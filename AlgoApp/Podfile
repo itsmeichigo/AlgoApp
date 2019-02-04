@@ -1,0 +1,46 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!
+inhibit_all_warnings!
+
+def rx
+  pod 'RealmSwift'
+  pod 'RxCocoa'
+  pod 'RxSwift'
+  pod 'RxRealm'
+  pod 'RxDataSources'
+  # pod 'Action'
+  # pod 'RxSwiftExt'
+  pod 'RxOptional'
+end
+
+def misc
+  pod 'Kanna', '~> 4.0.0'
+  pod 'Reusable'
+end
+
+def ui 
+  pod 'FloatingPanel'
+end
+
+def testing
+  pod 'Quick'
+  pod 'Nimble'
+  pod 'Nimble-Snapshots'
+  pod 'RxBlocking'
+  pod 'RxTest'
+end
+
+target 'AlgoApp' do
+  inherit! :search_paths
+  ui
+  rx
+  misc
+end
+
+target 'AlgoAppTests' do
+  inherit! :search_paths
+  rx
+  misc
+  testing
+end
