@@ -41,7 +41,7 @@ class DetailViewController: UIViewController {
             , target: self, action: #selector(addNotes))
         navigationItem.rightBarButtonItems = [readBarButton, noteBarButton]
         
-        navigationController?.navigationBar.tintColor = UIColor(rgb: 0xE06641)
+        navigationController?.navigationBar.tintColor = Configurations.highlightColor
     }
 
     private func configureView() {

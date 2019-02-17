@@ -54,11 +54,9 @@ final class HomeViewController: UIViewController {
         
         navigationItem.titleView = searchBar
         
-        let reminderButton = UIBarButtonItem(title: "⏰", style: .plain, target: self, action: #selector(setupReminder))
+        let filterButton = UIBarButtonItem(title: "🏷", style: .plain, target: self, action: #selector(showFilter))
         
-        let settingsButton = UIBarButtonItem(title: "⚙️", style: .plain, target: self, action: #selector(showSettings))
-        
-        navigationItem.rightBarButtonItems = [settingsButton, reminderButton]
+        navigationItem.rightBarButtonItems = [filterButton]
     }
     
     private func configurePresentable() {
@@ -71,6 +69,7 @@ final class HomeViewController: UIViewController {
             .drive(onNext: { [unowned self] viewModel in
                 guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
                 viewController.viewModel = viewModel
+                viewController.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
@@ -88,15 +87,7 @@ final class HomeViewController: UIViewController {
     
     }
     
-    @objc private func setupReminder() {
-        searchBar.resignFirstResponder()
-    }
-    
     @objc private func showFilter() {
-        searchBar.resignFirstResponder()
-    }
-    
-    @objc private func showSettings() {
         searchBar.resignFirstResponder()
     }
 }
