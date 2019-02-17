@@ -17,10 +17,12 @@ end
 def misc
   pod 'Kanna', '~> 4.0.0'
   pod 'Reusable'
+  pod 'StringExtensionHTML'
 end
 
 def ui 
   pod 'FloatingPanel'
+  pod 'Tags'
 end
 
 def testing

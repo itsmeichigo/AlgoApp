@@ -93,7 +93,7 @@ public class FloatingPanelController: UIViewController, UIScrollViewDelegate, UI
 
     // The underlying gesture recognizer for pan gestures
     public var panGestureRecognizer: UIPanGestureRecognizer {
-        return floatingPanel.panGesture
+        return floatingPanel.panGestureRecognizer
     }
 
     /// The current position of the floating panel controller's contents.
@@ -212,6 +212,11 @@ public class FloatingPanelController: UIViewController, UIScrollViewDelegate, UI
         floatingPanel.behavior = fetchBehavior(for: newCollection)
     }
 
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        safeAreaInsetsObservation = nil
+    }
+
     // MARK:- Privates
 
     private func fetchLayout(for traitCollection: UITraitCollection) -> FloatingPanelLayout {
@@ -235,7 +240,7 @@ public class FloatingPanelController: UIViewController, UIScrollViewDelegate, UI
         else { return }
 
         log.debug("Update safeAreaInsets", safeAreaInsets)
-        
+
         floatingPanel.layoutAdapter.safeAreaInsets = safeAreaInsets
 
         setUpLayout()
@@ -325,7 +330,6 @@ public class FloatingPanelController: UIViewController, UIScrollViewDelegate, UI
 
         parent.addChildViewController(self)
 
-
         view.frame = parent.view.bounds // Needed for a correct safe area configuration
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -376,6 +380,12 @@ public class FloatingPanelController: UIViewController, UIScrollViewDelegate, UI
             vc.willMove(toParentViewController: nil)
             vc.view.removeFromSuperview()
             vc.removeFromParentViewController()
+            
+            if let scrollView = floatingPanel.scrollView,
+                let delegate = floatingPanel.userScrollViewDelegate,
+                vc.view.subviews.contains(scrollView) {
+                scrollView.delegate = delegate
+            }
         }
 
         if let vc = contentViewController {
@@ -387,7 +397,7 @@ public class FloatingPanelController: UIViewController, UIScrollViewDelegate, UI
 
         _contentViewController = contentViewController
     }
-    
+
     @available(*, unavailable, renamed: "set(contentViewController:)")
     public override func show(_ vc: UIViewController, sender: Any?) {
         if let target = self.parent?.targetViewController(forAction: #selector(UIViewController.show(_:sender:)), sender: sender) {

@@ -35,12 +35,13 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
         return remains.count == 0
     }
 
-    let panGesture: FloatingPanelPanGestureRecognizer
+    let panGestureRecognizer: FloatingPanelPanGestureRecognizer
     var isRemovalInteractionEnabled: Bool = false
 
     private var animator: UIViewPropertyAnimator?
     private var initialFrame: CGRect = .zero
     private var initialScrollOffset: CGPoint = .zero
+    private var initialScrollInset: UIEdgeInsets = .zero
     private var transOffsetY: CGFloat = 0
 
     var interactionInProgress: Bool = false
@@ -67,17 +68,17 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
                                                         layout: layout)
         self.behavior = behavior
 
-        panGesture = FloatingPanelPanGestureRecognizer()
+        panGestureRecognizer = FloatingPanelPanGestureRecognizer()
 
         if #available(iOS 11.0, *) {
-            panGesture.name = "FloatingPanelSurface"
+            panGestureRecognizer.name = "FloatingPanelSurface"
         }
 
         super.init()
 
-        surfaceView.addGestureRecognizer(panGesture)
-        panGesture.addTarget(self, action: #selector(handle(panGesture:)))
-        panGesture.delegate = self
+        surfaceView.addGestureRecognizer(panGestureRecognizer)
+        panGestureRecognizer.addTarget(self, action: #selector(handle(panGesture:)))
+        panGestureRecognizer.delegate = self
     }
 
     func move(to: FloatingPanelPosition, animated: Bool, completion: (() -> Void)? = nil) {
@@ -145,7 +146,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
 
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                                   shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard gestureRecognizer == panGesture else { return false }
+        guard gestureRecognizer == panGestureRecognizer else { return false }
 
         /* log.debug("shouldRecognizeSimultaneouslyWith", otherGestureRecognizer) */
 
@@ -159,13 +160,13 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
     }
 
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard gestureRecognizer == panGesture else { return false }
+        guard gestureRecognizer == panGestureRecognizer else { return false }
         /* log.debug("shouldBeRequiredToFailBy", otherGestureRecognizer) */
         return false
     }
 
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard gestureRecognizer == panGesture else { return false }
+        guard gestureRecognizer == panGestureRecognizer else { return false }
 
         /* log.debug("shouldRequireFailureOf", otherGestureRecognizer) */
 
@@ -249,7 +250,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
                         return
                     }
                     // Fix the scroll offset in moving the panel from half and tip.
-                    scrollView.contentOffset.y = initialScrollOffset.y
+                    scrollView.contentOffset.y = initialScrollOffset.y + (initialScrollInset.top - scrollView.contentInset.top)
                 case .hidden:
                     fatalError("A floating panel hidden must not be used by a user")
                 }
@@ -264,7 +265,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
                     unlockScrollView()
                 }
             }
-        case panGesture:
+        case panGestureRecognizer:
             let translation = panGesture.translation(in: panGesture.view!.superview)
             let location = panGesture.location(in: panGesture.view)
 
@@ -437,6 +438,7 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
         initialFrame = surfaceView.frame
         if let scrollView = scrollView {
             initialScrollOffset = scrollView.contentOffset
+            initialScrollInset = scrollView.contentInset
         }
         transOffsetY = translation.y
 
@@ -493,15 +495,15 @@ class FloatingPanel: NSObject, UIGestureRecognizerDelegate, UIScrollViewDelegate
         let topBuffer = layoutAdapter.layout.topInteractionBuffer
         let bottomY = layoutAdapter.bottomY
         let bottomBuffer = layoutAdapter.layout.bottomInteractionBuffer
-
+        let topMax = layoutAdapter.topMaxY
+        let bottomMax = layoutAdapter.bottomMaxY
+        
         if let scrollView = scrollView, scrollView.panGestureRecognizer.state == .changed {
             let preY = surfaceView.frame.origin.y
             if preY > 0 && preY > y {
-                return max(topY, min(bottomY, y))
+                return max(topY, min(min(bottomY + bottomBuffer, bottomMax), y))
             }
         }
-        let topMax = layoutAdapter.topMaxY
-        let bottomMax = layoutAdapter.bottomMaxY
         return max(max(topY - topBuffer, topMax), min(min(bottomY + bottomBuffer, bottomMax), y))
     }
 

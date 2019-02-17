@@ -32,6 +32,10 @@ final class Question: Object {
         return DifficultyLevel(rawValue: rawDifficultyLevel) ?? .easy
     }
     
+    var remark: String {
+        return topLiked ? "👍 Top Liked" : topInterview ? "👩‍💻 Top Interviewed" : ""
+    }
+    
     enum DifficultyLevel: Int {
         case easy = 1
         case medium = 2
@@ -42,6 +46,14 @@ final class Question: Object {
             case .easy: return "Easy"
             case .medium: return "Medium"
             case .hard: return "Hard"
+            }
+        }
+        
+        var displayText: String {
+            switch self {
+            case .easy: return "🎖"
+            case .medium: return "🎖🎖"
+            case .hard: return "🎖🎖🎖"
             }
         }
     }

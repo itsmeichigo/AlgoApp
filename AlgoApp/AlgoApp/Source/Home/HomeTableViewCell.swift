@@ -9,31 +9,6 @@
 import UIKit
 import Reusable
 
-struct QuestionCellModel {
-    let emoji: String?
-    let title: String
-    let tags: String
-    let mark: String
-    let difficulty: String
-
-    private static let emojis = ["😈", "👹", "🤡", "💩", "👻", "👽", "👾", "🤖", "🎃", "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🐧", "🐦", "🐤", "🐙", "🦑", "🐡", "🐳", "🌞", "🌝", "🌚", "🌈", "⛈", "🌤", "☃️", "🌊", "🍎", "🍐", "🍊", "🍋", "🍉", "🍇", "🍓", "🍈", "🍒", "🍑", "🍍", "🥥", "🥝", "🥑", "🥕", "🥓", "🌭", "🍕", "🌮", "🍝", "🍣", "🍙", "🍧", "🍦", "🍭", "🍫", "🍩", "🍵", "🥤", "🍸", "🚗", "✈️", "🚛", "🛵", "🚠", "🚂", "🚀", "🚁", "⛵️", "🎡", "🎢", "🎠", "🏰", "🔮", "🔫", "🎏"]
-    
-    init(with question: Question) {
-        emoji = QuestionCellModel.emojis.randomElement()
-        title = question.title
-        
-        let tagNames: [String] = Array(question.tags).map { $0.name }
-        tags = tagNames.joined(separator: "・")
-        
-        mark = question.topLiked ? "👍 Top Liked" : question.topInterview ? "👩‍💻 Top Interviewed" : ""
-        switch question.difficultyLevel {
-        case .easy: difficulty = "🏅"
-        case .medium: difficulty = "🏅🏅"
-        case .hard: difficulty = "🏅🏅🏅"
-        }
-    }
-}
-
 final class HomeTableViewCell: UITableViewCell, Reusable {
 
     @IBOutlet weak var cardView: UIView!
@@ -59,11 +34,11 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         }
     }
 
-    func configureCell(with model: QuestionCellModel) {
+    func configureCell(with model: QuestionDetailModel) {
         emojiLabel.text = model.emoji
         titleLabel.text = model.title
-        tagsLabel.text = model.tags
-        markLabel.text = model.mark
+        tagsLabel.text = model.tags.joined(separator: "・")
+        markLabel.text = model.remark
         difficultyLabel.text = model.difficulty
     }
 }

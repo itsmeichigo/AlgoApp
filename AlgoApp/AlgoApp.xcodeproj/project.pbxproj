@@ -23,6 +23,10 @@
 		DE0E51832208413E00BFBB0B /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E51822208413E00BFBB0B /* Company.swift */; };
 		DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E51842208416100BFBB0B /* QuestionList.swift */; };
 		DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E51862208524200BFBB0B /* UIColor+Utility.swift */; };
+		DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518A22088A3200BFBB0B /* DetailViewController.swift */; };
+		DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */; };
+		DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */; };
+		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		DE0E51822208413E00BFBB0B /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		DE0E51842208416100BFBB0B /* QuestionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionList.swift; sourceTree = "<group>"; };
 		DE0E51862208524200BFBB0B /* UIColor+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utility.swift"; sourceTree = "<group>"; };
+		DE0E518A22088A3200BFBB0B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
+		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,9 +153,10 @@
 		DE0E517122082E0800BFBB0B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DE0E517422082E5400BFBB0B /* HomeViewModel.swift */,
 				DE0E515322070C2800BFBB0B /* HomeViewController.swift */,
 				DE0E517222082E2700BFBB0B /* HomeTableViewCell.swift */,
-				DE0E517422082E5400BFBB0B /* HomeViewModel.swift */,
+				DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -158,6 +167,8 @@
 				DE0E515122070C2800BFBB0B /* AppDelegate.swift */,
 				DE0E517D2208408E00BFBB0B /* Models */,
 				DE0E517122082E0800BFBB0B /* Home */,
+				DE0E518922088A1300BFBB0B /* Detail */,
+				DE195DC02219483B00BDDFB4 /* WebView */,
 				DE0E51882208524600BFBB0B /* Extensions */,
 			);
 			path = Source;
@@ -198,6 +209,23 @@
 				DE0E51862208524200BFBB0B /* UIColor+Utility.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DE0E518922088A1300BFBB0B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */,
+				DE0E518A22088A3200BFBB0B /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		DE195DC02219483B00BDDFB4 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				DE195DC12219485F00BDDFB4 /* WebViewController.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +351,8 @@
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/StringExtensionHTML/StringExtensionHTML.framework",
+				"${BUILT_PRODUCTS_DIR}/Tags/Tags.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -340,6 +370,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StringExtensionHTML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tags.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -388,6 +420,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/StringExtensionHTML/StringExtensionHTML.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
@@ -410,6 +443,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StringExtensionHTML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
@@ -455,10 +489,14 @@
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
 				DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */,
+				DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */,
 				DE0E5180220840A400BFBB0B /* Tag.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,
+				DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */,
 				DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */,
+				DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */,
+				DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */,
 				DE0E517522082E5400BFBB0B /* HomeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

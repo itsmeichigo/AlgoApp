@@ -13,10 +13,12 @@ import RxSwift
 
 final class HomeViewController: UIViewController {
     
-    typealias QuestionSection = SectionModel<String, QuestionCellModel>
+    typealias QuestionSection = SectionModel<String, QuestionDetailModel>
     typealias DataSource = RxTableViewSectionedReloadDataSource<QuestionSection>
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet fileprivate weak var tableView: UITableView!
+    fileprivate var searchBar: UISearchBar!
+    
     
     var viewModel: HomeViewModelType!
     private var currentFilter: QuestionFilter?
@@ -30,6 +32,7 @@ final class HomeViewController: UIViewController {
         viewModel.loadSeedDatabase()
         viewModel.loadQuestions(filter: currentFilter)
     
+        configureNavigationBar()
         configurePresentable()
     }
 
@@ -41,15 +44,47 @@ final class HomeViewController: UIViewController {
         })
     }
     
+    private func configureNavigationBar() {
+        searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search by title"
+        
+        navigationItem.titleView = searchBar
+        
+        let filterButton = UIBarButtonItem(title: "⏳", style: .plain, target: self, action: #selector(showFilter))
+        
+        let settingsButton = UIBarButtonItem(title: "⚙️", style: .plain, target: self, action: #selector(showSettings))
+        
+        navigationItem.rightBarButtonItems = [settingsButton, filterButton]
+    }
+    
     private func configurePresentable() {
         
         tableView.separatorStyle = .none
+        tableView.rx.modelSelected(QuestionDetailModel.self)
+            .asDriver()
+            .map { DetailViewModel(detail: $0) }
+            .drive(onNext: { [unowned self] viewModel in
+                guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+                viewController.viewModel = viewModel
+                self.navigationController?.pushViewController(viewController, animated: true)
+            })
+            .disposed(by: disposeBag)
         
         viewModel.questions
             .asDriver()
             .map { [QuestionSection(model: "", items: $0)] }
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
+    
+    }
+    
+    @objc private func showFilter() {
+        searchBar.resignFirstResponder()
+    }
+    
+    @objc private func showSettings() {
+        searchBar.resignFirstResponder()
     }
 }
 

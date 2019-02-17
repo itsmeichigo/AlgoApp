@@ -15,7 +15,7 @@ import RxSwift
 typealias QuestionFilter = (tags: [Tag], company: [Company])
 
 protocol HomeViewModelType {
-    var questions: BehaviorRelay<[QuestionCellModel]> { get }
+    var questions: BehaviorRelay<[QuestionDetailModel]> { get }
     
     func loadSeedDatabase()
     func loadQuestions(filter: QuestionFilter?)
@@ -23,7 +23,7 @@ protocol HomeViewModelType {
 
 final class HomeViewModel: HomeViewModelType {
     
-    let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
+    let questions = BehaviorRelay<[QuestionDetailModel]>(value: [])
     
     private let disposeBag = DisposeBag()
     private lazy var realm: Realm = {
@@ -45,19 +45,19 @@ final class HomeViewModel: HomeViewModelType {
         let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
         let bundleReamPath = Bundle.main.path(forResource: "default", ofType:"realm")
         
-        if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
-            do {
-                try FileManager.default.copyItem(atPath: bundleReamPath!, toPath: defaultRealmPath.path)
-            } catch let error as NSError {
-                print("error occurred, here are the details:\n \(error)")
-            }
+        guard FileManager.default.fileExists(atPath: defaultRealmPath.path) else { return }
+        
+        do {
+            try FileManager.default.copyItem(atPath: bundleReamPath!, toPath: defaultRealmPath.path)
+        } catch let error as NSError {
+            print("error occurred, here are the details:\n \(error)")
         }
     }
     
     func loadQuestions(filter: QuestionFilter?) {
         // FIXME: add predicate
         Observable.collection(from: realm.objects(Question.self))
-            .map { Array($0).map { QuestionCellModel(with: $0) } }
+            .map { Array($0).map { QuestionDetailModel(with: $0) } }
             .bind(to: questions)
             .disposed(by: disposeBag)
     }

@@ -1,17 +1,17 @@
 PODS:
   - Differentiator (3.1.0)
-  - FloatingPanel (1.3.2)
-  - iOSSnapshotTestCase (4.0.1):
-    - iOSSnapshotTestCase/SwiftSupport (= 4.0.1)
-  - iOSSnapshotTestCase/Core (4.0.1)
-  - iOSSnapshotTestCase/SwiftSupport (4.0.1):
+  - FloatingPanel (1.3.4)
+  - iOSSnapshotTestCase (5.0.2):
+    - iOSSnapshotTestCase/SwiftSupport (= 5.0.2)
+  - iOSSnapshotTestCase/Core (5.0.2)
+  - iOSSnapshotTestCase/SwiftSupport (5.0.2):
     - iOSSnapshotTestCase/Core
   - Kanna (4.0.3)
-  - Nimble (7.3.2)
-  - Nimble-Snapshots (6.9.0):
-    - Nimble-Snapshots/Core (= 6.9.0)
-  - Nimble-Snapshots/Core (6.9.0):
-    - iOSSnapshotTestCase (~> 4.0)
+  - Nimble (7.3.4)
+  - Nimble-Snapshots (6.9.1):
+    - Nimble-Snapshots/Core (= 6.9.1)
+  - Nimble-Snapshots/Core (6.9.1):
+    - iOSSnapshotTestCase (~> 5.0)
     - Nimble (~> 7.0)
   - Quick (1.3.4)
   - Realm (3.13.1):
@@ -24,11 +24,11 @@ PODS:
     - Reusable/View (= 4.0.5)
   - Reusable/Storyboard (4.0.5)
   - Reusable/View (4.0.5)
-  - RxAtomic (4.4.0)
-  - RxBlocking (4.4.0):
+  - RxAtomic (4.4.1)
+  - RxBlocking (4.4.1):
     - RxAtomic (~> 4.4)
     - RxSwift (~> 4.0)
-  - RxCocoa (4.4.0):
+  - RxCocoa (4.4.1):
     - RxSwift (~> 4.0)
   - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
@@ -40,11 +40,13 @@ PODS:
   - RxRealm (0.7.6):
     - RealmSwift (~> 3.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.4.0):
+  - RxSwift (4.4.1):
     - RxAtomic (~> 4.4)
-  - RxTest (4.4.0):
+  - RxTest (4.4.1):
     - RxAtomic (~> 4.4)
     - RxSwift (~> 4.0)
+  - StringExtensionHTML (1.0.2)
+  - Tags (0.2.4)
 
 DEPENDENCIES:
   - FloatingPanel
@@ -61,6 +63,8 @@ DEPENDENCIES:
   - RxRealm
   - RxSwift
   - RxTest
+  - StringExtensionHTML
+  - Tags
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -82,27 +86,31 @@ SPEC REPOS:
     - RxRealm
     - RxSwift
     - RxTest
+    - StringExtensionHTML
+    - Tags
 
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  FloatingPanel: a17dec0ef2b40eb614ee743de1a2529140fb2a6a
-  iOSSnapshotTestCase: f3b2b7e606fe03fdbe49af84316bd235df32dc44
+  FloatingPanel: 867950ddc47fd0e042f8a14e60425b2a4254a104
+  iOSSnapshotTestCase: 2d51aa06775e95cecb0a1fb9c5c159ccd1dd4596
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
-  Nimble: 5e94a8cacb355943c6c87198035dc4adbb0f10e4
-  Nimble-Snapshots: 79394f8d0aea3df54bd5ff78ee9dff05a523a09c
+  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
+  Nimble-Snapshots: bbd1ab264bacc24a9ce24a8363bc05aac783aeb0
   Quick: f4f7f063c524394c73ed93ac70983c609805d481
   Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
   RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
   Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
-  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
-  RxBlocking: 138ad53217434444d6eeeb4fb406a45431d92e31
-  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
+  RxAtomic: f8d6adc1ccb87a767811269e4875887bc74dbf19
+  RxBlocking: 5508e90d36ca2304632dc9378ece4e9b5d4bf656
+  RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxOptional: 80426a0ddbd092573e4c482d8cc13302078c4d5e
   RxRealm: 5379eddd74f8d617ca7681d1f8d144af25b432b0
-  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  RxTest: 19d03286bdc0a3aaea5d61d4cde31fdf4bb8a5ba
+  RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
+  RxTest: f8e548755ca3c7502dc41c7d3b28802c90115a38
+  StringExtensionHTML: 856dcc0c705012ae2f9c29c7413b015b82133e52
+  Tags: f513b25d753de97503f1bef5b4ff1fca4a0d5b29
 
-PODFILE CHECKSUM: d4ff950bc3dfcf5a9d36e0275a6a5b9a0be925d8
+PODFILE CHECKSUM: 3a94cedc80bae6aa333638f7555390557c06b432
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.0

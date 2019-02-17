@@ -67,7 +67,7 @@ Examples are here.
 
 ## Requirements
 
-FloatingPanel is written in Swift 4.2. Compatible with iOS 10.0+
+FloatingPanel is written in Swift. It can be built by Xcode 9.4.1 or later. Compatible with iOS 10.0+.
 
 ## Installation
 
@@ -139,9 +139,9 @@ fpc.isRemovalInteractionEnabled = true // Optional: Let it removable by a swipe-
 self.present(fpc, animated: true, completion: nil)
 ```
 
-You can show a floating panel over UINavigationController from the containnee view controllers as a modality of `.overCurrentContext` style.
+You can show a floating panel over UINavigationController from the container view controllers as a modality of `.overCurrentContext` style.
 
-NOTE: FloatingPanelController has the custom presentation controller. If you would like to customize the presentation/dismissal, please see [FloatingPanelTransitioning](https://github.com/SCENEE/FloatingPanel/blob/feat-modality/Framework/Sources/FloatingPanelTransitioning.swift).
+NOTE: FloatingPanelController has the custom presentation controller. If you would like to customize the presentation/dismissal, please see [FloatingPanelTransitioning](https://github.com/SCENEE/FloatingPanel/blob/master/Framework/Sources/FloatingPanelTransitioning.swift).
 
 ## View hierarchy
 

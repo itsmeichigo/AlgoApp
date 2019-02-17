@@ -1,0 +1,6 @@
+framework module StringExtensionHTML {
+  umbrella header "StringExtensionHTML-umbrella.h"
+
+  export *
+  module * { export * }
+}
