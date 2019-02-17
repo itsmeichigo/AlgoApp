@@ -21,7 +21,7 @@ final class HomeViewController: UIViewController {
     
     
     var viewModel: HomeViewModelType!
-    private var currentFilter: QuestionFilter?
+    private let currentFilter = BehaviorRelay<QuestionFilter?>(value: nil)
     private let disposeBag = DisposeBag()
     private lazy var datasource = self.buildDataSource()
     
@@ -30,7 +30,6 @@ final class HomeViewController: UIViewController {
         
         viewModel = HomeViewModel()
         viewModel.loadSeedDatabase()
-        viewModel.loadQuestions(filter: currentFilter)
     
         configureNavigationBar()
         configurePresentable()
@@ -48,18 +47,23 @@ final class HomeViewController: UIViewController {
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.placeholder = "Search by title"
+        searchBar.rx.text.asDriver()
+            .map { QuestionFilter(query: $0 ?? "", tags: [], companies: []) }
+            .drive(currentFilter)
+            .disposed(by: disposeBag)
         
         navigationItem.titleView = searchBar
         
-        let filterButton = UIBarButtonItem(title: "⏳", style: .plain, target: self, action: #selector(showFilter))
+        let reminderButton = UIBarButtonItem(title: "⏰", style: .plain, target: self, action: #selector(setupReminder))
         
         let settingsButton = UIBarButtonItem(title: "⚙️", style: .plain, target: self, action: #selector(showSettings))
         
-        navigationItem.rightBarButtonItems = [settingsButton, filterButton]
+        navigationItem.rightBarButtonItems = [settingsButton, reminderButton]
     }
     
     private func configurePresentable() {
         
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.rx.modelSelected(QuestionDetailModel.self)
             .asDriver()
@@ -76,7 +80,16 @@ final class HomeViewController: UIViewController {
             .map { [QuestionSection(model: "", items: $0)] }
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
+        
+        currentFilter
+            .asDriver()
+            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(filter: $0) })
+            .disposed(by: disposeBag)
     
+    }
+    
+    @objc private func setupReminder() {
+        searchBar.resignFirstResponder()
     }
     
     @objc private func showFilter() {

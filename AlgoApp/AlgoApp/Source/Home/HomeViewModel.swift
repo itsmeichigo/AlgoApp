@@ -12,7 +12,7 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-typealias QuestionFilter = (tags: [Tag], company: [Company])
+typealias QuestionFilter = (query: String, tags: [Tag], companies: [Company])
 
 protocol HomeViewModelType {
     var questions: BehaviorRelay<[QuestionDetailModel]> { get }
@@ -45,7 +45,7 @@ final class HomeViewModel: HomeViewModelType {
         let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
         let bundleReamPath = Bundle.main.path(forResource: "default", ofType:"realm")
         
-        guard FileManager.default.fileExists(atPath: defaultRealmPath.path) else { return }
+        guard !FileManager.default.fileExists(atPath: defaultRealmPath.path) else { return }
         
         do {
             try FileManager.default.copyItem(atPath: bundleReamPath!, toPath: defaultRealmPath.path)
@@ -55,8 +55,19 @@ final class HomeViewModel: HomeViewModelType {
     }
     
     func loadQuestions(filter: QuestionFilter?) {
-        // FIXME: add predicate
-        Observable.collection(from: realm.objects(Question.self))
+        var predicates: [NSPredicate] = []
+        var results = realm.objects(Question.self)
+        if let query = filter?.query, !query.isEmpty {
+            let predicate = NSPredicate(format: "title contains %@", query)
+            predicates.append(predicate)
+        }
+        
+        if predicates.count > 0 {
+            let compound: NSCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            results = realm.objects(Question.self).filter(compound)
+        }
+        
+        Observable.collection(from: results)
             .map { Array($0)
                 .map { QuestionDetailModel(with: $0) }
                 .sorted(by: { $0.id < $1.id })
