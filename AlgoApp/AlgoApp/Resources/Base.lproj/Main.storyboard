@@ -200,22 +200,29 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVJ-kx-Mes">
-                                        <rect key="frame" x="16" y="552" width="104" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="lB3-Zr-YOy"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                        <state key="normal" title="Official solution">
-                                            <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="z5h-lX-NTT">
+                                        <rect key="frame" x="16" y="552" width="104" height="59"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVJ-kx-Mes">
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                <state key="normal" title="Official solution">
+                                                    <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XD-pE-xHY">
+                                                <rect key="frame" x="0.0" y="29" width="104" height="30"/>
+                                                <state key="normal" title="Swift">
+                                                    <color key="titleColor" red="0.87843137250000003" green="0.40000000000000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="zZe-ha-XpT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gsq-bl-t0q" secondAttribute="trailing" constant="8" id="1cl-Kk-LYj"/>
-                                    <constraint firstItem="vVJ-kx-Mes" firstAttribute="leading" secondItem="6Mp-ZM-Qqj" secondAttribute="leading" id="3Lj-yt-if4"/>
+                                    <constraint firstAttribute="bottom" secondItem="z5h-lX-NTT" secondAttribute="bottom" constant="32" id="46t-Q6-xHU"/>
                                     <constraint firstItem="FqV-98-Xm7" firstAttribute="top" secondItem="zZe-ha-XpT" secondAttribute="bottom" constant="32" id="5I9-1X-uQz"/>
-                                    <constraint firstItem="vVJ-kx-Mes" firstAttribute="top" secondItem="6Mp-ZM-Qqj" secondAttribute="bottom" constant="16" id="6Ms-8S-Ml0"/>
                                     <constraint firstAttribute="trailing" secondItem="ghk-Wl-TnR" secondAttribute="trailing" constant="16" id="6fg-bk-Uy0"/>
                                     <constraint firstAttribute="trailing" secondItem="nyd-Rc-bQp" secondAttribute="trailing" constant="16" id="7Rt-B2-MO3"/>
                                     <constraint firstItem="FqV-98-Xm7" firstAttribute="trailing" secondItem="nyd-Rc-bQp" secondAttribute="trailing" id="9Aa-kr-VLY"/>
@@ -234,11 +241,12 @@
                                     <constraint firstItem="FqV-98-Xm7" firstAttribute="leading" secondItem="dMx-XB-apI" secondAttribute="leading" constant="16" id="jzN-9H-7iT"/>
                                     <constraint firstItem="ghk-Wl-TnR" firstAttribute="top" secondItem="Yih-A5-05H" secondAttribute="bottom" constant="16" id="mgV-5X-KsE"/>
                                     <constraint firstAttribute="trailing" secondItem="6Mp-ZM-Qqj" secondAttribute="trailing" constant="16" id="nTB-y6-QVJ"/>
+                                    <constraint firstItem="z5h-lX-NTT" firstAttribute="leading" secondItem="dMx-XB-apI" secondAttribute="leading" constant="16" id="nrY-Fb-q6X"/>
                                     <constraint firstItem="6Mp-ZM-Qqj" firstAttribute="leading" secondItem="dMx-XB-apI" secondAttribute="leading" constant="16" id="sdN-D1-oBJ"/>
                                     <constraint firstItem="gsq-bl-t0q" firstAttribute="leading" secondItem="dMx-XB-apI" secondAttribute="leading" constant="16" id="vOE-MS-oGg"/>
-                                    <constraint firstAttribute="bottom" secondItem="vVJ-kx-Mes" secondAttribute="bottom" constant="32" id="wzL-rb-7mZ"/>
                                     <constraint firstItem="RHd-JM-JiR" firstAttribute="trailing" secondItem="nyd-Rc-bQp" secondAttribute="trailing" id="x2L-8y-szu"/>
                                     <constraint firstItem="nyd-Rc-bQp" firstAttribute="centerX" secondItem="dMx-XB-apI" secondAttribute="centerX" id="yFh-ls-IiN"/>
+                                    <constraint firstItem="z5h-lX-NTT" firstAttribute="top" secondItem="6Mp-ZM-Qqj" secondAttribute="bottom" constant="16" id="yV3-dO-ACV"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -257,8 +265,8 @@
                         <outlet property="descriptionTextView" destination="RHd-JM-JiR" id="j9o-Ac-lb7"/>
                         <outlet property="difficultyLabel" destination="gsq-bl-t0q" id="Ye2-hy-cQg"/>
                         <outlet property="officialSolutionButton" destination="vVJ-kx-Mes" id="rBp-TP-kLi"/>
-                        <outlet property="officialSolutionButtonHeight" destination="lB3-Zr-YOy" id="hEs-rt-mTT"/>
                         <outlet property="remarkLabel" destination="zZe-ha-XpT" id="wVv-JY-Nhc"/>
+                        <outlet property="swiftButton" destination="4XD-pE-xHY" id="Hyr-Db-nQM"/>
                         <outlet property="tagsView" destination="ghk-Wl-TnR" id="BO4-fN-2NV"/>
                         <outlet property="titleLabel" destination="nyd-Rc-bQp" id="ahx-28-PaB"/>
                     </connections>

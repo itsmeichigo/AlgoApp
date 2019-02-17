@@ -57,7 +57,10 @@ final class HomeViewModel: HomeViewModelType {
     func loadQuestions(filter: QuestionFilter?) {
         // FIXME: add predicate
         Observable.collection(from: realm.objects(Question.self))
-            .map { Array($0).map { QuestionDetailModel(with: $0) } }
+            .map { Array($0)
+                .map { QuestionDetailModel(with: $0) }
+                .sorted(by: { $0.id < $1.id })
+            }
             .bind(to: questions)
             .disposed(by: disposeBag)
     }

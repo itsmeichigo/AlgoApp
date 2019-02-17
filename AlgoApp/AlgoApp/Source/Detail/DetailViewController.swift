@@ -6,11 +6,11 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
-import UIKit
 import RxSwift
 import RxCocoa
-import Tags
 import StringExtensionHTML
+import Tags
+import UIKit
 
 class DetailViewController: UIViewController {
 
@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var tagsView: TagsView!
     @IBOutlet weak var officialSolutionButton: UIButton!
-    @IBOutlet weak var officialSolutionButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var swiftButton: UIButton!
     
     var viewModel: DetailViewModel!
     let disposeBag = DisposeBag()
@@ -29,6 +29,8 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureView()
+        
+        viewModel.scrapeSwiftSolution()
     }
     
     private func configureNavigationBar() {
@@ -51,20 +53,35 @@ class DetailViewController: UIViewController {
         tagsView.tags = viewModel.detail.tags.joined(separator: ",")
         
         if viewModel.detail.articleSlug.isEmpty {
-            officialSolutionButton.clipsToBounds = true
-            officialSolutionButtonHeight.constant = 0
-            view.layoutIfNeeded()
+            officialSolutionButton.isHidden = true
         }
         
         officialSolutionButton.rx.tap
-            .subscribe(onNext: { [unowned self] in self.showArticle() })
+            .subscribe(onNext: { [unowned self] in
+                guard let url = URL(string: "https://leetcode.com/articles/\(self.viewModel.detail.articleSlug)#solution") else { return }
+                self.showWebpage(url: url, title: "Official Solution")
+            })
             .disposed(by: disposeBag)
+        
+        viewModel.swiftSolutionUrl
+            .asDriver()
+            .map { $0 == nil }
+            .drive(swiftButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        swiftButton.rx.tap
+            .subscribe(onNext: { [unowned self] in
+                guard let url = self.viewModel.swiftSolutionUrl.value else { return }
+                self.showWebpage(url: url, title: "Swift Solution")
+            })
+            .disposed(by: disposeBag)
+        
     }
     
-    private func showArticle() {
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController,
-            let url = URL(string: "https://leetcode.com/articles/\(viewModel.detail.articleSlug)") else { return }
+    private func showWebpage(url: URL, title: String = "") {
+        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController else { return }
         viewController.url = url
+        viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
     }
     
