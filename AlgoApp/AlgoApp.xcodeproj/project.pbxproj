@@ -17,7 +17,6 @@
 		DE0E516722070C2A00BFBB0B /* AlgoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E516622070C2A00BFBB0B /* AlgoAppTests.swift */; };
 		DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E517222082E2700BFBB0B /* HomeTableViewCell.swift */; };
 		DE0E517522082E5400BFBB0B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E517422082E5400BFBB0B /* HomeViewModel.swift */; };
-		DE0E51792208308F00BFBB0B /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE0E51782208308F00BFBB0B /* default.realm */; };
 		DE0E5180220840A400BFBB0B /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E517E220840A400BFBB0B /* Tag.swift */; };
 		DE0E5181220840A400BFBB0B /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E517F220840A400BFBB0B /* Question.swift */; };
 		DE0E51832208413E00BFBB0B /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E51822208413E00BFBB0B /* Company.swift */; };
@@ -26,6 +25,7 @@
 		DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518A22088A3200BFBB0B /* DetailViewController.swift */; };
 		DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */; };
 		DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */; };
+		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
 		DE195DC42219CAB700BDDFB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC32219CAB700BDDFB4 /* Configurations.swift */; };
 /* End PBXBuildFile section */
@@ -58,7 +58,6 @@
 		DE0E516822070C2A00BFBB0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE0E517222082E2700BFBB0B /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		DE0E517422082E5400BFBB0B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		DE0E51782208308F00BFBB0B /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE0E517E220840A400BFBB0B /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		DE0E517F220840A400BFBB0B /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		DE0E51822208413E00BFBB0B /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		DE0E518A22088A3200BFBB0B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
+		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DE195DC32219CAB700BDDFB4 /* Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		DE0E517C220830C000BFBB0B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DE0E51782208308F00BFBB0B /* default.realm */,
+				DE13936D221A491200F70F80 /* default.realm */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -316,8 +316,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE0E51792208308F00BFBB0B /* default.realm in Resources */,
 				DE0E515C22070C2A00BFBB0B /* LaunchScreen.storyboard in Resources */,
+				DE13936E221A491200F70F80 /* default.realm in Resources */,
 				DE0E515922070C2A00BFBB0B /* Assets.xcassets in Resources */,
 				DE0E515722070C2800BFBB0B /* Main.storyboard in Resources */,
 			);
