@@ -12,16 +12,9 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-typealias QuestionFilter = (query: String, tags: [Tag], companies: [Company])
+typealias QuestionFilter = (tags: [Tag], companies: [Company], levels: [Question.DifficultyLevel], topLiked: Bool, topInterviewed: Bool)
 
-protocol HomeViewModelType {
-    var questions: BehaviorRelay<[QuestionDetailModel]> { get }
-    
-    func loadSeedDatabase()
-    func loadQuestions(filter: QuestionFilter?)
-}
-
-final class HomeViewModel: HomeViewModelType {
+final class HomeViewModel {
     
     let questions = BehaviorRelay<[QuestionDetailModel]>(value: [])
     
@@ -54,10 +47,10 @@ final class HomeViewModel: HomeViewModelType {
         }
     }
     
-    func loadQuestions(filter: QuestionFilter?) {
+    func loadQuestions(query: String?, filter: QuestionFilter?) {
         var predicates: [NSPredicate] = []
         var results = realm.objects(Question.self)
-        if let query = filter?.query, !query.isEmpty {
+        if let query = query, !query.isEmpty {
             let predicate = NSPredicate(format: "title contains %@", query)
             predicates.append(predicate)
         }

@@ -21,7 +21,7 @@ def misc
 end
 
 def ui 
-  pod 'FloatingPanel'
+  pod 'SwiftMessages'
   pod 'Tags'
 end
 

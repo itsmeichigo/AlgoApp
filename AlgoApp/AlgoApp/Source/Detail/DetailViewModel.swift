@@ -10,11 +10,7 @@ import Foundation
 import Kanna
 import RxCocoa
 
-protocol DetailViewModelType {
-    
-}
-
-final class DetailViewModel: DetailViewModelType {
+final class DetailViewModel {
     
     let detail: QuestionDetailModel
     let swiftSolutionUrl = BehaviorRelay<URL?>(value: nil)

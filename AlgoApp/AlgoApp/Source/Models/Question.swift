@@ -34,10 +34,29 @@ final class Question: Object {
     }
     
     var remark: String {
-        return topLiked ? "👍 Top Liked" : topInterview ? "👩‍💻 Top Interviewed" : ""
+        return topLiked ? Remarks.topLiked.displayText : topInterview ? Remarks.topInterview.displayText : ""
     }
     
-    enum DifficultyLevel: Int {
+    enum Remarks: CaseIterable {
+        case topLiked
+        case topInterview
+        
+        var title: String {
+            switch self {
+            case .topLiked: return "Top Liked"
+            case .topInterview: return "Top Interviewed"
+            }
+        }
+        
+        var displayText: String {
+            switch self {
+            case .topLiked: return "👍 Top Liked"
+            case .topInterview: return "👩‍💻 Top Interviewed"
+            }
+        }
+    }
+    
+    enum DifficultyLevel: Int, CaseIterable {
         case easy = 1
         case medium = 2
         case hard = 3

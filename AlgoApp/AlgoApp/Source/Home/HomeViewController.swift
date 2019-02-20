@@ -17,10 +17,12 @@ final class HomeViewController: UIViewController {
     typealias DataSource = RxTableViewSectionedReloadDataSource<QuestionSection>
     
     @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    
     fileprivate var searchBar: UISearchBar!
     
+    var viewModel: HomeViewModel!
     
-    var viewModel: HomeViewModelType!
     private let currentFilter = BehaviorRelay<QuestionFilter?>(value: nil)
     private let disposeBag = DisposeBag()
     private lazy var datasource = self.buildDataSource()
@@ -33,6 +35,15 @@ final class HomeViewController: UIViewController {
     
         configureNavigationBar()
         configurePresentable()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard segue.identifier == "filterSegue",
+            let destination = segue.destination as? UINavigationController,
+            let filterController = destination.topViewController as? FilterViewController else { return }
+        filterController.initialFilter = currentFilter.value
+        filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
     }
 
     private func buildDataSource() -> DataSource {
@@ -47,16 +58,10 @@ final class HomeViewController: UIViewController {
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.placeholder = "Search by title"
-        searchBar.rx.text.asDriver()
-            .map { QuestionFilter(query: $0 ?? "", tags: [], companies: []) }
-            .drive(currentFilter)
-            .disposed(by: disposeBag)
         
         navigationItem.titleView = searchBar
         
-        let filterButton = UIBarButtonItem(title: "🏷", style: .plain, target: self, action: #selector(showFilter))
-        
-        navigationItem.rightBarButtonItems = [filterButton]
+        navigationController?.navigationBar.tintColor = Configurations.highlightColor
     }
     
     private func configurePresentable() {
@@ -80,15 +85,10 @@ final class HomeViewController: UIViewController {
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
         
-        currentFilter
-            .asDriver()
-            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(filter: $0) })
+        Driver.combineLatest(searchBar.rx.text.asDriver(), currentFilter.asDriver())
+            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(query: $0, filter: $1) })
             .disposed(by: disposeBag)
     
-    }
-    
-    @objc private func showFilter() {
-        searchBar.resignFirstResponder()
     }
 }
 

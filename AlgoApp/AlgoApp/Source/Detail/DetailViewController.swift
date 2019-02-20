@@ -21,6 +21,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var tagsView: TagsView!
     @IBOutlet weak var officialSolutionButton: UIButton!
     @IBOutlet weak var swiftButton: UIButton!
+    @IBOutlet weak var markAsReadButton: UIButton!
     
     var viewModel: DetailViewModel!
     let disposeBag = DisposeBag()
@@ -36,12 +37,9 @@ class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = "Detail"
         
-        let readBarButton = UIBarButtonItem(title: "✅", style: .plain, target: self, action: #selector(markAsRead))
-        let noteBarButton = UIBarButtonItem(title: "📝", style: .plain
+        let noteBarButton = UIBarButtonItem(title: "📝 Notes", style: .plain
             , target: self, action: #selector(addNotes))
-        navigationItem.rightBarButtonItems = [readBarButton, noteBarButton]
-        
-        navigationController?.navigationBar.tintColor = Configurations.highlightColor
+        navigationItem.rightBarButtonItems = [noteBarButton]
     }
 
     private func configureView() {
@@ -76,6 +74,8 @@ class DetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        markAsReadButton.layer.cornerRadius = 8
+        
     }
     
     private func showWebpage(url: URL, title: String = "") {
@@ -83,10 +83,6 @@ class DetailViewController: UIViewController {
         viewController.url = url
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
-    }
-    
-    @objc private func markAsRead() {
-        
     }
     
     @objc private func addNotes() {
