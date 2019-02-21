@@ -52,6 +52,41 @@ class FilterViewController: UIViewController {
             tagView?.delegate = self
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let filter = initialFilter {
+            loadInitialFilter(filter)
+        }
+    }
+    
+    private func loadInitialFilter(_ filter: QuestionFilter) {
+        for level in filter.levels {
+            if let button = difficultyTagsView.tagArray.first(where: { $0.title(for: .normal) == level.title }) {
+                tagsTouchAction(difficultyTagsView, tagButton: button)
+            }
+        }
+        
+        for tag in filter.tags {
+            if let button = categoryTagsView.tagArray.first(where: { $0.title(for: .normal) == tag }) {
+                tagsTouchAction(categoryTagsView, tagButton: button)
+            }
+        }
+        
+        for company in filter.companies {
+            if let button = companyTagsView.tagArray.first(where: { $0.title(for: .normal) == company }) {
+                tagsTouchAction(companyTagsView, tagButton: button)
+            }
+        }
+        
+        if filter.topLiked, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == Question.Remarks.topLiked.title }) {
+            tagsTouchAction(otherTagsView, tagButton: button)
+        }
+        
+        if filter.topInterviewed, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == Question.Remarks.topInterviewed.title }) {
+            tagsTouchAction(otherTagsView, tagButton: button)
+        }
+    }
 
     @IBAction func clearAllFilters(_ sender: Any) {
         let filter = viewModel.buildFilter(shouldClearAll: true)

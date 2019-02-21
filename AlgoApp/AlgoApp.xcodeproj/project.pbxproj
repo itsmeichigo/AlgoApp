@@ -234,8 +234,8 @@
 		DE157EA5221D398C0040B4E9 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				DE157EA6221D399E0040B4E9 /* FilterViewController.swift */,
 				DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */,
+				DE157EA6221D399E0040B4E9 /* FilterViewController.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";

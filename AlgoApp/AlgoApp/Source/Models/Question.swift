@@ -34,24 +34,24 @@ final class Question: Object {
     }
     
     var remark: String {
-        return topLiked ? Remarks.topLiked.displayText : topInterview ? Remarks.topInterview.displayText : ""
+        return topLiked ? Remarks.topLiked.displayText : topInterview ? Remarks.topInterviewed.displayText : ""
     }
     
     enum Remarks: CaseIterable {
         case topLiked
-        case topInterview
+        case topInterviewed
         
         var title: String {
             switch self {
             case .topLiked: return "Top Liked"
-            case .topInterview: return "Top Interviewed"
+            case .topInterviewed: return "Top Interviewed"
             }
         }
         
         var displayText: String {
             switch self {
             case .topLiked: return "👍 Top Liked"
-            case .topInterview: return "👩‍💻 Top Interviewed"
+            case .topInterviewed: return "👩‍💻 Top Interviewed"
             }
         }
     }

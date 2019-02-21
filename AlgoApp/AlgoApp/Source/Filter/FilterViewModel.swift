@@ -62,7 +62,21 @@ final class FilterViewModel {
     }
     
     func buildFilter(shouldClearAll: Bool) -> QuestionFilter {
-        return QuestionFilter(tags: [], companies: [], levels: [], topLiked: false, topInterviewed: false)
+        guard !shouldClearAll else {
+            return QuestionFilter(tags: [], companies: [], levels: [], topLiked: false, topInterviewed: false)
+        }
+        
+        var levels: [Question.DifficultyLevel] = []
+        for level in Question.DifficultyLevel.allCases {
+            if selectedLevels.contains(level.title) {
+                levels.append(level)
+            }
+        }
+        
+        let topLiked = selectedRemarks.contains(Question.Remarks.topLiked.title)
+        let topInterviewed = selectedRemarks.contains(Question.Remarks.topInterviewed.title)
+        
+        return QuestionFilter(tags: selectedCategories, companies: selectedCompanies, levels: levels, topLiked: topLiked, topInterviewed: topInterviewed)
     }
     
     private func loadTags() {

@@ -12,7 +12,7 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-typealias QuestionFilter = (tags: [Tag], companies: [Company], levels: [Question.DifficultyLevel], topLiked: Bool, topInterviewed: Bool)
+typealias QuestionFilter = (tags: [String], companies: [String], levels: [Question.DifficultyLevel], topLiked: Bool, topInterviewed: Bool)
 
 final class HomeViewModel {
     
@@ -53,6 +53,32 @@ final class HomeViewModel {
         if let query = query, !query.isEmpty {
             let predicate = NSPredicate(format: "title contains %@", query)
             predicates.append(predicate)
+        }
+        
+        if let tags = filter?.tags, !tags.isEmpty {
+            let tagPredicate = NSPredicate(format: "ANY tags.name IN %@", tags)
+            predicates.append(tagPredicate)
+        }
+        
+        if let companies = filter?.companies, !companies.isEmpty {
+            let companyPredicate = NSPredicate(format: "ANY companies.name IN %@", companies)
+            predicates.append(companyPredicate)
+        }
+        
+        if let levels = filter?.levels, !levels.isEmpty {
+            let levelPredicate = NSPredicate(format: "rawDifficultyLevel IN %@", levels.map { $0.rawValue })
+            predicates.append(levelPredicate)
+        }
+        
+        let topLikedPredicate = NSPredicate(format: "topLiked = true")
+        let topInterviewPredicate = NSPredicate(format: "topInterview = true")
+        if filter?.topLiked == true && filter?.topInterviewed == true {
+            let compound = NSCompoundPredicate(type: .or, subpredicates: [topLikedPredicate, topInterviewPredicate])
+            predicates.append(compound)
+        } else if filter?.topLiked == true {
+            predicates.append(topLikedPredicate)
+        } else if filter?.topInterviewed == true {
+            predicates.append(topInterviewPredicate)
         }
         
         if predicates.count > 0 {
