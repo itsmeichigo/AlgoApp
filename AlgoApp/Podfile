@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.1'
 use_frameworks!
 inhibit_all_warnings!
 
@@ -9,8 +9,6 @@ def rx
   pod 'RxSwift'
   pod 'RxRealm'
   pod 'RxDataSources'
-  # pod 'Action'
-  # pod 'RxSwiftExt'
   pod 'RxOptional'
 end
 
@@ -23,6 +21,7 @@ end
 def ui 
   pod 'SwiftMessages'
   pod 'Tags'
+  pod 'Highlightr'
 end
 
 def testing

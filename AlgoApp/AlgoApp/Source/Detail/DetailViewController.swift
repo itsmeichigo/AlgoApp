@@ -22,6 +22,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var officialSolutionButton: UIButton!
     @IBOutlet weak var swiftButton: UIButton!
     @IBOutlet weak var markAsReadButton: UIButton!
+    @IBOutlet weak var loadingView: UIView!
     
     var viewModel: DetailViewModel!
     let disposeBag = DisposeBag()
@@ -61,16 +62,22 @@ class DetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.swiftSolutionUrl
+        viewModel.scrapingSolution
+            .observeOn(MainScheduler.instance)
+            .map { !$0 }
+            .bind(to: loadingView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.swiftSolution
             .asDriver()
             .map { $0 == nil }
             .drive(swiftButton.rx.isHidden)
             .disposed(by: disposeBag)
         
         swiftButton.rx.tap
+            .withLatestFrom(viewModel.swiftSolution)
             .subscribe(onNext: { [unowned self] in
-                guard let url = self.viewModel.swiftSolutionUrl.value else { return }
-                self.showWebpage(url: url, title: "Swift Solution")
+                self.showCodeController(content: $0, language: .swift)
             })
             .disposed(by: disposeBag)
         
@@ -83,6 +90,14 @@ class DetailViewController: UIViewController {
         viewController.url = url
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showCodeController(content: String?, language: Language) {
+        guard let codeController = self.storyboard?.instantiateViewController(withIdentifier: "codeViewController") as? CodeViewController,
+            let content = content else { return }
+        codeController.viewModel = CodeViewModel(content: content, language: language)
+        codeController.title = "\(language.rawValue.capitalized) Solution"
+        self.navigationController?.pushViewController(codeController, animated: true)
     }
     
     @objc private func addNotes() {

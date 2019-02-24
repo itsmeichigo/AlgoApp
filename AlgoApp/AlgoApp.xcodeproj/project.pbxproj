@@ -27,6 +27,8 @@
 		DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */; };
 		DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */; };
 		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
+		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
+		DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11722226B920091FF96 /* CodeViewModel.swift */; };
 		DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA6221D399E0040B4E9 /* FilterViewController.swift */; };
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
@@ -71,6 +73,8 @@
 		DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
 		DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBottomSegue.swift; sourceTree = "<group>"; };
 		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
+		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
+		DE13A11722226B920091FF96 /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
 		DE157EA6221D399E0040B4E9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				DE157EA5221D398C0040B4E9 /* Filter */,
 				DE0E518922088A1300BFBB0B /* Detail */,
 				DE195DC02219483B00BDDFB4 /* WebView */,
+				DE13A11422226A630091FF96 /* CodeView */,
 				DE0E51882208524600BFBB0B /* Extensions */,
 			);
 			path = Source;
@@ -229,6 +234,15 @@
 				DE0E518A22088A3200BFBB0B /* DetailViewController.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		DE13A11422226A630091FF96 /* CodeView */ = {
+			isa = PBXGroup;
+			children = (
+				DE13A11722226B920091FF96 /* CodeViewModel.swift */,
+				DE13A11522226A7F0091FF96 /* CodeViewController.swift */,
+			);
+			path = CodeView;
 			sourceTree = "<group>";
 		};
 		DE157EA5221D398C0040B4E9 /* Filter */ = {
@@ -360,6 +374,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -379,6 +394,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kanna.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -509,6 +525,7 @@
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
+				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
 				DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */,
 				DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */,
@@ -520,6 +537,7 @@
 				DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */,
 				DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */,
 				DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */,
+				DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */,
 				DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */,
 				DE0E517522082E5400BFBB0B /* HomeViewModel.swift in Sources */,
 			);
@@ -686,6 +704,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AlgoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -704,6 +723,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AlgoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
