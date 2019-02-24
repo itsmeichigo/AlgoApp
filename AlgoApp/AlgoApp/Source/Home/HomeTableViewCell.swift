@@ -34,7 +34,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         }
     }
 
-    func configureCell(with model: QuestionDetailModel) {
+    func configureCell(with model: QuestionCellModel) {
         emojiLabel.text = model.emoji
         titleLabel.text = model.title
         tagsLabel.text = model.tags.joined(separator: "・")

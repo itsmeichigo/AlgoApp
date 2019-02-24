@@ -24,11 +24,12 @@
 		DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E51862208524200BFBB0B /* UIColor+Utility.swift */; };
 		DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518A22088A3200BFBB0B /* DetailViewController.swift */; };
 		DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */; };
-		DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */; };
+		DE0E518F22088F1C00BFBB0B /* QuestionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */; };
 		DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */; };
 		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
 		DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11722226B920091FF96 /* CodeViewModel.swift */; };
+		DE13A11A2222DEFB0091FF96 /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */; };
 		DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA6221D399E0040B4E9 /* FilterViewController.swift */; };
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
@@ -70,11 +71,12 @@
 		DE0E51862208524200BFBB0B /* UIColor+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utility.swift"; sourceTree = "<group>"; };
 		DE0E518A22088A3200BFBB0B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
+		DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCellModel.swift; sourceTree = "<group>"; };
 		DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBottomSegue.swift; sourceTree = "<group>"; };
 		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		DE13A11722226B920091FF96 /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
+		DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
 		DE157EA6221D399E0040B4E9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +170,7 @@
 				DE0E517422082E5400BFBB0B /* HomeViewModel.swift */,
 				DE0E515322070C2800BFBB0B /* HomeViewController.swift */,
 				DE0E517222082E2700BFBB0B /* HomeTableViewCell.swift */,
-				DE0E518E22088F1C00BFBB0B /* QuestionDetailModel.swift */,
+				DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -232,6 +234,7 @@
 			children = (
 				DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */,
 				DE0E518A22088A3200BFBB0B /* DetailViewController.swift */,
+				DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -528,7 +531,8 @@
 				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
 				DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */,
-				DE0E518F22088F1C00BFBB0B /* QuestionDetailModel.swift in Sources */,
+				DE0E518F22088F1C00BFBB0B /* QuestionCellModel.swift in Sources */,
+				DE13A11A2222DEFB0091FF96 /* QuestionDetailModel.swift in Sources */,
 				DE0E5180220840A400BFBB0B /* Tag.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,

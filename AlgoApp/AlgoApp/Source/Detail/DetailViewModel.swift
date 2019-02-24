@@ -8,20 +8,44 @@
 
 import Foundation
 import Kanna
+import RealmSwift
 import RxCocoa
+import RxRealm
+import RxSwift
+import RxOptional
 
 final class DetailViewModel {
     
-    let detail: QuestionDetailModel
+    let detail = BehaviorRelay<QuestionDetailModel?>(value: nil)
+    
     let swiftSolution = BehaviorRelay<String?>(value: nil)
     let scrapingSolution = BehaviorRelay<Bool>(value: true)
     
-    init(detail: QuestionDetailModel) {
-        self.detail = detail
+    private let realmForRead = try! Realm()
+    private let realmForWrite = try! Realm()
+    
+    private let disposeBag = DisposeBag()
+    private let questionId: Int
+    
+    init(questionId: Int) {
+        self.questionId = questionId
+        
+        Observable.collection(from: realmForRead.objects(Question.self))
+            .map { $0.first(where: { $0.id == questionId }) }
+            .map { question -> QuestionDetailModel? in
+                guard let question = question else { return nil }
+                return QuestionDetailModel(with: question)
+            }
+            .bind(to: detail)
+            .disposed(by: disposeBag)
     }
     
     func scrapeSwiftSolution() {
-        guard let url = URL(string:"https://github.com/soapyigu/LeetCode-Swift") else { return }
+        guard let titleSlug = detail.value?.titleSlug,
+            let url = URL(string:"https://github.com/soapyigu/LeetCode-Swift") else {
+            scrapingSolution.accept(false)
+            return
+        }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in
             guard let self = self else { return }
@@ -38,7 +62,7 @@ final class DetailViewModel {
                 let tds = node.element.xpath("//tr[\(offset)]/td/a")
                 
                 if tds.count > 1,
-                    tds[0]["href"]?.contains(self.detail.titleSlug) == true,
+                    tds[0]["href"]?.contains(titleSlug) == true,
                     let path = tds[1]["href"] {
                     if let url = URL(string: "https://github.com" + path) {
                         found = true
@@ -78,8 +102,12 @@ final class DetailViewModel {
         task.resume()
     }
     
-    func markAsRead(_ read: Bool) {
-        
+    func toggleRead() {
+        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
+        let toggledValue = !question.read
+        try! realmForWrite.write {
+            question.read = toggledValue
+        }
     }
     
     func updateNote(_ note: String) {

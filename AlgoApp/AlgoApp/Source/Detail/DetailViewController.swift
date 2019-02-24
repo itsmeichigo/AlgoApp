@@ -6,6 +6,7 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
+import RxOptional
 import RxSwift
 import RxCocoa
 import StringExtensionHTML
@@ -29,8 +30,10 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureNavigationBar()
-        configureView()
+        configureContent()
+        configureButtons()
         
         viewModel.scrapeSwiftSolution()
     }
@@ -43,21 +46,68 @@ class DetailViewController: UIViewController {
         navigationItem.rightBarButtonItems = [noteBarButton]
     }
 
-    private func configureView() {
+    private func configureContent() {
         
-        titleLabel.text = viewModel.detail.title
-        remarkLabel.text = viewModel.detail.remark
-        difficultyLabel.text = "Difficulty: " + viewModel.detail.difficulty
-        descriptionTextView.text = viewModel.detail.content.stringByDecodingHTMLEntities
-        tagsView.tags = viewModel.detail.tags.joined(separator: ",")
+        viewModel.detail
+            .map { $0?.title }
+            .bind(to: titleLabel.rx.text)
+            .disposed(by: disposeBag)
         
-        if viewModel.detail.articleSlug.isEmpty {
-            officialSolutionButton.isHidden = true
-        }
+        viewModel.detail
+            .map { $0?.remark }
+            .bind(to: remarkLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.detail
+            .map { $0?.difficulty ?? "" }
+            .map { "Difficulty: " + $0 }
+            .bind(to: difficultyLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.detail
+            .map { $0?.content.stringByDecodingHTMLEntities }
+            .bind(to: descriptionTextView.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.detail
+            .map { $0?.tags.joined(separator: ",") ?? "" }
+            .subscribe(onNext: { [weak self] in self?.tagsView.tags = $0 })
+            .disposed(by: disposeBag)
+        
+        viewModel.detail
+            .map { $0?.articleSlug.isEmpty ?? true }
+            .bind(to: officialSolutionButton.rx.isHidden)
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureButtons() {
+        markAsReadButton.layer.cornerRadius = 8
+        markAsReadButton.layer.borderWidth = 1
+        markAsReadButton.layer.borderColor = Configurations.highlightColor.cgColor
+        markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
+        markAsReadButton.setTitle("😕 Mark as Unread", for: .selected)
+        markAsReadButton.setTitleColor(.white, for: .normal)
+        markAsReadButton.setTitleColor(Configurations.highlightColor, for: .selected)
+        
+        viewModel.detail
+            .filterNil()
+            .map { $0.read }
+            .subscribe(onNext: { [weak self] read in
+                let backgroundColor = read ? Configurations.highlightColor: UIColor.white
+                self?.markAsReadButton.backgroundColor = backgroundColor
+                self?.markAsReadButton.isSelected = !read
+            })
+            .disposed(by: disposeBag)
+        
+        markAsReadButton.rx.tap
+            .subscribe(onNext: { [weak self] in self?.viewModel.toggleRead() })
+            .disposed(by: disposeBag)
         
         officialSolutionButton.rx.tap
+            .withLatestFrom(viewModel.detail)
+            .filterNil()
             .subscribe(onNext: { [unowned self] in
-                guard let url = URL(string: "https://leetcode.com/articles/\(self.viewModel.detail.articleSlug)#solution") else { return }
+                guard let url = URL(string: "https://leetcode.com/articles/\($0.articleSlug)#solution") else { return }
                 self.showWebpage(url: url, title: "Official Solution")
             })
             .disposed(by: disposeBag)
@@ -80,9 +130,6 @@ class DetailViewController: UIViewController {
                 self.showCodeController(content: $0, language: .swift)
             })
             .disposed(by: disposeBag)
-        
-        markAsReadButton.layer.cornerRadius = 8
-        
     }
     
     private func showWebpage(url: URL, title: String = "") {

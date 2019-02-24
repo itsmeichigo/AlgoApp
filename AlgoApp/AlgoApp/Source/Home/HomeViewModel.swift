@@ -16,7 +16,7 @@ typealias QuestionFilter = (tags: [String], companies: [String], levels: [Questi
 
 final class HomeViewModel {
     
-    let questions = BehaviorRelay<[QuestionDetailModel]>(value: [])
+    let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
     
     private let disposeBag = DisposeBag()
     private lazy var realm: Realm = {
@@ -88,7 +88,7 @@ final class HomeViewModel {
         
         Observable.collection(from: results)
             .map { Array($0)
-                .map { QuestionDetailModel(with: $0) }
+                .map { QuestionCellModel(with: $0) }
                 .sorted(by: { $0.id < $1.id })
             }
             .bind(to: questions)

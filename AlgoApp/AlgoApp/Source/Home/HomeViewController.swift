@@ -13,7 +13,7 @@ import RxSwift
 
 final class HomeViewController: UIViewController {
     
-    typealias QuestionSection = SectionModel<String, QuestionDetailModel>
+    typealias QuestionSection = SectionModel<String, QuestionCellModel>
     typealias DataSource = RxTableViewSectionedReloadDataSource<QuestionSection>
     
     @IBOutlet fileprivate weak var tableView: UITableView!
@@ -68,9 +68,9 @@ final class HomeViewController: UIViewController {
         
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
-        tableView.rx.modelSelected(QuestionDetailModel.self)
+        tableView.rx.modelSelected(QuestionCellModel.self)
             .asDriver()
-            .map { DetailViewModel(detail: $0) }
+            .map { DetailViewModel(questionId: $0.id) }
             .drive(onNext: { [unowned self] viewModel in
                 guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
                 viewController.viewModel = viewModel
