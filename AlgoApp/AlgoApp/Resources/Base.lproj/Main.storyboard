@@ -398,7 +398,7 @@
         <scene sceneID="YIG-9A-wYS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKf-0D-Yfr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="FXt-Cs-t0u"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="FXt-Cs-t0u"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kKe-LY-eId">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -615,7 +615,7 @@
         <scene sceneID="UYv-66-0Hu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cPN-0Q-sgk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reminder" id="xsB-7A-mwF"/>
+                    <tabBarItem key="tabBarItem" title="Reminder" image="reminder" selectedImage="reminder" id="xsB-7A-mwF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sOu-vq-J4W">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -650,7 +650,7 @@
         <scene sceneID="HdU-r2-FHX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kDj-H9-MUx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="4lL-HY-V4z"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="4lL-HY-V4z"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tdJ-2S-lGs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -685,4 +685,9 @@
             <point key="canvasLocation" x="2664.8000000000002" y="-1424.4377811094455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="home" width="30" height="29"/>
+        <image name="reminder" width="30" height="30"/>
+        <image name="settings" width="30" height="29"/>
+    </resources>
 </document>
