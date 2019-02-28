@@ -32,6 +32,9 @@ class FilterViewController: UIViewController {
         
         viewModel = FilterViewModel()
         
+        applyButton.tintColor = Colors.secondaryBlueColor
+        clearAllButton.tintColor = Colors.secondaryPinkColor
+        
         difficultyTagsView.tags = Question.DifficultyLevel.allCases.map { $0.title }.joined(separator: ",")
         
         otherTagsView.tags = Question.Remarks.allCases.map { $0.title }.joined(separator: ",")
@@ -50,6 +53,8 @@ class FilterViewController: UIViewController {
         
         [difficultyTagsView, otherTagsView, categoryTagsView, companyTagsView].forEach { [unowned self] tagView in
             tagView?.delegate = self
+            tagView?.tagLayerColor = Colors.borderColor
+            tagView?.tagTitleColor = Colors.darkGrey
         }
     }
     
@@ -103,12 +108,14 @@ class FilterViewController: UIViewController {
 
 extension FilterViewController: TagsDelegate {
     func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
-        if tagButton.backgroundColor != Configurations.highlightColor {
-            tagButton.backgroundColor = Configurations.highlightColor
+        if tagButton.backgroundColor != Colors.primaryColor {
+            tagButton.backgroundColor = Colors.primaryColor
             tagButton.setTitleColor(.white, for: .normal)
+            tagButton.layer.borderColor = UIColor.clear.cgColor
         } else {
             tagButton.backgroundColor = .white
-            tagButton.setTitleColor(Configurations.highlightColor, for: .normal)
+            tagButton.setTitleColor(Colors.darkGrey, for: .normal)
+            tagButton.layer.borderColor = Colors.borderColor.cgColor
         }
         
         let title = tagButton.title(for: .normal)!

@@ -61,7 +61,7 @@ final class HomeViewController: UIViewController {
         
         navigationItem.titleView = searchBar
         
-        navigationController?.navigationBar.tintColor = Configurations.highlightColor
+        navigationController?.navigationBar.tintColor = Colors.primaryColor
     }
     
     private func configurePresentable() {

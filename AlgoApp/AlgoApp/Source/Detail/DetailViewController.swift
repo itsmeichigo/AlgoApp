@@ -18,20 +18,29 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var remarkLabel: UILabel!
     @IBOutlet weak var difficultyLabel: UILabel!
+    
+    @IBOutlet weak var descriptionTitleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var tagTitleLabel: UILabel!
     @IBOutlet weak var tagsView: TagsView!
+    
+    @IBOutlet weak var solutionsTitleLabel: UILabel!
     @IBOutlet weak var officialSolutionButton: UIButton!
     @IBOutlet weak var swiftButton: UIButton!
+    
     @IBOutlet weak var markAsReadButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     
     var viewModel: DetailViewModel!
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
+    private let tagColors = [Colors.secondaryPinkColor, Colors.secondaryBlueColor, Colors.secondaryGreenColor, Colors.secondaryPurpleColor]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureNavigationBar()
+        configureViews()
         configureContent()
         configureButtons()
         
@@ -44,6 +53,28 @@ class DetailViewController: UIViewController {
         let noteBarButton = UIBarButtonItem(title: "📝 Notes", style: .plain
             , target: self, action: #selector(addNotes))
         navigationItem.rightBarButtonItems = [noteBarButton]
+    }
+    
+    private func configureViews() {
+        remarkLabel.textColor = Colors.lightGrey
+        difficultyLabel.textColor = Colors.lightGrey
+        
+        titleLabel.textColor = Colors.darkGrey
+        descriptionTextView.textColor = Colors.darkGrey
+        descriptionTitleLabel.textColor = Colors.darkGrey
+        tagTitleLabel.textColor = Colors.darkGrey
+        solutionsTitleLabel.textColor = Colors.darkGrey
+        
+        officialSolutionButton.setTitleColor(Colors.primaryColor, for: .normal)
+        swiftButton.setTitleColor(Colors.primaryColor, for: .normal)
+        
+        markAsReadButton.layer.cornerRadius = 8
+        markAsReadButton.layer.borderWidth = 1
+        markAsReadButton.layer.borderColor = Colors.primaryColor.cgColor
+        markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
+        markAsReadButton.setTitle("😕 Mark as Unread", for: .selected)
+        markAsReadButton.setTitleColor(.white, for: .normal)
+        markAsReadButton.setTitleColor(Colors.primaryColor, for: .selected)
     }
 
     private func configureContent() {
@@ -71,31 +102,37 @@ class DetailViewController: UIViewController {
         
         viewModel.detail
             .map { $0?.tags.joined(separator: ",") ?? "" }
-            .subscribe(onNext: { [weak self] in self?.tagsView.tags = $0 })
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.tagsView.tags = $0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    for (index, tagButton) in self.tagsView.tagArray.enumerated() {
+                        let currentColor = self.tagColors[index % self.tagColors.count]
+                        tagButton.setTitleColor(currentColor, for: .normal)
+                        tagButton.backgroundColor = currentColor.withAlphaComponent(0.1)
+                        tagButton.layer.borderColor = UIColor.clear.cgColor
+                    }
+                })
+            })
             .disposed(by: disposeBag)
         
         viewModel.detail
-            .map { $0?.articleSlug.isEmpty ?? true }
+            .map { $0?.articleSlug.isEmpty == false }
+            .map { !$0 }
             .bind(to: officialSolutionButton.rx.isHidden)
             .disposed(by: disposeBag)
     }
     
     private func configureButtons() {
-        markAsReadButton.layer.cornerRadius = 8
-        markAsReadButton.layer.borderWidth = 1
-        markAsReadButton.layer.borderColor = Configurations.highlightColor.cgColor
-        markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
-        markAsReadButton.setTitle("😕 Mark as Unread", for: .selected)
-        markAsReadButton.setTitleColor(.white, for: .normal)
-        markAsReadButton.setTitleColor(Configurations.highlightColor, for: .selected)
         
         viewModel.detail
             .filterNil()
             .map { $0.read }
             .subscribe(onNext: { [weak self] read in
-                let backgroundColor = read ? Configurations.highlightColor: UIColor.white
+                let backgroundColor = read ? UIColor.white: Colors.primaryColor
                 self?.markAsReadButton.backgroundColor = backgroundColor
-                self?.markAsReadButton.isSelected = !read
+                self?.markAsReadButton.isSelected = read
             })
             .disposed(by: disposeBag)
         
@@ -122,6 +159,14 @@ class DetailViewController: UIViewController {
             .asDriver()
             .map { $0 == nil }
             .drive(swiftButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.scrapingSolution.asDriver()
+            .filter { !$0 }
+            .withLatestFrom(Driver.combineLatest(viewModel.swiftSolution.asDriver(), viewModel.detail.asDriver()))
+            .map { $0.0 != nil || $0.1?.articleSlug.isEmpty == false }
+            .map { $0 == true ? "📕 Solutions" : "😓 No solution found" }
+            .drive(solutionsTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
         swiftButton.rx.tap

@@ -25,6 +25,10 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         cardView.layer.shadowOffset = CGSize(width: 0, height: 3)
         cardView.layer.shadowOpacity = 0.1
         cardView.layer.shadowRadius = 3.0
+        
+        titleLabel.textColor = Colors.darkGrey
+        tagsLabel.textColor = Colors.lightGrey
+        markLabel.textColor = Colors.lightGrey
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
