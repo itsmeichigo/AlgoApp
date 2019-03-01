@@ -18,6 +18,7 @@ struct QuestionDetailModel {
     let articleSlug: String
     let titleSlug: String
     let read: Bool
+    let note: String
     
     init(with question: Question) {
         id = question.id
@@ -29,5 +30,6 @@ struct QuestionDetailModel {
         articleSlug = question.articleSlug
         titleSlug = question.titleSlug
         read = question.read
+        note = question.note
     }
 }

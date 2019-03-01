@@ -42,6 +42,10 @@ final class HomeViewController: UIViewController {
         guard segue.identifier == "filterSegue",
             let destination = segue.destination as? UINavigationController,
             let filterController = destination.topViewController as? FilterViewController else { return }
+        
+        destination.view.layer.cornerRadius = 8.0
+        destination.view.layer.masksToBounds = true
+        
         filterController.initialFilter = currentFilter.value
         filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
     }

@@ -45,6 +45,7 @@ PODS:
   - RxTest (4.4.1):
     - RxAtomic (~> 4.4)
     - RxSwift (~> 4.0)
+  - SnapKit (4.0.1)
   - StringExtensionHTML (1.0.2)
   - SwiftMessages (6.0.2):
     - SwiftMessages/App (= 6.0.2)
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - RxRealm
   - RxSwift
   - RxTest
+  - SnapKit (~> 4.0.0)
   - StringExtensionHTML
   - SwiftMessages
   - Tags
@@ -90,6 +92,7 @@ SPEC REPOS:
     - RxRealm
     - RxSwift
     - RxTest
+    - SnapKit
     - StringExtensionHTML
     - SwiftMessages
     - Tags
@@ -113,10 +116,11 @@ SPEC CHECKSUMS:
   RxRealm: 5379eddd74f8d617ca7681d1f8d144af25b432b0
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
   RxTest: f8e548755ca3c7502dc41c7d3b28802c90115a38
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   StringExtensionHTML: 856dcc0c705012ae2f9c29c7413b015b82133e52
   SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
   Tags: f513b25d753de97503f1bef5b4ff1fca4a0d5b29
 
-PODFILE CHECKSUM: f9d84571ac8ac93bd723e689114f2e6a5939b252
+PODFILE CHECKSUM: 4cff533f7d025f2e8a64f2740ae773feb21b0659
 
 COCOAPODS: 1.6.1

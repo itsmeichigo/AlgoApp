@@ -16,6 +16,7 @@ import UIKit
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleView: UIView!
     @IBOutlet weak var remarkLabel: UILabel!
     @IBOutlet weak var difficultyLabel: UILabel!
     
@@ -172,7 +173,9 @@ class DetailViewController: UIViewController {
         swiftButton.rx.tap
             .withLatestFrom(viewModel.swiftSolution)
             .subscribe(onNext: { [unowned self] in
-                self.showCodeController(content: $0, language: .swift)
+                let language = Language.swift
+                let title = "\(language.rawValue.capitalized) Solution"
+                self.showCodeController(title: title, content: $0, language: language)
             })
             .disposed(by: disposeBag)
     }
@@ -184,15 +187,26 @@ class DetailViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showCodeController(content: String?, language: Language) {
-        guard let codeController = self.storyboard?.instantiateViewController(withIdentifier: "codeViewController") as? CodeViewController,
-            let content = content else { return }
-        codeController.viewModel = CodeViewModel(content: content, language: language)
-        codeController.title = "\(language.rawValue.capitalized) Solution"
-        self.navigationController?.pushViewController(codeController, animated: true)
+    private func showCodeController(title: String?, content: String?, language: Language, readOnly: Bool = true, completionHandler: ((String) -> Void)? = nil) {
+        guard let content = content else { return }
+        let codeController = CodeViewController()
+        codeController.viewModel = CodeViewModel(content: content, language: language, readOnly: readOnly)
+        codeController.title = title
+        codeController.completionHandler = completionHandler
+
+        let navigationController = UINavigationController(rootViewController: codeController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     @objc private func addNotes() {
-        
+        // TODO: switch language
+        let note = viewModel.detail.value?.note
+        let text = note?.isEmpty != false ? """
+            // start writing here
+            // choose your preferred language for appropriate syntax highlight
+        """ : note
+        showCodeController(title: "Notes", content: text, language: .swift, readOnly: false) { [weak self] note in
+            self?.viewModel.updateNote(note)
+        }
     }
 }

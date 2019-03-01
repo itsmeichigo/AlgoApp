@@ -111,6 +111,9 @@ final class DetailViewModel {
     }
     
     func updateNote(_ note: String) {
-        
+        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
+        try! realmForWrite.write {
+            question.note = note
+        }
     }
 }
