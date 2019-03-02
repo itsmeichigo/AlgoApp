@@ -58,6 +58,8 @@ private extension CodeViewController {
     
     func configureNavigationBar() {
         
+        navigationController?.navigationBar.isTranslucent = false
+        
         let closeButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
         navigationItem.leftBarButtonItems = [closeButton]
         
@@ -87,7 +89,7 @@ private extension CodeViewController {
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pickerView)
         pickerView.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().offset(-216 + 44)
+            maker.top.equalToSuperview().offset(-216)
             maker.leading.trailing.equalToSuperview()
         }
         pickerView.backgroundColor = .white
@@ -122,6 +124,7 @@ private extension CodeViewController {
         codeTextView.autocorrectionType = .no
         codeTextView.isEditable = !viewModel.readOnly
         codeTextView.delegate = self
+        codeTextView.font = UIFont.systemFont(ofSize: 16)
         
         codeTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(codeTextView)
@@ -140,7 +143,7 @@ private extension CodeViewController {
     }
     
     func togglePickerView(show: Bool) {
-        let offset = show ? 44 : -216 + 44
+        let offset = show ? 0 : -216
         pickerView.snp.updateConstraints { maker in
             maker.top.equalToSuperview().offset(offset)
         }

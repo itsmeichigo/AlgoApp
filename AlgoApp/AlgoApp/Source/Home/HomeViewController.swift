@@ -6,6 +6,7 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
+import Hero
 import UIKit
 import RxCocoa
 import RxDataSources
@@ -34,7 +35,7 @@ final class HomeViewController: UIViewController {
         viewModel.loadSeedDatabase()
     
         configureNavigationBar()
-        configurePresentable()
+        configureView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,9 +68,12 @@ final class HomeViewController: UIViewController {
         navigationItem.titleView = searchBar
         
         navigationController?.navigationBar.tintColor = Colors.primaryColor
+        navigationController?.hero.isEnabled = true
+//        navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))
+        navigationController?.hero.navigationAnimationType = .selectBy(presenting: .zoom, dismissing: .zoomOut)
     }
     
-    private func configurePresentable() {
+    private func configureView() {
         
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none

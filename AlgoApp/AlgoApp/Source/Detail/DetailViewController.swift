@@ -6,6 +6,7 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
+import Hero
 import RxOptional
 import RxSwift
 import RxCocoa
@@ -71,10 +72,11 @@ class DetailViewController: UIViewController {
         
         let noteBarButton = UIBarButtonItem(title: "📝 Note", style: .plain
             , target: self, action: #selector(showNotes))
-        navigationItem.rightBarButtonItems = [noteBarButton]
+        navigationItem.rightBarButtonItems = [noteBarButton]        
     }
     
     private func configureViews() {
+        
         remarkLabel.textColor = Colors.lightGrey
         difficultyLabel.textColor = Colors.lightGrey
         
@@ -84,8 +86,8 @@ class DetailViewController: UIViewController {
         tagTitleLabel.textColor = Colors.darkGrey
         solutionsTitleLabel.textColor = Colors.darkGrey
         
-        officialSolutionButton.setTitleColor(Colors.primaryColor, for: .normal)
-        swiftButton.setTitleColor(Colors.primaryColor, for: .normal)
+        officialSolutionButton.setTitleColor(Colors.secondaryBlueColor, for: .normal)
+        swiftButton.setTitleColor(Colors.secondaryOrangeColor, for: .normal)
         
         markAsReadButton.layer.cornerRadius = 8
         markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)

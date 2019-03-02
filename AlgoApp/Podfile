@@ -20,6 +20,7 @@ end
 
 def ui
   pod 'FloatingPanel'
+  pod 'Hero'
   pod 'Highlightr'
   pod 'SnapKit', '~> 4.0.0'
   pod 'SwiftMessages'
