@@ -61,11 +61,12 @@ private extension CodeViewController {
         navigationController?.navigationBar.isTranslucent = false
         
         let closeButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
+        closeButton.tintColor = Colors.lightGrey
         navigationItem.leftBarButtonItems = [closeButton]
         
         if !viewModel.readOnly {
-            let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveContent))
-            saveButton.tintColor = Colors.secondaryBlueColor
+            let saveButton = UIBarButtonItem(image: UIImage(named: "done"), style: .plain, target: self, action: #selector(saveContent))
+            saveButton.tintColor = Colors.secondaryGreenColor
             navigationItem.rightBarButtonItems = [saveButton]
             
             viewModel.language

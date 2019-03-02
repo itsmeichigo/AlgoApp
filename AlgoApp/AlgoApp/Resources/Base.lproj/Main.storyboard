@@ -120,14 +120,22 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="L4A-Z3-epk">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" style="plain" id="FpT-bH-Ee4">
-                            <connections>
-                                <segue destination="bL1-x7-NZt" kind="custom" identifier="filterSegue" customClass="SwiftMessagesBottomSegue" customModule="AlgoApp" customModuleProvider="target" id="bGd-JS-1b7"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="filter" style="plain" id="FpT-bH-Ee4">
+                                <connections>
+                                    <segue destination="bL1-x7-NZt" kind="custom" identifier="filterSegue" customClass="SwiftMessagesBottomSegue" customModule="AlgoApp" customModuleProvider="target" id="bGd-JS-1b7"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="shuffle" style="plain" id="5Bj-z7-KKn">
+                                <connections>
+                                    <segue destination="kTc-zy-1dV" kind="show" identifier="showRandomQuestion" id="Y7f-Uq-hPI"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="filterButton" destination="FpT-bH-Ee4" id="doo-g3-J4r"/>
+                        <outlet property="shuffleButton" destination="5Bj-z7-KKn" id="Wg4-c5-fWR"/>
                         <outlet property="tableView" destination="TUh-lj-CWp" id="eII-9v-PZr"/>
                     </connections>
                 </viewController>
@@ -663,8 +671,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home" width="30" height="23"/>
-        <image name="reminder" width="24" height="25"/>
-        <image name="settings" width="22" height="23"/>
+        <image name="filter" width="19" height="21"/>
+        <image name="home" width="25" height="23"/>
+        <image name="reminder" width="23" height="23"/>
+        <image name="settings" width="23" height="23"/>
+        <image name="shuffle" width="21" height="21"/>
     </resources>
 </document>

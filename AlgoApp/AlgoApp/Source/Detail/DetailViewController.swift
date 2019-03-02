@@ -70,8 +70,8 @@ class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = "Detail"
         
-        let noteBarButton = UIBarButtonItem(title: "📝 Note", style: .plain
-            , target: self, action: #selector(showNotes))
+        let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
+        noteBarButton.tintColor = Colors.secondaryYellowColor
         navigationItem.rightBarButtonItems = [noteBarButton]        
     }
     

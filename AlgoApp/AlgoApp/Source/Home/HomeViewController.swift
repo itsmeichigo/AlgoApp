@@ -19,6 +19,7 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet fileprivate weak var tableView: UITableView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var shuffleButton: UIBarButtonItem!
     
     fileprivate var searchBar: UISearchBar!
     
@@ -40,16 +41,23 @@ final class HomeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        guard segue.identifier == "filterSegue",
+        
+        if segue.identifier == "filterSegue",
             let destination = segue.destination as? UINavigationController,
-            let filterController = destination.topViewController as? FilterViewController else { return }
+            let filterController = destination.topViewController as? FilterViewController {
+            destination.view.layer.cornerRadius = 8.0
+            destination.view.layer.masksToBounds = true
+            destination.preferredContentSize = CGSize(width: 0, height: UIScreen.main.bounds.size.height * 2 / 3)
+            
+            filterController.initialFilter = currentFilter.value
+            filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
+            
+        } else if segue.identifier == "showRandomQuestion",
+            let detailController = segue.destination as? DetailViewController {
+            detailController.viewModel = viewModel.randomDetailModel()
+            detailController.hidesBottomBarWhenPushed = true
+        }
         
-        destination.view.layer.cornerRadius = 8.0
-        destination.view.layer.masksToBounds = true
-        destination.preferredContentSize = CGSize(width: 0, height: UIScreen.main.bounds.size.height * 2 / 3)
-        
-        filterController.initialFilter = currentFilter.value
-        filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
     }
 
     private func buildDataSource() -> DataSource {
@@ -64,13 +72,14 @@ final class HomeViewController: UIViewController {
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.placeholder = "Search by title"
-        
         navigationItem.titleView = searchBar
+        
+        filterButton.tintColor = Colors.secondaryBlueColor
+        shuffleButton.tintColor = Colors.secondaryOrangeColor
         
         navigationController?.navigationBar.tintColor = Colors.primaryColor
         navigationController?.hero.isEnabled = true
-//        navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))
-        navigationController?.hero.navigationAnimationType = .selectBy(presenting: .zoom, dismissing: .zoomOut)
+        navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))
     }
     
     private func configureView() {
@@ -80,9 +89,9 @@ final class HomeViewController: UIViewController {
         tableView.rx.modelSelected(QuestionCellModel.self)
             .asDriver()
             .map { DetailViewModel(questionId: $0.id) }
-            .drive(onNext: { [unowned self] viewModel in
+            .drive(onNext: { [unowned self] model in
                 guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-                viewController.viewModel = viewModel
+                viewController.viewModel = model
                 viewController.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(viewController, animated: true)
             })

@@ -94,4 +94,10 @@ final class HomeViewModel {
             .bind(to: questions)
             .disposed(by: disposeBag)
     }
+    
+    func randomDetailModel() -> DetailViewModel {
+        let randomIndex = Int.random(in: 0..<questions.value.count)
+        let question = questions.value[randomIndex]
+        return DetailViewModel(questionId: question.id)
+    }
 }
