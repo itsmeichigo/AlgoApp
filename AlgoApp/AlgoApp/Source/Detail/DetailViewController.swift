@@ -10,6 +10,7 @@ import RxOptional
 import RxSwift
 import RxCocoa
 import StringExtensionHTML
+import FloatingPanel
 import Tags
 import UIKit
 
@@ -35,7 +36,8 @@ class DetailViewController: UIViewController {
     
     var viewModel: DetailViewModel!
     private let disposeBag = DisposeBag()
-    private let tagColors = [Colors.secondaryPinkColor, Colors.secondaryBlueColor, Colors.secondaryGreenColor, Colors.secondaryPurpleColor]
+    private let tagColors = [Colors.secondaryPinkColor, Colors.secondaryYellowColor, Colors.secondaryBlueColor, Colors.secondaryGreenColor, Colors.secondaryPurpleColor]
+    private let notePanel = FloatingPanelController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +46,33 @@ class DetailViewController: UIViewController {
         configureViews()
         configureContent()
         configureButtons()
+        configureNotePanel()
         
         viewModel.scrapeSwiftSolution()
+    }
+    
+    private func configureNotePanel() {
+        notePanel.delegate = self
+        notePanel.surfaceView.cornerRadius = 8.0
+        notePanel.surfaceView.shadowHidden = false
+        
+        let note = viewModel.detail.value?.note
+        let text = note?.isEmpty != false ? """
+            // start writing here
+            // choose your preferred language for appropriate syntax highlight
+        """ : note
+        let navigationController = setupCodeController(title: "", content: text, language: .swift, readOnly: false, delegate: self)
+        
+        notePanel.set(contentViewController: navigationController)
+        notePanel.addPanel(toParent: self)
+        notePanel.hide()
     }
     
     private func configureNavigationBar() {
         title = "Detail"
         
         let noteBarButton = UIBarButtonItem(title: "📝 Notes", style: .plain
-            , target: self, action: #selector(addNotes))
+            , target: self, action: #selector(showNotes))
         navigationItem.rightBarButtonItems = [noteBarButton]
     }
     
@@ -70,12 +90,10 @@ class DetailViewController: UIViewController {
         swiftButton.setTitleColor(Colors.primaryColor, for: .normal)
         
         markAsReadButton.layer.cornerRadius = 8
-        markAsReadButton.layer.borderWidth = 1
-        markAsReadButton.layer.borderColor = Colors.primaryColor.cgColor
         markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
         markAsReadButton.setTitle("😕 Mark as Unread", for: .selected)
         markAsReadButton.setTitleColor(.white, for: .normal)
-        markAsReadButton.setTitleColor(Colors.primaryColor, for: .selected)
+        markAsReadButton.setTitleColor(.white, for: .selected)
     }
 
     private func configureContent() {
@@ -131,7 +149,7 @@ class DetailViewController: UIViewController {
             .filterNil()
             .map { $0.read }
             .subscribe(onNext: { [weak self] read in
-                let backgroundColor = read ? UIColor.white: Colors.primaryColor
+                let backgroundColor = read ? Colors.lightGrey: Colors.secondaryPurpleColor
                 self?.markAsReadButton.backgroundColor = backgroundColor
                 self?.markAsReadButton.isSelected = read
             })
@@ -172,10 +190,13 @@ class DetailViewController: UIViewController {
         
         swiftButton.rx.tap
             .withLatestFrom(viewModel.swiftSolution)
-            .subscribe(onNext: { [unowned self] in
+            .map { [unowned self] in
                 let language = Language.swift
                 let title = "\(language.rawValue.capitalized) Solution"
-                self.showCodeController(title: title, content: $0, language: language)
+                return self.setupCodeController(title: title, content: $0, language: language)
+            }
+            .subscribe(onNext: { [unowned self] in
+                self.present($0, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -187,26 +208,38 @@ class DetailViewController: UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func showCodeController(title: String?, content: String?, language: Language, readOnly: Bool = true, completionHandler: ((String) -> Void)? = nil) {
-        guard let content = content else { return }
+    private func setupCodeController(title: String?, content: String?, language: Language, readOnly: Bool = true, fullScreen: Bool = true, delegate: CodeViewControllerDelegate? = nil) -> UINavigationController {
         let codeController = CodeViewController()
-        codeController.viewModel = CodeViewModel(content: content, language: language, readOnly: readOnly)
+        codeController.viewModel = CodeViewModel(content: (content ?? ""), language: language, readOnly: readOnly)
         codeController.title = title
-        codeController.completionHandler = completionHandler
-
-        let navigationController = UINavigationController(rootViewController: codeController)
-        present(navigationController, animated: true, completion: nil)
+        codeController.delegate = delegate
+        
+        return UINavigationController(rootViewController: codeController)
     }
     
-    @objc private func addNotes() {
-        // TODO: switch language
-        let note = viewModel.detail.value?.note
-        let text = note?.isEmpty != false ? """
-            // start writing here
-            // choose your preferred language for appropriate syntax highlight
-        """ : note
-        showCodeController(title: "Notes", content: text, language: .swift, readOnly: false) { [weak self] note in
-            self?.viewModel.updateNote(note)
+    @objc private func showNotes() {
+        notePanel.move(to: .full, animated: true)
+    }
+}
+
+extension DetailViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
+        if notePanel.position != .full {
+            view.endEditing(true)
         }
+    }
+}
+
+extension DetailViewController: CodeViewControllerDelegate {
+    func codeControllerWillDismiss() {
+        notePanel.hide(animated: true, completion: nil)
+    }
+    
+    func codeControlerShouldSave(content: String) {
+        viewModel.updateNote(content)
+    }
+    
+    func codeControllerDidStartEditing() {
+        notePanel.move(to: .full, animated: true)
     }
 }

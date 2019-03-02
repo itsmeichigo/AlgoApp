@@ -1,5 +1,6 @@
 PODS:
   - Differentiator (3.1.0)
+  - FloatingPanel (1.4.0)
   - Highlightr (2.1.0)
   - iOSSnapshotTestCase (5.0.2):
     - iOSSnapshotTestCase/SwiftSupport (= 5.0.2)
@@ -53,6 +54,7 @@ PODS:
   - Tags (0.2.4)
 
 DEPENDENCIES:
+  - FloatingPanel
   - Highlightr
   - Kanna (~> 4.0.0)
   - Nimble
@@ -75,6 +77,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Differentiator
+    - FloatingPanel
     - Highlightr
     - iOSSnapshotTestCase
     - Kanna
@@ -99,6 +102,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  FloatingPanel: 1449e7c4b9994e394f2de685b2ad6dd93da06333
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
   iOSSnapshotTestCase: 2d51aa06775e95cecb0a1fb9c5c159ccd1dd4596
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
@@ -121,6 +125,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
   Tags: f513b25d753de97503f1bef5b4ff1fca4a0d5b29
 
-PODFILE CHECKSUM: 4cff533f7d025f2e8a64f2740ae773feb21b0659
+PODFILE CHECKSUM: 952d675345d673d25df98b250f7a8611036d1b54
 
 COCOAPODS: 1.6.1

@@ -9,12 +9,19 @@
 import UIKit
 import SnapKit
 
+protocol CodeViewControllerDelegate: class {
+    func codeControllerDidStartEditing()
+    func codeControllerWillDismiss()
+    func codeControlerShouldSave(content: String)
+}
+
 class CodeViewController: UIViewController {
 
     private var codeTextView: UITextView!
     
     var viewModel: CodeViewModel!
-    var completionHandler: ((String) -> Void)?
+    
+    weak var delegate: CodeViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +31,13 @@ class CodeViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let closeButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissView))
+        
+        let closeButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
         navigationItem.leftBarButtonItems = [closeButton]
         
         if !viewModel.readOnly {
             let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveContent))
-            
+            saveButton.tintColor = Colors.secondaryBlueColor
 //            let languageButton = UIBarButtonItem(title: viewModel.lan)
             
             navigationItem.rightBarButtonItems = [saveButton]
@@ -56,20 +64,25 @@ class CodeViewController: UIViewController {
         
         codeTextView.autocorrectionType = .no
         codeTextView.isEditable = !viewModel.readOnly
+        codeTextView.delegate = self
     }
     
     @objc
     private func dismissView() {
         codeTextView.resignFirstResponder()
+        delegate?.codeControllerWillDismiss()
         dismiss(animated: true, completion: nil)
     }
 
     @objc
-    private func saveContent() {
-        codeTextView.resignFirstResponder()
-        
+    private func saveContent() {        
         let string = codeTextView.attributedText.string
-        completionHandler?(string)
-        dismiss(animated: true, completion: nil)
+        delegate?.codeControlerShouldSave(content: string)
+    }
+}
+
+extension CodeViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        delegate?.codeControllerDidStartEditing()
     }
 }
