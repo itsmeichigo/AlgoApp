@@ -8,8 +8,10 @@
 
 import Foundation
 import Highlightr
+import RxCocoa
+import RxSwift
 
-enum Language: String {
+enum Language: String, CaseIterable {
     case c = "C"
     case cSharp = "C#"
     case cPP = "C++"
@@ -22,35 +24,59 @@ enum Language: String {
     case python = "Python"
     case ruby = "Ruby"
     case swift = "Swift"
+    
+    var rawLanguageName: String {
+        switch self {
+        case .objc:
+            return "objectivec"
+        case .cSharp:
+            return "cs"
+        default:
+            return self.rawValue.lowercased()
+        }
+    }
 }
 
 final class CodeViewModel {
+    
     var attributedContent: NSAttributedString? {
-        return highlighter?.highlight(content, as: language.rawValue, fastRender: true)
+        return highlighter?.highlight(content, as: language.value.rawLanguageName, fastRender: true)
     }
     
-    var layoutManager: NSLayoutManager {
-        let textStorage = CodeAttributedString(highlightr: highlighter!)
-        textStorage.language = language.rawValue
-        let layoutManager = NSLayoutManager()
-        textStorage.addLayoutManager(layoutManager)
-        
-        return layoutManager
+    var languageList: [Language] {
+        return Language.allCases
     }
     
-    private(set) var readOnly: Bool
+    let layoutManager = BehaviorRelay<NSLayoutManager?>(value: nil)
     
-    private let content: String
-    private let language: Language
+    let language = BehaviorRelay<Language>(value: .markdown)
+    let readOnly: Bool
     
+    var content: String
     private let highlighter: Highlightr?
+    private let disposeBag = DisposeBag()
     
     init(content: String, language: Language, readOnly: Bool) {
         self.content = content
-        self.language = language
         self.readOnly = readOnly
+        
+        self.language.accept(language)
         
         highlighter = Highlightr()
         highlighter?.setTheme(to: "tomorrow")
+        
+        self.language
+            .map { [weak self] language -> NSLayoutManager? in
+                guard let highlighter = self?.highlighter else { return nil }
+                
+                let textStorage = CodeAttributedString(highlightr: highlighter)
+                textStorage.language = language.rawLanguageName
+                let layoutManager = NSLayoutManager()
+                textStorage.addLayoutManager(layoutManager)
+                
+                return layoutManager
+            }
+            .bind(to: layoutManager)
+            .disposed(by: disposeBag)
     }
 }

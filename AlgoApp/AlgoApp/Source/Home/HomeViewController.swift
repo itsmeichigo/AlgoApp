@@ -45,6 +45,7 @@ final class HomeViewController: UIViewController {
         
         destination.view.layer.cornerRadius = 8.0
         destination.view.layer.masksToBounds = true
+        destination.preferredContentSize = CGSize(width: 0, height: UIScreen.main.bounds.size.height * 2 / 3)
         
         filterController.initialFilter = currentFilter.value
         filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }

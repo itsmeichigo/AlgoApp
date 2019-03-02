@@ -57,11 +57,9 @@ class DetailViewController: UIViewController {
         notePanel.surfaceView.shadowHidden = false
         
         let note = viewModel.detail.value?.note
-        let text = note?.isEmpty != false ? """
-            // start writing here
-            // choose your preferred language for appropriate syntax highlight
-        """ : note
-        let navigationController = setupCodeController(title: "", content: text, language: .swift, readOnly: false, delegate: self)
+        let text = note?.isEmpty != false ? "" : note
+        let language = viewModel.detail.value?.noteLanguage ?? .markdown
+        let navigationController = setupCodeController(title: "", content: text, language: language, readOnly: false, delegate: self)
         
         notePanel.set(contentViewController: navigationController)
         notePanel.addPanel(toParent: self)
@@ -71,7 +69,7 @@ class DetailViewController: UIViewController {
     private func configureNavigationBar() {
         title = "Detail"
         
-        let noteBarButton = UIBarButtonItem(title: "📝 Notes", style: .plain
+        let noteBarButton = UIBarButtonItem(title: "📝 Note", style: .plain
             , target: self, action: #selector(showNotes))
         navigationItem.rightBarButtonItems = [noteBarButton]
     }
@@ -235,11 +233,11 @@ extension DetailViewController: CodeViewControllerDelegate {
         notePanel.hide(animated: true, completion: nil)
     }
     
-    func codeControlerShouldSave(content: String) {
-        viewModel.updateNote(content)
+    func codeControlerShouldSave(content: String, language: Language) {
+        viewModel.updateNote(content, language: language)
     }
     
-    func codeControllerDidStartEditing() {
+    func codeControllerShouldExpand() {
         notePanel.move(to: .full, animated: true)
     }
 }

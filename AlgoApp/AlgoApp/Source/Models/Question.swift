@@ -23,6 +23,7 @@ final class Question: Object {
     
     @objc dynamic var read = false
     @objc dynamic var note = ""
+    @objc dynamic var noteLanguage = "Markdown"
     @objc dynamic var emoji = ""
     
     var tags = List<Tag>()

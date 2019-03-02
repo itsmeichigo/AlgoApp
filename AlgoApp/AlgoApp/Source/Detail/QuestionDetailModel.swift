@@ -19,6 +19,7 @@ struct QuestionDetailModel {
     let titleSlug: String
     let read: Bool
     let note: String
+    let noteLanguage: Language
     
     init(with question: Question) {
         id = question.id
@@ -31,5 +32,6 @@ struct QuestionDetailModel {
         titleSlug = question.titleSlug
         read = question.read
         note = question.note
+        noteLanguage = Language(rawValue: question.noteLanguage) ?? .markdown
     }
 }

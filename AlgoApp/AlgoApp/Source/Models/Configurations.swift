@@ -11,6 +11,7 @@ import UIKit
 enum Colors {
     
     static let primaryColor = UIColor(rgb: 0x333333)
+    static let secondaryOrangeColor = UIColor(rgb: 0xFB866C)
     static let secondaryYellowColor = UIColor(rgb: 0xFE9D14)
     static let secondaryBlueColor = UIColor(rgb: 0x618ED9)
     static let secondaryGreenColor = UIColor(rgb: 0x66BD90)
@@ -20,4 +21,5 @@ enum Colors {
     static let borderColor = UIColor(rgb: 0xc3c3c3)
     static let lightGrey = UIColor(rgb: 0x999999)
     static let darkGrey = UIColor(rgb: 0x333333)
+    static let background = UIColor(rgb: 0xf1f1f1)
 }
