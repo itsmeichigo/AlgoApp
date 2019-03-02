@@ -56,6 +56,7 @@ class DetailViewController: UIViewController {
         notePanel.delegate = self
         notePanel.surfaceView.cornerRadius = 8.0
         notePanel.surfaceView.shadowHidden = false
+        notePanel.surfaceView.grabberHandle.backgroundColor = .clear
         
         let note = viewModel.detail.value?.note
         let text = note?.isEmpty != false ? "" : note
