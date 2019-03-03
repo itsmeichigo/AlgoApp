@@ -165,7 +165,7 @@ class DetailViewController: UIViewController {
             .filterNil()
             .subscribe(onNext: { [unowned self] in
                 guard let url = URL(string: "https://leetcode.com/articles/\($0.articleSlug)#solution") else { return }
-                self.showWebpage(url: url, title: "Official Solution")
+                self.showWebpage(url: url, title: "Official Solution", contentSelector: ".article-body")
             })
             .disposed(by: disposeBag)
         
@@ -202,10 +202,11 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func showWebpage(url: URL, title: String = "") {
-        guard let viewController = storyboard?.instantiateViewController(withIdentifier: "WebViewController") as? WebViewController else { return }
+    private func showWebpage(url: URL, title: String = "", contentSelector: String?) {
+        let viewController = WebViewController()
         viewController.url = url
         viewController.title = title
+        viewController.contentSelector = contentSelector
         navigationController?.pushViewController(viewController, animated: true)
     }
     
