@@ -33,7 +33,10 @@
 		DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA6221D399E0040B4E9 /* FilterViewController.swift */; };
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
-		DE195DC42219CAB700BDDFB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC32219CAB700BDDFB4 /* Configurations.swift */; };
+		DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC32219CAB700BDDFB4 /* Theme.swift */; };
+		DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AC222BA918009C30B0 /* SettingsController.swift */; };
+		DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */; };
+		DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +83,10 @@
 		DE157EA6221D399E0040B4E9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		DE195DC32219CAB700BDDFB4 /* Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
+		DE195DC32219CAB700BDDFB4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DE1BA9AC222BA918009C30B0 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
+		DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +191,7 @@
 				DE0E518922088A1300BFBB0B /* Detail */,
 				DE195DC02219483B00BDDFB4 /* WebView */,
 				DE13A11422226A630091FF96 /* CodeView */,
+				DE1BA9AB222BA736009C30B0 /* Settings */,
 				DE0E51882208524600BFBB0B /* Extensions */,
 			);
 			path = Source;
@@ -215,7 +222,7 @@
 				DE0E517E220840A400BFBB0B /* Tag.swift */,
 				DE0E51822208413E00BFBB0B /* Company.swift */,
 				DE0E51842208416100BFBB0B /* QuestionList.swift */,
-				DE195DC32219CAB700BDDFB4 /* Configurations.swift */,
+				DE195DC32219CAB700BDDFB4 /* Theme.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +230,8 @@
 		DE0E51882208524600BFBB0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */,
+				DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */,
 				DE0E51862208524200BFBB0B /* UIColor+Utility.swift */,
 				DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */,
 			);
@@ -263,6 +272,14 @@
 				DE195DC12219485F00BDDFB4 /* WebViewController.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		DE1BA9AB222BA736009C30B0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DE1BA9AC222BA918009C30B0 /* SettingsController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -530,9 +547,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE195DC42219CAB700BDDFB4 /* Configurations.swift in Sources */,
+				DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */,
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,
+				DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */,
+				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
 				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
@@ -542,6 +561,7 @@
 				DE0E5180220840A400BFBB0B /* Tag.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,
+				DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */,
 				DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */,
 				DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */,
 				DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */,

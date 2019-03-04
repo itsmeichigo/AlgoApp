@@ -21,6 +21,8 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var clearAllButton: UIBarButtonItem!
     @IBOutlet weak var applyButton: UIBarButtonItem!
     
+    @IBOutlet var titleLabels: [UILabel]!
+    
     private var viewModel: FilterViewModel!
     private let disposeBag = DisposeBag()
     
@@ -32,8 +34,8 @@ class FilterViewController: UIViewController {
         
         viewModel = FilterViewModel()
         
-        applyButton.tintColor = Colors.secondaryBlueColor
-        clearAllButton.tintColor = Colors.secondaryPinkColor
+        applyButton.tintColor = .secondaryBlueColor()
+        clearAllButton.tintColor = .secondaryPinkColor()
         
         difficultyTagsView.tags = Question.DifficultyLevel.allCases.map { $0.title }.joined(separator: ",")
         
@@ -53,9 +55,12 @@ class FilterViewController: UIViewController {
         
         [difficultyTagsView, otherTagsView, categoryTagsView, companyTagsView].forEach { [unowned self] tagView in
             tagView?.delegate = self
-            tagView?.tagLayerColor = Colors.borderColor
-            tagView?.tagTitleColor = Colors.darkGrey
+            tagView?.tagLayerColor = .borderColor()
+            tagView?.tagTitleColor = .titleTextColor()
+            tagView?.backgroundColor = .clear
         }
+        
+        updateColors()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,6 +97,16 @@ class FilterViewController: UIViewController {
             tagsTouchAction(otherTagsView, tagButton: button)
         }
     }
+    
+    private func updateColors() {
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = .primaryColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
+        
+        view.backgroundColor = .primaryColor()
+        
+        titleLabels.forEach { $0.textColor = .titleTextColor() }
+    }
 
     @IBAction func clearAllFilters(_ sender: Any) {
         let filter = viewModel.buildFilter(shouldClearAll: true)
@@ -108,14 +123,14 @@ class FilterViewController: UIViewController {
 
 extension FilterViewController: TagsDelegate {
     func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
-        if tagButton.backgroundColor != Colors.primaryColor {
-            tagButton.backgroundColor = Colors.primaryColor
-            tagButton.setTitleColor(.white, for: .normal)
+        if tagButton.layer.borderColor != UIColor.clear.cgColor {
+            tagButton.backgroundColor = .titleTextColor()
+            tagButton.setTitleColor(.primaryColor(), for: .normal)
             tagButton.layer.borderColor = UIColor.clear.cgColor
         } else {
-            tagButton.backgroundColor = .white
-            tagButton.setTitleColor(Colors.darkGrey, for: .normal)
-            tagButton.layer.borderColor = Colors.borderColor.cgColor
+            tagButton.backgroundColor = .backgroundColor()
+            tagButton.setTitleColor(.titleTextColor(), for: .normal)
+            tagButton.layer.borderColor = UIColor.borderColor().cgColor
         }
         
         let title = tagButton.title(for: .normal)!

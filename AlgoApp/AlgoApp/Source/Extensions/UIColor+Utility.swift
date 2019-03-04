@@ -25,3 +25,61 @@ extension UIColor {
         )
     }
 }
+
+extension UIColor {
+    static func primaryColor() -> UIColor {
+        switch Themer.shared.currentTheme {
+        case .light: return .white
+        case .dark: return UIColor(rgb: 0x333333)
+        }
+    }
+    
+    static func secondaryOrangeColor() -> UIColor {
+        return UIColor(rgb: 0xFB866C)
+    }
+    
+    static func secondaryYellowColor() -> UIColor {
+        switch Themer.shared.currentTheme {
+        case .light: return UIColor(rgb: 0xFF945A)
+        case .dark: return UIColor(rgb: 0xFFD452)
+        }
+    }
+    
+    static func secondaryBlueColor() -> UIColor {
+        return UIColor(rgb: 0x618ED9)
+    }
+    
+    static func secondaryGreenColor() -> UIColor {
+        return UIColor(rgb: 0x66BD90)
+    }
+    
+    static func secondaryPinkColor() -> UIColor {
+        return UIColor(rgb: 0xE94C68)
+    }
+    
+    static func secondaryPurpleColor() -> UIColor {
+        return UIColor(rgb: 0x8774D8)
+    }
+
+    static func borderColor() -> UIColor {
+        return UIColor(rgb: 0xc3c3c3)
+    }
+    
+    static func subtitleTextColor() -> UIColor {
+        return UIColor(rgb: 0x999999)
+    }
+    
+    static func titleTextColor() -> UIColor {
+        switch Themer.shared.currentTheme {
+        case .light: return UIColor(rgb: 0x333333)
+        case .dark: return .white
+        }
+    }
+    
+    static func backgroundColor() -> UIColor {
+        switch Themer.shared.currentTheme {
+        case .light: return UIColor(rgb: 0xf4f4f4)
+        case .dark: return UIColor(rgb: 0x010101)
+        }
+    }
+}

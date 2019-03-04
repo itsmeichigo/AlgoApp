@@ -52,6 +52,10 @@ class CodeViewController: UIViewController {
             object: nil
         )
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return Themer.shared.currentTheme == .light ? .default : .lightContent
+    }
 }
 
 private extension CodeViewController {
@@ -59,14 +63,17 @@ private extension CodeViewController {
     func configureNavigationBar() {
         
         navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = .primaryColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         let closeButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
-        closeButton.tintColor = Colors.lightGrey
+        closeButton.tintColor = .subtitleTextColor()
         navigationItem.leftBarButtonItems = [closeButton]
         
         if !viewModel.readOnly {
             let saveButton = UIBarButtonItem(image: UIImage(named: "done"), style: .plain, target: self, action: #selector(saveContent))
-            saveButton.tintColor = Colors.secondaryGreenColor
+            saveButton.tintColor = .secondaryGreenColor()
             navigationItem.rightBarButtonItems = [saveButton]
             
             viewModel.language
@@ -77,7 +84,7 @@ private extension CodeViewController {
             
             languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
             languageButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-            languageButton.tintColor = Colors.secondaryOrangeColor
+            languageButton.tintColor = .secondaryOrangeColor()
             languageButton.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
             navigationItem.titleView = languageButton
         }
@@ -85,7 +92,7 @@ private extension CodeViewController {
     
     func configureSubviews() {
         
-        view.backgroundColor = Colors.background
+        view.backgroundColor = .primaryColor()
         
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pickerView)
@@ -93,7 +100,7 @@ private extension CodeViewController {
             maker.top.equalToSuperview().offset(-216)
             maker.leading.trailing.equalToSuperview()
         }
-        pickerView.backgroundColor = .white
+        pickerView.backgroundColor = .backgroundColor()
         pickerView.dataSource = self
         pickerView.delegate = self
         if let index = viewModel.languageList.firstIndex(where: { $0 == self.viewModel.language.value }) {
@@ -126,6 +133,7 @@ private extension CodeViewController {
         codeTextView.isEditable = !viewModel.readOnly
         codeTextView.delegate = self
         codeTextView.font = UIFont.systemFont(ofSize: 16)
+        codeTextView.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
         
         codeTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(codeTextView)
@@ -210,13 +218,14 @@ extension CodeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         return viewModel.languageList.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return viewModel.languageList[row].rawValue
-    }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let language = viewModel.languageList[row]
         viewModel.language.accept(language)
         togglePickerView(show: false)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let string = viewModel.languageList[row].rawValue
+        return NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()])
     }
 }

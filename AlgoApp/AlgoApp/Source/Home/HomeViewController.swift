@@ -17,9 +17,9 @@ final class HomeViewController: UIViewController {
     typealias QuestionSection = SectionModel<String, QuestionCellModel>
     typealias DataSource = RxTableViewSectionedReloadDataSource<QuestionSection>
     
-    @IBOutlet fileprivate weak var tableView: UITableView!
-    @IBOutlet weak var filterButton: UIBarButtonItem!
-    @IBOutlet weak var shuffleButton: UIBarButtonItem!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var filterButton: UIBarButtonItem!
+    @IBOutlet private weak var shuffleButton: UIBarButtonItem!
     
     fileprivate var searchBar: UISearchBar!
     
@@ -37,6 +37,21 @@ final class HomeViewController: UIViewController {
     
         configureNavigationBar()
         configureView()
+        
+        Themer.shared.currentThemeRelay
+            .subscribe(onNext: { [weak self] theme in
+                self?.updateColors()
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -59,6 +74,22 @@ final class HomeViewController: UIViewController {
         }
         
     }
+    
+    private func updateColors() {
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = .backgroundColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
+        
+        tabBarController?.tabBar.tintColor = .secondaryYellowColor()
+        tabBarController?.tabBar.barTintColor = .backgroundColor()
+        
+        tableView.reloadData()
+        
+        searchBar.barStyle = Themer.shared.currentTheme == .light ? .default : .black
+        searchBar.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
+        
+        view.backgroundColor = .backgroundColor()
+    }
 
     private func buildDataSource() -> DataSource {
         return DataSource(configureCell: { (_, tableView, indexPath, model) -> UITableViewCell in
@@ -74,16 +105,16 @@ final class HomeViewController: UIViewController {
         searchBar.placeholder = "Search by title"
         navigationItem.titleView = searchBar
         
-        filterButton.tintColor = Colors.secondaryBlueColor
-        shuffleButton.tintColor = Colors.secondaryOrangeColor
+        filterButton.tintColor = .secondaryBlueColor()
+        shuffleButton.tintColor = .secondaryOrangeColor()
         
-        navigationController?.navigationBar.tintColor = Colors.primaryColor
         navigationController?.hero.isEnabled = true
         navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))
     }
     
     private func configureView() {
         
+        updateColors()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.rx.modelSelected(QuestionCellModel.self)

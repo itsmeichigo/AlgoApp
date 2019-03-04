@@ -37,7 +37,7 @@ class DetailViewController: UIViewController {
     
     var viewModel: DetailViewModel!
     private let disposeBag = DisposeBag()
-    private let tagColors = [Colors.secondaryPinkColor, Colors.secondaryYellowColor, Colors.secondaryBlueColor, Colors.secondaryGreenColor, Colors.secondaryPurpleColor]
+    private let tagColors: [UIColor] = [.secondaryPinkColor(), .secondaryYellowColor(), .secondaryBlueColor(), .secondaryGreenColor(), .secondaryPurpleColor()]
     private let notePanel = FloatingPanelController()
     
     override func viewDidLoad() {
@@ -50,6 +50,10 @@ class DetailViewController: UIViewController {
         configureNotePanel()
         
         viewModel.scrapeSwiftSolution()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
     private func configureNotePanel() {
@@ -72,29 +76,36 @@ class DetailViewController: UIViewController {
         title = "Detail"
         
         let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
-        noteBarButton.tintColor = Colors.secondaryYellowColor
+        noteBarButton.tintColor = .secondaryYellowColor()
         navigationItem.rightBarButtonItems = [noteBarButton]        
     }
     
     private func configureViews() {
-        
-        remarkLabel.textColor = Colors.lightGrey
-        difficultyLabel.textColor = Colors.lightGrey
-        
-        titleLabel.textColor = Colors.darkGrey
-        descriptionTextView.textColor = Colors.darkGrey
-        descriptionTitleLabel.textColor = Colors.darkGrey
-        tagTitleLabel.textColor = Colors.darkGrey
-        solutionsTitleLabel.textColor = Colors.darkGrey
-        
-        officialSolutionButton.setTitleColor(Colors.secondaryBlueColor, for: .normal)
-        swiftButton.setTitleColor(Colors.secondaryOrangeColor, for: .normal)
         
         markAsReadButton.layer.cornerRadius = 8
         markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
         markAsReadButton.setTitle("😕 Mark as Unread", for: .selected)
         markAsReadButton.setTitleColor(.white, for: .normal)
         markAsReadButton.setTitleColor(.white, for: .selected)
+        
+        updateColors()
+    }
+    
+    private func updateColors() {
+        view.backgroundColor = .backgroundColor()
+        loadingView.backgroundColor = .backgroundColor()
+        
+        remarkLabel.textColor = .subtitleTextColor()
+        difficultyLabel.textColor = .subtitleTextColor()
+        
+        titleLabel.textColor = .titleTextColor()
+        descriptionTextView.textColor = .titleTextColor()
+        descriptionTitleLabel.textColor = .titleTextColor()
+        tagTitleLabel.textColor = .titleTextColor()
+        solutionsTitleLabel.textColor = .titleTextColor()
+        
+        officialSolutionButton.setTitleColor(.secondaryBlueColor(), for: .normal)
+        swiftButton.setTitleColor(.secondaryOrangeColor(), for: .normal)
     }
 
     private func configureContent() {
@@ -150,7 +161,7 @@ class DetailViewController: UIViewController {
             .filterNil()
             .map { $0.read }
             .subscribe(onNext: { [weak self] read in
-                let backgroundColor = read ? Colors.lightGrey: Colors.secondaryPurpleColor
+                let backgroundColor: UIColor = read ? .subtitleTextColor() : .secondaryPurpleColor()
                 self?.markAsReadButton.backgroundColor = backgroundColor
                 self?.markAsReadButton.isSelected = read
             })

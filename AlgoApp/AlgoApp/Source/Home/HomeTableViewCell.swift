@@ -25,10 +25,6 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         cardView.layer.shadowOffset = CGSize(width: 0, height: 3)
         cardView.layer.shadowOpacity = 0.1
         cardView.layer.shadowRadius = 3.0
-        
-        titleLabel.textColor = Colors.darkGrey
-        tagsLabel.textColor = Colors.lightGrey
-        markLabel.textColor = Colors.lightGrey
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,10 +35,19 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
     }
 
     func configureCell(with model: QuestionCellModel) {
+        updateColors()
+        
         emojiLabel.text = model.emoji
         titleLabel.text = model.title
         tagsLabel.text = model.tags.joined(separator: "・")
         markLabel.text = model.remark
         difficultyLabel.text = model.difficulty
+    }
+    
+    private func updateColors() {
+        titleLabel.textColor = .titleTextColor()
+        tagsLabel.textColor = .subtitleTextColor()
+        markLabel.textColor = .subtitleTextColor()
+        cardView.backgroundColor = .primaryColor()
     }
 }

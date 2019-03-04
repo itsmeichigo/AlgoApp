@@ -63,7 +63,8 @@ final class CodeViewModel {
         self.language.accept(language)
         
         highlighter = Highlightr()
-        highlighter?.setTheme(to: "tomorrow")
+        let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
+        highlighter?.setTheme(to: theme)
         
         self.language
             .map { [weak self] language -> NSLayoutManager? in

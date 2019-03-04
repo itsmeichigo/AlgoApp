@@ -21,7 +21,7 @@ class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         userContentController = WKUserContentController()
         
         let configuration = WKWebViewConfiguration()
@@ -49,6 +49,10 @@ class WebViewController: UIViewController {
         activityIndicator.startAnimating()
         
         loadPage(url: url, partialContentQuerySelector: contentSelector)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
     private func loadPage(url: URL, partialContentQuerySelector selector: String?) {
