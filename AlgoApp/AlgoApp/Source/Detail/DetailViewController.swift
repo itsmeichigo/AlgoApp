@@ -34,6 +34,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var markAsReadButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var viewModel: DetailViewModel!
     private let disposeBag = DisposeBag()
@@ -106,6 +107,8 @@ class DetailViewController: UIViewController {
         
         officialSolutionButton.setTitleColor(.secondaryBlueColor(), for: .normal)
         swiftButton.setTitleColor(.secondaryOrangeColor(), for: .normal)
+        
+        loadingIndicator.style = Themer.shared.currentTheme == .light ? .gray : .white
     }
 
     private func configureContent() {
