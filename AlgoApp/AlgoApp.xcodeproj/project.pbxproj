@@ -25,6 +25,7 @@
 		DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518A22088A3200BFBB0B /* DetailViewController.swift */; };
 		DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */; };
 		DE0E518F22088F1C00BFBB0B /* QuestionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */; };
+		DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0F99FA222F900F0034BF3E /* SolutionScraper.swift */; };
 		DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */; };
 		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
@@ -75,6 +76,7 @@
 		DE0E518A22088A3200BFBB0B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCellModel.swift; sourceTree = "<group>"; };
+		DE0F99FA222F900F0034BF3E /* SolutionScraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionScraper.swift; sourceTree = "<group>"; };
 		DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBottomSegue.swift; sourceTree = "<group>"; };
 		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				DE0E518C22088A3F00BFBB0B /* DetailViewModel.swift */,
 				DE0E518A22088A3200BFBB0B /* DetailViewController.swift */,
 				DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */,
+				DE0F99FA222F900F0034BF3E /* SolutionScraper.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,
 				DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */,
 				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,
+				DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
 				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,

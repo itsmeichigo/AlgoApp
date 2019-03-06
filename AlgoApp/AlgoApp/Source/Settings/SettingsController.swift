@@ -39,6 +39,7 @@ class SettingsController: UITableViewController {
 
     private func configureNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     private func configureView() {
@@ -72,6 +73,7 @@ class SettingsController: UITableViewController {
             label.textColor = .titleTextColor()
         })
         
+        tableView.separatorColor = .borderColor()
         view.backgroundColor = .backgroundColor()
         
         setNeedsStatusBarAppearanceUpdate()

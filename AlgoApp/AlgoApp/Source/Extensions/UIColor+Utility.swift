@@ -62,7 +62,10 @@ extension UIColor {
     }
 
     static func borderColor() -> UIColor {
-        return UIColor(rgb: 0xc3c3c3)
+        switch Themer.shared.currentTheme {
+        case .light: return UIColor(rgb: 0xc3c3c3)
+        case .dark: return UIColor(rgb: 0xc3c3c3).withAlphaComponent(0.4)
+        }
     }
     
     static func subtitleTextColor() -> UIColor {
@@ -79,7 +82,7 @@ extension UIColor {
     static func backgroundColor() -> UIColor {
         switch Themer.shared.currentTheme {
         case .light: return UIColor(rgb: 0xf4f4f4)
-        case .dark: return UIColor(rgb: 0x010101)
+        case .dark: return UIColor(rgb: 0x424242)
         }
     }
 }
