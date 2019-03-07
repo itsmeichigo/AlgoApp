@@ -30,7 +30,8 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var solutionsTitleLabel: UILabel!
     @IBOutlet weak var officialSolutionButton: UIButton!
-    @IBOutlet weak var swiftButton: UIButton!
+    @IBOutlet weak var solutionsView: TagsView!
+    @IBOutlet weak var otherSolutionsLabel: UILabel!
     
     @IBOutlet weak var markAsReadButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
@@ -50,7 +51,7 @@ class DetailViewController: UIViewController {
         configureButtons()
         configureNotePanel()
         
-        viewModel.scrapeSwiftSolution()
+        viewModel.scrapeSolutions()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -61,7 +62,7 @@ class DetailViewController: UIViewController {
         notePanel.delegate = self
         notePanel.surfaceView.cornerRadius = 8.0
         notePanel.surfaceView.shadowHidden = false
-        notePanel.surfaceView.grabberHandle.backgroundColor = .clear
+        notePanel.surfaceView.grabberHandle.isHidden = true
         
         let note = viewModel.detail.value?.note
         let text = note?.isEmpty != false ? "" : note
@@ -82,6 +83,10 @@ class DetailViewController: UIViewController {
     }
     
     private func configureViews() {
+        
+        solutionsView.backgroundColor = .clear
+        solutionsView.delegate = self
+        tagsView.isUserInteractionEnabled = false
         
         markAsReadButton.layer.cornerRadius = 8
         markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
@@ -105,8 +110,12 @@ class DetailViewController: UIViewController {
         tagTitleLabel.textColor = .titleTextColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
-        officialSolutionButton.setTitleColor(.secondaryBlueColor(), for: .normal)
-        swiftButton.setTitleColor(.secondaryOrangeColor(), for: .normal)
+        officialSolutionButton.setTitleColor(.secondaryYellowColor(), for: .normal)
+        
+        otherSolutionsLabel.textColor = .titleTextColor()
+        solutionsView.tagLayerColor = .clear
+        solutionsView.tagBackgroundColor = UIColor.secondaryPurpleColor().withAlphaComponent(0.1)
+        solutionsView.tagTitleColor = .secondaryPurpleColor()
         
         loadingIndicator.style = Themer.shared.currentTheme == .light ? .gray : .white
     }
@@ -156,6 +165,15 @@ class DetailViewController: UIViewController {
             .map { !$0 }
             .bind(to: officialSolutionButton.rx.isHidden)
             .disposed(by: disposeBag)
+        
+        viewModel.githubSolutionsRelay
+            .observeOn(MainScheduler.instance)
+            .map { $0.keys.map { $0.rawValue }.joined(separator: ",") }
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] in
+                self?.solutionsView.tags = $0
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureButtons() {
@@ -179,41 +197,30 @@ class DetailViewController: UIViewController {
             .filterNil()
             .subscribe(onNext: { [unowned self] in
                 guard let url = URL(string: "https://leetcode.com/articles/\($0.articleSlug)#solution") else { return }
-                self.showWebpage(url: url, title: "Official Solution", contentSelector: ".article-body")
+                self.showWebpage(url: url, title: "Official Solution", contentSelector: ".article-base")
             })
             .disposed(by: disposeBag)
         
-        viewModel.scrapingSolution
+        viewModel.scrapingSolutions
             .observeOn(MainScheduler.instance)
             .map { !$0 }
             .bind(to: loadingView.rx.isHidden)
             .disposed(by: disposeBag)
         
-        viewModel.swiftSolution
-            .asDriver()
-            .map { $0 == nil }
-            .drive(swiftButton.rx.isHidden)
+        viewModel.githubSolutionsRelay
+            .observeOn(MainScheduler.instance)
+            .map { $0.count == 0 }
+            .bind(to: solutionsView.rx.isHidden)
             .disposed(by: disposeBag)
         
-        viewModel.scrapingSolution.asDriver()
+        viewModel.scrapingSolutions.asDriver()
             .filter { !$0 }
-            .withLatestFrom(Driver.combineLatest(viewModel.swiftSolution.asDriver(), viewModel.detail.asDriver()))
-            .map { $0.0 != nil || $0.1?.articleSlug.isEmpty == false }
+            .withLatestFrom(Driver.combineLatest(viewModel.githubSolutionsRelay.asDriver(), viewModel.detail.asDriver()))
+            .map { $0.0.count > 0 || $0.1?.articleSlug.isEmpty == false }
             .map { $0 == true ? "📕 Solutions" : "😓 No solution found" }
             .drive(solutionsTitleLabel.rx.text)
             .disposed(by: disposeBag)
-        
-        swiftButton.rx.tap
-            .withLatestFrom(viewModel.swiftSolution)
-            .map { [unowned self] in
-                let language = Language.swift
-                let title = "\(language.rawValue.capitalized) Solution"
-                return self.setupCodeController(title: title, content: $0, language: language)
-            }
-            .subscribe(onNext: { [unowned self] in
-                self.present($0, animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
+    
     }
     
     private func showWebpage(url: URL, title: String = "", contentSelector: String?) {
@@ -257,5 +264,20 @@ extension DetailViewController: CodeViewControllerDelegate {
     
     func codeControllerShouldExpand() {
         notePanel.move(to: .full, animated: true)
+    }
+}
+
+extension DetailViewController: TagsDelegate {
+    func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
+        guard tagsView == solutionsView,
+            let title = tagButton.title(for: .normal) else { return }
+        for (language, content) in viewModel.githubSolutionsRelay.value {
+            if language.rawValue == title {
+                let title = "\(language.rawValue.capitalized) Solution"
+                let controller = setupCodeController(title: title, content: content, language: language)
+                present(controller, animated: true, completion: nil)
+                break
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ import Kanna
 final class SolutionScraper {
     
     func scrapeSolution(at url: URL,
-                        searchBlock: @escaping ((Kanna.XPathObject) -> (Bool, String?)),
+                        searchBlock: @escaping ((Kanna.XPathObject) -> String?),
                         completionBlock: @escaping ((String) -> Void),
                         failureBlock: @escaping (() -> Void)) {
         let session = URLSession(configuration: .default)
@@ -26,13 +26,15 @@ final class SolutionScraper {
             }
             
             var found = false
-            for node in nodes {
-                let offset = node.offset
-                let tds = node.element.xpath("//tr[\(offset)]/td/a")
+            for (offset, node) in nodes {
+                let tds = node.xpath("//tr[\(offset)]/td/a")
                 
                 let result = searchBlock(tds)
-                if result.0, let path = result.1 {
-                    if let url = URL(string: "https://github.com" + path) {
+                if let path = result?.replacingOccurrences(of: " ", with: "%20") {
+                    if path.contains("https://github.com"), let url = URL(string: path) {
+                        found = true
+                        self.scrapeContent(url: url, completionBlock: completionBlock, failureBlock: failureBlock)
+                    } else if let url = URL(string: "https://github.com" + path) {
                         found = true
                         self.scrapeContent(url: url, completionBlock: completionBlock, failureBlock: failureBlock)
                     }
