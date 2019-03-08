@@ -197,7 +197,7 @@ class DetailViewController: UIViewController {
             .filterNil()
             .subscribe(onNext: { [unowned self] in
                 guard let url = URL(string: "https://leetcode.com/articles/\($0.articleSlug)#solution") else { return }
-                self.showWebpage(url: url, title: "Official Solution", contentSelector: ".article-base")
+                self.showWebpage(url: url, title: "Official Explanation", contentSelector: ".article-base")
             })
             .disposed(by: disposeBag)
         

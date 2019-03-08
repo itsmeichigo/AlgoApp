@@ -38,7 +38,6 @@ class SettingsController: UITableViewController {
     }
 
     private func configureNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isTranslucent = false
     }
     
@@ -46,10 +45,6 @@ class SettingsController: UITableViewController {
         updateColors()
         
         tableView.tableFooterView = UIView()
-        
-        showsUnreadSwitch.onTintColor = .secondaryPurpleColor()
-        
-        darkModeSwitch.onTintColor = .secondaryPurpleColor()
         darkModeSwitch.isOn = Themer.shared.currentTheme == .dark
         
         darkModeSwitch.rx.isOn
@@ -64,10 +59,12 @@ class SettingsController: UITableViewController {
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = .backgroundColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         tabBarController?.tabBar.tintColor = .secondaryYellowColor()
         tabBarController?.tabBar.barTintColor = .backgroundColor()
+        
+        showsUnreadSwitch.onTintColor = .secondaryYellowColor()
+        darkModeSwitch.onTintColor = .secondaryYellowColor()
         
         titleLabels.forEach({ label in
             label.textColor = .titleTextColor()

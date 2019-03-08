@@ -387,21 +387,45 @@
             </objects>
             <point key="canvasLocation" x="1008.8" y="-564.46776611694156"/>
         </scene>
-        <!--View Controller-->
+        <!--Reminder View Controller-->
         <scene sceneID="6l0-9y-lQT">
             <objects>
-                <viewController id="Xhs-1n-agM" sceneMemberID="viewController">
+                <viewController id="Xhs-1n-agM" customClass="ReminderViewController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9FW-wa-uNa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell" translatesAutoresizingMaskIntoConstraints="NO" id="Zjf-1z-8gr">
+                                <rect key="frame" x="117" y="310" width="180" height="180"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep yourself ready for  daily challenges" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-7b-YPh">
+                                <rect key="frame" x="16" y="522" width="382" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uL5-f5-VuR" firstAttribute="trailing" secondItem="rPt-7b-YPh" secondAttribute="trailing" constant="16" id="dTL-W7-n5I"/>
+                            <constraint firstItem="Zjf-1z-8gr" firstAttribute="centerX" secondItem="9FW-wa-uNa" secondAttribute="centerX" id="lYm-De-msA"/>
+                            <constraint firstItem="Zjf-1z-8gr" firstAttribute="centerY" secondItem="9FW-wa-uNa" secondAttribute="centerY" constant="-48" id="rMy-T3-IQs"/>
+                            <constraint firstItem="rPt-7b-YPh" firstAttribute="top" secondItem="Zjf-1z-8gr" secondAttribute="bottom" constant="32" id="tHF-3o-lXp"/>
+                            <constraint firstItem="rPt-7b-YPh" firstAttribute="leading" secondItem="uL5-f5-VuR" secondAttribute="leading" constant="16" id="xzC-xU-KKV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uL5-f5-VuR"/>
                     </view>
-                    <navigationItem key="navigationItem" id="e0S-cT-Sf1"/>
+                    <navigationItem key="navigationItem" id="e0S-cT-Sf1">
+                        <barButtonItem key="rightBarButtonItem" image="plus" id="Yqw-L8-4MO"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="Yqw-L8-4MO" id="e3I-K9-9Mg"/>
+                        <outlet property="emptyViewTitleLabel" destination="rPt-7b-YPh" id="MYv-eB-TAD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gU0-pW-0by" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1889" y="-1424"/>
+            <point key="canvasLocation" x="1888.4057971014495" y="-1424.3303571428571"/>
         </scene>
         <!--Filter-->
         <scene sceneID="mpH-0Z-BLB">
@@ -812,8 +836,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bell" width="180" height="180"/>
         <image name="filter" width="19" height="21"/>
         <image name="home" width="25" height="23"/>
+        <image name="plus" width="20" height="20"/>
         <image name="reminder" width="23" height="23"/>
         <image name="settings" width="23" height="23"/>
         <image name="shuffle" width="21" height="21"/>

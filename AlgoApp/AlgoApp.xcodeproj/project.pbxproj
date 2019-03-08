@@ -35,6 +35,7 @@
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
 		DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC32219CAB700BDDFB4 /* Theme.swift */; };
+		DE1AC97022317BA30044D83D /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1AC96F22317BA30044D83D /* ReminderViewController.swift */; };
 		DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AC222BA918009C30B0 /* SettingsController.swift */; };
 		DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */; };
 		DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */; };
@@ -86,6 +87,7 @@
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DE195DC32219CAB700BDDFB4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		DE1AC96F22317BA30044D83D /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		DE1BA9AC222BA918009C30B0 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				DE0E518922088A1300BFBB0B /* Detail */,
 				DE195DC02219483B00BDDFB4 /* WebView */,
 				DE13A11422226A630091FF96 /* CodeView */,
+				DE1AC96E22317B710044D83D /* Reminder */,
 				DE1BA9AB222BA736009C30B0 /* Settings */,
 				DE0E51882208524600BFBB0B /* Extensions */,
 			);
@@ -275,6 +278,14 @@
 				DE195DC12219485F00BDDFB4 /* WebViewController.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		DE1AC96E22317B710044D83D /* Reminder */ = {
+			isa = PBXGroup;
+			children = (
+				DE1AC96F22317BA30044D83D /* ReminderViewController.swift */,
+			);
+			path = Reminder;
 			sourceTree = "<group>";
 		};
 		DE1BA9AB222BA736009C30B0 /* Settings */ = {
@@ -572,6 +583,7 @@
 				DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */,
 				DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */,
 				DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */,
+				DE1AC97022317BA30044D83D /* ReminderViewController.swift in Sources */,
 				DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */,
 				DE0E517522082E5400BFBB0B /* HomeViewModel.swift in Sources */,
 			);
