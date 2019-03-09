@@ -103,7 +103,7 @@ class FilterViewController: UIViewController {
         }
     }
     
-    private func updateColors() {
+    func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = .primaryColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]

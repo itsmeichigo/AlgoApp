@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class ReminderViewController: UIViewController {
+class RemindersViewController: UIViewController {
 
     @IBOutlet private weak var emptyViewTitleLabel: UILabel!
     @IBOutlet weak var addButton: UIBarButtonItem!
@@ -20,6 +20,7 @@ class ReminderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        configureNavigationBar()
         
         Themer.shared.currentThemeRelay
             .subscribe(onNext: { [weak self] theme in
@@ -32,11 +33,14 @@ class ReminderViewController: UIViewController {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
+    private func configureNavigationBar() {
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
     private func configureView() {
         title = "Reminders"
         
         updateColors()
-        
     }
     
     private func updateColors() {
@@ -45,7 +49,7 @@ class ReminderViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         view.backgroundColor = .backgroundColor()
-        emptyViewTitleLabel.textColor = .titleTextColor()
+        emptyViewTitleLabel.textColor = .subtitleTextColor()
         addButton.tintColor = .secondaryYellowColor()
         
         setNeedsStatusBarAppearanceUpdate()
