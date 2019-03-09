@@ -46,8 +46,9 @@ final class HomeViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchBar.resignFirstResponder()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -78,7 +79,7 @@ final class HomeViewController: UIViewController {
     
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
-        navigationController?.navigationBar.barTintColor = .backgroundColor()
+        navigationController?.navigationBar.barTintColor = .primaryColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         tabBarController?.tabBar.tintColor = .secondaryYellowColor()

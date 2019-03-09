@@ -12,7 +12,13 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-typealias QuestionFilter = (tags: [String], companies: [String], levels: [Question.DifficultyLevel], topLiked: Bool, topInterviewed: Bool)
+struct QuestionFilter {
+    let tags: [String]
+    let companies: [String]
+    let levels: [Question.DifficultyLevel]
+    let topLiked: Bool
+    let topInterviewed: Bool
+}
 
 final class HomeViewModel {
     

@@ -27,6 +27,7 @@
 		DE0E518F22088F1C00BFBB0B /* QuestionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */; };
 		DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0F99FA222F900F0034BF3E /* SolutionScraper.swift */; };
 		DE112E9722337451003A5796 /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE112E9622337451003A5796 /* ReminderDetailViewController.swift */; };
+		DE112E992233E200003A5796 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE112E982233E200003A5796 /* AppUtility.swift */; };
 		DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */; };
 		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
@@ -80,6 +81,7 @@
 		DE0E518E22088F1C00BFBB0B /* QuestionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCellModel.swift; sourceTree = "<group>"; };
 		DE0F99FA222F900F0034BF3E /* SolutionScraper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionScraper.swift; sourceTree = "<group>"; };
 		DE112E9622337451003A5796 /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
+		DE112E982233E200003A5796 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBottomSegue.swift; sourceTree = "<group>"; };
 		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */,
 				DE0E51862208524200BFBB0B /* UIColor+Utility.swift */,
 				DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */,
+				DE112E982233E200003A5796 /* AppUtility.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 			files = (
 				DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */,
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
+				DE112E992233E200003A5796 /* AppUtility.swift in Sources */,
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,
 				DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */,
 				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,

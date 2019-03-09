@@ -13,21 +13,26 @@ import Tags
 
 class FilterViewController: UIViewController {
 
-    @IBOutlet weak var difficultyTagsView: TagsView!
-    @IBOutlet weak var categoryTagsView: TagsView!
-    @IBOutlet weak var companyTagsView: TagsView!
-    @IBOutlet weak var otherTagsView: TagsView!
+    @IBOutlet private weak var difficultyTagsView: TagsView!
+    @IBOutlet private weak var categoryTagsView: TagsView!
+    @IBOutlet private weak var companyTagsView: TagsView!
+    @IBOutlet private weak var otherTagsView: TagsView!
     
-    @IBOutlet weak var clearAllButton: UIBarButtonItem!
-    @IBOutlet weak var applyButton: UIBarButtonItem!
+    @IBOutlet private weak var clearAllButton: UIBarButtonItem!
+    @IBOutlet private weak var applyButton: UIBarButtonItem!
     
-    @IBOutlet var titleLabels: [UILabel]!
+    @IBOutlet private var titleLabels: [UILabel]!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var viewModel: FilterViewModel!
     private let disposeBag = DisposeBag()
     
     var initialFilter: QuestionFilter?
     var completionBlock: ((QuestionFilter) -> Void)?
+    var currentFilter: QuestionFilter {
+        return viewModel.buildFilter(shouldClearAll: false)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +40,7 @@ class FilterViewController: UIViewController {
         viewModel = FilterViewModel()
         
         applyButton.tintColor = .secondaryBlueColor()
-        clearAllButton.tintColor = .secondaryPinkColor()
+        clearAllButton.tintColor = .secondaryOrangeColor()
         
         difficultyTagsView.tags = Question.DifficultyLevel.allCases.map { $0.title }.joined(separator: ",")
         
@@ -129,7 +134,7 @@ class FilterViewController: UIViewController {
 extension FilterViewController: TagsDelegate {
     func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
         if tagButton.layer.borderColor != UIColor.clear.cgColor {
-            tagButton.backgroundColor = .titleTextColor()
+            tagButton.backgroundColor = .secondaryYellowColor()
             tagButton.setTitleColor(.primaryColor(), for: .normal)
             tagButton.layer.borderColor = UIColor.clear.cgColor
         } else {
