@@ -29,13 +29,19 @@ class ReminderDetailViewController: UIViewController {
     @IBOutlet weak var datePickerTopSpace: NSLayoutConstraint!
     
     private var filterView: UIView?
-    private var filterScrollView: UIScrollView?
-    private var questionFilter: QuestionFilter?
+    private var filterViewController: FilterViewController?
+    
+    var viewModel: ReminderDetailViewModel!
     
     private lazy var dayButtons: [UIButton] = [sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = (viewModel.reminder != nil) ? "Edit Reminder" : "Add Reminder"
+        if let reminder = viewModel.reminder {
+            populateViews(reminder: reminder)
+        }
         
         addFilterView()
         updateColors()
@@ -45,9 +51,20 @@ class ReminderDetailViewController: UIViewController {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
+    private func populateViews(reminder: ReminderDetail) {
+        datePicker.setDate(reminder.date, animated: true)
+        for (index, button) in dayButtons.enumerated() {
+            if reminder.repeatDays.contains(index + 1) {
+                button.isSelected = true
+            }
+        }
+    }
+    
     private func addFilterView() {
         guard let filterViewController = storyboard?.instantiateViewController(withIdentifier: "filterViewController") as? FilterViewController,
             let filterView = filterViewController.view else { return }
+        filterViewController.initialFilter = viewModel.reminder?.filter
+            
         view.addSubview(filterView)
         filterView.snp.makeConstraints { maker in
             maker.top.equalTo(sendProblemSwitch.snp.bottom).offset(16)
@@ -55,7 +72,6 @@ class ReminderDetailViewController: UIViewController {
         }
         
         filterView.isHidden = true
-        
         filterViewController.scrollView.bounces = false
         filterViewController.scrollView.delegate = self
         filterViewController.updateColors()
@@ -64,7 +80,7 @@ class ReminderDetailViewController: UIViewController {
         filterViewController.didMove(toParent: self)
         
         self.filterView = filterView
-        filterScrollView = filterViewController.scrollView
+        self.filterViewController = filterViewController
     }
     
     private func updateColors() {
@@ -99,6 +115,20 @@ class ReminderDetailViewController: UIViewController {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction private func saveReminder(_ sender: Any) {
+        var repeatDays: [Int] = []
+        for (index, button) in dayButtons.enumerated() {
+            if button.isSelected {
+                repeatDays.append(index + 1)
+            }
+        }
+        
+        viewModel.saveReminder(date: datePicker.date,
+                               repeatDays: repeatDays,
+                               filter: filterViewController?.currentFilter)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction private func dayButtonTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
@@ -113,7 +143,7 @@ class ReminderDetailViewController: UIViewController {
     @IBAction private func sendProblemStateChange(_ sender: UISwitch) {
         filterView?.isHidden = !sender.isOn
         if !sender.isOn {
-            filterScrollView?.setContentOffset(.zero, animated: false)
+            filterViewController?.scrollView.setContentOffset(.zero, animated: false)
             datePickerTopSpace.constant = 0
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()

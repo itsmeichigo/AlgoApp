@@ -109,7 +109,7 @@ private extension CodeViewController {
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pickerView)
         pickerView.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().offset(-216)
+            maker.top.equalToSuperview().offset(-pickerView.bounds.height)
             maker.leading.trailing.equalToSuperview()
         }
         pickerView.backgroundColor = .backgroundColor()
@@ -146,7 +146,7 @@ private extension CodeViewController {
         codeTextView.delegate = self
         codeTextView.font = UIFont.systemFont(ofSize: 16)
         codeTextView.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
-        
+ 
         codeTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(codeTextView)
         codeTextView.snp.makeConstraints { maker in

@@ -12,14 +12,6 @@ import RxCocoa
 import RxRealm
 import RxSwift
 
-struct QuestionFilter {
-    let tags: [String]
-    let companies: [String]
-    let levels: [Question.DifficultyLevel]
-    let topLiked: Bool
-    let topInterviewed: Bool
-}
-
 final class HomeViewModel {
     
     let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
