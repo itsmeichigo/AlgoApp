@@ -38,12 +38,15 @@ extension ReminderDetail {
         return dateFormatter.string(from: self.date)
     }
     
-    var filterString: String {
+    var totalFilters: [String] {
         if let filter = filter {
-            let tags: [String] = filter.levels.map { $0.title } + filter.tags + filter.companies + (filter.topLiked ? ["Top Liked 👍"] : []) + (filter.topInterviewed ? ["Top Interviewed 👩‍💻"] : [])
-            return tags.isEmpty ? "Any problems 💁‍♀️" : tags.joined(separator: "・")
+            return filter.levels.map { $0.title } + filter.tags + filter.companies + (filter.topLiked ? ["Top Liked 👍"] : []) + (filter.topInterviewed ? ["Top Interviewed 👩‍💻"] : [])
         }
-        return "Any problems 💁‍♀️"
+        return []
+    }
+    
+    var filterString: String {
+        return totalFilters.isEmpty ? "Any problems 💁‍♀️" : totalFilters.joined(separator: "・")
     }
     
     var repeatDaysString: String {
