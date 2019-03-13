@@ -15,6 +15,10 @@ struct QuestionFilter {
     let levels: [Question.DifficultyLevel]
     let topLiked: Bool
     let topInterviewed: Bool
+    
+    var allFilters: [String] {
+        return levels.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : [])
+    }
 }
 
 final class FilterObject: Object {

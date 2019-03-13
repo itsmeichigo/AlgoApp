@@ -59,7 +59,7 @@ class ReminderDetailViewController: UIViewController {
                 dayButtonTapped(button)
             }
         }
-        sendProblemSwitch.isOn = !reminder.totalFilters.isEmpty
+        sendProblemSwitch.isOn = reminder.filter?.allFilters.isEmpty == false
         sendProblemStateChange(sendProblemSwitch)
     }
     
