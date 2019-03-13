@@ -48,18 +48,18 @@ extension ReminderDetail {
     
     var repeatDaysString: String {
         if repeatDays.count == 7 {
-            return "Everyday"
+            return "🤖 Everyday"
         } else if repeatDays.count == 5 &&
             !repeatDays.contains(1) &&
             !repeatDays.contains(7) {
-            return "Weekdays"
+            return "💼 Weekdays"
         } else if repeatDays.count == 2 &&
             repeatDays.contains(1) &&
             repeatDays.contains(7) {
-            return "Weekends"
+            return "🏠 Weekends"
         } else if repeatDays.count > 0 {
             let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-            return repeatDays.sorted()
+            return "🗓 " + repeatDays.sorted()
                 .map { days[$0 - 1] }
                 .joined(separator: ", ")
         }

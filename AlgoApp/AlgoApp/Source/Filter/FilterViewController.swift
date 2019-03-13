@@ -138,7 +138,7 @@ extension FilterViewController: TagsDelegate {
             tagButton.setTitleColor(.primaryColor(), for: .normal)
             tagButton.layer.borderColor = UIColor.clear.cgColor
         } else {
-            tagButton.backgroundColor = .backgroundColor()
+            tagButton.backgroundColor = .clear
             tagButton.setTitleColor(.titleTextColor(), for: .normal)
             tagButton.layer.borderColor = UIColor.borderColor().cgColor
         }

@@ -39,12 +39,13 @@ class ReminderDetailViewController: UIViewController {
         super.viewDidLoad()
         
         title = (viewModel.reminder != nil) ? "Edit Reminder" : "Add Reminder"
-        if let reminder = viewModel.reminder {
-            populateViews(reminder: reminder)
-        }
         
         addFilterView()
         updateColors()
+        
+        if let reminder = viewModel.reminder {
+            populateViews(reminder: reminder)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -55,9 +56,11 @@ class ReminderDetailViewController: UIViewController {
         datePicker.setDate(reminder.date, animated: true)
         for (index, button) in dayButtons.enumerated() {
             if reminder.repeatDays.contains(index + 1) {
-                button.isSelected = true
+                dayButtonTapped(button)
             }
         }
+        sendProblemSwitch.isOn = reminder.filter != nil
+        sendProblemStateChange(sendProblemSwitch)
     }
     
     private func addFilterView() {

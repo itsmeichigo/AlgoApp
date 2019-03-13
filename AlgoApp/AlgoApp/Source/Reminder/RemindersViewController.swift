@@ -45,7 +45,7 @@ class RemindersViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if segue.identifier == "showReminderDetail",
+        if segue.identifier == "addNewReminder",
             let destination = segue.destination as? UINavigationController,
             let controller = destination.topViewController as? ReminderDetailViewController {
             let viewModel = ReminderDetailViewModel(reminder: nil)
@@ -63,6 +63,7 @@ class RemindersViewController: UIViewController {
         updateColors()
         
         tableView.tableFooterView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         
         viewModel.reminders.asDriver()
             .map { [ReminderSection(model: "", items: $0)] }
@@ -77,6 +78,17 @@ class RemindersViewController: UIViewController {
         viewModel.reminders.asDriver()
             .map { !$0.isEmpty }
             .drive(emptyImageView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(ReminderDetail.self)
+            .subscribe(onNext: { [weak self] in
+                guard let controller = self?.storyboard?.instantiateViewController(withIdentifier: "ReminderDetailViewController") as? ReminderDetailViewController else { return }
+                let viewModel = ReminderDetailViewModel(reminder: $0)
+                controller.viewModel = viewModel
+                let navigationController = UINavigationController(rootViewController: controller)
+                navigationController.navigationBar.isTranslucent = false
+                self?.present(navigationController, animated: true, completion: nil)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -97,6 +109,9 @@ class RemindersViewController: UIViewController {
         return RxTableViewSectionedReloadDataSource<ReminderSection>(configureCell: { (_, tableView, indexPath, model) -> UITableViewCell in
             let cell: ReminderCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configureCell(model: model)
+            cell.enabledSwitch.rx.controlEvent(UIControl.Event.valueChanged)
+                .subscribe(onNext: { [weak self] in self?.viewModel.toggleReminder(id: model.id) })
+                .disposed(by: cell.disposeBag)
             return cell
         })
     }

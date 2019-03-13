@@ -37,4 +37,12 @@ final class RemindersViewModel {
             .bind(to: reminders)
             .disposed(by: disposeBag)
     }
+    
+    func toggleReminder(id: String) {
+        let realm = try! Realm()
+        guard let reminder = realm.object(ofType: Reminder.self, forPrimaryKey: id) else { return }
+        try! realm.write {
+            reminder.enabled = !reminder.enabled
+        }
+    }
 }
