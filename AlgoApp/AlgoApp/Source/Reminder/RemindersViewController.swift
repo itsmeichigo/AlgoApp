@@ -81,13 +81,13 @@ class RemindersViewController: UIViewController {
             .disposed(by: disposeBag)
         
         tableView.rx.modelSelected(ReminderDetail.self)
-            .subscribe(onNext: { [weak self] in
-                guard let controller = self?.storyboard?.instantiateViewController(withIdentifier: "ReminderDetailViewController") as? ReminderDetailViewController else { return }
+            .subscribe(onNext: { [unowned self] in
+                guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "ReminderDetailViewController") as? ReminderDetailViewController else { return }
                 let viewModel = ReminderDetailViewModel(reminder: $0)
                 controller.viewModel = viewModel
                 let navigationController = UINavigationController(rootViewController: controller)
                 navigationController.navigationBar.isTranslucent = false
-                self?.present(navigationController, animated: true, completion: nil)
+                self.present(navigationController, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }

@@ -53,8 +53,8 @@ extension UIColor {
         return UIColor(rgb: 0x66BD90)
     }
     
-    static func secondaryPinkColor() -> UIColor {
-        return UIColor(rgb: 0xE94C68)
+    static func secondaryRedColor() -> UIColor {
+        return UIColor(rgb: 0xED6B68)
     }
     
     static func secondaryPurpleColor() -> UIColor {

@@ -11,6 +11,7 @@ import SnapKit
 
 class ReminderDetailViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private weak var datePicker: UIDatePicker!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet private weak var cancelButton: UIBarButtonItem!
@@ -26,9 +27,12 @@ class ReminderDetailViewController: UIViewController {
     @IBOutlet private weak var fridayButton: UIButton!
     @IBOutlet private weak var saturdayButton: UIButton!
     
-    @IBOutlet weak var datePickerTopSpace: NSLayoutConstraint!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var deleteButtonHeight: NSLayoutConstraint!
     
-    private var filterView: UIView?
+    @IBOutlet weak var filterContainerView: UIView!
+    @IBOutlet weak var filterContainerViewHeight: NSLayoutConstraint!
+    
     private var filterViewController: FilterViewController?
     
     var viewModel: ReminderDetailViewModel!
@@ -42,10 +46,15 @@ class ReminderDetailViewController: UIViewController {
         
         addFilterView()
         updateColors()
-        
+
         if let reminder = viewModel.reminder {
             populateViews(reminder: reminder)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateFilterViewHeight(isShowing: sendProblemSwitch.isOn, animated: false)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -53,6 +62,7 @@ class ReminderDetailViewController: UIViewController {
     }
     
     private func populateViews(reminder: ReminderDetail) {
+        deleteButtonHeight.constant = 50
         datePicker.setDate(reminder.date, animated: true)
         for (index, button) in dayButtons.enumerated() {
             if reminder.repeatDays.contains(index + 1) {
@@ -64,25 +74,22 @@ class ReminderDetailViewController: UIViewController {
     }
     
     private func addFilterView() {
+        filterContainerView.isHidden = true
+        
         guard let filterViewController = storyboard?.instantiateViewController(withIdentifier: "filterViewController") as? FilterViewController,
             let filterView = filterViewController.view else { return }
         filterViewController.initialFilter = viewModel.reminder?.filter
             
-        view.addSubview(filterView)
+        filterContainerView.addSubview(filterView)
         filterView.snp.makeConstraints { maker in
-            maker.top.equalTo(sendProblemSwitch.snp.bottom).offset(16)
-            maker.leading.trailing.bottom.equalToSuperview()
+            maker.edges.equalToSuperview()
         }
         
-        filterView.isHidden = true
-        filterViewController.scrollView.bounces = false
-        filterViewController.scrollView.delegate = self
         filterViewController.updateColors()
     
         addChild(filterViewController)
         filterViewController.didMove(toParent: self)
         
-        self.filterView = filterView
         self.filterViewController = filterViewController
     }
     
@@ -95,7 +102,7 @@ class ReminderDetailViewController: UIViewController {
         datePicker.setValue(UIColor.titleTextColor(), forKey: "textColor")
         
         cancelButton.tintColor = .subtitleTextColor()
-        saveButton.tintColor = .secondaryYellowColor()
+        saveButton.tintColor = .secondaryBlueColor()
         sendProblemSwitch.onTintColor = .secondaryYellowColor()
         
         titleLabels.forEach { label in
@@ -105,13 +112,25 @@ class ReminderDetailViewController: UIViewController {
         dayButtons.forEach { button in
             button.setTitleColor(.secondaryYellowColor(), for: .normal)
             button.setTitleColor(.primaryColor(), for: .selected)
-            button.layer.borderColor = UIColor.secondaryYellowColor().cgColor
-            button.layer.borderWidth = 1
             button.layer.cornerRadius = button.bounds.height / 2
-            button.backgroundColor = .clear
+            button.backgroundColor = UIColor.secondaryYellowColor().withAlphaComponent(0.1)
         }
         
+        deleteButton.setTitleColor(.white, for: .normal)
+        deleteButton.backgroundColor = .secondaryRedColor()
+        deleteButton.layer.cornerRadius = 8.0
+        
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    private func updateFilterViewHeight(isShowing: Bool, animated: Bool = true) {
+        if let controller = filterViewController {
+            let height = isShowing ? controller.scrollView.contentSize.height : max(0, scrollView.bounds.height - filterContainerView.frame.origin.y - deleteButtonHeight.constant - 16 * 2)
+            filterContainerViewHeight.constant = height
+            UIView.animate(withDuration: (animated ? 0.3 : 0.0)) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 
     @IBAction private func dismissView(_ sender: Any) {
@@ -135,29 +154,28 @@ class ReminderDetailViewController: UIViewController {
     @IBAction private func dayButtonTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if sender.isSelected {
-            sender.layer.borderWidth = 0
             sender.backgroundColor = UIColor.secondaryYellowColor()
         } else {
-            sender.layer.borderWidth = 1
-            sender.backgroundColor = .clear
+            sender.backgroundColor = UIColor.secondaryYellowColor().withAlphaComponent(0.1)
         }
     }
     
     @IBAction private func sendProblemStateChange(_ sender: UISwitch) {
-        filterView?.isHidden = !sender.isOn
-        if !sender.isOn {
-            filterViewController?.scrollView.setContentOffset(.zero, animated: false)
-            datePickerTopSpace.constant = 0
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        }
+        filterContainerView.isHidden = !sender.isOn
+        updateFilterViewHeight(isShowing: sender.isOn)
     }
-}
-
-extension ReminderDetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        datePickerTopSpace.constant = offsetY > 0 ? -offsetY : CGFloat(0)
+    
+    @IBAction func deleteReminder(_ sender: Any) {
+        let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to remove this reminder?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        let deleteAction = UIAlertAction(title: "Yes", style: .default) { [unowned self] _ in
+            self.viewModel.deleteReminder()
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }

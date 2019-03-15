@@ -34,6 +34,14 @@ final class ReminderDetailViewModel {
         }
     }
     
+    func deleteReminder() {
+        guard let detail = reminder,
+            let model = realm.object(ofType: Reminder.self, forPrimaryKey: detail.id) else { return }
+        try! realm.write {
+            realm.delete(model)
+        }
+    }
+    
     private func correctSecondComponent(date: Date, calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)) -> Date {
         let second = calendar.component(.second, from: date)
         let updatedDate = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.second,

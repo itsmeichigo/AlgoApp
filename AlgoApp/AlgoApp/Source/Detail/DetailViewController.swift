@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
     
     var viewModel: DetailViewModel!
     private let disposeBag = DisposeBag()
-    private let tagColors: [UIColor] = [.secondaryPinkColor(), .secondaryYellowColor(), .secondaryBlueColor(), .secondaryGreenColor(), .secondaryPurpleColor()]
+    private let tagColors: [UIColor] = [.secondaryRedColor(), .secondaryYellowColor(), .secondaryBlueColor(), .secondaryGreenColor(), .secondaryPurpleColor()]
     private let notePanel = FloatingPanelController()
     
     override func viewDidLoad() {
