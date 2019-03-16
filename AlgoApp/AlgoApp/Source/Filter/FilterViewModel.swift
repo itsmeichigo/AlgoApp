@@ -15,6 +15,7 @@ import RxRealm
 final class FilterViewModel {
     let allTags = BehaviorRelay<[String]>(value: [])
     let allCompanies = BehaviorRelay<[String]>(value: [])
+    let currentFilterRelay = BehaviorRelay<QuestionFilter?>(value: nil)
     
     private var selectedCategories: [String] = []
     private var selectedCompanies: [String] = []
@@ -35,6 +36,8 @@ final class FilterViewModel {
         } else {
             selectedCategories.append(category)
         }
+        
+        updateCurrentFilter()
     }
     
     func updateCompany(_ company: String) {
@@ -43,6 +46,8 @@ final class FilterViewModel {
         } else {
             selectedCompanies.append(company)
         }
+        
+        updateCurrentFilter()
     }
     
     func updateLevel(_ level: String) {
@@ -51,6 +56,8 @@ final class FilterViewModel {
         } else {
             selectedLevels.append(level)
         }
+        
+        updateCurrentFilter()
     }
     
     func updateRemark(_ remark: String) {
@@ -59,6 +66,8 @@ final class FilterViewModel {
         } else {
             selectedRemarks.append(remark)
         }
+        
+        updateCurrentFilter()
     }
     
     func buildFilter(shouldClearAll: Bool) -> QuestionFilter {
@@ -77,6 +86,10 @@ final class FilterViewModel {
         let topInterviewed = selectedRemarks.contains(Question.Remarks.topInterviewed.title)
         
         return QuestionFilter(tags: selectedCategories, companies: selectedCompanies, levels: levels, topLiked: topLiked, topInterviewed: topInterviewed)
+    }
+    
+    private func updateCurrentFilter() {
+        currentFilterRelay.accept(buildFilter(shouldClearAll: false))
     }
     
     private func loadTags() {

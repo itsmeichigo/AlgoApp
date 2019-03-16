@@ -416,9 +416,6 @@
                                                 <state key="normal" title="S">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="zGu-vW-oga"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AY6-3R-6Yz">
                                                 <rect key="frame" x="35" y="0.0" width="30" height="30"/>
@@ -429,9 +426,6 @@
                                                 <state key="normal" title="M">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="1Sw-2r-ojE"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fga-Ka-Xcs">
                                                 <rect key="frame" x="70" y="0.0" width="30" height="30"/>
@@ -442,9 +436,6 @@
                                                 <state key="normal" title="T">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="fQL-1V-IyC"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSE-8O-5V8">
                                                 <rect key="frame" x="105" y="0.0" width="30" height="30"/>
@@ -455,9 +446,6 @@
                                                 <state key="normal" title="W">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="HtI-Yb-aaa"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWS-IK-oxD">
                                                 <rect key="frame" x="140" y="0.0" width="30" height="30"/>
@@ -468,9 +456,6 @@
                                                 <state key="normal" title="T">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="txB-vg-MXs"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOj-qH-09Y">
                                                 <rect key="frame" x="175" y="0.0" width="30" height="30"/>
@@ -481,9 +466,6 @@
                                                 <state key="normal" title="F">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="jGz-IE-kUK"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1w-Rt-and">
                                                 <rect key="frame" x="210" y="0.0" width="30" height="30"/>
@@ -494,9 +476,6 @@
                                                 <state key="normal" title="S">
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="dayButtonTapped:" destination="yFD-d7-FJC" eventType="touchUpInside" id="JDr-Un-v4A"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -522,19 +501,16 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Bbu-c1-yqV">
                                         <rect key="frame" x="255" y="281.5" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="sendProblemStateChange:" destination="yFD-d7-FJC" eventType="valueChanged" id="PJL-qQ-KTO"/>
-                                        </connections>
                                     </switch>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Har-sV-Evq">
-                                        <rect key="frame" x="0.0" y="328.5" width="320" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="336.5" width="320" height="0.0"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="ANq-9h-TAk"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu1-pI-9YU">
-                                        <rect key="frame" x="16" y="344.5" width="288" height="0.0"/>
+                                        <rect key="frame" x="16" y="352.5" width="288" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="RQh-ML-BKy"/>
                                         </constraints>
@@ -542,10 +518,13 @@
                                         <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" title="Delete" image="garbage"/>
-                                        <connections>
-                                            <action selector="deleteReminder:" destination="yFD-d7-FJC" eventType="touchUpInside" id="O30-uh-wxO"/>
-                                        </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 problems found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-H8-gjE">
+                                        <rect key="frame" x="16" y="314" width="288" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -559,16 +538,19 @@
                                     <constraint firstItem="cfR-CE-BdV" firstAttribute="leading" secondItem="ykP-is-Pe0" secondAttribute="leading" constant="16" id="H4I-2o-MYO"/>
                                     <constraint firstItem="Har-sV-Evq" firstAttribute="leading" secondItem="ykP-is-Pe0" secondAttribute="leading" id="LSh-eR-Fwm"/>
                                     <constraint firstItem="Bbu-c1-yqV" firstAttribute="centerY" secondItem="RFo-pn-DRM" secondAttribute="centerY" id="N85-qs-47I"/>
+                                    <constraint firstItem="6Rg-H8-gjE" firstAttribute="leading" secondItem="ykP-is-Pe0" secondAttribute="leading" constant="16" id="NKd-Dw-bQv"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Rg-H8-gjE" secondAttribute="trailing" constant="16" id="RXo-Qd-x6V"/>
                                     <constraint firstItem="Yu1-pI-9YU" firstAttribute="top" secondItem="Har-sV-Evq" secondAttribute="bottom" constant="16" id="Uot-WV-VoE"/>
                                     <constraint firstItem="WBt-LX-mZI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cfR-CE-BdV" secondAttribute="trailing" constant="8" id="YH7-iM-J1H"/>
                                     <constraint firstAttribute="trailing" secondItem="Bbu-c1-yqV" secondAttribute="trailing" constant="16" id="axY-0n-2sb"/>
-                                    <constraint firstItem="Har-sV-Evq" firstAttribute="top" secondItem="Bbu-c1-yqV" secondAttribute="bottom" constant="16" id="bGo-uZ-REJ"/>
+                                    <constraint firstItem="Har-sV-Evq" firstAttribute="top" secondItem="Bbu-c1-yqV" secondAttribute="bottom" constant="24" id="bGo-uZ-REJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Yu1-pI-9YU" secondAttribute="trailing" constant="16" id="egz-vX-o4q"/>
                                     <constraint firstAttribute="trailing" secondItem="VIW-ou-JSX" secondAttribute="trailing" id="gNe-OW-FoC"/>
                                     <constraint firstItem="RFo-pn-DRM" firstAttribute="top" secondItem="WBt-LX-mZI" secondAttribute="bottom" constant="32" id="jbR-8M-AAL"/>
                                     <constraint firstItem="VIW-ou-JSX" firstAttribute="top" secondItem="ykP-is-Pe0" secondAttribute="top" id="ko0-ts-6L2"/>
                                     <constraint firstAttribute="trailing" secondItem="WBt-LX-mZI" secondAttribute="trailing" constant="16" id="qrZ-Ct-mPk"/>
                                     <constraint firstItem="cfR-CE-BdV" firstAttribute="top" secondItem="VIW-ou-JSX" secondAttribute="bottom" constant="16" id="uMc-Q4-64t"/>
+                                    <constraint firstItem="6Rg-H8-gjE" firstAttribute="top" secondItem="RFo-pn-DRM" secondAttribute="bottom" constant="8" id="yYg-UK-Nza"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -582,16 +564,8 @@
                         <viewLayoutGuide key="safeArea" id="ZWR-zK-bPg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Reminder" id="od5-Gn-ek2">
-                        <barButtonItem key="leftBarButtonItem" image="cancel-button" id="ZZE-u9-j5J">
-                            <connections>
-                                <action selector="dismissView:" destination="yFD-d7-FJC" id="oc3-YL-lDJ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="qf5-Ie-Fag">
-                            <connections>
-                                <action selector="saveReminder:" destination="yFD-d7-FJC" id="NQX-nK-S5t"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="cancel-button" id="ZZE-u9-j5J"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="qf5-Ie-Fag"/>
                     </navigationItem>
                     <connections>
                         <outlet property="cancelButton" destination="ZZE-u9-j5J" id="o2Y-sM-Pjo"/>
@@ -603,6 +577,7 @@
                         <outlet property="filterContainerViewHeight" destination="ANq-9h-TAk" id="3Gb-R2-U8n"/>
                         <outlet property="fridayButton" destination="uOj-qH-09Y" id="528-aP-bhA"/>
                         <outlet property="mondayButton" destination="AY6-3R-6Yz" id="IIz-wx-nTF"/>
+                        <outlet property="problemsCountLabel" destination="6Rg-H8-gjE" id="KvN-nB-y9S"/>
                         <outlet property="saturdayButton" destination="k1w-Rt-and" id="9zc-Nq-79f"/>
                         <outlet property="saveButton" destination="qf5-Ie-Fag" id="Z69-96-ABd"/>
                         <outlet property="scrollView" destination="ykP-is-Pe0" id="xZa-a8-9L9"/>
@@ -1175,7 +1150,7 @@
     </scenes>
     <resources>
         <image name="bell" width="180" height="180"/>
-        <image name="cancel-button" width="16" height="16"/>
+        <image name="cancel-button" width="14" height="14"/>
         <image name="filter" width="19" height="21"/>
         <image name="garbage" width="20" height="20"/>
         <image name="home" width="25" height="23"/>

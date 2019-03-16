@@ -30,8 +30,9 @@ class FilterViewController: UIViewController {
     
     var initialFilter: QuestionFilter?
     var completionBlock: ((QuestionFilter) -> Void)?
-    var currentFilter: QuestionFilter {
-        return viewModel.buildFilter(shouldClearAll: false)
+    
+    var currentFilterDriver: Driver<QuestionFilter?> {
+        return viewModel.currentFilterRelay.asDriver()
     }
     
     override func viewDidLoad() {

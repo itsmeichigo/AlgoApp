@@ -42,6 +42,10 @@ final class ReminderDetailViewModel {
         }
     }
     
+    func countProblems(with filter: QuestionFilter?) -> Int {
+        return Question.loadQuestions(filter: filter).count
+    }
+    
     private func correctSecondComponent(date: Date, calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)) -> Date {
         let second = calendar.component(.second, from: date)
         let updatedDate = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.second,

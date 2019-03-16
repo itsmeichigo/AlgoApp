@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import SnapKit
 
 class ReminderDetailViewController: UIViewController {
@@ -18,6 +20,7 @@ class ReminderDetailViewController: UIViewController {
     @IBOutlet private weak var sendProblemSwitch: UISwitch!
     @IBOutlet private weak var daysStackView: UIStackView!
     @IBOutlet private var titleLabels: [UILabel]!
+    @IBOutlet private weak var problemsCountLabel: UILabel!
     
     @IBOutlet private weak var sundayButton: UIButton!
     @IBOutlet private weak var mondayButton: UIButton!
@@ -33,6 +36,7 @@ class ReminderDetailViewController: UIViewController {
     @IBOutlet weak var filterContainerView: UIView!
     @IBOutlet weak var filterContainerViewHeight: NSLayoutConstraint!
     
+    private let disposeBag = DisposeBag()
     private var filterViewController: FilterViewController?
     
     var viewModel: ReminderDetailViewModel!
@@ -42,8 +46,8 @@ class ReminderDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNavigationBar()
         addFilterView()
+        configureView()
         updateColors()
 
         if let reminder = viewModel.reminder {
@@ -60,8 +64,61 @@ class ReminderDetailViewController: UIViewController {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
-    private func configureNavigationBar() {
+    private func configureView() {
         title = (viewModel.reminder != nil) ? "Edit Reminder" : "Add Reminder"
+
+        cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        deleteButton.rx.tap
+            .subscribe(onNext: { [weak self] in self?.showDeleteAlert() })
+            .disposed(by: disposeBag)
+        
+        if let controller = filterViewController {
+            Driver.combineLatest(controller.currentFilterDriver, sendProblemSwitch.rx.isOn.asDriver())
+                .map { [weak self] (filter, onSwitch) in
+                    self?.viewModel.countProblems(with: (onSwitch ? filter : nil)) ?? 0
+                }
+                .map { "\($0) problems found" }
+                .drive(problemsCountLabel.rx.text)
+                .disposed(by: disposeBag)
+            
+            saveButton.rx.tap
+                .withLatestFrom(controller.currentFilterDriver)
+                .subscribe(onNext: { [weak self] filter in
+                    self?.saveReminder(filter: filter)
+                })
+                .disposed(by: disposeBag)
+        } else {
+            problemsCountLabel.isHidden = true
+            
+            saveButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.saveReminder()
+                })
+                .disposed(by: disposeBag)
+        }
+        
+        sendProblemSwitch.rx.isOn
+            .subscribe(onNext: { [weak self] isOn in
+                self?.filterContainerView.isHidden = !isOn
+                self?.updateFilterViewHeight(isShowing: isOn)
+            })
+            .disposed(by: disposeBag)
+        
+        dayButtons.forEach { button in
+            button.rx.tap.asDriver()
+                .map { !button.isSelected }
+                .do(onNext: { selected in
+                    let color = selected ? UIColor.secondaryYellowColor() : UIColor.secondaryYellowColor().withAlphaComponent(0.1)
+                    button.backgroundColor = color
+                })
+                .drive(button.rx.isSelected)
+                .disposed(by: disposeBag)
+        }
     }
     
     private func populateViews(reminder: ReminderDetail) {
@@ -69,11 +126,11 @@ class ReminderDetailViewController: UIViewController {
         datePicker.setDate(reminder.date, animated: true)
         for (index, button) in dayButtons.enumerated() {
             if reminder.repeatDays.contains(index + 1) {
-                dayButtonTapped(button)
+                button.sendActions(for: UIControl.Event.touchUpInside)
             }
         }
         sendProblemSwitch.isOn = reminder.filter?.allFilters.isEmpty == false
-        sendProblemStateChange(sendProblemSwitch)
+        sendProblemSwitch.sendActions(for: UIControl.Event.valueChanged)
     }
     
     private func addFilterView() {
@@ -108,6 +165,7 @@ class ReminderDetailViewController: UIViewController {
         saveButton.tintColor = .secondaryBlueColor()
         sendProblemSwitch.onTintColor = .secondaryYellowColor()
         
+        problemsCountLabel.textColor = .subtitleTextColor()
         titleLabels.forEach { label in
             label.textColor = .titleTextColor()
         }
@@ -135,40 +193,8 @@ class ReminderDetailViewController: UIViewController {
             }
         }
     }
-
-    @IBAction private func dismissView(_ sender: Any) {
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
     
-    @IBAction private func saveReminder(_ sender: Any) {
-        var repeatDays: [Int] = []
-        for (index, button) in dayButtons.enumerated() {
-            if button.isSelected {
-                repeatDays.append(index + 1)
-            }
-        }
-        
-        viewModel.saveReminder(date: datePicker.date,
-                               repeatDays: repeatDays,
-                               filter: sendProblemSwitch.isOn ? filterViewController?.currentFilter : nil)
-        navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction private func dayButtonTapped(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        if sender.isSelected {
-            sender.backgroundColor = UIColor.secondaryYellowColor()
-        } else {
-            sender.backgroundColor = UIColor.secondaryYellowColor().withAlphaComponent(0.1)
-        }
-    }
-    
-    @IBAction private func sendProblemStateChange(_ sender: UISwitch) {
-        filterContainerView.isHidden = !sender.isOn
-        updateFilterViewHeight(isShowing: sender.isOn)
-    }
-    
-    @IBAction func deleteReminder(_ sender: Any) {
+    private func showDeleteAlert() {
         let alert = UIAlertController(title: "Delete Reminder", message: "Are you sure you want to remove this reminder?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Yes", style: .default) { [unowned self] _ in
@@ -181,4 +207,19 @@ class ReminderDetailViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    private func saveReminder(filter: QuestionFilter? = nil) {
+        var repeatDays: [Int] = []
+        for (index, button) in dayButtons.enumerated() {
+            if button.isSelected {
+                repeatDays.append(index + 1)
+            }
+        }
+        
+        viewModel.saveReminder(date: datePicker.date,
+                               repeatDays: repeatDays,
+                               filter: sendProblemSwitch.isOn ? filter : nil)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
 }
