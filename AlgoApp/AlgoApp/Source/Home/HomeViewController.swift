@@ -79,10 +79,10 @@ final class HomeViewController: UIViewController {
     
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
-        navigationController?.navigationBar.barTintColor = .primaryColor()
+        navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
-        tabBarController?.tabBar.tintColor = .secondaryYellowColor()
+        tabBarController?.tabBar.tintColor = .secondaryColor()
         tabBarController?.tabBar.barTintColor = .backgroundColor()
         
         tableView.reloadData()
@@ -107,8 +107,8 @@ final class HomeViewController: UIViewController {
         searchBar.placeholder = "Search by title"
         navigationItem.titleView = searchBar
         
-        filterButton.tintColor = .secondaryBlueColor()
-        shuffleButton.tintColor = .secondaryOrangeColor()
+        filterButton.tintColor = .appBlueColor()
+        shuffleButton.tintColor = .appOrangeColor()
         
         navigationController?.hero.isEnabled = true
         navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))

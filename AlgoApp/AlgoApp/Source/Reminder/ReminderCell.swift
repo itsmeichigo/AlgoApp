@@ -60,7 +60,7 @@ class ReminderCell: UITableViewCell, NibReusable {
         filterLabel.textColor = .subtitleTextColor()
         repeatLabel.textColor = enabled ? .titleTextColor() : .subtitleTextColor()
         contentView.backgroundColor = .backgroundColor()
-        enabledSwitch.onTintColor = .secondaryYellowColor()
+        enabledSwitch.onTintColor = .secondaryColor()
         cardView.backgroundColor = .primaryColor()
     }
 }

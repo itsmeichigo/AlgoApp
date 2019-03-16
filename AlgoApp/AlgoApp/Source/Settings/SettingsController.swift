@@ -60,11 +60,11 @@ class SettingsController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .backgroundColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
-        tabBarController?.tabBar.tintColor = .secondaryYellowColor()
+        tabBarController?.tabBar.tintColor = .secondaryColor()
         tabBarController?.tabBar.barTintColor = .backgroundColor()
         
-        showsUnreadSwitch.onTintColor = .secondaryYellowColor()
-        darkModeSwitch.onTintColor = .secondaryYellowColor()
+        showsUnreadSwitch.onTintColor = .secondaryColor()
+        darkModeSwitch.onTintColor = .secondaryColor()
         
         titleLabels.forEach({ label in
             label.textColor = .titleTextColor()

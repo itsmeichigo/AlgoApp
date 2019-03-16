@@ -113,7 +113,7 @@ class ReminderDetailViewController: UIViewController {
             button.rx.tap.asDriver()
                 .map { !button.isSelected }
                 .do(onNext: { selected in
-                    let color = selected ? UIColor.secondaryYellowColor() : UIColor.secondaryYellowColor().withAlphaComponent(0.1)
+                    let color = selected ? UIColor.secondaryColor() : UIColor.secondaryColor().withAlphaComponent(0.1)
                     button.backgroundColor = color
                 })
                 .drive(button.rx.isSelected)
@@ -162,8 +162,8 @@ class ReminderDetailViewController: UIViewController {
         datePicker.setValue(UIColor.titleTextColor(), forKey: "textColor")
         
         cancelButton.tintColor = .subtitleTextColor()
-        saveButton.tintColor = .secondaryBlueColor()
-        sendProblemSwitch.onTintColor = .secondaryYellowColor()
+        saveButton.tintColor = .appBlueColor()
+        sendProblemSwitch.onTintColor = .secondaryColor()
         
         problemsCountLabel.textColor = .subtitleTextColor()
         titleLabels.forEach { label in
@@ -171,14 +171,14 @@ class ReminderDetailViewController: UIViewController {
         }
         
         dayButtons.forEach { button in
-            button.setTitleColor(.secondaryYellowColor(), for: .normal)
+            button.setTitleColor(.secondaryColor(), for: .normal)
             button.setTitleColor(.primaryColor(), for: .selected)
             button.layer.cornerRadius = button.bounds.height / 2
-            button.backgroundColor = UIColor.secondaryYellowColor().withAlphaComponent(0.1)
+            button.backgroundColor = UIColor.secondaryColor().withAlphaComponent(0.1)
         }
         
         deleteButton.setTitleColor(.white, for: .normal)
-        deleteButton.backgroundColor = .secondaryRedColor()
+        deleteButton.backgroundColor = .appRedColor()
         deleteButton.layer.cornerRadius = 8.0
         
         setNeedsStatusBarAppearanceUpdate()

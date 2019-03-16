@@ -85,7 +85,7 @@ private extension CodeViewController {
         
         if !viewModel.readOnly {
             let saveButton = UIBarButtonItem(image: UIImage(named: "done"), style: .plain, target: self, action: #selector(saveContent))
-            saveButton.tintColor = .secondaryGreenColor()
+            saveButton.tintColor = .appGreenColor()
             navigationItem.rightBarButtonItems = [saveButton]
             
             viewModel.language
@@ -96,7 +96,7 @@ private extension CodeViewController {
             
             languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
             languageButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
-            languageButton.tintColor = .secondaryOrangeColor()
+            languageButton.tintColor = .appOrangeColor()
             languageButton.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
             navigationItem.titleView = languageButton
         }

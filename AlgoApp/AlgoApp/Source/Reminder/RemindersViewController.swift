@@ -93,7 +93,7 @@ class RemindersViewController: UIViewController {
         
         view.backgroundColor = .backgroundColor()
         emptyTitleLabel.textColor = .subtitleTextColor()
-        addButton.tintColor = .secondaryYellowColor()
+        addButton.tintColor = .secondaryColor()
         
         tableView.reloadData()
         setNeedsStatusBarAppearanceUpdate()

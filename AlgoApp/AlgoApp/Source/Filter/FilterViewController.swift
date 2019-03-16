@@ -40,8 +40,8 @@ class FilterViewController: UIViewController {
         
         viewModel = FilterViewModel()
         
-        applyButton.tintColor = .secondaryBlueColor()
-        clearAllButton.tintColor = .secondaryOrangeColor()
+        applyButton.tintColor = .appBlueColor()
+        clearAllButton.tintColor = .appOrangeColor()
         
         difficultyTagsView.tags = Question.DifficultyLevel.allCases.map { $0.title }.joined(separator: ",")
         
@@ -135,7 +135,7 @@ class FilterViewController: UIViewController {
 extension FilterViewController: TagsDelegate {
     func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
         if tagButton.layer.borderColor != UIColor.clear.cgColor {
-            tagButton.backgroundColor = .secondaryYellowColor()
+            tagButton.backgroundColor = .secondaryColor()
             tagButton.setTitleColor(.primaryColor(), for: .normal)
             tagButton.layer.borderColor = UIColor.clear.cgColor
         } else {

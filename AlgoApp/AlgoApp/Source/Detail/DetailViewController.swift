@@ -40,7 +40,7 @@ class DetailViewController: UIViewController {
     var viewModel: DetailViewModel!
     
     private let disposeBag = DisposeBag()
-    private let tagColors: [UIColor] = [.secondaryRedColor(), .secondaryYellowColor(), .secondaryBlueColor(), .secondaryGreenColor(), .secondaryPurpleColor()]
+    private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appPurpleColor()]
     private let notePanel = FloatingPanelController()
     
     override func viewDidLoad() {
@@ -91,7 +91,7 @@ class DetailViewController: UIViewController {
         title = "Detail"
         
         let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
-        noteBarButton.tintColor = .secondaryYellowColor()
+        noteBarButton.tintColor = .secondaryColor()
         navigationItem.rightBarButtonItems = [noteBarButton]
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
@@ -134,12 +134,12 @@ class DetailViewController: UIViewController {
         tagTitleLabel.textColor = .titleTextColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
-        officialSolutionButton.setTitleColor(.secondaryYellowColor(), for: .normal)
+        officialSolutionButton.setTitleColor(.secondaryColor(), for: .normal)
         
         otherSolutionsLabel.textColor = .titleTextColor()
         solutionsView.tagLayerColor = .clear
-        solutionsView.tagBackgroundColor = UIColor.secondaryPurpleColor().withAlphaComponent(0.1)
-        solutionsView.tagTitleColor = .secondaryPurpleColor()
+        solutionsView.tagBackgroundColor = UIColor.appPurpleColor().withAlphaComponent(0.1)
+        solutionsView.tagTitleColor = .appPurpleColor()
         
         loadingIndicator.style = Themer.shared.currentTheme == .light ? .gray : .white
     }
@@ -206,7 +206,7 @@ class DetailViewController: UIViewController {
             .filterNil()
             .map { $0.read }
             .subscribe(onNext: { [weak self] read in
-                let backgroundColor: UIColor = read ? .subtitleTextColor() : .secondaryPurpleColor()
+                let backgroundColor: UIColor = read ? .subtitleTextColor() : .appPurpleColor()
                 self?.markAsReadButton.backgroundColor = backgroundColor
                 self?.markAsReadButton.isSelected = read
             })

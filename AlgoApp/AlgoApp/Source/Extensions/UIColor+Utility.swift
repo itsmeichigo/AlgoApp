@@ -34,30 +34,30 @@ extension UIColor {
         }
     }
     
-    static func secondaryOrangeColor() -> UIColor {
-        return UIColor(rgb: 0xFB866C)
-    }
-    
-    static func secondaryYellowColor() -> UIColor {
+    static func secondaryColor() -> UIColor {
         switch Themer.shared.currentTheme {
         case .light: return UIColor(rgb: 0xFF945A)
         case .dark: return UIColor(rgb: 0xFFD452)
         }
     }
     
-    static func secondaryBlueColor() -> UIColor {
+    static func appOrangeColor() -> UIColor {
+        return UIColor(rgb: 0xFB866C)
+    }
+    
+    static func appBlueColor() -> UIColor {
         return UIColor(rgb: 0x618ED9)
     }
     
-    static func secondaryGreenColor() -> UIColor {
+    static func appGreenColor() -> UIColor {
         return UIColor(rgb: 0x66BD90)
     }
     
-    static func secondaryRedColor() -> UIColor {
+    static func appRedColor() -> UIColor {
         return UIColor(rgb: 0xED6B68)
     }
     
-    static func secondaryPurpleColor() -> UIColor {
+    static func appPurpleColor() -> UIColor {
         return UIColor(rgb: 0x8774D8)
     }
 
