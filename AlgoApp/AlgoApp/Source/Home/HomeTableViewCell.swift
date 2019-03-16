@@ -21,10 +21,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         cardView.layer.cornerRadius = 8.0
-        cardView.layer.shadowColor = UIColor(rgb: 0x333333).cgColor
-        cardView.layer.shadowOffset = CGSize(width: 0, height: 3)
-        cardView.layer.shadowOpacity = 0.1
-        cardView.layer.shadowRadius = 3.0
+        cardView.dropCardShadow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

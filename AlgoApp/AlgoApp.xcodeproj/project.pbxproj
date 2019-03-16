@@ -46,6 +46,7 @@
 		DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */; };
 		DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */; };
 		DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */; };
+		DE1D26D2223CFD2500AA9F68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */; };
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
+		DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,6 +262,7 @@
 				DE0E51862208524200BFBB0B /* UIColor+Utility.swift */,
 				DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */,
 				DE112E982233E200003A5796 /* AppUtility.swift */,
+				DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */,
 				DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */,
 				DE112EA22235169D003A5796 /* RemindersViewModel.swift in Sources */,
+				DE1D26D2223CFD2500AA9F68 /* UIView+Extension.swift in Sources */,
 				DE0E518B22088A3200BFBB0B /* DetailViewController.swift in Sources */,
 				DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */,
 				DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */,
