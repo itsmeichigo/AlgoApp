@@ -13,12 +13,12 @@ import RxSwift
 
 class ReminderCell: UITableViewCell, NibReusable {
 
+    @IBOutlet weak var enabledSwitch: UISwitch!
+    @IBOutlet private weak var cardView: UIView!
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var ampmLabel: UILabel!
-    @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet private weak var filterLabel: UILabel!
     @IBOutlet private weak var repeatLabel: UILabel!
-    @IBOutlet private weak var cardView: UIView!
     
     private(set) var disposeBag = DisposeBag()
     

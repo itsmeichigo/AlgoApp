@@ -30,6 +30,7 @@ class RemindersViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         configureNavigationBar()
+        updateColors()
         viewModel.loadReminders()
         
         Themer.shared.currentThemeRelay
@@ -59,9 +60,7 @@ class RemindersViewController: UIViewController {
     
     private func configureView() {
         title = "Reminders"
-        
-        updateColors()
-        
+                
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         
@@ -82,12 +81,7 @@ class RemindersViewController: UIViewController {
         
         tableView.rx.modelSelected(ReminderDetail.self)
             .subscribe(onNext: { [unowned self] in
-                guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "ReminderDetailViewController") as? ReminderDetailViewController else { return }
-                let viewModel = ReminderDetailViewModel(reminder: $0)
-                controller.viewModel = viewModel
-                let navigationController = UINavigationController(rootViewController: controller)
-                navigationController.navigationBar.isTranslucent = false
-                self.present(navigationController, animated: true, completion: nil)
+                self.showDetail(model: $0)
             })
             .disposed(by: disposeBag)
     }
@@ -114,5 +108,16 @@ class RemindersViewController: UIViewController {
                 .disposed(by: cell.disposeBag)
             return cell
         })
+    }
+    
+    private func showDetail(model: ReminderDetail) {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "ReminderDetailViewController") as? ReminderDetailViewController else { return }
+        let viewModel = ReminderDetailViewModel(reminder: model)
+        controller.viewModel = viewModel
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.navigationBar.isTranslucent = false
+        present(navigationController, animated: true, completion: nil)
+        
+        tableView.reloadData() // workaround :(
     }
 }

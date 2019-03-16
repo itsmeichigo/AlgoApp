@@ -11,13 +11,13 @@ import SnapKit
 
 class ReminderDetailViewController: UIViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var datePicker: UIDatePicker!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet private weak var cancelButton: UIBarButtonItem!
+    @IBOutlet private weak var saveButton: UIBarButtonItem!
     @IBOutlet private weak var sendProblemSwitch: UISwitch!
-    @IBOutlet private var titleLabels: [UILabel]!
     @IBOutlet private weak var daysStackView: UIStackView!
+    @IBOutlet private var titleLabels: [UILabel]!
     
     @IBOutlet private weak var sundayButton: UIButton!
     @IBOutlet private weak var mondayButton: UIButton!
@@ -42,8 +42,7 @@ class ReminderDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = (viewModel.reminder != nil) ? "Edit Reminder" : "Add Reminder"
-        
+        configureNavigationBar()
         addFilterView()
         updateColors()
 
@@ -59,6 +58,10 @@ class ReminderDetailViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
+    }
+    
+    private func configureNavigationBar() {
+        title = (viewModel.reminder != nil) ? "Edit Reminder" : "Add Reminder"
     }
     
     private func populateViews(reminder: ReminderDetail) {
@@ -147,7 +150,7 @@ class ReminderDetailViewController: UIViewController {
         
         viewModel.saveReminder(date: datePicker.date,
                                repeatDays: repeatDays,
-                               filter: filterViewController?.currentFilter)
+                               filter: sendProblemSwitch.isOn ? filterViewController?.currentFilter : nil)
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
