@@ -38,6 +38,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var viewModel: DetailViewModel!
+    
     private let disposeBag = DisposeBag()
     private let tagColors: [UIColor] = [.secondaryRedColor(), .secondaryYellowColor(), .secondaryBlueColor(), .secondaryGreenColor(), .secondaryPurpleColor()]
     private let notePanel = FloatingPanelController()
@@ -91,7 +92,18 @@ class DetailViewController: UIViewController {
         
         let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
         noteBarButton.tintColor = .secondaryYellowColor()
-        navigationItem.rightBarButtonItems = [noteBarButton]        
+        navigationItem.rightBarButtonItems = [noteBarButton]
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
+        backButton.tintColor = .subtitleTextColor()
+        navigationItem.leftBarButtonItem = backButton
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self;
+
+    }
+    
+    @objc private func popView() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func configureViews() {
@@ -291,5 +303,11 @@ extension DetailViewController: TagsDelegate {
                 break
             }
         }
+    }
+}
+
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

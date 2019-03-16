@@ -49,6 +49,14 @@ class WebViewController: UIViewController {
         activityIndicator.startAnimating()
         
         loadPage(url: url, partialContentQuerySelector: contentSelector)
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
+        backButton.tintColor = .subtitleTextColor()
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc private func popView() {
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
