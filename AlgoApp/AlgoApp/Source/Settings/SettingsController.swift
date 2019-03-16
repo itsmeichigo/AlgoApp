@@ -25,8 +25,8 @@ class SettingsController: UITableViewController {
         configureView()
         configureNavigationBar()
         
-        Themer.shared.currentThemeRelay
-            .subscribe(onNext: { [weak self] theme in
+        Themer.shared.currentThemeDriver
+            .drive(onNext: { [weak self] theme in
                 self?.darkModeSwitch.isOn = theme == .dark
                 self?.updateColors()
             })
@@ -44,13 +44,22 @@ class SettingsController: UITableViewController {
     private func configureView() {
         updateColors()
         
+        tableView.delegate = self
         tableView.tableFooterView = UIView()
         darkModeSwitch.isOn = Themer.shared.currentTheme == .dark
+        showsUnreadSwitch.isOn = AppConfigs.shared.showsReadProblem
         
         darkModeSwitch.rx.isOn
             .map { $0 ? Theme.dark : Theme.light }
             .subscribe(onNext: {
                 Themer.shared.currentTheme = $0
+            })
+            .disposed(by: disposeBag)
+        
+        showsUnreadSwitch.rx.isOn
+            .map { !$0 }
+            .subscribe(onNext: {
+                AppConfigs.shared.showsReadProblem = $0
             })
             .disposed(by: disposeBag)
     }
@@ -71,9 +80,57 @@ class SettingsController: UITableViewController {
         })
         
         tableView.separatorColor = .borderColor()
+        tableView.reloadData()
         view.backgroundColor = .backgroundColor()
         
         setNeedsStatusBarAppearanceUpdate()
     }
 
+}
+
+extension SettingsController {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = .primaryColor()
+        
+        if cell.accessoryType == .none {
+            cell.selectionStyle = .none
+        } else {
+            cell.selectionStyle = .default
+        }
+        
+        let colorView = UIView()
+        colorView.backgroundColor = .backgroundColor()
+        cell.selectedBackgroundView? = colorView
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 28
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 28))
+        view.backgroundColor = .backgroundColor()
+        
+        let label = UILabel(frame: CGRect(x: 8, y: 0, width: tableView.bounds.width - 16, height: 28))
+        label.textColor = .subtitleTextColor()
+        label.font = UIFont.systemFont(ofSize: 14)
+        view.addSubview(label)
+        
+        switch section {
+        case 0:
+            label.text = "Problems"
+        case 1:
+            label.text = "Appearance"
+        case 2:
+            label.text = "Leetcode Daily"
+        default:
+            break
+        }
+        
+        return view
+    }
 }

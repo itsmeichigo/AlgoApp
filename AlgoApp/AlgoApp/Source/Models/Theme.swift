@@ -16,9 +16,13 @@ enum Theme: Int {
 
 final class Themer {
     static let shared = Themer()
-    private let themeKey = "SavedTheme"
     
-    let currentThemeRelay = BehaviorRelay<Theme>(value: .light)
+    private let themeKey = "SavedTheme"
+    private let currentThemeRelay = BehaviorRelay<Theme>(value: .light)
+    
+    var currentThemeDriver: Driver<Theme> {
+        return currentThemeRelay.asDriver()
+    }
     
     var currentTheme: Theme {
         get {

@@ -45,6 +45,7 @@
 		DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AC222BA918009C30B0 /* SettingsController.swift */; };
 		DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */; };
 		DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */; };
+		DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */; };
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 		DE1BA9AC222BA918009C30B0 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
 		DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
+		DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 		DE0E517D2208408E00BFBB0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */,
 				DE195DC32219CAB700BDDFB4 /* Theme.swift */,
 				DE0E517F220840A400BFBB0B /* Question.swift */,
 				DE0E517E220840A400BFBB0B /* Tag.swift */,
@@ -601,6 +604,7 @@
 				DE112EA022351652003A5796 /* ReminderDetailViewModel.swift in Sources */,
 				DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
+				DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */,
 				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
 				DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */,

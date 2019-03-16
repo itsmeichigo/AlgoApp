@@ -78,9 +78,10 @@ class ReminderDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         if let controller = filterViewController {
-            Driver.combineLatest(controller.currentFilterDriver, sendProblemSwitch.rx.isOn.asDriver())
-                .map { [weak self] (filter, onSwitch) in
-                    self?.viewModel.countProblems(with: (onSwitch ? filter : nil)) ?? 0
+            Driver.combineLatest(controller.currentFilterDriver, sendProblemSwitch.rx.isOn.asDriver(), AppConfigs.shared.showsReadProblemDriver)
+                .map { [weak self] tuple -> Int in
+                    let (filter, onSwitch, showsReadProblems) = tuple
+                    return self?.viewModel.countProblems(with: (onSwitch ? filter : nil), onlyUnread: !showsReadProblems) ?? 0
                 }
                 .map { "\($0) problems found" }
                 .drive(problemsCountLabel.rx.text)

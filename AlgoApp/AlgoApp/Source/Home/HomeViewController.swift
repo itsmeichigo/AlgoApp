@@ -38,8 +38,8 @@ final class HomeViewController: UIViewController {
         configureNavigationBar()
         configureView()
         
-        Themer.shared.currentThemeRelay
-            .subscribe(onNext: { [weak self] theme in
+        Themer.shared.currentThemeDriver
+            .drive(onNext: { [weak self] theme in
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
@@ -136,8 +136,8 @@ final class HomeViewController: UIViewController {
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
         
-        Driver.combineLatest(searchBar.rx.text.asDriver(), currentFilter.asDriver())
-            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(query: $0, filter: $1) })
+        Driver.combineLatest(searchBar.rx.text.asDriver(), currentFilter.asDriver(), AppConfigs.shared.showsReadProblemDriver)
+            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(query: $0, filter: $1, onlyUnread: !$2) })
             .disposed(by: disposeBag)
     
     }

@@ -86,7 +86,7 @@ final class Question: Object {
 }
 
 extension Question {
-    static func loadQuestions(with realm: Realm = try! Realm(), query: String? = nil, filter: QuestionFilter? = nil) -> Results<Question> {
+    static func loadQuestions(with realm: Realm = try! Realm(), query: String? = nil, filter: QuestionFilter? = nil, onlyUnread: Bool = false) -> Results<Question> {
         var predicates: [NSPredicate] = []
         var results = realm.objects(Question.self)
         if let query = query, !query.isEmpty {
@@ -118,6 +118,11 @@ extension Question {
             predicates.append(topLikedPredicate)
         } else if filter?.topInterviewed == true {
             predicates.append(topInterviewPredicate)
+        }
+        
+        if onlyUnread {
+            let unreadPredicate = NSPredicate(format: "read = false")
+            predicates.append(unreadPredicate)
         }
         
         if predicates.count > 0 {

@@ -64,7 +64,7 @@ extension UIColor {
     static func borderColor() -> UIColor {
         switch Themer.shared.currentTheme {
         case .light: return UIColor(rgb: 0xc3c3c3)
-        case .dark: return UIColor(rgb: 0xc3c3c3).withAlphaComponent(0.4)
+        case .dark: return UIColor(rgb: 0xc3c3c3).withAlphaComponent(0.2)
         }
     }
     

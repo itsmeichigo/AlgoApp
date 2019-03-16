@@ -42,8 +42,8 @@ final class ReminderDetailViewModel {
         }
     }
     
-    func countProblems(with filter: QuestionFilter?) -> Int {
-        return Question.loadQuestions(filter: filter).count
+    func countProblems(with filter: QuestionFilter?, onlyUnread: Bool) -> Int {
+        return Question.loadQuestions(filter: filter, onlyUnread: onlyUnread).count
     }
     
     private func correctSecondComponent(date: Date, calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)) -> Date {

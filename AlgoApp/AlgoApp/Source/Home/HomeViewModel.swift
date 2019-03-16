@@ -45,8 +45,8 @@ final class HomeViewModel {
         }
     }
     
-    func loadQuestions(query: String?, filter: QuestionFilter?) {
-        let results = Question.loadQuestions(with: realm, query: query, filter: filter)
+    func loadQuestions(query: String?, filter: QuestionFilter?, onlyUnread: Bool) {
+        let results = Question.loadQuestions(with: realm, query: query, filter: filter, onlyUnread: onlyUnread)
         
         Observable.collection(from: results)
             .map { Array($0)

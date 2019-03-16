@@ -33,8 +33,8 @@ class RemindersViewController: UIViewController {
         updateColors()
         viewModel.loadReminders()
         
-        Themer.shared.currentThemeRelay
-            .subscribe(onNext: { [weak self] theme in
+        Themer.shared.currentThemeDriver
+            .drive(onNext: { [weak self] theme in
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
