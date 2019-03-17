@@ -136,8 +136,8 @@ final class HomeViewController: UIViewController {
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
         
-        Driver.combineLatest(searchBar.rx.text.asDriver(), currentFilter.asDriver(), AppConfigs.shared.showsReadProblemDriver)
-            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(query: $0, filter: $1, onlyUnread: !$2) })
+        Driver.combineLatest(searchBar.rx.text.asDriver(), currentFilter.asDriver(), AppConfigs.shared.hidesSolvedProblemsDriver)
+            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(query: $0, filter: $1, onlyUnsolved: $2) })
             .disposed(by: disposeBag)
     
     }

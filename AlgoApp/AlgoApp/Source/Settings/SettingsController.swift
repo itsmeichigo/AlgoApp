@@ -12,7 +12,7 @@ import RxSwift
 
 class SettingsController: UITableViewController {
     
-    @IBOutlet weak var showsUnreadSwitch: UISwitch!
+    @IBOutlet weak var hidesSolvedSwitch: UISwitch!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
     @IBOutlet var titleLabels: [UILabel]!
@@ -49,7 +49,7 @@ class SettingsController: UITableViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         darkModeSwitch.isOn = Themer.shared.currentTheme == .dark
-        showsUnreadSwitch.isOn = AppConfigs.shared.showsReadProblem
+        hidesSolvedSwitch.isOn = AppConfigs.shared.hidesSolvedProblems
         
         cardViews.forEach { view in
             view.layer.cornerRadius = 8.0
@@ -63,10 +63,9 @@ class SettingsController: UITableViewController {
             })
             .disposed(by: disposeBag)
         
-        showsUnreadSwitch.rx.isOn
-            .map { !$0 }
+        hidesSolvedSwitch.rx.isOn
             .subscribe(onNext: {
-                AppConfigs.shared.showsReadProblem = $0
+                AppConfigs.shared.hidesSolvedProblems = $0
             })
             .disposed(by: disposeBag)
     }
@@ -79,7 +78,7 @@ class SettingsController: UITableViewController {
         tabBarController?.tabBar.tintColor = .secondaryColor()
         tabBarController?.tabBar.barTintColor = .backgroundColor()
         
-        showsUnreadSwitch.onTintColor = .secondaryColor()
+        hidesSolvedSwitch.onTintColor = .secondaryColor()
         darkModeSwitch.onTintColor = .secondaryColor()
         
         titleLabels.forEach { label in

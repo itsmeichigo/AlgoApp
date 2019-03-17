@@ -65,11 +65,11 @@ final class DetailViewModel {
         scrapeCppSolution()
     }
     
-    func toggleRead() {
+    func toggleSolved() {
         guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
-        let toggledValue = !question.read
+        let toggledValue = !question.solved
         try! realmForWrite.write {
-            question.read = toggledValue
+            question.solved = toggledValue
         }
     }
     

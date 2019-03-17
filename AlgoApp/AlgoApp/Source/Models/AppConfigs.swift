@@ -13,24 +13,24 @@ import RxSwift
 final class AppConfigs {
     static let shared = AppConfigs()
     
-    var showsReadProblemDriver: Driver<Bool> {
-        return showsReadProblemRelay.asDriver()
+    var hidesSolvedProblemsDriver: Driver<Bool> {
+        return hidesSolvedProblemsRelay.asDriver()
     }
     
-    var showsReadProblem: Bool {
+    var hidesSolvedProblems: Bool {
         get {
-            let showing = UserDefaults.standard.bool(forKey: showsReadProblemsKey)
-            showsReadProblemRelay.accept(showing)
-            return showing
+            let hiding = UserDefaults.standard.bool(forKey: hidesSolvedProblemsKey)
+            hidesSolvedProblemsRelay.accept(hiding)
+            return hiding
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: showsReadProblemsKey)
-            showsReadProblemRelay.accept(newValue)
+            UserDefaults.standard.set(newValue, forKey: hidesSolvedProblemsKey)
+            hidesSolvedProblemsRelay.accept(newValue)
         }
     }
     
-    private let showsReadProblemsKey = "ShowsReadProblems"
-    private let showsReadProblemRelay = BehaviorRelay<Bool>(value: true)
+    private let hidesSolvedProblemsKey = "HidesSolvedProblems"
+    private let hidesSolvedProblemsRelay = BehaviorRelay<Bool>(value: true)
     
 }

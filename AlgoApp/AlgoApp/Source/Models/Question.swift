@@ -21,7 +21,7 @@ final class Question: Object {
     @objc dynamic var topInterview = false
     @objc dynamic var saved = false
     
-    @objc dynamic var read = false
+    @objc dynamic var solved = false
     @objc dynamic var note = ""
     @objc dynamic var noteLanguage = "Markdown"
     @objc dynamic var emoji = ""
@@ -86,7 +86,7 @@ final class Question: Object {
 }
 
 extension Question {
-    static func loadQuestions(with realm: Realm = try! Realm(), query: String? = nil, filter: QuestionFilter? = nil, onlyUnread: Bool = false) -> Results<Question> {
+    static func loadQuestions(with realm: Realm = try! Realm(), query: String? = nil, filter: QuestionFilter? = nil, onlyUnsolved: Bool = false) -> Results<Question> {
         var predicates: [NSPredicate] = []
         var results = realm.objects(Question.self)
         if let query = query, !query.isEmpty {
@@ -120,9 +120,9 @@ extension Question {
             predicates.append(topInterviewPredicate)
         }
         
-        if onlyUnread {
-            let unreadPredicate = NSPredicate(format: "read = false")
-            predicates.append(unreadPredicate)
+        if onlyUnsolved {
+            let unsolvedPredicate = NSPredicate(format: "solved = false")
+            predicates.append(unsolvedPredicate)
         }
         
         if predicates.count > 0 {

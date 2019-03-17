@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var solutionsView: TagsView!
     @IBOutlet weak var otherSolutionsLabel: UILabel!
     
-    @IBOutlet weak var markAsReadButton: UIButton!
+    @IBOutlet weak var markAsSolvedButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
@@ -112,11 +112,11 @@ class DetailViewController: UIViewController {
         solutionsView.delegate = self
         tagsView.isUserInteractionEnabled = false
         
-        markAsReadButton.layer.cornerRadius = 8
-        markAsReadButton.setTitle("🤓 Mark as Read", for: .normal)
-        markAsReadButton.setTitle("😕 Mark as Unread", for: .selected)
-        markAsReadButton.setTitleColor(.white, for: .normal)
-        markAsReadButton.setTitleColor(.white, for: .selected)
+        markAsSolvedButton.layer.cornerRadius = 8
+        markAsSolvedButton.setTitle("🤓 Mark as Solved", for: .normal)
+        markAsSolvedButton.setTitle("😕 Mark as Unsolved", for: .selected)
+        markAsSolvedButton.setTitleColor(.white, for: .normal)
+        markAsSolvedButton.setTitleColor(.white, for: .selected)
         
         updateColors()
     }
@@ -204,16 +204,16 @@ class DetailViewController: UIViewController {
         
         viewModel.detail
             .filterNil()
-            .map { $0.read }
-            .subscribe(onNext: { [weak self] read in
-                let backgroundColor: UIColor = read ? .subtitleTextColor() : .appPurpleColor()
-                self?.markAsReadButton.backgroundColor = backgroundColor
-                self?.markAsReadButton.isSelected = read
+            .map { $0.solved }
+            .subscribe(onNext: { [weak self] solved in
+                let backgroundColor: UIColor = solved ? .subtitleTextColor() : .appPurpleColor()
+                self?.markAsSolvedButton.backgroundColor = backgroundColor
+                self?.markAsSolvedButton.isSelected = solved
             })
             .disposed(by: disposeBag)
         
-        markAsReadButton.rx.tap
-            .subscribe(onNext: { [weak self] in self?.viewModel.toggleRead() })
+        markAsSolvedButton.rx.tap
+            .subscribe(onNext: { [weak self] in self?.viewModel.toggleSolved() })
             .disposed(by: disposeBag)
         
         officialSolutionButton.rx.tap

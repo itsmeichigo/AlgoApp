@@ -54,7 +54,7 @@ class ReminderCell: UITableViewCell, NibReusable {
     private func updateColors(enabled: Bool) {
         timeLabel.textColor = enabled ? .titleTextColor() : .subtitleTextColor()
         ampmLabel.textColor = enabled ? .titleTextColor() : .subtitleTextColor()
-        filterLabel.textColor = .subtitleTextColor()
+        filterLabel.textColor = enabled ? .subtitleTextColor() : UIColor.subtitleTextColor().withAlphaComponent(0.5)
         repeatLabel.textColor = enabled ? .titleTextColor() : .subtitleTextColor()
         contentView.backgroundColor = .backgroundColor()
         enabledSwitch.onTintColor = .secondaryColor()
