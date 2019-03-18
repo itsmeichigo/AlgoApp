@@ -64,6 +64,7 @@ extension ReminderDetail {
         }
         return ""
     }
+    
 }
 
 final class Reminder: Object {
@@ -76,5 +77,14 @@ final class Reminder: Object {
     
     override static func primaryKey() -> String? {
         return "id"
-    }    
+    }
+    
+    static func randomQuestionId(for reminderId: String) -> Int? {
+        let realm = try! Realm()
+        guard let reminder = realm.object(ofType: Reminder.self, forPrimaryKey: reminderId) else { return nil }
+        
+        return Question.loadQuestions(with: realm,
+                                      filter: ReminderDetail(with: reminder).filter,
+                                      onlyUnsolved: AppConfigs.shared.hidesSolvedProblems).randomElement()?.id
+    }
 }

@@ -96,8 +96,30 @@ final class NotificationHelper: NSObject {
 
 extension NotificationHelper: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print(response.actionIdentifier)
+        
         completionHandler()
+        
+        if let reminderId = response.notification.request.content.userInfo[NotificationHelper.reminderIdKey] as? String,
+            let questionId = Reminder.randomQuestionId(for: reminderId),
+            let window = UIApplication.shared.keyWindow,
+            let tabbarController = window.rootViewController as? UITabBarController,
+            let navigationController = tabbarController.viewControllers?.first as? UINavigationController {
+            
+            if let presentedController = navigationController.topViewController?.presentedViewController {
+                presentedController.dismiss(animated: false, completion: nil)
+            }
+            
+            navigationController.popToRootViewController(animated: false)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            viewController.viewModel = DetailViewModel(questionId: questionId)
+            viewController.hidesBottomBarWhenPushed = true
+            navigationController.pushViewController(viewController, animated: true)
+            
+            tabbarController.selectedIndex = 0
+            
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
