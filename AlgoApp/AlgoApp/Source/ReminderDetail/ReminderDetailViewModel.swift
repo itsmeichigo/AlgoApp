@@ -31,7 +31,7 @@ final class ReminderDetailViewModel {
         
         try! realm.write {
             realm.add(reminder, update: true)
-            NotificationHelper.updateScheduledNotifications(for: ReminderDetail(with: reminder))
+            NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
         }
     }
     
@@ -39,7 +39,7 @@ final class ReminderDetailViewModel {
         guard let detail = reminder,
             let model = realm.object(ofType: Reminder.self, forPrimaryKey: detail.id) else { return }
         try! realm.write {
-            NotificationHelper.updateScheduledNotifications(for: ReminderDetail(with: model))
+            NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: model))
             realm.delete(model)
         }
     }

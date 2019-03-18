@@ -43,7 +43,7 @@ final class RemindersViewModel {
         guard let reminder = realm.object(ofType: Reminder.self, forPrimaryKey: id) else { return }
         try! realm.write {
             reminder.enabled = !reminder.enabled
-            NotificationHelper.updateScheduledNotifications(for: ReminderDetail(with: reminder))
+            NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
         }
     }
 }
