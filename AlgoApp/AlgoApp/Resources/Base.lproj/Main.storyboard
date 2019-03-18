@@ -368,11 +368,13 @@
             </objects>
             <point key="canvasLocation" x="2692" y="-564"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="YIG-9A-wYS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKf-0D-Yfr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="FXt-Cs-t0u"/>
+                    <tabBarItem key="tabBarItem" title="" image="home" selectedImage="home" id="FXt-Cs-t0u">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kKe-LY-eId">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -594,7 +596,7 @@
             </objects>
             <point key="canvasLocation" x="2660.625" y="-2164.4366197183099"/>
         </scene>
-        <!--Reminders View Controller-->
+        <!--Reminders-->
         <scene sceneID="6l0-9y-lQT">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Xhs-1n-agM" customClass="RemindersViewController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -703,7 +705,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uL5-f5-VuR"/>
                     </view>
-                    <navigationItem key="navigationItem" id="e0S-cT-Sf1">
+                    <navigationItem key="navigationItem" title="Reminders" id="e0S-cT-Sf1">
                         <barButtonItem key="rightBarButtonItem" image="plus" id="Yqw-L8-4MO">
                             <connections>
                                 <segue destination="gJT-cl-cIa" kind="presentation" identifier="addNewReminder" id="1xK-JC-qSQ"/>
@@ -909,11 +911,13 @@
             </objects>
             <point key="canvasLocation" x="69.599999999999994" y="-564.46776611694156"/>
         </scene>
-        <!--Reminder-->
+        <!--Navigation Controller-->
         <scene sceneID="UYv-66-0Hu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cPN-0Q-sgk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reminder" image="reminder" selectedImage="reminder" id="xsB-7A-mwF"/>
+                    <tabBarItem key="tabBarItem" title="" image="reminder" selectedImage="reminder" id="xsB-7A-mwF">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sOu-vq-J4W">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -928,11 +932,13 @@
             </objects>
             <point key="canvasLocation" x="1009" y="-1424"/>
         </scene>
-        <!--Settings-->
+        <!--Navigation Controller-->
         <scene sceneID="HdU-r2-FHX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kDj-H9-MUx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="4lL-HY-V4z"/>
+                    <tabBarItem key="tabBarItem" title="" image="settings" selectedImage="settings" id="4lL-HY-V4z">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tdJ-2S-lGs">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>

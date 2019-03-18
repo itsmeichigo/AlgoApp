@@ -47,6 +47,7 @@
 		DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */; };
 		DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */; };
 		DE1D26D2223CFD2500AA9F68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */; };
+		DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */; };
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
 		DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +209,9 @@
 			isa = PBXGroup;
 			children = (
 				DE0E515122070C2800BFBB0B /* AppDelegate.swift */,
+				DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */,
+				DE195DC32219CAB700BDDFB4 /* Theme.swift */,
+				DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */,
 				DE0E517D2208408E00BFBB0B /* Models */,
 				DE0E517122082E0800BFBB0B /* Home */,
 				DE157EA5221D398C0040B4E9 /* Filter */,
@@ -242,8 +247,6 @@
 		DE0E517D2208408E00BFBB0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */,
-				DE195DC32219CAB700BDDFB4 /* Theme.swift */,
 				DE0E517F220840A400BFBB0B /* Question.swift */,
 				DE0E517E220840A400BFBB0B /* Tag.swift */,
 				DE0E51822208413E00BFBB0B /* Company.swift */,
@@ -604,6 +607,7 @@
 				DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */,
 				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,
 				DE112E9722337451003A5796 /* ReminderDetailViewController.swift in Sources */,
+				DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */,
 				DE112EA022351652003A5796 /* ReminderDetailViewModel.swift in Sources */,
 				DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
@@ -793,6 +797,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2L9U9J29G7;
 				INFOPLIST_FILE = AlgoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -812,6 +817,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2L9U9J29G7;
 				INFOPLIST_FILE = AlgoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (

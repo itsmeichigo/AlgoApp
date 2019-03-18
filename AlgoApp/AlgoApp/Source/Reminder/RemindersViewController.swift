@@ -58,9 +58,7 @@ class RemindersViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    private func configureView() {
-        title = "Reminders"
-                
+    private func configureView() {                
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         
