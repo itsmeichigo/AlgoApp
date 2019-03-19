@@ -17,6 +17,11 @@ final class HomeViewController: UIViewController {
     typealias QuestionSection = SectionModel<String, QuestionCellModel>
     typealias DataSource = RxTableViewSectionedReloadDataSource<QuestionSection>
     
+    @IBOutlet weak var emptyStackView: UIStackView!
+    @IBOutlet weak var emptyImageView: UIImageView!
+    @IBOutlet weak var emptyTitleLabel: UILabel!
+    @IBOutlet weak var emptyMessageLabel: UILabel!
+    
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var filterButton: UIBarButtonItem!
     @IBOutlet private weak var shuffleButton: UIBarButtonItem!
@@ -90,6 +95,9 @@ final class HomeViewController: UIViewController {
         searchBar.barStyle = Themer.shared.currentTheme == .light ? .default : .black
         searchBar.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
         
+        emptyTitleLabel.textColor = .subtitleTextColor()
+        emptyMessageLabel.textColor = .subtitleTextColor()
+        
         view.backgroundColor = .backgroundColor()
     
     }
@@ -118,7 +126,7 @@ final class HomeViewController: UIViewController {
     private func configureView() {
         
         updateColors()
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 68, right: 0)
         tableView.separatorStyle = .none
         tableView.rx.modelSelected(QuestionCellModel.self)
             .asDriver()
@@ -128,6 +136,12 @@ final class HomeViewController: UIViewController {
                 viewController.viewModel = model
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.questions
+            .asDriver()
+            .map { !$0.isEmpty }
+            .drive(emptyStackView.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.questions

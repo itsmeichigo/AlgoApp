@@ -228,7 +228,7 @@
 				DE0E518922088A1300BFBB0B /* Detail */,
 				DE195DC02219483B00BDDFB4 /* WebView */,
 				DE13A11422226A630091FF96 /* CodeView */,
-				DE1AC96E22317B710044D83D /* Reminder */,
+				DE1AC96E22317B710044D83D /* Reminders */,
 				DE112E9E22351637003A5796 /* ReminderDetail */,
 				DE1BA9AB222BA736009C30B0 /* Settings */,
 				DE0E51882208524600BFBB0B /* Extensions */,
@@ -329,14 +329,14 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
-		DE1AC96E22317B710044D83D /* Reminder */ = {
+		DE1AC96E22317B710044D83D /* Reminders */ = {
 			isa = PBXGroup;
 			children = (
 				DE112EA12235169D003A5796 /* RemindersViewModel.swift */,
 				DE1AC96F22317BA30044D83D /* RemindersViewController.swift */,
 				DE1E399E2236C82900DD3465 /* ReminderCell.swift */,
 			);
-			path = Reminder;
+			path = Reminders;
 			sourceTree = "<group>";
 		};
 		DE1BA9AB222BA736009C30B0 /* Settings */ = {

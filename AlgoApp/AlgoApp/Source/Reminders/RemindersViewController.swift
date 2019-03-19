@@ -64,7 +64,7 @@ class RemindersViewController: UIViewController {
     
     private func configureView() {                
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 68, right: 0)
         
         openSettingsButton.layer.cornerRadius = openSettingsButton.frame.height / 2
         openSettingsButton.rx.tap
@@ -130,8 +130,8 @@ class RemindersViewController: UIViewController {
         emptyMessageLabel.textColor = .subtitleTextColor()
         addButton.tintColor = .secondaryColor()
         
-        openSettingsButton.setTitleColor(.secondaryColor(), for: .normal)
-        openSettingsButton.backgroundColor = UIColor.secondaryColor().withAlphaComponent(0.1)
+        openSettingsButton.setTitleColor(.white, for: .normal)
+        openSettingsButton.backgroundColor = UIColor.appPurpleColor()
         
         tableView.reloadData()
         setNeedsStatusBarAppearanceUpdate()

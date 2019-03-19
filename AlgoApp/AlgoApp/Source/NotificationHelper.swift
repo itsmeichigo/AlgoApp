@@ -21,6 +21,11 @@ final class NotificationHelper: NSObject {
     
     private static let reminderIdKey = "reminderId"
     
+    override init() {
+        super.init()
+        setupNotificationSettings()
+    }
+    
     func setupNotificationSettings() {
         
         let openProblemAction = UNNotificationAction(

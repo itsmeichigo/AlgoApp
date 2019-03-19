@@ -48,6 +48,8 @@ class SettingsController: UITableViewController {
         
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
+        
         darkModeSwitch.isOn = Themer.shared.currentTheme == .dark
         hidesSolvedSwitch.isOn = AppConfigs.shared.hidesSolvedProblems
         
