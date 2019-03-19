@@ -78,13 +78,20 @@ class ReminderDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         if let controller = filterViewController {
-            Driver.combineLatest(controller.currentFilterDriver, sendProblemSwitch.rx.isOn.asDriver(), AppConfigs.shared.hidesSolvedProblemsDriver)
+            let problemsFound = Driver.combineLatest(controller.currentFilterDriver, sendProblemSwitch.rx.isOn.asDriver(), AppConfigs.shared.hidesSolvedProblemsDriver)
                 .map { [weak self] tuple -> Int in
                     let (filter, onSwitch, hidesSolvedProblems) = tuple
                     return self?.viewModel.countProblems(with: (onSwitch ? filter : nil), onlyUnsolved: hidesSolvedProblems) ?? 0
                 }
-                .map { "\($0) problems found" }
+                
+            problemsFound
+                .map { $0 > 0 ? "\($0) problems found" : "No problems found. Please consider adjusting your filters." }
                 .drive(problemsCountLabel.rx.text)
+                .disposed(by: disposeBag)
+            
+            problemsFound
+                .map { $0 > 0 ? UIColor.subtitleTextColor() : UIColor.appRedColor() }
+                .drive(onNext: { [weak self] in self?.problemsCountLabel.textColor = $0 })
                 .disposed(by: disposeBag)
             
             saveButton.rx.tap

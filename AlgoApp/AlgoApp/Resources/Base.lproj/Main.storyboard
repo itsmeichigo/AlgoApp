@@ -521,8 +521,8 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" title="Delete" image="garbage"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 problems found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-H8-gjE">
-                                        <rect key="frame" x="16" y="314" width="343" height="13.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 problems found" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-H8-gjE">
+                                        <rect key="frame" x="16" y="314" width="284" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -541,17 +541,17 @@
                                     <constraint firstItem="Har-sV-Evq" firstAttribute="leading" secondItem="ykP-is-Pe0" secondAttribute="leading" id="LSh-eR-Fwm"/>
                                     <constraint firstItem="Bbu-c1-yqV" firstAttribute="centerY" secondItem="RFo-pn-DRM" secondAttribute="centerY" id="N85-qs-47I"/>
                                     <constraint firstItem="6Rg-H8-gjE" firstAttribute="leading" secondItem="ykP-is-Pe0" secondAttribute="leading" constant="16" id="NKd-Dw-bQv"/>
-                                    <constraint firstAttribute="trailing" secondItem="6Rg-H8-gjE" secondAttribute="trailing" constant="16" id="RXo-Qd-x6V"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Rg-H8-gjE" secondAttribute="trailing" constant="75" id="RXo-Qd-x6V"/>
                                     <constraint firstItem="Yu1-pI-9YU" firstAttribute="top" secondItem="Har-sV-Evq" secondAttribute="bottom" constant="16" id="Uot-WV-VoE"/>
                                     <constraint firstItem="WBt-LX-mZI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cfR-CE-BdV" secondAttribute="trailing" constant="8" id="YH7-iM-J1H"/>
                                     <constraint firstAttribute="trailing" secondItem="Bbu-c1-yqV" secondAttribute="trailing" constant="16" id="axY-0n-2sb"/>
-                                    <constraint firstItem="Har-sV-Evq" firstAttribute="top" secondItem="Bbu-c1-yqV" secondAttribute="bottom" constant="24" id="bGo-uZ-REJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Yu1-pI-9YU" secondAttribute="trailing" constant="16" id="egz-vX-o4q"/>
                                     <constraint firstAttribute="trailing" secondItem="VIW-ou-JSX" secondAttribute="trailing" id="gNe-OW-FoC"/>
                                     <constraint firstItem="RFo-pn-DRM" firstAttribute="top" secondItem="WBt-LX-mZI" secondAttribute="bottom" constant="32" id="jbR-8M-AAL"/>
                                     <constraint firstItem="VIW-ou-JSX" firstAttribute="top" secondItem="ykP-is-Pe0" secondAttribute="top" id="ko0-ts-6L2"/>
                                     <constraint firstAttribute="trailing" secondItem="WBt-LX-mZI" secondAttribute="trailing" constant="16" id="qrZ-Ct-mPk"/>
                                     <constraint firstItem="cfR-CE-BdV" firstAttribute="top" secondItem="VIW-ou-JSX" secondAttribute="bottom" constant="16" id="uMc-Q4-64t"/>
+                                    <constraint firstItem="Har-sV-Evq" firstAttribute="top" secondItem="6Rg-H8-gjE" secondAttribute="bottom" constant="9" id="ueo-b9-AqL"/>
                                     <constraint firstItem="6Rg-H8-gjE" firstAttribute="top" secondItem="RFo-pn-DRM" secondAttribute="bottom" constant="8" id="yYg-UK-Nza"/>
                                 </constraints>
                             </scrollView>
