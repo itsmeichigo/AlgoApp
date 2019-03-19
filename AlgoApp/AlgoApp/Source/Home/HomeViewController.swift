@@ -91,6 +91,7 @@ final class HomeViewController: UIViewController {
         searchBar.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
         
         view.backgroundColor = .backgroundColor()
+    
     }
 
     private func buildDataSource() -> DataSource {
@@ -125,7 +126,6 @@ final class HomeViewController: UIViewController {
             .drive(onNext: { [unowned self] model in
                 guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
                 viewController.viewModel = model
-                viewController.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)

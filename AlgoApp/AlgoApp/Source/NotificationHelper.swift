@@ -111,7 +111,6 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
             viewController.viewModel = DetailViewModel(questionId: questionId)
-            viewController.hidesBottomBarWhenPushed = true
             navigationController.pushViewController(viewController, animated: true)
             
             tabbarController.selectedIndex = 0

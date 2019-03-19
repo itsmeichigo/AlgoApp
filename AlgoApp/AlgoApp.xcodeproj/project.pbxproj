@@ -51,6 +51,9 @@
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 		DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */; };
 		DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */; };
+		DEBFEE192240B0A9005B1A7A /* BubbleTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE152240B0A9005B1A7A /* BubbleTabBar.swift */; };
+		DEBFEE1B2240B0A9005B1A7A /* BubbleTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE172240B0A9005B1A7A /* BubbleTabBarController.swift */; };
+		DEBFEE1C2240B0A9005B1A7A /* CBTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE182240B0A9005B1A7A /* CBTabBarButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
 		DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxApplicationDelegateProxy.swift; sourceTree = "<group>"; };
+		DEBFEE152240B0A9005B1A7A /* BubbleTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBar.swift; sourceTree = "<group>"; };
+		DEBFEE172240B0A9005B1A7A /* BubbleTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTabBarController.swift; sourceTree = "<group>"; };
+		DEBFEE182240B0A9005B1A7A /* CBTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBTabBarButton.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +270,7 @@
 		DE0E51882208524600BFBB0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DEBFEE142240B0A9005B1A7A /* BubbleIconTabbar */,
 				DE1BA9AF222C0D44009C30B0 /* UINavigationBar+Extension.swift */,
 				DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */,
 				DE0E51862208524200BFBB0B /* UIColor+Utility.swift */,
@@ -338,6 +345,16 @@
 				DE1BA9AC222BA918009C30B0 /* SettingsController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		DEBFEE142240B0A9005B1A7A /* BubbleIconTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				DEBFEE152240B0A9005B1A7A /* BubbleTabBar.swift */,
+				DEBFEE172240B0A9005B1A7A /* BubbleTabBarController.swift */,
+				DEBFEE182240B0A9005B1A7A /* CBTabBarButton.swift */,
+			);
+			path = BubbleIconTabbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,6 +626,7 @@
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
 				DE112E992233E200003A5796 /* AppUtility.swift in Sources */,
 				DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */,
+				DEBFEE1C2240B0A9005B1A7A /* CBTabBarButton.swift in Sources */,
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,
 				DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */,
 				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,
@@ -618,6 +636,7 @@
 				DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */,
 				DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
+				DEBFEE1B2240B0A9005B1A7A /* BubbleTabBarController.swift in Sources */,
 				DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */,
 				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
@@ -638,6 +657,7 @@
 				DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */,
 				DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */,
 				DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */,
+				DEBFEE192240B0A9005B1A7A /* BubbleTabBar.swift in Sources */,
 				DE1AC97022317BA30044D83D /* RemindersViewController.swift in Sources */,
 				DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */,
 				DE0E517522082E5400BFBB0B /* HomeViewModel.swift in Sources */,
