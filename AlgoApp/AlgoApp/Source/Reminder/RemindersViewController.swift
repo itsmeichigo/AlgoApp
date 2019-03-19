@@ -16,8 +16,12 @@ class RemindersViewController: UIViewController {
     typealias ReminderSection = SectionModel<String, ReminderDetail>
     typealias Datasource = RxTableViewSectionedReloadDataSource<ReminderSection>
     
+    @IBOutlet weak var emptyStackView: UIStackView!
     @IBOutlet private weak var emptyImageView: UIImageView!
     @IBOutlet private weak var emptyTitleLabel: UILabel!
+    @IBOutlet private weak var emptyMessageLabel: UILabel!
+    @IBOutlet weak var openSettingsButton: UIButton!
+    
     @IBOutlet private weak var addButton: UIBarButtonItem!
     @IBOutlet private weak var tableView: UITableView!
     
@@ -62,19 +66,51 @@ class RemindersViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
         
+        openSettingsButton.layer.cornerRadius = openSettingsButton.frame.height / 2
+        openSettingsButton.rx.tap
+            .subscribe(onNext: { [weak self] in self?.openSettings() })
+            .disposed(by: disposeBag)
+        
+        let notificationGranted = UIApplication.shared.rx.applicationDidBecomeActive
+            .startWith(.active)
+            .flatMap { _ in NotificationHelper.shared.center
+                .rx.requestAuthorization(options: [.alert, .sound]) }
+            .map { $0 }
+            .asDriver(onErrorJustReturn: false)
+        
+        notificationGranted
+            .map { $0 ? UIImage(named: "notification") : UIImage(named: "permission") }
+            .drive(emptyImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        notificationGranted
+            .map { $0 ? "No reminders yet" : "Push notification disabled" }
+            .drive(emptyTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        notificationGranted
+            .map { $0 ? "Keep your coding skills sharp \nwith daily challenges" : "Please enable notification settings \nto receive reminders with coding problems" }
+            .drive(emptyMessageLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        notificationGranted
+            .map { !$0 }
+            .drive(tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        notificationGranted
+            .map { $0 }
+            .drive(openSettingsButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         viewModel.reminders.asDriver()
             .map { [ReminderSection(model: "", items: $0)] }
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
         
-        viewModel.reminders.asDriver()
-            .map { !$0.isEmpty }
-            .drive(emptyTitleLabel.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        viewModel.reminders.asDriver()
-            .map { !$0.isEmpty }
-            .drive(emptyImageView.rx.isHidden)
+        Driver.combineLatest(viewModel.reminders.asDriver(), notificationGranted)
+            .map { !$0.0.isEmpty && $0.1 }
+            .drive(emptyStackView.rx.isHidden)
             .disposed(by: disposeBag)
         
         tableView.rx.modelSelected(ReminderDetail.self)
@@ -91,7 +127,11 @@ class RemindersViewController: UIViewController {
         
         view.backgroundColor = .backgroundColor()
         emptyTitleLabel.textColor = .subtitleTextColor()
+        emptyMessageLabel.textColor = .subtitleTextColor()
         addButton.tintColor = .secondaryColor()
+        
+        openSettingsButton.setTitleColor(.secondaryColor(), for: .normal)
+        openSettingsButton.backgroundColor = UIColor.secondaryColor().withAlphaComponent(0.1)
         
         tableView.reloadData()
         setNeedsStatusBarAppearanceUpdate()
@@ -117,5 +157,14 @@ class RemindersViewController: UIViewController {
         present(navigationController, animated: true, completion: nil)
         
         tableView.reloadData() // workaround :(
+    }
+    
+    private func openSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString),
+            UIApplication.shared.canOpenURL(settingsUrl) else {
+            return
+        }
+        
+        UIApplication.shared.open(settingsUrl, completionHandler: nil)
     }
 }

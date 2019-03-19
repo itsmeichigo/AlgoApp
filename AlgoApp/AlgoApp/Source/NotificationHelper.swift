@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import RxSwift
 import UIKit
 import UserNotifications
 
 final class NotificationHelper: NSObject {
     
     static let shared = NotificationHelper()
+    let center = UNUserNotificationCenter.current()
     
     private static let openProblemActionId = "com.ichigo.AlgoApp.reminders.problem"
     private static let reminderCategoryId = "com.ichigo.AlgoApp.reminders"
@@ -20,10 +22,6 @@ final class NotificationHelper: NSObject {
     private static let reminderIdKey = "reminderId"
     
     func setupNotificationSettings() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-            // TODO: update UI if not granted or encounter error
-        }
         
         let openProblemAction = UNNotificationAction(
             identifier: NotificationHelper.openProblemActionId,
@@ -42,7 +40,7 @@ final class NotificationHelper: NSObject {
     }
     
     func updateScheduledNotifications(for reminder: ReminderDetail) {
-        cancelAllScheduledNotifications(for: reminder) {
+        cancelAllScheduledNotifications(for: reminder) { [weak self] in
             guard reminder.enabled else { return }
             
             let content = UNMutableNotificationContent()
@@ -51,7 +49,6 @@ final class NotificationHelper: NSObject {
             content.categoryIdentifier = NotificationHelper.reminderCategoryId
             content.userInfo[NotificationHelper.reminderIdKey] = reminder.id
             
-            let center = UNUserNotificationCenter.current()
             let calendar = Calendar.current
             let minuteComponent = calendar.component(.minute, from: reminder.date)
             let hourComponent = calendar.component(.hour, from: reminder.date)
@@ -64,14 +61,14 @@ final class NotificationHelper: NSObject {
             if reminder.repeatDays.isEmpty {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                center.add(request, withCompletionHandler: nil)
+                self?.center.add(request, withCompletionHandler: nil)
             } else {
                 for weekday in reminder.repeatDays {
                     dateComponents.weekday = weekday
                     
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                    center.add(request, withCompletionHandler: nil)
+                    self?.center.add(request, withCompletionHandler: nil)
                 }
             }
         }
@@ -79,8 +76,8 @@ final class NotificationHelper: NSObject {
     
     func cancelAllScheduledNotifications(for reminder: ReminderDetail,
                                          completionHandler: @escaping (() -> Void)) {
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { requests in
+        
+        center.getPendingNotificationRequests { [weak self] requests in
             var foundRequestIds: [String] = []
             for request in requests {
                 guard let reminderId = request.content.userInfo[NotificationHelper.reminderIdKey] as? String,
@@ -88,7 +85,7 @@ final class NotificationHelper: NSObject {
                 foundRequestIds.append(request.identifier)
             }
             
-            center.removePendingNotificationRequests(withIdentifiers: foundRequestIds)
+            self?.center.removePendingNotificationRequests(withIdentifiers: foundRequestIds)
             completionHandler()
         }
     }
@@ -126,3 +123,20 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
         completionHandler(UNNotificationPresentationOptions.alert)
     }
 }
+
+extension Reactive where Base: UNUserNotificationCenter {
+    
+    public func requestAuthorization(options: UNAuthorizationOptions = []) -> Single<Bool> {
+        return Single.create(subscribe: { (event) -> Disposable in
+            self.base.requestAuthorization(options: options) { (success: Bool, error: Error?) in
+                if let error = error {
+                    event(.error(error))
+                } else {
+                    event(.success(success))
+                }
+            }
+            return Disposables.create()
+        })
+    }
+}
+
