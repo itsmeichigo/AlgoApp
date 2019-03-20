@@ -35,6 +35,9 @@ final class Question: Object {
     }
     
     var remark: String {
+        if topLiked && topInterview {
+            return "👍 Top Liked & Interviewed 👨‍💻"
+        }
         return topLiked ? Remarks.topLiked.displayText : topInterview ? Remarks.topInterviewed.displayText : ""
     }
     
@@ -52,7 +55,7 @@ final class Question: Object {
         var displayText: String {
             switch self {
             case .topLiked: return "👍 Top Liked"
-            case .topInterviewed: return "👩‍💻 Top Interviewed"
+            case .topInterviewed: return "👨‍💻 Top Interviewed"
             }
         }
     }
@@ -112,7 +115,7 @@ extension Question {
         let topLikedPredicate = NSPredicate(format: "topLiked = true")
         let topInterviewPredicate = NSPredicate(format: "topInterview = true")
         if filter?.topLiked == true && filter?.topInterviewed == true {
-            let compound = NSCompoundPredicate(type: .or, subpredicates: [topLikedPredicate, topInterviewPredicate])
+            let compound = NSCompoundPredicate(type: .and, subpredicates: [topLikedPredicate, topInterviewPredicate])
             predicates.append(compound)
         } else if filter?.topLiked == true {
             predicates.append(topLikedPredicate)
