@@ -38,8 +38,8 @@ final class ReminderDetailViewModel {
     func deleteReminder() {
         guard let detail = reminder,
             let model = realm.object(ofType: Reminder.self, forPrimaryKey: detail.id) else { return }
+        NotificationHelper.shared.cancelAllScheduledNotifications(for: detail, completionHandler: {})
         try! realm.write {
-            NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: model))
             realm.delete(model)
         }
     }

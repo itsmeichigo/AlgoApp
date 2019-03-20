@@ -107,8 +107,7 @@ final class NotificationHelper: NSObject {
         tabbarController.selectedIndex = 0
     }
     
-    private func cancelAllScheduledNotifications(for reminder: ReminderDetail,
-                                         completionHandler: @escaping (() -> Void)) {
+    func cancelAllScheduledNotifications(for reminder: ReminderDetail, completionHandler: @escaping (() -> Void)) {
         
         center.getPendingNotificationRequests { [weak self] requests in
             var foundRequestIds: [String] = []
