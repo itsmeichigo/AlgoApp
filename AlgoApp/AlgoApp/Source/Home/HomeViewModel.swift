@@ -17,33 +17,7 @@ final class HomeViewModel {
     let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
     
     private let disposeBag = DisposeBag()
-    private lazy var realm: Realm = {
-        let config = Realm.Configuration(
-            schemaVersion: 4,
-            migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 4) {
-                    // Nothing to do!
-                    // Realm will automatically detect new properties and removed properties
-                    // And will update the schema on disk automatically
-                }
-        })
-        Realm.Configuration.defaultConfiguration = config
-        
-        return try! Realm()
-    }()
-    
-    func loadSeedDatabase() {
-        let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
-        let bundleReamPath = Bundle.main.path(forResource: "default", ofType:"realm")
-        
-        guard !FileManager.default.fileExists(atPath: defaultRealmPath.path) else { return }
-        
-        do {
-            try FileManager.default.copyItem(atPath: bundleReamPath!, toPath: defaultRealmPath.path)
-        } catch let error as NSError {
-            print("error occurred, here are the details:\n \(error)")
-        }
-    }
+    private lazy var realm = try! Realm()
     
     func loadQuestions(query: String?, filter: QuestionFilter?, onlyUnsolved: Bool) {
         let results = Question.loadQuestions(with: realm, query: query, filter: filter, onlyUnsolved: onlyUnsolved)

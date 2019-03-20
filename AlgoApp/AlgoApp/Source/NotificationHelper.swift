@@ -21,6 +21,8 @@ final class NotificationHelper: NSObject {
     
     private static let reminderIdKey = "reminderId"
     
+    private var pendingReminderId: String?
+    
     override init() {
         super.init()
         setupNotificationSettings()
@@ -79,7 +81,33 @@ final class NotificationHelper: NSObject {
         }
     }
     
-    func cancelAllScheduledNotifications(for reminder: ReminderDetail,
+    func showPendingQuestion() {
+        guard let id = pendingReminderId else { return }
+        
+        guard let window = UIApplication.shared.keyWindow,
+            let tabbarController = window.rootViewController as? UITabBarController,
+            let navigationController = tabbarController.viewControllers?.first as? UINavigationController else {
+                
+            return
+        }
+        
+        if let presentedController = navigationController.topViewController?.presentedViewController {
+            presentedController.dismiss(animated: false, completion: nil)
+        }
+        
+        navigationController.popToRootViewController(animated: false)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
+            let questionId = Reminder.randomQuestionId(for: id) else { return }
+        
+        viewController.viewModel = DetailViewModel(questionId: questionId)
+        navigationController.pushViewController(viewController, animated: true)
+        
+        tabbarController.selectedIndex = 0
+    }
+    
+    private func cancelAllScheduledNotifications(for reminder: ReminderDetail,
                                          completionHandler: @escaping (() -> Void)) {
         
         center.getPendingNotificationRequests { [weak self] requests in
@@ -101,11 +129,15 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
         
         completionHandler()
         
-        if let reminderId = response.notification.request.content.userInfo[NotificationHelper.reminderIdKey] as? String,
-            let questionId = Reminder.randomQuestionId(for: reminderId),
-            let window = UIApplication.shared.keyWindow,
-            let tabbarController = window.rootViewController as? UITabBarController,
-            let navigationController = tabbarController.viewControllers?.first as? UINavigationController {
+        if let reminderId = response.notification.request.content.userInfo[NotificationHelper.reminderIdKey] as? String {
+            
+            guard let window = UIApplication.shared.keyWindow,
+                let tabbarController = window.rootViewController as? UITabBarController,
+                let navigationController = tabbarController.viewControllers?.first as? UINavigationController else {
+                    
+                self.pendingReminderId = reminderId
+                return
+            }
             
             if let presentedController = navigationController.topViewController?.presentedViewController {
                 presentedController.dismiss(animated: false, completion: nil)
@@ -114,7 +146,9 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
             navigationController.popToRootViewController(animated: false)
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+            guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
+                let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
+            
             viewController.viewModel = DetailViewModel(questionId: questionId)
             navigationController.pushViewController(viewController, animated: true)
             

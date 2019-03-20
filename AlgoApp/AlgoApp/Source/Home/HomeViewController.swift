@@ -38,7 +38,6 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel = HomeViewModel()
-        viewModel.loadSeedDatabase()
     
         configureNavigationBar()
         configureView()
