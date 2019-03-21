@@ -19,19 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gC0-Aj-uiT">
-                                <rect key="frame" x="16" y="213" width="343" height="241.5"/>
+                                <rect key="frame" x="16" y="214.5" width="343" height="238.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-result" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-z9-vfe">
-                                        <rect key="frame" x="81" y="0.0" width="181" height="181"/>
+                                        <rect key="frame" x="82.5" y="0.0" width="178" height="178"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No problems found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OA-hk-Xk4">
-                                        <rect key="frame" x="96.5" y="192" width="150" height="20.5"/>
+                                        <rect key="frame" x="96.5" y="189" width="150" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't find any problem matching your filters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rd-hY-xpT">
-                                        <rect key="frame" x="22" y="223.5" width="299.5" height="18"/>
+                                        <rect key="frame" x="22" y="220.5" width="299.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -278,8 +278,8 @@
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9r-Pf-zKI">
                                                 <rect key="frame" x="0.0" y="40" width="343" height="128"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👀 Other Solutions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Nc-OW-aa4">
-                                                        <rect key="frame" x="0.0" y="16" width="128.5" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐙 GitHub Solutions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Nc-OW-aa4">
+                                                        <rect key="frame" x="0.0" y="16" width="137" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -305,8 +305,8 @@
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1SU-oy-lgl">
                                                         <rect key="frame" x="0.0" y="15" width="20" height="20"/>
                                                     </activityIndicatorView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading more solutions..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EC-En-D5P">
-                                                        <rect key="frame" x="28" y="16.5" width="162.5" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading solutions from GitHub..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3EC-En-D5P">
+                                                        <rect key="frame" x="28" y="16.5" width="208.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -383,9 +383,10 @@
                         <outlet property="markAsSolvedButton" destination="3Uy-ge-MCb" id="Yky-NT-oMc"/>
                         <outlet property="officialSolutionButton" destination="vVJ-kx-Mes" id="rBp-TP-kLi"/>
                         <outlet property="otherSolutionsLabel" destination="1Nc-OW-aa4" id="LLR-JK-G1O"/>
+                        <outlet property="otherSolutionsTagView" destination="U9D-bA-VzZ" id="1Va-gP-Zfc"/>
+                        <outlet property="otherSolutionsView" destination="t9r-Pf-zKI" id="fVt-7y-HJR"/>
                         <outlet property="remarkLabel" destination="zZe-ha-XpT" id="wVv-JY-Nhc"/>
                         <outlet property="solutionsTitleLabel" destination="6Mp-ZM-Qqj" id="6Zp-cF-n9T"/>
-                        <outlet property="solutionsView" destination="U9D-bA-VzZ" id="1Va-gP-Zfc"/>
                         <outlet property="tagTitleLabel" destination="Yih-A5-05H" id="4CM-H5-AR4"/>
                         <outlet property="tagsView" destination="ghk-Wl-TnR" id="BO4-fN-2NV"/>
                         <outlet property="titleLabel" destination="nyd-Rc-bQp" id="ahx-28-PaB"/>
@@ -1410,7 +1411,7 @@
         <image name="notification" width="181" height="188"/>
         <image name="plus" width="20" height="20"/>
         <image name="reminder" width="23" height="23"/>
-        <image name="search-result" width="181" height="181"/>
+        <image name="search-result" width="178" height="178"/>
         <image name="settings" width="23" height="23"/>
         <image name="shuffle" width="21" height="21"/>
     </resources>

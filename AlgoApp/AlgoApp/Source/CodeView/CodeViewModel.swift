@@ -11,32 +11,6 @@ import Highlightr
 import RxCocoa
 import RxSwift
 
-enum Language: String, CaseIterable {
-    case c = "C"
-    case cSharp = "C#"
-    case cPP = "C++"
-    case go = "Go"
-    case java = "Java"
-    case javascript = "Javascript"
-    case markdown = "Markdown"
-    case objc = "Objective-C"
-    case php = "PHP"
-    case python = "Python"
-    case ruby = "Ruby"
-    case swift = "Swift"
-    
-    var rawLanguageName: String {
-        switch self {
-        case .objc:
-            return "objectivec"
-        case .cSharp:
-            return "cs"
-        default:
-            return self.rawValue.lowercased()
-        }
-    }
-}
-
 final class CodeViewModel {
     
     var attributedContent: NSAttributedString? {

@@ -30,8 +30,9 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var solutionsTitleLabel: UILabel!
     @IBOutlet weak var officialSolutionButton: UIButton!
-    @IBOutlet weak var solutionsView: TagsView!
+    @IBOutlet weak var otherSolutionsTagView: TagsView!
     @IBOutlet weak var otherSolutionsLabel: UILabel!
+    @IBOutlet weak var otherSolutionsView: UIView!
     
     @IBOutlet weak var markAsSolvedButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
@@ -108,8 +109,8 @@ class DetailViewController: UIViewController {
     
     private func configureViews() {
         
-        solutionsView.backgroundColor = .clear
-        solutionsView.delegate = self
+        otherSolutionsTagView.backgroundColor = .clear
+        otherSolutionsTagView.delegate = self
         tagsView.isUserInteractionEnabled = false
         
         markAsSolvedButton.layer.cornerRadius = 8
@@ -137,9 +138,9 @@ class DetailViewController: UIViewController {
         officialSolutionButton.setTitleColor(.secondaryColor(), for: .normal)
         
         otherSolutionsLabel.textColor = .titleTextColor()
-        solutionsView.tagLayerColor = .clear
-        solutionsView.tagBackgroundColor = UIColor.appPurpleColor().withAlphaComponent(0.1)
-        solutionsView.tagTitleColor = .appPurpleColor()
+        otherSolutionsTagView.tagLayerColor = .clear
+        otherSolutionsTagView.tagBackgroundColor = UIColor.appPurpleColor().withAlphaComponent(0.1)
+        otherSolutionsTagView.tagTitleColor = .appPurpleColor()
         
         loadingIndicator.style = Themer.shared.currentTheme == .light ? .gray : .white
     }
@@ -195,7 +196,7 @@ class DetailViewController: UIViewController {
             .map { $0.keys.map { $0.rawValue }.joined(separator: ",") }
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] in
-                self?.solutionsView.tags = $0
+                self?.otherSolutionsTagView.tags = $0
             })
             .disposed(by: disposeBag)
     }
@@ -233,14 +234,14 @@ class DetailViewController: UIViewController {
         
         viewModel.githubSolutionsRelay
             .observeOn(MainScheduler.instance)
-            .map { $0.count == 0 }
-            .bind(to: solutionsView.rx.isHidden)
+            .map { $0.isEmpty }
+            .bind(to: otherSolutionsView.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.scrapingSolutions.asDriver()
             .filter { !$0 }
-            .withLatestFrom(Driver.combineLatest(viewModel.githubSolutionsRelay.asDriver(), viewModel.detail.asDriver()))
-            .map { $0.0.count > 0 || $0.1?.articleSlug.isEmpty == false }
+            .withLatestFrom(Driver.combineLatest(viewModel.githubSolutionsRelay.asDriver(), viewModel.detail.asDriver().filterNil()))
+            .map { $0.0.count > 0 || $0.1.articleSlug.isEmpty == false }
             .map { $0 == true ? "📕 Solutions" : "😓 No solution found" }
             .drive(solutionsTitleLabel.rx.text)
             .disposed(by: disposeBag)
@@ -293,7 +294,7 @@ extension DetailViewController: CodeViewControllerDelegate {
 
 extension DetailViewController: TagsDelegate {
     func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
-        guard tagsView == solutionsView,
+        guard tagsView == otherSolutionsTagView,
             let title = tagButton.title(for: .normal) else { return }
         for (language, content) in viewModel.githubSolutionsRelay.value {
             if language.rawValue == title {

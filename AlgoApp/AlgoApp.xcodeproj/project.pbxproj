@@ -34,6 +34,7 @@
 		DE112EA22235169D003A5796 /* RemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE112EA12235169D003A5796 /* RemindersViewModel.swift */; };
 		DE12A359221D9B55002F51FD /* SwiftMessagesBottomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */; };
 		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
+		DE139D7F22436EC200879F89 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE139D7E22436EC200879F89 /* Language.swift */; };
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
 		DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11722226B920091FF96 /* CodeViewModel.swift */; };
 		DE13A11A2222DEFB0091FF96 /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */; };
@@ -103,6 +104,7 @@
 		DE112EA12235169D003A5796 /* RemindersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewModel.swift; sourceTree = "<group>"; };
 		DE12A358221D9B55002F51FD /* SwiftMessagesBottomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBottomSegue.swift; sourceTree = "<group>"; };
 		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
+		DE139D7E22436EC200879F89 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		DE13A11722226B920091FF96 /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
 		DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			children = (
 				DE13A11722226B920091FF96 /* CodeViewModel.swift */,
 				DE13A11522226A7F0091FF96 /* CodeViewController.swift */,
+				DE139D7E22436EC200879F89 /* Language.swift */,
 			);
 			path = CodeView;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */,
 				DE112E9B223510D5003A5796 /* Reminder.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
+				DE139D7F22436EC200879F89 /* Language.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,
 				DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */,
 				DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */,
