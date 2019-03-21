@@ -38,6 +38,8 @@
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
 		DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11722226B920091FF96 /* CodeViewModel.swift */; };
 		DE13A11A2222DEFB0091FF96 /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */; };
+		DE13DDEB2243D38F00113A6F /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13DDEA2243D38F00113A6F /* CollectionsViewModel.swift */; };
+		DE13DDED2243D3A200113A6F /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13DDEC2243D3A200113A6F /* CollectionsViewController.swift */; };
 		DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA6221D399E0040B4E9 /* FilterViewController.swift */; };
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
@@ -108,6 +110,8 @@
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		DE13A11722226B920091FF96 /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
 		DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
+		DE13DDEA2243D38F00113A6F /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
+		DE13DDEC2243D3A200113A6F /* CollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		DE157EA6221D399E0040B4E9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				DE13A11422226A630091FF96 /* CodeView */,
 				DE1AC96E22317B710044D83D /* Reminders */,
 				DE112E9E22351637003A5796 /* ReminderDetail */,
+				DE13DDE92243D37900113A6F /* Collections */,
 				DE1BA9AB222BA736009C30B0 /* Settings */,
 				DE0E51882208524600BFBB0B /* Extensions */,
 			);
@@ -320,6 +325,15 @@
 				DE139D7E22436EC200879F89 /* Language.swift */,
 			);
 			path = CodeView;
+			sourceTree = "<group>";
+		};
+		DE13DDE92243D37900113A6F /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				DE13DDEA2243D38F00113A6F /* CollectionsViewModel.swift */,
+				DE13DDEC2243D3A200113A6F /* CollectionsViewController.swift */,
+			);
+			path = Collections;
 			sourceTree = "<group>";
 		};
 		DE157EA5221D398C0040B4E9 /* Filter */ = {
@@ -678,6 +692,7 @@
 				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,
 				DE112E9722337451003A5796 /* ReminderDetailViewController.swift in Sources */,
 				DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */,
+				DE13DDED2243D3A200113A6F /* CollectionsViewController.swift in Sources */,
 				DE112EA022351652003A5796 /* ReminderDetailViewModel.swift in Sources */,
 				DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */,
 				DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */,
@@ -686,6 +701,7 @@
 				DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */,
 				DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */,
 				DE0E51872208524200BFBB0B /* UIColor+Utility.swift in Sources */,
+				DE13DDEB2243D38F00113A6F /* CollectionsViewModel.swift in Sources */,
 				DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */,
 				DE0E518F22088F1C00BFBB0B /* QuestionCellModel.swift in Sources */,
 				DE13A11A2222DEFB0091FF96 /* QuestionDetailModel.swift in Sources */,

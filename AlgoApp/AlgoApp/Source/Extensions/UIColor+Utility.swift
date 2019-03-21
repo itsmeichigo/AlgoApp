@@ -41,6 +41,10 @@ extension UIColor {
         }
     }
     
+    static func appYellowColor() -> UIColor {
+        return UIColor(rgb: 0xFFD452)
+    }
+    
     static func appOrangeColor() -> UIColor {
         return UIColor(rgb: 0xFB866C)
     }

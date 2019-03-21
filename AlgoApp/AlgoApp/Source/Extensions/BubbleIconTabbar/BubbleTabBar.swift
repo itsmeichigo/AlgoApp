@@ -58,7 +58,6 @@ open class BubbleTabBar: UITabBar {
     
     private func configure() {
         backgroundColor = UIColor.white
-        isTranslucent = false
         barTintColor = UIColor.white
         tintColor = #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
         addSubview(container)

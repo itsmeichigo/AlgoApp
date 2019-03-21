@@ -64,7 +64,8 @@ class RemindersViewController: UIViewController {
     
     private func configureView() {                
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 68, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 36, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 36, right: 0)
         
         openSettingsButton.layer.cornerRadius = openSettingsButton.frame.height / 2
         openSettingsButton.rx.tap

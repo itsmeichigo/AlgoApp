@@ -94,7 +94,7 @@ public class CBTabBarButton: UIControl {
         tabImage.contentMode = .center
         tabImage.translatesAutoresizingMaskIntoConstraints = false
         tabLabel.translatesAutoresizingMaskIntoConstraints = false
-        tabLabel.font = UIFont.systemFont(ofSize: 14)
+        tabLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         tabBg.translatesAutoresizingMaskIntoConstraints = false
         tabBg.isUserInteractionEnabled = false
         tabImage.setContentHuggingPriority(.required, for: .horizontal)
@@ -111,14 +111,13 @@ public class CBTabBarButton: UIControl {
         tabBg.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         tabBg.heightAnchor.constraint(equalToConstant: bgHeight).isActive = true
         
-        
-        tabImage.leadingAnchor.constraint(equalTo: tabBg.leadingAnchor, constant: bgHeight/2.0).isActive = true
+        tabImage.leadingAnchor.constraint(equalTo: tabBg.leadingAnchor, constant: bgHeight/2.5).isActive = true
         tabImage.centerYAnchor.constraint(equalTo: tabBg.centerYAnchor).isActive = true
         tabLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         csFoldedLblLeading = tabLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
-        csUnfoldedLblLeading = tabLabel.leadingAnchor.constraint(equalTo: tabImage.trailingAnchor, constant: bgHeight/4.0)
-        csFoldedBgTrailing = tabImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -bgHeight/2.0)
-        csUnfoldedBgTrailing = tabLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -bgHeight/2.0)
+        csUnfoldedLblLeading = tabLabel.leadingAnchor.constraint(equalTo: tabImage.trailingAnchor, constant: 5)
+        csFoldedBgTrailing = tabImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -bgHeight/2.5)
+        csUnfoldedBgTrailing = tabLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -bgHeight/2.5)
         fold()
         setNeedsLayout()
     }

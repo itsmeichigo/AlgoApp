@@ -49,7 +49,7 @@ open class BubbleTabBarController: UITabBarController {
         super.viewDidAppear(animated)
     }
 
-    private var _barHeight: CGFloat = 60
+    private var _barHeight: CGFloat = 74
     open var barHeight: CGFloat {
         get {
             if #available(iOS 11.0, *) {
