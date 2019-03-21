@@ -41,7 +41,7 @@ final class FilterViewModel {
     }
     
     func updateCompany(_ company: String) {
-        if let index = selectedCategories.firstIndex(of: company) {
+        if let index = selectedCompanies.firstIndex(of: company) {
             selectedCompanies.remove(at: index)
         } else {
             selectedCompanies.append(company)

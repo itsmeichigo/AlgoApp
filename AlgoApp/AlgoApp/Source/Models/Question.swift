@@ -36,7 +36,7 @@ final class Question: Object {
     
     var remark: String {
         if topLiked && topInterview {
-            return "👍 Top Liked & Interviewed 👨‍💻"
+            return "Top 👍 & 👨‍💻"
         }
         return topLiked ? Remarks.topLiked.displayText : topInterview ? Remarks.topInterviewed.displayText : ""
     }
