@@ -74,7 +74,9 @@ class DetailViewController: UIViewController {
     
     private func configureNotePanel() {
         notePanel.delegate = self
-        notePanel.surfaceView.cornerRadius = 8.0
+        notePanel.isRemovalInteractionEnabled = true
+        
+        notePanel.surfaceView.cornerRadius = 16.0
         notePanel.surfaceView.shadowHidden = false
         notePanel.surfaceView.grabberHandle.isHidden = true
         
@@ -84,13 +86,9 @@ class DetailViewController: UIViewController {
         let navigationController = setupCodeController(title: "", content: text, language: language, readOnly: false, delegate: self)
         
         notePanel.set(contentViewController: navigationController)
-        notePanel.addPanel(toParent: self)
-        notePanel.hide()
     }
     
-    private func configureNavigationBar() {
-        title = "Detail"
-        
+    private func configureNavigationBar() {        
         let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
         noteBarButton.tintColor = .secondaryColor()
         navigationItem.rightBarButtonItems = [noteBarButton]
@@ -266,6 +264,9 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func showNotes() {
+        if notePanel.parent == nil {
+            notePanel.addPanel(toParent: self)
+        }
         notePanel.move(to: .full, animated: true)
     }
 }
@@ -280,7 +281,7 @@ extension DetailViewController: FloatingPanelControllerDelegate {
 
 extension DetailViewController: CodeViewControllerDelegate {
     func codeControllerWillDismiss() {
-        notePanel.hide(animated: true, completion: nil)
+        notePanel.removePanelFromParent(animated: true)
     }
     
     func codeControlerShouldSave(content: String, language: Language) {

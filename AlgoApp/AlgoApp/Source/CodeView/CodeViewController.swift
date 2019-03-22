@@ -99,6 +99,10 @@ private extension CodeViewController {
             languageButton.tintColor = .appOrangeColor()
             languageButton.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
             navigationItem.titleView = languageButton
+        } else if viewModel.language.value.githubRepoUrl != nil {
+            let linkButton = UIBarButtonItem(image: UIImage(named: "link"), style: .plain, target: self, action: #selector(openRepo))
+            linkButton.tintColor = .appBlueColor()
+            navigationItem.rightBarButtonItem = linkButton
         }
     }
     
@@ -208,6 +212,14 @@ private extension CodeViewController {
         codeTextView.snp.updateConstraints { maker in
             maker.bottom.equalToSuperview().offset(0)
         }
+    }
+    
+    @objc func openRepo() {
+        guard let url = viewModel.language.value.githubRepoUrl else { return }
+        
+        let viewController = WebViewController()
+        viewController.url = url
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
