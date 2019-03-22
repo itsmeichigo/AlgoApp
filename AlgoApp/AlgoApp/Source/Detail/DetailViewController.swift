@@ -99,6 +99,8 @@ class DetailViewController: UIViewController {
         backButton.tintColor = .subtitleTextColor()
         navigationItem.leftBarButtonItem = backButton
         
+        navigationController?.interactivePopGestureRecognizer?.delegate = self;
+
     }
     
     @objc private func popView() {
@@ -112,8 +114,8 @@ class DetailViewController: UIViewController {
         tagsView.isUserInteractionEnabled = false
         
         markAsSolvedButton.layer.cornerRadius = 8
-        markAsSolvedButton.setTitle("🤓 Mark as Solved", for: .normal)
-        markAsSolvedButton.setTitle("😕 Mark as Unsolved", for: .selected)
+        markAsSolvedButton.setTitle("🤯 Mark as Solved", for: .normal)
+        markAsSolvedButton.setTitle("🤭 Mark as Unsolved", for: .selected)
         markAsSolvedButton.setTitleColor(.white, for: .normal)
         markAsSolvedButton.setTitleColor(.white, for: .selected)
         
@@ -302,5 +304,11 @@ extension DetailViewController: TagsDelegate {
                 break
             }
         }
+    }
+}
+
+extension DetailViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

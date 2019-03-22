@@ -77,7 +77,7 @@ class SettingsController: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         tabBarController?.tabBar.tintColor = .secondaryColor()
-        tabBarController?.tabBar.barTintColor = .backgroundColor()
+        tabBarController?.tabBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         hidesSolvedSwitch.onTintColor = .secondaryColor()
         darkModeSwitch.onTintColor = .secondaryColor()

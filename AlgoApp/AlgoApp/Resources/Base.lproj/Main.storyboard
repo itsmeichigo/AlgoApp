@@ -19,19 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gC0-Aj-uiT">
-                                <rect key="frame" x="16" y="214.5" width="343" height="238.5"/>
+                                <rect key="frame" x="16" y="215" width="343" height="237.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-result" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-z9-vfe">
-                                        <rect key="frame" x="82.5" y="0.0" width="178" height="178"/>
+                                        <rect key="frame" x="83" y="0.0" width="177" height="177"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No problems found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OA-hk-Xk4">
-                                        <rect key="frame" x="96.5" y="189" width="150" height="20.5"/>
+                                        <rect key="frame" x="96.5" y="188" width="150" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't find any problem matching your filters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rd-hY-xpT">
-                                        <rect key="frame" x="22" y="220.5" width="299.5" height="18"/>
+                                        <rect key="frame" x="22" y="219.5" width="299.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -397,16 +397,12 @@
             </objects>
             <point key="canvasLocation" x="2692" y="-564"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="YIG-9A-wYS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKf-0D-Yfr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="FXt-Cs-t0u" customClass="CBTabBarItem" customModule="AlgoApp" customModuleProvider="target">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.92941176470588238" green="0.41960784313725491" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                    <tabBarItem key="tabBarItem" title="" image="home" selectedImage="home" id="FXt-Cs-t0u">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kKe-LY-eId">
@@ -946,10 +942,10 @@
             </objects>
             <point key="canvasLocation" x="3604" y="-1425.3373313343329"/>
         </scene>
-        <!--Bubble Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="HFr-yd-pq7">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="yte-ZO-utj" customClass="BubbleTabBarController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="yte-ZO-utj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SZQ-4b-25n">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -959,7 +955,6 @@
                     <connections>
                         <segue destination="lKf-0D-Yfr" kind="relationship" relationship="viewControllers" id="oJt-kE-y2V"/>
                         <segue destination="cPN-0Q-sgk" kind="relationship" relationship="viewControllers" id="JWe-W0-MKP"/>
-                        <segue destination="CYJ-Sr-aCP" kind="relationship" relationship="viewControllers" id="dK9-1f-csr"/>
                         <segue destination="kDj-H9-MUx" kind="relationship" relationship="viewControllers" id="odN-eW-YNI"/>
                     </connections>
                 </tabBarController>
@@ -967,16 +962,12 @@
             </objects>
             <point key="canvasLocation" x="69.599999999999994" y="-564.46776611694156"/>
         </scene>
-        <!--Reminders-->
+        <!--Navigation Controller-->
         <scene sceneID="UYv-66-0Hu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cPN-0Q-sgk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reminders" image="reminder" selectedImage="reminder" id="xsB-7A-mwF" customClass="CBTabBarItem" customModule="AlgoApp" customModuleProvider="target">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="1" green="0.58039215686274503" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                    <tabBarItem key="tabBarItem" title="" image="reminder" selectedImage="reminder" id="xsB-7A-mwF">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sOu-vq-J4W">
@@ -992,16 +983,12 @@
             </objects>
             <point key="canvasLocation" x="1009" y="-1424"/>
         </scene>
-        <!--Settings-->
+        <!--Navigation Controller-->
         <scene sceneID="HdU-r2-FHX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kDj-H9-MUx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="4lL-HY-V4z" customClass="CBTabBarItem" customModule="AlgoApp" customModuleProvider="target">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.52941176470588236" green="0.45490196078431372" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                    <tabBarItem key="tabBarItem" title="" image="settings" selectedImage="settings" id="4lL-HY-V4z">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tdJ-2S-lGs">
@@ -1365,78 +1352,6 @@
             </objects>
             <point key="canvasLocation" x="1871.25" y="340.14084507042253"/>
         </scene>
-        <!--Collections-->
-        <scene sceneID="N7J-Pa-ep0">
-            <objects>
-                <navigationController id="CYJ-Sr-aCP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collections" image="collection" id="2w3-7t-b8p" customClass="CBTabBarItem" customModule="AlgoApp" customModuleProvider="target">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.40000000000000002" green="0.74117647058823533" blue="0.56470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FOj-WG-z3e">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="62v-vR-EfW" kind="relationship" relationship="rootViewController" id="8R8-FK-YAw"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XVk-pa-qzr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1009" y="1237"/>
-        </scene>
-        <!--Collections-->
-        <scene sceneID="LyM-ie-ZYa">
-            <objects>
-                <viewController id="62v-vR-EfW" customClass="CollectionsViewController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zj6-RW-0os">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="1q0-uB-MdP">
-                                <rect key="frame" x="16" y="204" width="343" height="259.5"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="save" translatesAutoresizingMaskIntoConstraints="NO" id="Z7h-ZP-hnY">
-                                        <rect key="frame" x="81" y="0.0" width="181" height="181"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No collections yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shC-JU-lCn">
-                                        <rect key="frame" x="101.5" y="192" width="140.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save your favorite problems for later reviews" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRO-HK-U7m">
-                                        <rect key="frame" x="76" y="223.5" width="191" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="4uI-O2-m1V" firstAttribute="trailing" secondItem="1q0-uB-MdP" secondAttribute="trailing" constant="16" id="BFR-wG-bkG"/>
-                            <constraint firstItem="1q0-uB-MdP" firstAttribute="centerX" secondItem="zj6-RW-0os" secondAttribute="centerX" id="kh5-w3-OfI"/>
-                            <constraint firstItem="1q0-uB-MdP" firstAttribute="centerY" secondItem="zj6-RW-0os" secondAttribute="centerY" id="nnm-dc-Qvb"/>
-                            <constraint firstItem="1q0-uB-MdP" firstAttribute="leading" secondItem="4uI-O2-m1V" secondAttribute="leading" constant="16" id="v0C-7x-zpW"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="4uI-O2-m1V"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Collections" id="K52-Ez-YAQ"/>
-                    <connections>
-                        <outlet property="emptyMessageLabel" destination="tRO-HK-U7m" id="KVB-vq-9df"/>
-                        <outlet property="emptyStackView" destination="1q0-uB-MdP" id="3dM-26-kda"/>
-                        <outlet property="emptyTitleLabel" destination="shC-JU-lCn" id="Cii-up-Szw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PFB-lM-mx3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1889" y="1236"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="02s-94-5U0">
             <objects>
@@ -1477,17 +1392,15 @@
     </scenes>
     <resources>
         <image name="cancel-button" width="14" height="14"/>
-        <image name="collection" width="19" height="18"/>
         <image name="disclosure" width="9" height="15"/>
         <image name="filter" width="17" height="19"/>
         <image name="garbage" width="20" height="20"/>
-        <image name="home" width="21" height="19"/>
+        <image name="home" width="24" height="22"/>
         <image name="notification" width="181" height="188"/>
         <image name="plus" width="17" height="17"/>
-        <image name="reminder" width="18" height="18"/>
-        <image name="save" width="181" height="181"/>
-        <image name="search-result" width="178" height="178"/>
-        <image name="settings" width="19" height="19"/>
+        <image name="reminder" width="22" height="21"/>
+        <image name="search-result" width="177" height="177"/>
+        <image name="settings" width="24" height="23"/>
         <image name="shuffle" width="19" height="19"/>
     </resources>
 </document>
