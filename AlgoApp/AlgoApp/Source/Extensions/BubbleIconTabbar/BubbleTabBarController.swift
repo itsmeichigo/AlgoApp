@@ -49,41 +49,6 @@ open class BubbleTabBarController: UITabBarController {
         super.viewDidAppear(animated)
     }
 
-    private var _barHeight: CGFloat = 74
-    open var barHeight: CGFloat {
-        get {
-            if #available(iOS 11.0, *) {
-                return _barHeight + view.safeAreaInsets.bottom
-            } else {
-                return _barHeight
-            }
-        }
-        set {
-            _barHeight = newValue
-            updateTabBarFrame()
-        }
-    }
-
-    private func updateTabBarFrame() {
-        var tabFrame = self.tabBar.frame
-        tabFrame.size.height = barHeight
-        tabFrame.origin.y = self.view.frame.size.height - barHeight
-        self.tabBar.frame = tabFrame
-        tabBar.setNeedsLayout()
-    }
-
-    open override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        updateTabBarFrame()
-    }
-
-    open override func viewSafeAreaInsetsDidChange() {
-        if #available(iOS 11.0, *) {
-            super.viewSafeAreaInsetsDidChange()
-        }
-        updateTabBarFrame()
-    }
-
     open override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let idx = tabBar.items?.index(of: item) else {
             return

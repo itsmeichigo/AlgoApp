@@ -13,6 +13,17 @@ open class BubbleTabBar: UITabBar {
     private var buttons: [CBTabBarButton] = []
     public var animationDuration: Double = 0.3
     
+    private var _barHeight: CGFloat = 74
+    private var barHeight: CGFloat {
+        get {
+            if #available(iOS 11.0, *), let view = superview {
+                return _barHeight + view.safeAreaInsets.bottom
+            } else {
+                return _barHeight
+            }
+        }
+    }
+    
     open override var selectedItem: UITabBarItem? {
         willSet {
             guard let newValue = newValue else {
@@ -45,6 +56,12 @@ open class BubbleTabBar: UITabBar {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
+    }
+    
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var size = super.sizeThatFits(size)
+        size.height = barHeight
+        return size
     }
     
     var container: UIView = {

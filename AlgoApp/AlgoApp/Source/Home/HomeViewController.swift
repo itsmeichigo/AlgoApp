@@ -125,8 +125,8 @@ final class HomeViewController: UIViewController {
     private func configureView() {
         
         updateColors()
-        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 36, right: 0)
-        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 36, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.rx.modelSelected(QuestionCellModel.self)
             .asDriver()

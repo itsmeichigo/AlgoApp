@@ -34,6 +34,11 @@ class CollectionsViewController: UIViewController {
     }
     
     private func updateColors() {
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = .backgroundColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
+        
         view.backgroundColor = .backgroundColor()
         emptyTitleLabel.textColor = .subtitleTextColor()
         emptyMessageLabel.textColor = .subtitleTextColor()
