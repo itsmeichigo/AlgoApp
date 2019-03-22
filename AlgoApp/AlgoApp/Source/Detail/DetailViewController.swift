@@ -99,8 +99,6 @@ class DetailViewController: UIViewController {
         backButton.tintColor = .subtitleTextColor()
         navigationItem.leftBarButtonItem = backButton
         
-        navigationController?.interactivePopGestureRecognizer?.delegate = self;
-
     }
     
     @objc private func popView() {
@@ -304,11 +302,5 @@ extension DetailViewController: TagsDelegate {
                 break
             }
         }
-    }
-}
-
-extension DetailViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }
