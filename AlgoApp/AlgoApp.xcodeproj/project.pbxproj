@@ -38,6 +38,7 @@
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
 		DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11722226B920091FF96 /* CodeViewModel.swift */; };
 		DE13A11A2222DEFB0091FF96 /* QuestionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */; };
+		DE1492D82245F42900B7E56C /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1492D72245F42900B7E56C /* StoreHelper.swift */; };
 		DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA6221D399E0040B4E9 /* FilterViewController.swift */; };
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
@@ -105,6 +106,7 @@
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		DE13A11722226B920091FF96 /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
 		DE13A1192222DEFB0091FF96 /* QuestionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDetailModel.swift; sourceTree = "<group>"; };
+		DE1492D72245F42900B7E56C /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
 		DE157EA6221D399E0040B4E9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				DE0E515122070C2800BFBB0B /* AppDelegate.swift */,
 				DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */,
 				DE195DC32219CAB700BDDFB4 /* Theme.swift */,
+				DE1492D72245F42900B7E56C /* StoreHelper.swift */,
 				DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */,
 				DE0E517D2208408E00BFBB0B /* Models */,
 				DE0E517122082E0800BFBB0B /* Home */,
@@ -657,6 +660,7 @@
 				DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */,
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,
 				DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */,
+				DE1492D82245F42900B7E56C /* StoreHelper.swift in Sources */,
 				DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */,
 				DE112E9722337451003A5796 /* ReminderDetailViewController.swift in Sources */,
 				DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */,

@@ -17,6 +17,10 @@ final class AppConfigs {
         return hidesSolvedProblemsRelay.asDriver()
     }
     
+    var isPremiumDriver: Driver<Bool> {
+        return isPremiumRelay.asDriver()
+    }
+    
     var hidesSolvedProblems: Bool {
         get {
             let hiding = UserDefaults.standard.bool(forKey: hidesSolvedProblemsKey)
@@ -30,7 +34,23 @@ final class AppConfigs {
         }
     }
     
+    var isPremium: Bool {
+        get {
+            let premium = UserDefaults.standard.bool(forKey: isPremiumKey)
+            isPremiumRelay.accept(premium)
+            return premium
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: isPremiumKey)
+            isPremiumRelay.accept(newValue)
+        }
+    }
+    
     private let hidesSolvedProblemsKey = "HidesSolvedProblems"
-    private let hidesSolvedProblemsRelay = BehaviorRelay<Bool>(value: true)
+    private let hidesSolvedProblemsRelay = BehaviorRelay<Bool>(value: false)
+    
+    private let isPremiumKey = "IsPremium"
+    private let isPremiumRelay = BehaviorRelay<Bool>(value: false)
     
 }

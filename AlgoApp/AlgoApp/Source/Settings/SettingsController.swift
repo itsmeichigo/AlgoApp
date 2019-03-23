@@ -35,6 +35,11 @@ class SettingsController: UITableViewController {
             .disposed(by: disposeBag)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.tintColor = .appPurpleColor()
+        super.viewWillAppear(animated)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
@@ -76,7 +81,6 @@ class SettingsController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .backgroundColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
-        tabBarController?.tabBar.tintColor = .secondaryColor()
         tabBarController?.tabBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         hidesSolvedSwitch.onTintColor = .secondaryColor()

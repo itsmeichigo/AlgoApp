@@ -44,6 +44,11 @@ class RemindersViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.tintColor = .secondaryColor()
+        super.viewWillAppear(animated)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
