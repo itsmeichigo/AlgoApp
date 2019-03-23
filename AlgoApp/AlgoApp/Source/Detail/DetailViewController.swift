@@ -43,6 +43,7 @@ class DetailViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appPurpleColor()]
     private let notePanel = FloatingPanelController()
+    private let feedbackGenerator = UISelectionFeedbackGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +118,7 @@ class DetailViewController: UIViewController {
         markAsSolvedButton.setTitleColor(.white, for: .normal)
         markAsSolvedButton.setTitleColor(.white, for: .selected)
         
+        feedbackGenerator.prepare()
         updateColors()
     }
     
@@ -212,7 +214,10 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         markAsSolvedButton.rx.tap
-            .subscribe(onNext: { [weak self] in self?.viewModel.toggleSolved() })
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.toggleSolved()
+                self?.feedbackGenerator.selectionChanged()
+            })
             .disposed(by: disposeBag)
         
         officialSolutionButton.rx.tap
