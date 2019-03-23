@@ -13,7 +13,9 @@ import RxSwift
 
 final class CodeViewModel {
     
-    var attributedContent: NSAttributedString?
+    var attributedContent: NSAttributedString? {
+        return highlighter?.highlight(content, as: language.value.rawLanguageName, fastRender: true)
+    }
     
     var languageList: [Language] {
         return Language.allCases
