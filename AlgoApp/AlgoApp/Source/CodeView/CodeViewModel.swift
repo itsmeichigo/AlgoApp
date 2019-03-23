@@ -13,9 +13,7 @@ import RxSwift
 
 final class CodeViewModel {
     
-    var attributedContent: NSAttributedString? {
-        return highlighter?.highlight(content, as: language.value.rawLanguageName, fastRender: true)
-    }
+    var attributedContent: NSAttributedString?
     
     var languageList: [Language] {
         return Language.allCases
@@ -27,6 +25,7 @@ final class CodeViewModel {
     let readOnly: Bool
     
     var content: String
+    
     private let highlighter: Highlightr?
     private let disposeBag = DisposeBag()
     
