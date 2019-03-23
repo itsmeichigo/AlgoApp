@@ -28,6 +28,8 @@ class RemindersViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = RemindersViewModel()
     
+    private var premiumViewController: PremiumAlertViewController?
+    
     private lazy var datasource: Datasource = buildDatasource()
     
     override func viewDidLoad() {
@@ -67,7 +69,23 @@ class RemindersViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    private func configureView() {                
+    private func configureView() {
+        if let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController,
+            let premiumView = controller.view {
+            
+            view.addSubview(premiumView)
+            premiumView.snp.makeConstraints { maker in
+                maker.bottom.leading.trailing.equalToSuperview()
+                maker.top.equalToSuperview().offset(-20)
+            }
+            
+            premiumViewController = controller
+            
+            AppConfigs.shared.isPremiumDriver
+                .drive(premiumView.rx.isHidden)
+                .disposed(by: disposeBag)
+        }
+        
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.scrollIndicatorInsets = UIEdgeInsets(top: 8, left: 0, bottom: 36, right: 0)
@@ -132,6 +150,8 @@ class RemindersViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         view.backgroundColor = .backgroundColor()
+        premiumViewController?.updateColors()
+        
         emptyTitleLabel.textColor = .subtitleTextColor()
         emptyMessageLabel.textColor = .subtitleTextColor()
         addButton.tintColor = .secondaryColor()

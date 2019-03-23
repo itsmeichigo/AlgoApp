@@ -21,5 +21,9 @@ class PannableNavigationController: UINavigationController, PanModalPresentable 
         let height = UIScreen.main.bounds.size.height * 2 / 3
         return .contentHeight(height)
     }
+    
+    var showDragIndicator: Bool {
+        return false
+    }
 }
 

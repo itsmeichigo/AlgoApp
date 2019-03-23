@@ -53,6 +53,7 @@
 		DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */; };
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 		DE24271422460E95000A10ED /* PannableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271322460E95000A10ED /* PannableNavigationController.swift */; };
+		DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */; };
 		DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */; };
 		DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */; };
 /* End PBXBuildFile section */
@@ -121,6 +122,7 @@
 		DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		DE24271322460E95000A10ED /* PannableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableNavigationController.swift; sourceTree = "<group>"; };
+		DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumAlertViewController.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
 		DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxApplicationDelegateProxy.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				DE1AC96E22317B710044D83D /* Reminders */,
 				DE112E9E22351637003A5796 /* ReminderDetail */,
 				DE1BA9AB222BA736009C30B0 /* Settings */,
+				DE24271522466CD4000A10ED /* Premium */,
 				DE0E51882208524600BFBB0B /* Extensions */,
 			);
 			path = Source;
@@ -351,6 +354,14 @@
 				DE1BA9AC222BA918009C30B0 /* SettingsController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		DE24271522466CD4000A10ED /* Premium */ = {
+			isa = PBXGroup;
+			children = (
+				DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */,
+			);
+			path = Premium;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -656,6 +667,7 @@
 			files = (
 				DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */,
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
+				DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */,
 				DE112E992233E200003A5796 /* AppUtility.swift in Sources */,
 				DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */,
 				DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */,

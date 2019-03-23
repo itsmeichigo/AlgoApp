@@ -7,6 +7,7 @@
 //
 
 import Hero
+import PanModal
 import RxOptional
 import RxSwift
 import RxCocoa
@@ -17,26 +18,27 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var titleView: UIView!
-    @IBOutlet weak var remarkLabel: UILabel!
-    @IBOutlet weak var difficultyLabel: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleView: UIView!
+    @IBOutlet private weak var remarkLabel: UILabel!
+    @IBOutlet private weak var difficultyLabel: UILabel!
     
-    @IBOutlet weak var descriptionTitleLabel: UILabel!
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet private weak var descriptionTitleLabel: UILabel!
+    @IBOutlet private weak var descriptionTextView: UITextView!
     
-    @IBOutlet weak var tagTitleLabel: UILabel!
-    @IBOutlet weak var tagsView: TagsView!
+    @IBOutlet private weak var tagTitleLabel: UILabel!
+    @IBOutlet private weak var tagsView: TagsView!
     
-    @IBOutlet weak var solutionsTitleLabel: UILabel!
-    @IBOutlet weak var officialSolutionButton: UIButton!
-    @IBOutlet weak var otherSolutionsTagView: TagsView!
-    @IBOutlet weak var otherSolutionsLabel: UILabel!
-    @IBOutlet weak var otherSolutionsView: UIView!
+    @IBOutlet private weak var solutionsTitleLabel: UILabel!
+    @IBOutlet private weak var officialSolutionButton: UIButton!
+    @IBOutlet private weak var otherSolutionsTagView: TagsView!
+    @IBOutlet private weak var otherSolutionsLabel: UILabel!
+    @IBOutlet private weak var otherSolutionsView: UIView!
     
-    @IBOutlet weak var markAsSolvedButton: UIButton!
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var markAsSolvedButton: UIButton!
+    @IBOutlet private weak var loadingView: UIView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     
     var viewModel: DetailViewModel!
     
@@ -117,6 +119,13 @@ class DetailViewController: UIViewController {
         markAsSolvedButton.setTitle("🤭 Mark as Unsolved", for: .selected)
         markAsSolvedButton.setTitleColor(.white, for: .normal)
         markAsSolvedButton.setTitleColor(.white, for: .selected)
+        
+        scrollView.rx.contentOffset.asDriver()
+            .drive(onNext: { [weak self] offset in
+                guard let self = self else { return }
+                self.title = offset.y > self.titleLabel.frame.maxY ? self.viewModel.detail.value?.title : ""
+            })
+            .disposed(by: disposeBag)
         
         feedbackGenerator.prepare()
         updateColors()
@@ -269,6 +278,16 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func showNotes() {
+        
+        if !AppConfigs.shared.isPremium {
+            if presentedViewController == nil,
+                let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
+                controller.mode = .code
+                presentPanModal(controller)
+            }
+            return
+        }
+
         if notePanel.parent == nil {
             notePanel.addPanel(toParent: self)
         }

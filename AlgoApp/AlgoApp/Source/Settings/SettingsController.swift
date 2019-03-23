@@ -6,6 +6,7 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
+import PanModal
 import UIKit
 import RxCocoa
 import RxSwift
@@ -15,7 +16,9 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var hidesSolvedSwitch: UISwitch!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
+    @IBOutlet var arrowImageViews: [UIImageView]!
     @IBOutlet var titleLabels: [UILabel]!
+    @IBOutlet var buttons: [UIButton]!
     @IBOutlet var cardViews: [UIView]!
     @IBOutlet var separatorViews: [UIView]!
     
@@ -62,9 +65,18 @@ class SettingsController: UITableViewController {
             view.dropCardShadow()
         }
         
-        darkModeSwitch.rx.isOn
-            .map { $0 ? Theme.dark : Theme.light }
-            .subscribe(onNext: {
+        darkModeSwitch.rx.isOn.asDriver()
+            .skip(1)
+            .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }
+            .do(onNext: { [weak self] in
+                if !$0.1, self?.presentedViewController == nil,
+                    let controller = self?.storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
+                    controller.mode = .darkMode
+                    self?.presentPanModal(controller)
+                }
+            })
+            .map { !$0.1 ? Theme.light : $0.0 ? Theme.dark : Theme.light }
+            .drive(onNext: {
                 Themer.shared.currentTheme = $0
             })
             .disposed(by: disposeBag)
@@ -90,8 +102,16 @@ class SettingsController: UITableViewController {
             label.textColor = .titleTextColor()
         }
         
+        buttons.forEach { button in
+            button.tintColor = .titleTextColor()
+        }
+        
         cardViews.forEach { view in
             view.backgroundColor = .primaryColor()
+        }
+        
+        arrowImageViews.forEach { imageView in
+            imageView.tintColor = .subtitleTextColor()
         }
         
         separatorViews.forEach { view in
