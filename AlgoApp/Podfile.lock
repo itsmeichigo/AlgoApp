@@ -68,6 +68,7 @@ PODS:
   - Nimble-Snapshots/Core (7.0.0):
     - iOSSnapshotTestCase (~> 6.0)
     - Nimble (~> 8.0)
+  - PanModal (1.0.2)
   - Quick (2.0.0)
   - Realm (3.13.1):
     - Realm/Headers (= 3.13.1)
@@ -102,9 +103,6 @@ PODS:
     - RxSwift (>= 4.4.2, ~> 4.4)
   - SnapKit (4.0.1)
   - StringExtensionHTML (1.0.2)
-  - SwiftMessages (6.0.2):
-    - SwiftMessages/App (= 6.0.2)
-  - SwiftMessages/App (6.0.2)
   - SwiftyStoreKit (0.14.2)
   - Tags (0.2.4)
 
@@ -118,6 +116,7 @@ DEPENDENCIES:
   - Kanna (~> 4.0.0)
   - Nimble
   - Nimble-Snapshots
+  - PanModal
   - Quick
   - RealmSwift
   - Reusable
@@ -130,7 +129,6 @@ DEPENDENCIES:
   - RxTest
   - SnapKit (~> 4.0.0)
   - StringExtensionHTML
-  - SwiftMessages
   - SwiftyStoreKit
   - Tags
 
@@ -153,6 +151,7 @@ SPEC REPOS:
     - nanopb
     - Nimble
     - Nimble-Snapshots
+    - PanModal
     - Quick
     - Realm
     - RealmSwift
@@ -167,7 +166,6 @@ SPEC REPOS:
     - RxTest
     - SnapKit
     - StringExtensionHTML
-    - SwiftMessages
     - SwiftyStoreKit
     - Tags
 
@@ -189,6 +187,7 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Nimble-Snapshots: 2d6d712ceb2d1850d88f850fbd7c732618106022
+  PanModal: 01b52e31a2d28e00bad6fa98e14620d706183d13
   Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
   Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
   RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
@@ -203,10 +202,9 @@ SPEC CHECKSUMS:
   RxTest: 6433d5b6229f5de424fa534bc22b5e6c38b0b671
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   StringExtensionHTML: 856dcc0c705012ae2f9c29c7413b015b82133e52
-  SwiftMessages: 8b3cc68dba2f1c91aac1a74c90b10287aac35371
   SwiftyStoreKit: cc399645796b094022fb650c148a0aed25995873
   Tags: f513b25d753de97503f1bef5b4ff1fca4a0d5b29
 
-PODFILE CHECKSUM: 3d867901d904e7d0a19bec74e0dc0ce6b57ee1cc
+PODFILE CHECKSUM: 17590d8c379275c52471022c5168689f53658ed0
 
 COCOAPODS: 1.6.1

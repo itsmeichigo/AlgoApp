@@ -7,6 +7,7 @@
 //
 
 import Hero
+import PanModal
 import UIKit
 import RxCocoa
 import RxDataSources
@@ -23,8 +24,9 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var emptyMessageLabel: UILabel!
     
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var filterButton: UIBarButtonItem!
-    @IBOutlet private weak var shuffleButton: UIBarButtonItem!
+   
+    private lazy var filterButton = UIBarButtonItem(image: UIImage(named: "shuffle"), style: .plain, target: self, action: #selector(showRandomQuestion))
+    private lazy var shuffleButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(showFilter))
     
     fileprivate var searchBar: UISearchBar!
     
@@ -64,28 +66,6 @@ final class HomeViewController: UIViewController {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        if segue.identifier == "filterSegue",
-            let destination = segue.destination as? UINavigationController,
-            let filterController = destination.topViewController as? FilterViewController {
-            destination.view.layer.cornerRadius = 8.0
-            destination.view.layer.masksToBounds = true
-            
-            destination.preferredContentSize = CGSize(width: 0, height: UIScreen.main.bounds.size.height * 2 / 3)
-            
-            filterController.initialFilter = currentFilter.value
-            filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
-            
-        } else if segue.identifier == "showRandomQuestion",
-            let detailController = segue.destination as? DetailViewController {
-            detailController.viewModel = viewModel.randomDetailModel()
-            detailController.hidesBottomBarWhenPushed = true
-        }
-        
-    }
-    
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
@@ -117,10 +97,12 @@ final class HomeViewController: UIViewController {
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.placeholder = "Search by title"
+        searchBar.delegate = self
         navigationItem.titleView = searchBar
         
         filterButton.tintColor = .appBlueColor()
         shuffleButton.tintColor = .appOrangeColor()
+        navigationItem.rightBarButtonItems = [filterButton, shuffleButton]
         
         navigationController?.hero.isEnabled = true
         navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))
@@ -159,5 +141,38 @@ final class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
     
     }
+    
+    @objc private func showRandomQuestion() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        
+        controller.viewModel = viewModel.randomDetailModel()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc private func showFilter() {
+        guard let navigationController = storyboard?.instantiateViewController(withIdentifier: "filterNavigationController") as? PannableNavigationController,
+            let filterController = navigationController.topViewController as? FilterViewController else { return }
+        
+        filterController.initialFilter = currentFilter.value
+        filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
+        
+        presentPanModal(navigationController)
+    }
 }
 
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        navigationItem.rightBarButtonItems = []
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        navigationItem.rightBarButtonItems = [filterButton, shuffleButton]
+        searchBar.showsCancelButton = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+}

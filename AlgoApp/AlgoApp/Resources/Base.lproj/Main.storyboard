@@ -143,27 +143,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="L4A-Z3-epk">
-                        <rightBarButtonItems>
-                            <barButtonItem image="filter" style="plain" id="FpT-bH-Ee4">
-                                <connections>
-                                    <segue destination="bL1-x7-NZt" kind="custom" identifier="filterSegue" customClass="SwiftMessagesBottomSegue" customModule="AlgoApp" customModuleProvider="target" id="bGd-JS-1b7"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="shuffle" style="plain" id="5Bj-z7-KKn">
-                                <connections>
-                                    <segue destination="kTc-zy-1dV" kind="show" identifier="showRandomQuestion" id="Y7f-Uq-hPI"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="L4A-Z3-epk"/>
                     <connections>
                         <outlet property="emptyImageView" destination="5wb-z9-vfe" id="rbe-wH-JIx"/>
                         <outlet property="emptyMessageLabel" destination="2rd-hY-xpT" id="InG-x5-vhc"/>
                         <outlet property="emptyStackView" destination="gC0-Aj-uiT" id="O1A-vo-FyG"/>
                         <outlet property="emptyTitleLabel" destination="5OA-hk-Xk4" id="cho-0v-XeG"/>
-                        <outlet property="filterButton" destination="FpT-bH-Ee4" id="doo-g3-J4r"/>
-                        <outlet property="shuffleButton" destination="5Bj-z7-KKn" id="Wg4-c5-fWR"/>
                         <outlet property="tableView" destination="TUh-lj-CWp" id="eII-9v-PZr"/>
                     </connections>
                 </viewController>
@@ -179,8 +164,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dMx-XB-apI">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMx-XB-apI">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TPH-hD-M4R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
@@ -262,7 +247,7 @@
                                         <color key="textColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="z5h-lX-NTT">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="z5h-lX-NTT">
                                         <rect key="frame" x="16" y="563.5" width="343" height="218"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVJ-kx-Mes">
@@ -275,7 +260,7 @@
                                                     <color key="titleColor" red="0.87843896649999997" green="0.39891746709999998" blue="0.2565614497" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                             </button>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9r-Pf-zKI">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t9r-Pf-zKI">
                                                 <rect key="frame" x="0.0" y="40" width="343" height="128"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐙 GitHub Solutions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Nc-OW-aa4">
@@ -284,7 +269,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U9D-bA-VzZ" customClass="TagsView" customModule="Tags">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U9D-bA-VzZ" customClass="TagsView" customModule="Tags">
                                                         <rect key="frame" x="0.0" y="49" width="343" height="79"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
@@ -299,7 +284,7 @@
                                                     <constraint firstItem="1Nc-OW-aa4" firstAttribute="leading" secondItem="t9r-Pf-zKI" secondAttribute="leading" id="y07-j8-7ct"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KZN-II-cHz">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZN-II-cHz">
                                                 <rect key="frame" x="0.0" y="168" width="343" height="50"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1SU-oy-lgl">
@@ -323,7 +308,7 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Uy-ge-MCb">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Uy-ge-MCb">
                                         <rect key="frame" x="16" y="813.5" width="343" height="48"/>
                                         <color key="backgroundColor" red="0.87843137250000003" green="0.40000000000000002" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -1352,10 +1337,10 @@
             </objects>
             <point key="canvasLocation" x="1871.25" y="340.14084507042253"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Pannable Navigation Controller-->
         <scene sceneID="02s-94-5U0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bL1-x7-NZt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="filterNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bL1-x7-NZt" customClass="PannableNavigationController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <value key="contentSizeForViewInPopover" type="size" width="0.0" height="600"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0rc-5Z-bCT">
@@ -1393,7 +1378,6 @@
     <resources>
         <image name="cancel-button" width="14" height="14"/>
         <image name="disclosure" width="9" height="15"/>
-        <image name="filter" width="17" height="19"/>
         <image name="garbage" width="20" height="20"/>
         <image name="home" width="24" height="22"/>
         <image name="notification" width="181" height="188"/>
@@ -1401,6 +1385,5 @@
         <image name="reminder" width="22" height="21"/>
         <image name="search-result" width="177" height="177"/>
         <image name="settings" width="24" height="23"/>
-        <image name="shuffle" width="19" height="19"/>
     </resources>
 </document>
