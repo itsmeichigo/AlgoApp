@@ -81,6 +81,12 @@ class RemindersViewController: UIViewController {
             
             premiumViewController = controller
             
+            if let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") {
+                controller.dismissHandler = { [weak self] in
+                    self?.present(detailController, animated: true, completion: nil)
+                }
+            }
+            
             AppConfigs.shared.isPremiumDriver
                 .drive(premiumView.rx.isHidden)
                 .disposed(by: disposeBag)

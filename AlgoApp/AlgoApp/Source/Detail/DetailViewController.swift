@@ -283,6 +283,13 @@ class DetailViewController: UIViewController {
             if presentedViewController == nil,
                 let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
                 controller.mode = .code
+                
+                if let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") {
+                    controller.dismissHandler = { [weak self] in
+                        self?.present(detailController, animated: true, completion: nil)
+                    }
+                }
+                
                 presentPanModal(controller)
             }
             return

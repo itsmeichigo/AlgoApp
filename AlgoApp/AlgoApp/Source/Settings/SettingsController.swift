@@ -69,10 +69,8 @@ class SettingsController: UITableViewController {
             .skip(1)
             .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }
             .do(onNext: { [weak self] in
-                if !$0.1, self?.presentedViewController == nil,
-                    let controller = self?.storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
-                    controller.mode = .darkMode
-                    self?.presentPanModal(controller)
+                if !$0.1, self?.presentedViewController == nil {
+                    self?.showPremiumAlert()
                 }
             })
             .map { !$0.1 ? Theme.light : $0.0 ? Theme.dark : Theme.light }
@@ -123,4 +121,14 @@ class SettingsController: UITableViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
 
+    private func showPremiumAlert() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController,
+            let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        
+        controller.mode = .darkMode
+        controller.dismissHandler = { [weak self] in
+            self?.present(detailController, animated: true, completion: nil)
+        }
+        presentPanModal(controller)
+    }
 }

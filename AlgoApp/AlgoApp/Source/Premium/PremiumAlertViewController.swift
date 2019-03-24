@@ -23,6 +23,7 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
     @IBOutlet weak var logoImageView: UIImageView!
     
     var mode: PremiumFeature = .alarm
+    var dismissHandler: (() -> Void)?
     
     var panScrollable: UIScrollView? {
         return nil
@@ -52,7 +53,7 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
         case .code:
             logoImageView.image = UIImage(named: "code")
             messageLabel.text = "Unlock Premium to keep your \ncode snippets for each problem."
-            showButton.setTitle("Why not? 👩‍💻", for: .normal)
+            showButton.setTitle("Why not? 🤓", for: .normal)
         case .darkMode:
             logoImageView.image = UIImage(named: "moon")
             messageLabel.text = "Unlock Premium to enable Dark mode"
@@ -61,6 +62,7 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
         
         showButton.layer.cornerRadius = showButton.frame.height / 2
         showButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        showButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
         updateColors()
     }
@@ -82,5 +84,16 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
             showButton.backgroundColor = .appPurpleColor()
         }
         
+    }
+    
+    @objc func dismissView() {
+        if presentingViewController != nil {
+            dismiss(animated: true) { [weak self] in
+                self?.dismissHandler?()
+            }
+            return
+        }
+        
+        dismissHandler?()
     }
 }

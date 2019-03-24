@@ -54,6 +54,8 @@
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 		DE24271422460E95000A10ED /* PannableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271322460E95000A10ED /* PannableNavigationController.swift */; };
 		DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */; };
+		DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271822476129000A10ED /* PremiumDetailViewController.swift */; };
+		DE24271B2247B716000A10ED /* PremiumDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271A2247B716000A10ED /* PremiumDetailCell.swift */; };
 		DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */; };
 		DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */; };
 /* End PBXBuildFile section */
@@ -123,6 +125,8 @@
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		DE24271322460E95000A10ED /* PannableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableNavigationController.swift; sourceTree = "<group>"; };
 		DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumAlertViewController.swift; sourceTree = "<group>"; };
+		DE24271822476129000A10ED /* PremiumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumDetailViewController.swift; sourceTree = "<group>"; };
+		DE24271A2247B716000A10ED /* PremiumDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumDetailCell.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
 		DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxApplicationDelegateProxy.swift; sourceTree = "<group>"; };
 		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -360,6 +364,8 @@
 			isa = PBXGroup;
 			children = (
 				DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */,
+				DE24271822476129000A10ED /* PremiumDetailViewController.swift */,
+				DE24271A2247B716000A10ED /* PremiumDetailCell.swift */,
 			);
 			path = Premium;
 			sourceTree = "<group>";
@@ -691,6 +697,7 @@
 				DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */,
 				DE112E9B223510D5003A5796 /* Reminder.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
+				DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */,
 				DE139D7F22436EC200879F89 /* Language.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,
 				DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */,
@@ -702,6 +709,7 @@
 				DE0E518D22088A3F00BFBB0B /* DetailViewModel.swift in Sources */,
 				DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */,
 				DE1AC97022317BA30044D83D /* RemindersViewController.swift in Sources */,
+				DE24271B2247B716000A10ED /* PremiumDetailCell.swift in Sources */,
 				DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */,
 				DE0E517522082E5400BFBB0B /* HomeViewModel.swift in Sources */,
 				DE112E9D223511B5003A5796 /* QuestionFilter.swift in Sources */,
