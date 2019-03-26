@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import StoreKit
+import SVProgressHUD
 
 enum PremiumDetailType: CaseIterable {
     case `default`
@@ -77,6 +79,11 @@ class PremiumDetailViewController: UIViewController {
         configureViews()
         store.fetchProductsInfo()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SVProgressHUD.dismiss()
+        super.viewWillDisappear(animated)
+    }
 
     private func configureViews() {
         
@@ -121,8 +128,8 @@ class PremiumDetailViewController: UIViewController {
             .drive(collectionView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
         
-        Driver.combineLatest(store.weeklyProduct, store.monthlyProduct)
-            .map { $0.0 != nil && $0.1 != nil }
+        store.products
+            .map { !$0.isEmpty }
             .drive(onNext: { [weak self] in
                 self?.loadingProductsView.isHidden = $0
                 self?.weeklyProductView.isHidden = !$0
@@ -185,6 +192,39 @@ class PremiumDetailViewController: UIViewController {
             })
             .drive(continueButton.rx.isEnabled)
             .disposed(by: disposeBag)
+        
+        continueButton.rx.tap.asDriver()
+            .withLatestFrom(store.products)
+            .drive(onNext: { [weak self] products in
+                guard let self = self else { return }
+                if self.weeklyProductButton.isSelected == true,
+                    let product = products.first(where: { $0.productIdentifier == StoreHelper.weeklyProductId }) {
+                    self.store.purchase(product: product)
+                } else if self.monthlyProductButton.isSelected == true,
+                    let product = products.first(where: { $0.productIdentifier == StoreHelper.monthlyProductId }) {
+                    self.store.purchase(product: product)
+                }
+                
+                SVProgressHUD.show()
+            })
+            .disposed(by: disposeBag)
+        
+        store.purchaseSuccess
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                SVProgressHUD.dismiss()
+                AppConfigs.shared.isPremium = true
+                self?.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        store.purchaseError
+            .asDriver(onErrorDriveWith: .never())
+            .drive(onNext: { [weak self] in
+                SVProgressHUD.dismiss()
+                self?.showAlert(for: $0)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureDatasource() -> Datasource {
@@ -193,6 +233,40 @@ class PremiumDetailViewController: UIViewController {
             cell.configureCell(model: model)
             return cell
         })
+    }
+    
+    private func showAlert(for error: SKError) {
+        var message: String?
+        
+        switch error.code {
+        case .unknown:
+            message = "Unknown error. Please contact support."
+        case .clientInvalid:
+            message = "The payment was denied. Please contact support."
+        case .paymentCancelled:
+            print("Payment was cancelled")
+            break
+        case .paymentInvalid:
+            message = "The selected product was invalid. Please try again."
+        case .paymentNotAllowed:
+            message = "The device is not allowed to make the payment. Please contact support."
+        case .storeProductNotAvailable:
+            print("The product is not available in the current storefront. Please contact support.")
+        case .cloudServicePermissionDenied:
+            print("Access to cloud service information is not allowed. Please contact support.")
+        case .cloudServiceNetworkConnectionFailed:
+            print("Could not connect to the network. Please try again later.")
+        case .cloudServiceRevoked:
+            print("Permission to use this cloud service has been revoked.")
+        }
+
+        if let message = message {
+            let alertController = UIAlertController(title: "Purchase Failed", message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Try again", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+        }
     }
 }
 

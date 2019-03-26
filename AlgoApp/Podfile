@@ -29,6 +29,7 @@ def ui
   pod 'SnapKit', '~> 4.0.0'
   pod 'PanModal'
   pod 'Tags'
+  pod 'SVProgressHUD'
 end
 
 def testing

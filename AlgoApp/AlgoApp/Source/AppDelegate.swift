@@ -9,11 +9,15 @@
 import UIKit
 import Firebase
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    private let disposeBag = DisposeBag()
     
     /// set orientations you want to be allowed in this property by default
     var orientationLock = UIInterfaceOrientationMask.portrait
@@ -27,11 +31,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         configureRealm()
-        StoreHelper.checkPendingTransactions()
+        checkSubscription()
         
         NotificationHelper.shared.showPendingQuestion()
         
         return true
+    }
+    
+    private func checkSubscription() {
+        let store = StoreHelper()
+        store.checkPendingTransactions()
+        store.verifySubscription()
+        
+        store.verificationResult
+            .drive(onNext: {
+                AppConfigs.shared.isPremium = $0
+            })
+            .disposed(by: disposeBag)
     }
 
     private func configureRealm() {

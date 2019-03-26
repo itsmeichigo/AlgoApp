@@ -103,6 +103,7 @@ PODS:
     - RxSwift (>= 4.4.2, ~> 4.4)
   - SnapKit (4.0.1)
   - StringExtensionHTML (1.0.2)
+  - SVProgressHUD (2.2.5)
   - SwiftyStoreKit (0.14.2)
   - Tags (0.2.4)
 
@@ -129,6 +130,7 @@ DEPENDENCIES:
   - RxTest
   - SnapKit (~> 4.0.0)
   - StringExtensionHTML
+  - SVProgressHUD
   - SwiftyStoreKit
   - Tags
 
@@ -166,6 +168,7 @@ SPEC REPOS:
     - RxTest
     - SnapKit
     - StringExtensionHTML
+    - SVProgressHUD
     - SwiftyStoreKit
     - Tags
 
@@ -202,9 +205,10 @@ SPEC CHECKSUMS:
   RxTest: 6433d5b6229f5de424fa534bc22b5e6c38b0b671
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   StringExtensionHTML: 856dcc0c705012ae2f9c29c7413b015b82133e52
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyStoreKit: cc399645796b094022fb650c148a0aed25995873
   Tags: f513b25d753de97503f1bef5b4ff1fca4a0d5b29
 
-PODFILE CHECKSUM: 17590d8c379275c52471022c5168689f53658ed0
+PODFILE CHECKSUM: 2712f3002dc857b6048748edd5ceb095929a0e0e
 
 COCOAPODS: 1.6.1
