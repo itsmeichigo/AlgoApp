@@ -30,7 +30,7 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
     }
     
     var shortFormHeight: PanModalHeight {
-        let height = UIScreen.main.bounds.height / 2
+        let height: CGFloat = 320.0
         return .contentHeight(height)
     }
     

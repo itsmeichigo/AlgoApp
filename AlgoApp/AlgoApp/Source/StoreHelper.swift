@@ -7,12 +7,26 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
+import StoreKit
 import SwiftyStoreKit
 
 final class StoreHelper {
     
-    private static let weeklyPremiumProductId = "com.ichigo.AlgoApp.Weekly"
-    private static let monthlyPremiumProductId = "com.ichigo.AlgoApp.Monthly"
+    var weeklyProduct: Driver<SKProduct?> {
+        return weeklyProductRelay.asDriver()
+    }
+    
+    var monthlyProduct: Driver<SKProduct?> {
+        return monthlyProductRelay.asDriver()
+    }
+    
+    private let weeklyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
+    private let monthlyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
+    
+    private static let weeklyProductId = "com.ichigo.AlgoApp.Weekly"
+    private static let monthlyProductId = "com.ichigo.AlgoApp.Monthly"
     
     static func checkPendingTransactions() {
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
@@ -31,4 +45,13 @@ final class StoreHelper {
         }
     }
     
+    func fetchProductsInfo() {
+        SwiftyStoreKit.retrieveProductsInfo([StoreHelper.weeklyProductId]) { [weak self] results in
+            self?.weeklyProductRelay.accept(results.retrievedProducts.first)
+        }
+        
+        SwiftyStoreKit.retrieveProductsInfo([StoreHelper.monthlyProductId]) { [weak self] results in
+            self?.monthlyProductRelay.accept(results.retrievedProducts.first)
+        }
+    }
 }
