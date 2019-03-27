@@ -89,6 +89,13 @@ class RemindersViewController: UIViewController {
             AppConfigs.shared.isPremiumDriver
                 .drive(premiumView.rx.isHidden)
                 .disposed(by: disposeBag)
+            
+            AppConfigs.shared.isPremiumDriver
+                .filter { !$0 }
+                .drive(onNext: { [weak self] _ in
+                    self?.viewModel.disableAllReminders()
+                })
+                .disposed(by: disposeBag)
         }
         
         tableView.tableFooterView = UIView()

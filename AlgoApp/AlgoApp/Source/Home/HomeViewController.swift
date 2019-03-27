@@ -82,6 +82,8 @@ final class HomeViewController: UIViewController {
         emptyMessageLabel.textColor = .subtitleTextColor()
         
         view.backgroundColor = .backgroundColor()
+        
+        setNeedsStatusBarAppearanceUpdate()
     
     }
 

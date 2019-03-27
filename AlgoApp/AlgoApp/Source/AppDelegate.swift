@@ -39,15 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func checkSubscription() {
-        let store = StoreHelper()
-        store.checkPendingTransactions()
-        store.verifySubscription()
-        
-        store.verificationResult
-            .drive(onNext: {
-                AppConfigs.shared.isPremium = $0
-            })
-            .disposed(by: disposeBag)
+        StoreHelper.checkPendingTransactions()
+        StoreHelper.verifySubscription()
     }
 
     private func configureRealm() {

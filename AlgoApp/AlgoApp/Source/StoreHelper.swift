@@ -14,6 +14,9 @@ import SwiftyStoreKit
 
 final class StoreHelper {
     
+    static let weeklyProductId = "com.ichigo.AlgoApp.Weekly"
+    static let monthlyProductId = "com.ichigo.AlgoApp.Monthly"
+    
     var products: Driver<[SKProduct]> {
         return productsRelay.asDriver()
     }
@@ -26,11 +29,6 @@ final class StoreHelper {
         return monthlyProductRelay.asDriver()
     }
     
-    var verificationResult: Driver<Bool> {
-        return Driver.combineLatest(purchasedWeeklyProductRelay.asDriver(), purchasedMonthlyProductRelay.asDriver())
-            .map { $0.0 && $0.1 }
-    }
-    
     let purchaseSuccess = PublishRelay<Void>()
     let purchaseError = PublishRelay<SKError>()
     
@@ -38,19 +36,14 @@ final class StoreHelper {
     private let monthlyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
     private let productsRelay = BehaviorRelay<[SKProduct]>(value: [])
     
-    private let purchasedWeeklyProductRelay = BehaviorRelay<Bool>(value: false)
-    private let purchasedMonthlyProductRelay = BehaviorRelay<Bool>(value: false)
+    private static let sharedSecret = "416fafcd56174d3b9d4174ebab9b5512"
     
-    static let weeklyProductId = "com.ichigo.AlgoApp.Weekly"
-    static let monthlyProductId = "com.ichigo.AlgoApp.Monthly"
-    
-    func checkPendingTransactions() {
+    static func checkPendingTransactions() {
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:
                     if purchase.needsFinishTransaction {
-                        // Deliver content from server, then:
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                     AppConfigs.shared.isPremium = true
@@ -88,11 +81,15 @@ final class StoreHelper {
         }
     }
     
-    func verifySubscription() {
-        let appleValidator = AppleReceiptValidator(service: .sandbox)
-        SwiftyStoreKit.verifyReceipt(using: appleValidator) { [weak self] result in
+    static func verifySubscription() {
+        let appleValidator = AppleReceiptValidator(service: .sandbox, sharedSecret: sharedSecret)
+        SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
+            var purchased = false
+            
             switch result {
             case .success(let receipt):
+                
+                
                 // Verify the purchase of weekly subscription
                 let purchaseWeeklyResult = SwiftyStoreKit.verifySubscription(
                     ofType: .autoRenewable,
@@ -101,7 +98,7 @@ final class StoreHelper {
                 
                 switch purchaseWeeklyResult {
                 case .purchased:
-                    self?.purchasedWeeklyProductRelay.accept(true)
+                    purchased = true
                 default:
                     break
                 }
@@ -114,13 +111,18 @@ final class StoreHelper {
                 
                 switch purchaseMonthlyResult {
                 case .purchased:
-                    self?.purchasedMonthlyProductRelay.accept(true)
+                    purchased = true
                 default:
                     break
                 }
                 
             case .error(let error):
                 print("Receipt verification failed: \(error)")
+            }
+            
+            AppConfigs.shared.isPremium = purchased
+            if !purchased && Themer.shared.currentTheme == .dark {
+                Themer.shared.currentTheme = .light
             }
         }
     }

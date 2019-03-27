@@ -26,7 +26,6 @@ final class Themer {
     
     var currentTheme: Theme {
         get {
-            if !AppConfigs.shared.isPremium { return .light }
             let theme = UserDefaults.standard.integer(forKey: themeKey)
             return Theme(rawValue: theme) ?? .light
         }

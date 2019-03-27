@@ -33,4 +33,15 @@ final class RemindersViewModel {
             NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
         }
     }
+    
+    func disableAllReminders() {
+        let realm = try! Realm()
+        let reminders = realm.objects(Reminder.self)
+        try! realm.write {
+            for reminder in reminders {
+                reminder.enabled = false
+                NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
+            }
+        }
+    }
 }

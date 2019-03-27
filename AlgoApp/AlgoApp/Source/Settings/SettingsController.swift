@@ -27,6 +27,7 @@ class SettingsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateColors()
         configureView()
         configureNavigationBar()
         
@@ -52,7 +53,6 @@ class SettingsController: UITableViewController {
     }
     
     private func configureView() {
-        updateColors()
         
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -66,16 +66,20 @@ class SettingsController: UITableViewController {
         }
         
         darkModeSwitch.rx.isOn.asDriver()
-            .skip(1)
             .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }
-            .do(onNext: { [weak self] in
-                if !$0.1, self?.presentedViewController == nil {
-                    self?.showPremiumAlert()
-                }
-            })
             .map { !$0.1 ? Theme.light : $0.0 ? Theme.dark : Theme.light }
             .drive(onNext: {
                 Themer.shared.currentTheme = $0
+            })
+            .disposed(by: disposeBag)
+        
+        darkModeSwitch.rx.isOn.asDriver()
+            .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }
+            .skip(1)
+            .drive(onNext: { [weak self] in
+                if !$0.1, self?.presentedViewController == nil {
+                    self?.showPremiumAlert()
+                }
             })
             .disposed(by: disposeBag)
         
