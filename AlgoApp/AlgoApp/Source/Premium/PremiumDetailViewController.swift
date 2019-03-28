@@ -72,12 +72,14 @@ class PremiumDetailViewController: UIViewController {
     private lazy var datasource = configureDatasource()
     
     private let store = StoreHelper()
+    private let confettiView = ConfettiView(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureViews()
         store.fetchProductsInfo()
+        SVProgressHUD.configure()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,6 +121,13 @@ class PremiumDetailViewController: UIViewController {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let screenWidth = UIScreen.main.bounds.width
             layout.itemSize = CGSize(width: screenWidth, height: collectionView.frame.height)
+        }
+        
+        confettiView.type = .mixed
+        confettiView.isUserInteractionEnabled = false
+        UIApplication.shared.keyWindow?.addSubview(confettiView)
+        confettiView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
         }
         
         collectionView.delegate = self
@@ -214,7 +223,12 @@ class PremiumDetailViewController: UIViewController {
             .drive(onNext: { [weak self] in
                 SVProgressHUD.dismiss()
                 AppConfigs.shared.isPremium = true
-                self?.dismiss(animated: true, completion: nil)
+                self?.confettiView.startConfetti()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                    self?.confettiView.stopConfetti()
+                    self?.dismiss(animated: true, completion: nil)
+                })
+                
             })
             .disposed(by: disposeBag)
         

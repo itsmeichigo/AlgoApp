@@ -88,8 +88,6 @@ final class StoreHelper {
             
             switch result {
             case .success(let receipt):
-                
-                
                 // Verify the purchase of weekly subscription
                 let purchaseWeeklyResult = SwiftyStoreKit.verifySubscription(
                     ofType: .autoRenewable,

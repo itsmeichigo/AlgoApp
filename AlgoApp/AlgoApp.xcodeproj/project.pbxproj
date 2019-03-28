@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4BCEDB176601904A79793AB9 /* Pods_AlgoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */; };
 		8466EA9403B1C5EF1EAEFC28 /* Pods_AlgoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */; };
+		DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */; };
 		DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515122070C2800BFBB0B /* AppDelegate.swift */; };
 		DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515322070C2800BFBB0B /* HomeViewController.swift */; };
 		DE0E515722070C2800BFBB0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE0E515522070C2800BFBB0B /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		DE1492D82245F42900B7E56C /* StoreHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1492D72245F42900B7E56C /* StoreHelper.swift */; };
 		DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA6221D399E0040B4E9 /* FilterViewController.swift */; };
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
+		DE170A02224BDFAB00B0FB56 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
 		DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC32219CAB700BDDFB4 /* Theme.swift */; };
 		DE1A9A1D22427EAA007E79F6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */; };
@@ -76,6 +78,7 @@
 		040821A4F46688C4B6B3059C /* Pods-AlgoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6591BD170AE1C7DCDB3DEDB6 /* Pods-AlgoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.debug.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7B2540EDFF9B32ED935A3A23 /* Pods-AlgoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.release.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVProgressHUD+Extension.swift"; sourceTree = "<group>"; };
 		DE0E514E22070C2800BFBB0B /* AlgoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0E515122070C2800BFBB0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE0E515322070C2800BFBB0B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		DE1492D72245F42900B7E56C /* StoreHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreHelper.swift; sourceTree = "<group>"; };
 		DE157EA6221D399E0040B4E9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DE195DC32219CAB700BDDFB4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -290,6 +294,7 @@
 				DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */,
 				DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */,
 				DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */,
+				DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 		DE24271522466CD4000A10ED /* Premium */ = {
 			isa = PBXGroup;
 			children = (
+				DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */,
 				DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */,
 				DE24271822476129000A10ED /* PremiumDetailViewController.swift */,
 				DE24271A2247B716000A10ED /* PremiumDetailCell.swift */,
@@ -673,6 +679,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE170A02224BDFAB00B0FB56 /* ConfettiView.swift in Sources */,
 				DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */,
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
 				DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */,
@@ -699,6 +706,7 @@
 				DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */,
 				DE112E9B223510D5003A5796 /* Reminder.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
+				DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */,
 				DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */,
 				DE139D7F22436EC200879F89 /* Language.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,

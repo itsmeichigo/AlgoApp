@@ -31,15 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         configureRealm()
-        checkSubscription()
+        StoreHelper.checkPendingTransactions()
         
         NotificationHelper.shared.showPendingQuestion()
         
         return true
     }
     
-    private func checkSubscription() {
-        StoreHelper.checkPendingTransactions()
+    func applicationDidBecomeActive(_ application: UIApplication) {
         StoreHelper.verifySubscription()
     }
 
