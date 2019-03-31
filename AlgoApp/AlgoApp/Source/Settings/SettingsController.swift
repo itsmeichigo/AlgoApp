@@ -18,9 +18,24 @@ class SettingsController: UITableViewController {
     
     @IBOutlet var arrowImageViews: [UIImageView]!
     @IBOutlet var titleLabels: [UILabel]!
-    @IBOutlet var buttons: [UIButton]!
     @IBOutlet var cardViews: [UIView]!
     @IBOutlet var separatorViews: [UIView]!
+    
+    @IBOutlet weak var sortProblemsButton: UIButton!
+    @IBOutlet weak var goPremiumButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var reviewButton: UIButton!
+    @IBOutlet weak var contactButton: UIButton!
+    
+    private var buttons: [UIButton] {
+        return [
+            sortProblemsButton,
+            goPremiumButton,
+            aboutButton,
+            reviewButton,
+            contactButton
+        ]
+    }
     
     private let disposeBag = DisposeBag()
     
@@ -37,10 +52,18 @@ class SettingsController: UITableViewController {
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
+        
+        AppConfigs.shared.isPremiumDriver
+            .distinctUntilChanged()
+            .drive(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.tintColor = .appPurpleColor()
+        tableView.reloadData()
         super.viewWillAppear(animated)
     }
     
@@ -54,7 +77,6 @@ class SettingsController: UITableViewController {
     
     private func configureView() {
         
-        tableView.delegate = self
         tableView.tableFooterView = UIView()
         
         darkModeSwitch.isOn = Themer.shared.currentTheme == .dark
@@ -65,9 +87,11 @@ class SettingsController: UITableViewController {
             view.dropCardShadow()
         }
         
-        darkModeSwitch.rx.isOn.asDriver()
-            .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }
-            .map { !$0.1 ? Theme.light : $0.0 ? Theme.dark : Theme.light }
+        darkModeSwitch.rx.isOn
+            .take(1)
+            .asDriver(onErrorDriveWith: .never())
+            .withLatestFrom(AppConfigs.shared.isPremiumDriver)
+            .map { !$0 ? Theme.light : Theme.dark }
             .drive(onNext: {
                 Themer.shared.currentTheme = $0
             })
@@ -76,16 +100,50 @@ class SettingsController: UITableViewController {
         darkModeSwitch.rx.isOn.asDriver()
             .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }
             .skip(1)
-            .drive(onNext: { [weak self] in
+            .do(onNext: { [weak self] in
                 if !$0.1, self?.presentedViewController == nil {
                     self?.showPremiumAlert()
                 }
+            })
+            .map { !$0.1 ? Theme.light : $0.0 ? Theme.dark : Theme.light }
+            .drive(onNext: {
+                Themer.shared.currentTheme = $0
             })
             .disposed(by: disposeBag)
         
         hidesSolvedSwitch.rx.isOn
             .subscribe(onNext: {
                 AppConfigs.shared.hidesSolvedProblems = $0
+            })
+            .disposed(by: disposeBag)
+        
+        goPremiumButton.rx.tap.asDriver()
+            .drive(onNext: { [unowned self] in
+                self.showPremiumDetail()
+            })
+            .disposed(by: disposeBag)
+        
+        contactButton.rx.tap.asDriver()
+            .drive(onNext: {
+                let path = "https://twitter.com/itsmeichigo"
+                guard let url = URL(string: path),
+                    UIApplication.shared.canOpenURL(url) else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        reviewButton.rx.tap.asDriver()
+            .drive(onNext: {
+                let path = "itms-apps://itunes.apple.com/app/id1457038505"
+                guard let url = URL(string: path),
+                    UIApplication.shared.canOpenURL(url) else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        aboutButton.rx.tap.asDriver()
+            .drive(onNext: {
+                
             })
             .disposed(by: disposeBag)
     }
@@ -126,13 +184,31 @@ class SettingsController: UITableViewController {
     }
 
     private func showPremiumAlert() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController,
-            let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
         
         controller.mode = .darkMode
         controller.dismissHandler = { [weak self] in
-            self?.present(detailController, animated: true, completion: nil)
+            self?.showPremiumDetail()
         }
         presentPanModal(controller)
+    }
+    
+    private func showPremiumDetail() {
+        guard let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        present(detailController, animated: true, completion: nil)
+    }
+}
+
+extension SettingsController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch indexPath.row {
+        case 0: return 84
+        case 1: return 136
+        case 2: return AppConfigs.shared.isPremium ? 0 : 76
+        case 3: return 204
+        default:
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
     }
 }
