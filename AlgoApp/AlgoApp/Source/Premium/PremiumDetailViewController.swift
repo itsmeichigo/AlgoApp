@@ -37,7 +37,7 @@ enum PremiumDetailType: CaseIterable {
         case .code:
             return "Quickly save code snippets \nwith proper syntax highlight"
         case .darkMode:
-            return "Ease your eyes in the dark \nwith Dark Mode"
+            return "Switch app to Dark Mode \nas it's a cool and hip thing to do"
         }
     }
 }

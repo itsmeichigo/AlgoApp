@@ -61,7 +61,7 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
         }
         
         showButton.layer.cornerRadius = showButton.frame.height / 2
-        showButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        showButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         showButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         
         updateColors()

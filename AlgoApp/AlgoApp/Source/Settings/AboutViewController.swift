@@ -24,6 +24,10 @@ class AboutViewController: UIViewController {
         view.backgroundColor = .backgroundColor()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return Themer.shared.currentTheme == .light ? .default : .lightContent
+    }
+    
     private func configureNavigationBar() {
         
         title = "About 🐱💻"
