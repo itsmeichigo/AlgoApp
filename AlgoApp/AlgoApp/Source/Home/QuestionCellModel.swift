@@ -15,6 +15,7 @@ struct QuestionCellModel {
     let tags: [String]
     let remark: String
     let difficulty: String
+    let rawDifficultyLevel: Int
     
     init(with question: Question) {
         id = question.id
@@ -23,5 +24,6 @@ struct QuestionCellModel {
         tags = Array(question.tags).map { $0.name }
         remark = question.remark
         difficulty = question.difficultyLevel.displayText
+        rawDifficultyLevel = question.rawDifficultyLevel
     }
 }

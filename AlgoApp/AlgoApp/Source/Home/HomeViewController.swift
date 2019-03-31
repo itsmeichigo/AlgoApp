@@ -138,8 +138,20 @@ final class HomeViewController: UIViewController {
             .drive(tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
         
-        Driver.combineLatest(searchBar.rx.text.asDriver(), currentFilter.asDriver(), AppConfigs.shared.hidesSolvedProblemsDriver)
-            .drive(onNext: { [unowned self] in self.viewModel.loadQuestions(query: $0, filter: $1, onlyUnsolved: $2) })
+        // hack: trigger getters to update drivers
+        _ = AppConfigs.shared.hidesSolvedProblems
+        _ = AppConfigs.shared.sortOption
+        
+        Driver.combineLatest(searchBar.rx.text.asDriver(),
+                             currentFilter.asDriver(),
+                             AppConfigs.shared.hidesSolvedProblemsDriver,
+                             AppConfigs.shared.sortOptionDriver)
+            .drive(onNext: { [unowned self] in
+                self.viewModel.loadQuestions(query: $0,
+                                             filter: $1,
+                                             onlyUnsolved: $2,
+                                             sortOption: $3)
+            })
             .disposed(by: disposeBag)
     
     }

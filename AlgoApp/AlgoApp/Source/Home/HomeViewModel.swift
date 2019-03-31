@@ -19,13 +19,13 @@ final class HomeViewModel {
     private let disposeBag = DisposeBag()
     private lazy var realm = try! Realm()
     
-    func loadQuestions(query: String?, filter: QuestionFilter?, onlyUnsolved: Bool) {
+    func loadQuestions(query: String?, filter: QuestionFilter?, onlyUnsolved: Bool, sortOption: SortOption) {
         let results = Question.loadQuestions(with: realm, query: query, filter: filter, onlyUnsolved: onlyUnsolved)
         
         Observable.collection(from: results)
             .map { Array($0)
                 .map { QuestionCellModel(with: $0) }
-                .sorted(by: { $0.id < $1.id })
+                .sorted(by: sortOption.sortBlock)
             }
             .bind(to: questions)
             .disposed(by: disposeBag)

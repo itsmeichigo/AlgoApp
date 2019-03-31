@@ -21,6 +21,8 @@ class SettingsController: UITableViewController {
     @IBOutlet var cardViews: [UIView]!
     @IBOutlet var separatorViews: [UIView]!
     
+    @IBOutlet weak var sortOptionLabel: UILabel!
+    
     @IBOutlet weak var sortProblemsButton: UIButton!
     @IBOutlet weak var goPremiumButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
@@ -57,6 +59,11 @@ class SettingsController: UITableViewController {
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             })
+            .disposed(by: disposeBag)
+        
+        AppConfigs.shared.sortOptionDriver
+            .map { $0.displayText }
+            .drive(sortOptionLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
@@ -107,9 +114,7 @@ class SettingsController: UITableViewController {
             .disposed(by: disposeBag)
         
         goPremiumButton.rx.tap.asDriver()
-            .drive(onNext: { [unowned self] in
-                self.showPremiumDetail()
-            })
+            .drive(onNext: { [unowned self] in self.showPremiumDetail() })
             .disposed(by: disposeBag)
         
         contactButton.rx.tap.asDriver()
@@ -129,6 +134,10 @@ class SettingsController: UITableViewController {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             })
             .disposed(by: disposeBag)
+        
+        sortProblemsButton.rx.tap.asDriver()
+            .drive(onNext: { [unowned self] in self.showSortOptions() })
+            .disposed(by: disposeBag)
     }
     
     private func updateColors() {
@@ -140,6 +149,8 @@ class SettingsController: UITableViewController {
         
         hidesSolvedSwitch.onTintColor = .secondaryColor()
         darkModeSwitch.onTintColor = .secondaryColor()
+        
+        sortOptionLabel.textColor = .subtitleTextColor()
         
         titleLabels.forEach { label in
             label.textColor = .titleTextColor()
@@ -164,6 +175,11 @@ class SettingsController: UITableViewController {
         view.backgroundColor = .backgroundColor()
         
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    private func showSortOptions() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "SortOptionsViewController") as? SortOptionsViewController else { return }
+        presentPanModal(controller)
     }
 
     private func showPremiumAlert() {
