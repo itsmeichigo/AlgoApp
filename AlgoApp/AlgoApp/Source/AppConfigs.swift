@@ -24,7 +24,9 @@ final class AppConfigs {
     var hidesSolvedProblems: Bool {
         get {
             let hiding = UserDefaults.standard.bool(forKey: hidesSolvedProblemsKey)
-            hidesSolvedProblemsRelay.accept(hiding)
+            if hiding != hidesSolvedProblemsRelay.value {
+                hidesSolvedProblemsRelay.accept(hiding)
+            }
             return hiding
         }
         
@@ -37,7 +39,10 @@ final class AppConfigs {
     var isPremium: Bool {
         get {
             let premium = UserDefaults.standard.bool(forKey: isPremiumKey)
-            isPremiumRelay.accept(premium)
+            if premium != isPremiumRelay.value {
+                isPremiumRelay.accept(premium)
+            }
+            
             return premium
         }
         

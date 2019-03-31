@@ -253,8 +253,6 @@ class PremiumDetailViewController: UIViewController {
         var message: String?
         
         switch error.code {
-        case .unknown:
-            message = "Unknown error. Please contact support."
         case .clientInvalid:
             message = "The payment was denied. Please contact support."
         case .paymentCancelled:
@@ -272,6 +270,8 @@ class PremiumDetailViewController: UIViewController {
             print("Could not connect to the network. Please try again later.")
         case .cloudServiceRevoked:
             print("Permission to use this cloud service has been revoked.")
+        default:
+            message = "Unknown error. Please contact support."
         }
 
         if let message = message {

@@ -54,7 +54,6 @@ class SettingsController: UITableViewController {
             .disposed(by: disposeBag)
         
         AppConfigs.shared.isPremiumDriver
-            .distinctUntilChanged()
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
             })
@@ -86,16 +85,6 @@ class SettingsController: UITableViewController {
             view.layer.cornerRadius = 8.0
             view.dropCardShadow()
         }
-        
-        darkModeSwitch.rx.isOn
-            .take(1)
-            .asDriver(onErrorDriveWith: .never())
-            .withLatestFrom(AppConfigs.shared.isPremiumDriver)
-            .map { !$0 ? Theme.light : Theme.dark }
-            .drive(onNext: {
-                Themer.shared.currentTheme = $0
-            })
-            .disposed(by: disposeBag)
         
         darkModeSwitch.rx.isOn.asDriver()
             .withLatestFrom(AppConfigs.shared.isPremiumDriver) { ($0, $1) }

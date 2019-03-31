@@ -144,9 +144,9 @@ class DetailViewController: UIViewController {
         tagTitleLabel.textColor = .titleTextColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
-        officialSolutionButton.setTitleColor(.secondaryColor(), for: .normal)
+        officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)
         
-        otherSolutionsLabel.textColor = .titleTextColor()
+        otherSolutionsLabel.textColor = .subtitleTextColor()
         otherSolutionsTagView.tagLayerColor = .clear
         otherSolutionsTagView.tagBackgroundColor = UIColor.appPurpleColor().withAlphaComponent(0.1)
         otherSolutionsTagView.tagTitleColor = .appPurpleColor()

@@ -47,7 +47,7 @@ class RemindersViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.tabBar.tintColor = .secondaryColor()
+        tabBarController?.tabBar.tintColor = .appYellowColor()
         super.viewWillAppear(animated)
     }
     
@@ -109,6 +109,8 @@ class RemindersViewController: UIViewController {
         
         let notificationGranted = UIApplication.shared.rx.applicationDidBecomeActive
             .startWith(.active)
+            .withLatestFrom(AppConfigs.shared.isPremiumDriver)
+            .filter { $0 }
             .flatMap { _ in NotificationHelper.shared.center
                 .rx.requestAuthorization(options: [.alert, .sound]) }
             .map { $0 }

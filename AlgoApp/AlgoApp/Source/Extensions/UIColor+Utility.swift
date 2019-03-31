@@ -35,14 +35,11 @@ extension UIColor {
     }
     
     static func secondaryColor() -> UIColor {
-        switch Themer.shared.currentTheme {
-        case .light: return UIColor(rgb: 0xFF945A)
-        case .dark: return UIColor(rgb: 0xFFD452)
-        }
+        return UIColor(rgb: 0xFBC441)
     }
     
     static func appYellowColor() -> UIColor {
-        return UIColor(rgb: 0xFFD452)
+        return UIColor(rgb: 0xFBC441)
     }
     
     static func appOrangeColor() -> UIColor {

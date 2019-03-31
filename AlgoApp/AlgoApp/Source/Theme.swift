@@ -26,8 +26,12 @@ final class Themer {
     
     var currentTheme: Theme {
         get {
-            let theme = UserDefaults.standard.integer(forKey: themeKey)
-            return Theme(rawValue: theme) ?? .light
+            let themeValue = UserDefaults.standard.integer(forKey: themeKey)
+            let theme = Theme(rawValue: themeValue) ?? .light
+            if theme != currentThemeRelay.value {
+                currentThemeRelay.accept(theme)
+            }
+            return theme
         }
         
         set {

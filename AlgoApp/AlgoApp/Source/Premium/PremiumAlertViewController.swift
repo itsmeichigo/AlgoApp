@@ -77,7 +77,7 @@ class PremiumAlertViewController: UIViewController, PanModalPresentable {
         
         switch mode {
         case .alarm:
-            showButton.backgroundColor = .appOrangeColor()
+            showButton.backgroundColor = .appYellowColor()
         case .code:
             showButton.backgroundColor = .appBlueColor()
         case .darkMode:
