@@ -16,7 +16,12 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
 
         configureNavigationBar()
+        
         contentTextView.textColor = .titleTextColor()
+        contentTextView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        contentTextView.backgroundColor = .backgroundColor()
+        
+        view.backgroundColor = .backgroundColor()
     }
     
     private func configureNavigationBar() {
