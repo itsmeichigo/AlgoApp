@@ -129,12 +129,6 @@ class SettingsController: UITableViewController {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             })
             .disposed(by: disposeBag)
-        
-        aboutButton.rx.tap.asDriver()
-            .drive(onNext: {
-                
-            })
-            .disposed(by: disposeBag)
     }
     
     private func updateColors() {
