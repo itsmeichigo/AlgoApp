@@ -23,6 +23,22 @@ final class NotificationHelper: NSObject {
     
     private var pendingReminderId: String?
     
+    private let reminderTitles: [String] = [
+        "Time to practice coding again!",
+        "What time is it? Puzzle time!",
+        "You asked to be reminded - you got it!",
+        "Yet another reminder to practice coding",
+        "Ready? Puzzle time!"
+    ]
+    
+    private let reminderBodies: [String] = [
+        "A coding challenge is waiting for you to solve 👩‍💻",
+        "Keep your coding skills sharp with at least one challenge a day 🤓",
+        "You're doing better everyday 🥳 Here's another coding challenge for you.",
+        "You're guaranteed to learn something new 🤯 by trying this coding problem.",
+        "Be a ninja and take on this one challenge picked especially for you 😏"
+    ]
+    
     override init() {
         super.init()
         setupNotificationSettings()
@@ -51,8 +67,8 @@ final class NotificationHelper: NSObject {
             guard reminder.enabled else { return }
             
             let content = UNMutableNotificationContent()
-            content.title = "Time to practice coding again!"
-            content.body = "A coding problem is waiting for you to solve 👩‍💻"
+            content.title = self?.reminderTitles.randomElement() ?? ""
+            content.body = self?.reminderBodies.randomElement() ?? ""
             content.categoryIdentifier = NotificationHelper.reminderCategoryId
             content.userInfo[NotificationHelper.reminderIdKey] = reminder.id
             
