@@ -19,19 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gC0-Aj-uiT">
-                                <rect key="frame" x="16" y="330" width="382" height="76.333333333333314"/>
+                                <rect key="frame" x="16" y="273" width="382" height="190.33333333333337"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-result" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-z9-vfe">
-                                        <rect key="frame" x="183" y="0.0" width="16" height="16"/>
+                                        <rect key="frame" x="126" y="0.0" width="130" height="130"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No problems found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OA-hk-Xk4">
-                                        <rect key="frame" x="116" y="27" width="150" height="20.333333333333329"/>
+                                        <rect key="frame" x="116" y="141" width="150" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't find any problem matching your filters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rd-hY-xpT">
-                                        <rect key="frame" x="41.333333333333343" y="58.333333333333314" width="299.33333333333326" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try adjusting your filters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rd-hY-xpT">
+                                        <rect key="frame" x="108.33333333333333" y="172.33333333333331" width="165.33333333333337" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1339,7 +1339,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NBv-Qz-Nwc">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">One wise man (or woman, I'm not really sure 🤷‍♀️) once said: "One Leetcode problem a day keeps unemployment away". If you are like me - wanting to practice coding problems for job interviews; or just simply like solving puzzles in form of coding - this app is your buddy. 🤓  All the problems in this app belong to LeetCode - a very popular platform for job interview preparations. Only free problems are included in the app, so if you look for beyond these, please head for the source site for more challenges.  The solutions in this app were collected from GitHub repos listed below. I cannot guarantee the performance of them but here are my kudos 🙏 to all the contributors of the repos:  ・Swift Solutions: https://github.com/soapyigu/LeetCode-Swift ・Java Solutions: https://github.com/fishercoder1534/Leetcode ・Python Solutions: https://github.com/Garvit244/Leetcode ・JavaScript Solutions: https://github.com/hanzichi/leetcode ・C++ Solutions: https://github.com/haoel/leetcode  The notes and code snippets you save in this app are saved locally and can be gone once you uninstall the app (please don't 😿). Fortunately, you can save them somewhere else by exporting them to other apps like Notes app etc.   Last but not least, the icons and logos in this apps were created using vectors from FlatIcons website. I wish I could make them all with my bare hands, but my talents are limited. 😬  Thanks for reading the potentially lengthiest About page ever! Please also buy LeetCode Daily Premium to help me buy breakfast 🥓🍳🥯, as you may know, that's the most important meal of the day and I don't want to skip it.</mutableString>
+                                <mutableString key="text">A wise (wo)man once said: "One Leetcode problem a day keeps unemployment away". If you are like me - wanting to practice coding problems for job interviews; or just simply like solving puzzles in form of coding - this app is your buddy. 🤓  All the problems in this app belong to LeetCode - a very popular platform for job interview preparations. Only free problems are included in the app, so if you look for beyond these, please head to the source site for more challenges.  The solutions in this app were collected from GitHub repos listed below. I cannot guarantee the performance of them but here are my kudos 🙏 to all the contributors of the repos:  ・Swift Solutions: https://github.com/soapyigu/LeetCode-Swift ・Java Solutions: https://github.com/fishercoder1534/Leetcode ・Python Solutions: https://github.com/Garvit244/Leetcode ・JavaScript Solutions: https://github.com/hanzichi/leetcode ・C++ Solutions: https://github.com/haoel/leetcode  The notes and code snippets you save in this app are saved locally and can be gone once you uninstall the app (please don't 😿). Fortunately, you can save them somewhere else by exporting them to other apps like Notes app etc.   Last but not least, the icons and logos in this apps were created using vectors from FlatIcons website. I wish I could make them all with my bare hands, but my talents are limited. 😬  Thanks for reading the potentially lengthiest About page ever! Please also buy LeetCode Daily Premium to help me buy breakfast 🥓🍳🥯, as you may know, that's the most important meal of the day and I don't want to skip it.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1494,10 +1494,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="premium" translatesAutoresizingMaskIntoConstraints="NO" id="HeD-Mj-72M">
-                                                            <rect key="frame" x="179.66666666666666" y="24" width="16" height="16"/>
+                                                            <rect key="frame" x="120.66666666666669" y="24" width="134" height="140"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Unlock Premium to get access to all features" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myP-kQ-PBy">
-                                                            <rect key="frame" x="16" y="56" width="343" height="160"/>
+                                                            <rect key="frame" x="16" y="180" width="343" height="36"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1769,7 +1769,7 @@
         <image name="home" width="24" height="22"/>
         <image name="notification" width="130" height="135"/>
         <image name="plus" width="17" height="17"/>
-        <image name="premium" width="135" height="135"/>
+        <image name="premium" width="134" height="140"/>
         <image name="reminder" width="23" height="22"/>
         <image name="search-result" width="130" height="130"/>
         <image name="settings" width="24" height="23"/>

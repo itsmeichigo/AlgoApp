@@ -53,6 +53,15 @@ class CodeViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
+        
+        //ask the system to start notifying when interface change
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        //add the observer
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(orientationChanged(notification:)),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,9 +71,8 @@ class CodeViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
         super.viewWillDisappear(animated)
-        
-        AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -178,7 +186,7 @@ private extension CodeViewController {
     }
     
     func togglePickerView(show: Bool) {
-        let offset = show ? 0 : -216
+        let offset = show ? 0 : -pickerView.bounds.height
         pickerView.snp.updateConstraints { maker in
             maker.top.equalToSuperview().offset(offset)
         }
@@ -237,6 +245,10 @@ private extension CodeViewController {
         
         let controller = UIActivityViewController(activityItems: [content], applicationActivities: nil)
         present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func orientationChanged(notification : NSNotification) {
+        togglePickerView(show: false)
     }
 }
 
