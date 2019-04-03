@@ -81,7 +81,8 @@ final class StoreHelper {
         }
     }
     
-    static func verifySubscription() {
+    static func verifySubscription(completionHandler: ((Bool) -> Void)? = nil) {
+        // FIXME: update service type here!!!
         let appleValidator = AppleReceiptValidator(service: .sandbox, sharedSecret: sharedSecret)
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             var purchased = false
@@ -122,6 +123,8 @@ final class StoreHelper {
             if !purchased && Themer.shared.currentTheme == .dark {
                 Themer.shared.currentTheme = .light
             }
+            
+            completionHandler?(purchased)
         }
     }
 }

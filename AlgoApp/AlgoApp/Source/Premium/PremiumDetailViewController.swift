@@ -67,6 +67,9 @@ class PremiumDetailViewController: UIViewController {
     
     @IBOutlet weak var termsTextView: UITextView!
     
+    @IBOutlet weak var purchasedLabel: UILabel!
+    @IBOutlet weak var restoreButton: UIButton!
+    
     typealias Section = SectionModel<String, PremiumDetailType>
     typealias Datasource = RxCollectionViewSectionedReloadDataSource<Section>
     
@@ -79,8 +82,12 @@ class PremiumDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViews()
+        configureColors()
+        configureCollectionView()
         configureTermsTextView()
+        configureButtons()
+        configureStore()
+        
         store.fetchProductsInfo()
         SVProgressHUD.configure()
     }
@@ -90,7 +97,7 @@ class PremiumDetailViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    private func configureViews() {
+    private func configureColors() {
         
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = .backgroundColor()
@@ -115,22 +122,22 @@ class PremiumDetailViewController: UIViewController {
         }
         
         dismissButton.tintColor = .subtitleTextColor()
-        dismissButton.rx.tap.asDriver()
-            .drive(onNext: { [unowned self] in
-                self.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
         
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let screenWidth = UIScreen.main.bounds.width
-            layout.itemSize = CGSize(width: screenWidth, height: collectionView.frame.height)
-        }
+        purchasedLabel.textColor = .appRedColor()
+        restoreButton.tintColor = .appRedColor()
         
         confettiView.type = .mixed
         confettiView.isUserInteractionEnabled = false
         UIApplication.shared.keyWindow?.addSubview(confettiView)
         confettiView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
+        }
+    }
+    
+    private func configureCollectionView() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let screenWidth = UIScreen.main.bounds.width
+            layout.itemSize = CGSize(width: screenWidth, height: collectionView.frame.height)
         }
         
         collectionView.delegate = self
@@ -139,44 +146,23 @@ class PremiumDetailViewController: UIViewController {
             .map { [Section(model: "", items: $0)] }
             .drive(collectionView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
-        
-        store.products
-            .map { !$0.isEmpty }
-            .drive(onNext: { [weak self] in
-                self?.loadingProductsView.isHidden = $0
-                self?.weeklyProductView.isHidden = !$0
-                self?.monthlyProductView.isHidden = !$0
+    }
+    
+    private func configureButtons() {
+        dismissButton.rx.tap.asDriver()
+            .drive(onNext: { [unowned self] in
+                self.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
         
-        store.weeklyProduct
-            .map { $0?.localizedTitle }
-            .drive(weeklyProductNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.weeklyProduct
-            .map { $0?.localizedPrice }
-            .drive(weeklyProductPriceLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.weeklyProduct
-            .map { $0?.localizedDescription }
-            .drive(weeklyProductDescriptionLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.monthlyProduct
-            .map { $0?.localizedTitle }
-            .drive(monthlyProductNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.monthlyProduct
-            .map { $0?.localizedPrice }
-            .drive(monthlyProductPriceLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.monthlyProduct
-            .map { $0?.localizedDescription }
-            .drive(monthlyProductDescriptionLabel.rx.text)
+        restoreButton.rx.tap
+            .subscribe(onNext: {
+                SVProgressHUD.show()
+                StoreHelper.verifySubscription { [weak self] purchased in
+                    SVProgressHUD.dismiss()
+                    self?.showAlert(forVerificationResult: purchased)
+                }
+            })
             .disposed(by: disposeBag)
         
         weeklyProductButton.rx.tap.asDriver()
@@ -219,6 +205,47 @@ class PremiumDetailViewController: UIViewController {
                 
                 SVProgressHUD.show()
             })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureStore() {
+        store.products
+            .map { !$0.isEmpty }
+            .drive(onNext: { [weak self] in
+                self?.loadingProductsView.isHidden = $0
+                self?.weeklyProductView.isHidden = !$0
+                self?.monthlyProductView.isHidden = !$0
+            })
+            .disposed(by: disposeBag)
+        
+        store.weeklyProduct
+            .map { $0?.localizedTitle }
+            .drive(weeklyProductNameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.weeklyProduct
+            .map { $0?.localizedPrice }
+            .drive(weeklyProductPriceLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.weeklyProduct
+            .map { $0?.localizedDescription }
+            .drive(weeklyProductDescriptionLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.monthlyProduct
+            .map { $0?.localizedTitle }
+            .drive(monthlyProductNameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.monthlyProduct
+            .map { $0?.localizedPrice }
+            .drive(monthlyProductPriceLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.monthlyProduct
+            .map { $0?.localizedDescription }
+            .drive(monthlyProductDescriptionLabel.rx.text)
             .disposed(by: disposeBag)
         
         store.purchaseSuccess
@@ -266,6 +293,22 @@ class PremiumDetailViewController: UIViewController {
             cell.configureCell(model: model)
             return cell
         })
+    }
+    
+    private func showAlert(forVerificationResult purchased: Bool) {
+        let message = purchased ? "Voila 🎉 Your subscription has been updated!" : "Uh oh 😕 You haven't purchased any subscription."
+        
+        let alert = UIAlertController(title: "Restore Subscription", message: message, preferredStyle: .alert)
+        
+        if purchased {
+            let action = UIAlertAction(title: "Thanks!", style: .default) { [unowned self] _ in self.dismiss(animated: true, completion: nil) }
+            alert.addAction(action)
+        } else {
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+        }
+        
+        present(alert, animated: true, completion: nil)
     }
     
     private func showAlert(for error: SKError) {

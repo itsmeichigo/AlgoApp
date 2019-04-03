@@ -1649,17 +1649,36 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already Purchased?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocq-VH-7wf">
+                                        <rect key="frame" x="16" y="709" width="382" height="15.666666666666629"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hlf-jl-ucj">
+                                        <rect key="frame" x="133.66666666666666" y="716.66666666666663" width="146.99999999999997" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="XtM-YM-ApF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal" title="Restore Subscription"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="clU-BG-LbH" secondAttribute="bottom" constant="16" id="3IT-xh-txz"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ocq-VH-7wf" secondAttribute="trailing" constant="16" id="5lb-ut-mcG"/>
+                                    <constraint firstItem="Ocq-VH-7wf" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" constant="16" id="7BQ-b1-QNw"/>
                                     <constraint firstItem="5s6-PI-0s2" firstAttribute="top" secondItem="G8V-GY-yX1" secondAttribute="top" id="DaW-qS-c6G"/>
                                     <constraint firstItem="clU-BG-LbH" firstAttribute="top" secondItem="QNh-rR-Sxh" secondAttribute="bottom" constant="16" id="EFH-Hr-9NC"/>
                                     <constraint firstItem="5s6-PI-0s2" firstAttribute="centerX" secondItem="G8V-GY-yX1" secondAttribute="centerX" id="EOX-eS-Q3e"/>
                                     <constraint firstItem="QNh-rR-Sxh" firstAttribute="top" secondItem="3wR-Ws-XUQ" secondAttribute="bottom" constant="24" id="FVN-NL-ks5"/>
+                                    <constraint firstItem="hlf-jl-ucj" firstAttribute="centerX" secondItem="G8V-GY-yX1" secondAttribute="centerX" id="GAe-yF-hiL"/>
                                     <constraint firstItem="mXM-Bu-tah" firstAttribute="top" secondItem="5s6-PI-0s2" secondAttribute="bottom" id="HRI-ks-06s"/>
                                     <constraint firstAttribute="trailing" secondItem="3wR-Ws-XUQ" secondAttribute="trailing" constant="16" id="Ixh-tj-WgN"/>
                                     <constraint firstAttribute="trailing" secondItem="clU-BG-LbH" secondAttribute="trailing" constant="16" id="Oh5-uc-vQy"/>
+                                    <constraint firstItem="Ocq-VH-7wf" firstAttribute="bottom" secondItem="hlf-jl-ucj" secondAttribute="top" constant="8" id="Otu-5E-dH5"/>
                                     <constraint firstAttribute="trailing" secondItem="5s6-PI-0s2" secondAttribute="trailing" id="T9X-MB-a6z"/>
+                                    <constraint firstItem="hlf-jl-ucj" firstAttribute="top" secondItem="clU-BG-LbH" secondAttribute="bottom" constant="50" id="VxI-4i-LLm"/>
+                                    <constraint firstAttribute="bottom" secondItem="hlf-jl-ucj" secondAttribute="bottom" constant="16" id="eJk-KI-fAc"/>
                                     <constraint firstAttribute="trailing" secondItem="QNh-rR-Sxh" secondAttribute="trailing" constant="16" id="f7e-i4-Hzl"/>
                                     <constraint firstItem="5s6-PI-0s2" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" id="fdK-WL-oee"/>
                                     <constraint firstItem="3wR-Ws-XUQ" firstAttribute="top" secondItem="mXM-Bu-tah" secondAttribute="bottom" constant="8" id="gOH-re-uMB"/>
@@ -1695,6 +1714,8 @@
                         <outlet property="monthlyProductPriceLabel" destination="9ZY-Lo-Wam" id="aKp-IH-VuQ"/>
                         <outlet property="monthlyProductView" destination="kCV-hf-H2I" id="6T9-fJ-kqC"/>
                         <outlet property="pageControl" destination="mXM-Bu-tah" id="YGa-p2-dQD"/>
+                        <outlet property="purchasedLabel" destination="Ocq-VH-7wf" id="YZN-e8-d33"/>
+                        <outlet property="restoreButton" destination="hlf-jl-ucj" id="Co6-jR-Sr1"/>
                         <outlet property="scrollView" destination="G8V-GY-yX1" id="giT-ME-dB7"/>
                         <outlet property="termsTextView" destination="clU-BG-LbH" id="jqN-m2-Kjz"/>
                         <outlet property="weeklyProductButton" destination="thS-mF-Hkx" id="KBa-LE-AQF"/>
