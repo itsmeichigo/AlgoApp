@@ -65,6 +65,8 @@ class PremiumDetailViewController: UIViewController {
     
     @IBOutlet weak var loadingProductsView: UIView!
     
+    @IBOutlet weak var termsTextView: UITextView!
+    
     typealias Section = SectionModel<String, PremiumDetailType>
     typealias Datasource = RxCollectionViewSectionedReloadDataSource<Section>
     
@@ -78,6 +80,7 @@ class PremiumDetailViewController: UIViewController {
         super.viewDidLoad()
 
         configureViews()
+        configureTermsTextView()
         store.fetchProductsInfo()
         SVProgressHUD.configure()
     }
@@ -239,6 +242,22 @@ class PremiumDetailViewController: UIViewController {
                 self?.showAlert(for: $0)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func configureTermsTextView() {
+        let string = "Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase. By tapping \"Start Subscription\" you agree to AlgoDaily's Privacy Policy and Terms."
+        let attributedString = NSMutableAttributedString(string: string)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.subtitleTextColor(), range: NSRange(location: 0, length: string.count))
+        
+        if let range = string.range(of: "Privacy Policy") {
+            attributedString.addAttribute(.link, value: "https://gist.github.com/16bitsapps/0825806307a34381b30e4f7f51327bf1", range: NSRange(range, in: string))
+        }
+        
+        if let range = string.range(of: "Terms") {
+            attributedString.addAttribute(.link, value: "https://gist.github.com/16bitsapps/abbb4b23d1e2cfe054fc947ede565266", range: NSRange(range, in: string))
+        }
+        
+        termsTextView.attributedText = attributedString
     }
     
     private func configureDatasource() -> Datasource {

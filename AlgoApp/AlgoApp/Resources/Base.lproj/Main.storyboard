@@ -1640,30 +1640,32 @@
                                         </constraints>
                                         <state key="normal" title="Start Subscription"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjr-60-VMh">
-                                        <rect key="frame" x="16" y="525" width="382" height="100.33333333333337"/>
-                                        <string key="text">By tapping "Start Subscription", your payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="clU-BG-LbH">
+                                        <rect key="frame" x="16" y="517" width="382" height="149.66666666666663"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.</string>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="pjr-60-VMh" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" constant="16" id="2zb-CF-8OD"/>
-                                    <constraint firstItem="pjr-60-VMh" firstAttribute="top" secondItem="QNh-rR-Sxh" secondAttribute="bottom" constant="24" id="3p3-0u-Q1H"/>
+                                    <constraint firstAttribute="bottom" secondItem="clU-BG-LbH" secondAttribute="bottom" constant="16" id="3IT-xh-txz"/>
                                     <constraint firstItem="5s6-PI-0s2" firstAttribute="top" secondItem="G8V-GY-yX1" secondAttribute="top" id="DaW-qS-c6G"/>
+                                    <constraint firstItem="clU-BG-LbH" firstAttribute="top" secondItem="QNh-rR-Sxh" secondAttribute="bottom" constant="16" id="EFH-Hr-9NC"/>
                                     <constraint firstItem="5s6-PI-0s2" firstAttribute="centerX" secondItem="G8V-GY-yX1" secondAttribute="centerX" id="EOX-eS-Q3e"/>
                                     <constraint firstItem="QNh-rR-Sxh" firstAttribute="top" secondItem="3wR-Ws-XUQ" secondAttribute="bottom" constant="24" id="FVN-NL-ks5"/>
                                     <constraint firstItem="mXM-Bu-tah" firstAttribute="top" secondItem="5s6-PI-0s2" secondAttribute="bottom" id="HRI-ks-06s"/>
                                     <constraint firstAttribute="trailing" secondItem="3wR-Ws-XUQ" secondAttribute="trailing" constant="16" id="Ixh-tj-WgN"/>
+                                    <constraint firstAttribute="trailing" secondItem="clU-BG-LbH" secondAttribute="trailing" constant="16" id="Oh5-uc-vQy"/>
                                     <constraint firstAttribute="trailing" secondItem="5s6-PI-0s2" secondAttribute="trailing" id="T9X-MB-a6z"/>
-                                    <constraint firstAttribute="bottom" secondItem="pjr-60-VMh" secondAttribute="bottom" constant="16" id="cba-Kr-x1p"/>
                                     <constraint firstAttribute="trailing" secondItem="QNh-rR-Sxh" secondAttribute="trailing" constant="16" id="f7e-i4-Hzl"/>
                                     <constraint firstItem="5s6-PI-0s2" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" id="fdK-WL-oee"/>
-                                    <constraint firstAttribute="trailing" secondItem="pjr-60-VMh" secondAttribute="trailing" constant="16" id="flg-1f-vWT"/>
                                     <constraint firstItem="3wR-Ws-XUQ" firstAttribute="top" secondItem="mXM-Bu-tah" secondAttribute="bottom" constant="8" id="gOH-re-uMB"/>
                                     <constraint firstItem="3wR-Ws-XUQ" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" constant="16" id="j7R-Dl-WTu"/>
                                     <constraint firstItem="mXM-Bu-tah" firstAttribute="centerX" secondItem="G8V-GY-yX1" secondAttribute="centerX" id="lRo-z9-CPm"/>
+                                    <constraint firstItem="clU-BG-LbH" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" constant="16" id="ldW-Gk-51v"/>
                                     <constraint firstItem="QNh-rR-Sxh" firstAttribute="leading" secondItem="G8V-GY-yX1" secondAttribute="leading" constant="16" id="s5l-jR-15p"/>
                                 </constraints>
                             </scrollView>
@@ -1694,6 +1696,7 @@
                         <outlet property="monthlyProductView" destination="kCV-hf-H2I" id="6T9-fJ-kqC"/>
                         <outlet property="pageControl" destination="mXM-Bu-tah" id="YGa-p2-dQD"/>
                         <outlet property="scrollView" destination="G8V-GY-yX1" id="giT-ME-dB7"/>
+                        <outlet property="termsTextView" destination="clU-BG-LbH" id="jqN-m2-Kjz"/>
                         <outlet property="weeklyProductButton" destination="thS-mF-Hkx" id="KBa-LE-AQF"/>
                         <outlet property="weeklyProductDescriptionLabel" destination="jqj-93-3tv" id="dm1-1r-Et4"/>
                         <outlet property="weeklyProductNameLabel" destination="jTE-2g-cbu" id="ngn-OR-XRP"/>
