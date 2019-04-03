@@ -14,8 +14,8 @@ import SwiftyStoreKit
 
 final class StoreHelper {
     
-    static let weeklyProductId = "com.ichigo.AlgoApp.Weekly"
-    static let monthlyProductId = "com.ichigo.AlgoApp.Monthly"
+    static let weeklyProductId = "com.ichigo.AlgoApp.WeeklyPremium"
+    static let monthlyProductId = "com.ichigo.AlgoApp.3monthPremium"
     
     var products: Driver<[SKProduct]> {
         return productsRelay.asDriver()
