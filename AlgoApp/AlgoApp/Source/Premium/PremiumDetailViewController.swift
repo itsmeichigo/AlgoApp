@@ -42,6 +42,32 @@ enum PremiumDetailType: CaseIterable {
     }
 }
 
+enum LegalType {
+    case privacyPolicy
+    case terms
+    
+    var title: String {
+        switch self {
+        case .privacyPolicy: return "Privacy Policy"
+        case .terms: return "Terms"
+        }
+    }
+    
+    var link: String {
+        switch self {
+        case .privacyPolicy: return "https://gist.github.com/16bitsapps/0825806307a34381b30e4f7f51327bf1"
+        case .terms: return "https://gist.github.com/16bitsapps/abbb4b23d1e2cfe054fc947ede565266"
+        }
+    }
+    
+    var contentSelector: String {
+        switch self {
+        case .privacyPolicy: return "#file-algodaily-policy-md"
+        case .terms: return "#file-algodaily-terms-md"
+        }
+    }
+}
+
 class PremiumDetailViewController: UIViewController {
 
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -277,15 +303,16 @@ class PremiumDetailViewController: UIViewController {
         let attributedString = NSMutableAttributedString(string: string)
         attributedString.addAttribute(.foregroundColor, value: UIColor.subtitleTextColor(), range: NSRange(location: 0, length: string.count))
         
-        if let range = string.range(of: "Privacy Policy") {
-            attributedString.addAttribute(.link, value: "https://gist.github.com/16bitsapps/0825806307a34381b30e4f7f51327bf1", range: NSRange(range, in: string))
+        if let range = string.range(of: LegalType.privacyPolicy.title) {
+            attributedString.addAttribute(.link, value: LegalType.privacyPolicy.link, range: NSRange(range, in: string))
         }
         
-        if let range = string.range(of: "Terms") {
-            attributedString.addAttribute(.link, value: "https://gist.github.com/16bitsapps/abbb4b23d1e2cfe054fc947ede565266", range: NSRange(range, in: string))
+        if let range = string.range(of: LegalType.terms.title) {
+            attributedString.addAttribute(.link, value: LegalType.terms.link, range: NSRange(range, in: string))
         }
         
         termsTextView.attributedText = attributedString
+        termsTextView.delegate = self
     }
     
     private func configureDatasource() -> Datasource {
@@ -352,4 +379,20 @@ extension PremiumDetailViewController: UICollectionViewDelegate {
        pageControl.currentPage = indexPath.item
     }
     
+}
+
+extension PremiumDetailViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        let type: LegalType = URL.absoluteString == LegalType.privacyPolicy.link ? .privacyPolicy : .terms
+        showWebpage(url: URL, title: type.title, contentSelector: type.contentSelector)
+        return false
+    }
+    
+    private func showWebpage(url: URL, title: String = "", contentSelector: String?) {
+        let viewController = WebViewController()
+        viewController.url = url
+        viewController.title = title
+        viewController.contentSelector = contentSelector
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }

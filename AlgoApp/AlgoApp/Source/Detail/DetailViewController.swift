@@ -99,9 +99,12 @@ class DetailViewController: UIViewController {
         saveButton.setImage(UIImage(named: "bookmark"), for: .normal)
         saveButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         saveButton.tintColor = .appBlueColor()
+        let saveBarButton = UIBarButtonItem(customView: saveButton)
         
-        var saveBarButton = UIBarButtonItem(customView: saveButton)
-        navigationItem.rightBarButtonItems = [noteBarButton, saveBarButton]
+        let linkBarButton = UIBarButtonItem(image: UIImage(named: "link"), style: .plain, target: self, action: #selector(showLeetCode))
+        linkBarButton.tintColor = .appGreenColor()
+        
+        navigationItem.rightBarButtonItems = [noteBarButton, saveBarButton, linkBarButton]
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
         backButton.tintColor = .subtitleTextColor()
@@ -126,13 +129,6 @@ class DetailViewController: UIViewController {
         markAsSolvedButton.setTitle("🤭 Mark as Unsolved", for: .selected)
         markAsSolvedButton.setTitleColor(.white, for: .normal)
         markAsSolvedButton.setTitleColor(.white, for: .selected)
-        
-        scrollView.rx.contentOffset.asDriver()
-            .drive(onNext: { [weak self] offset in
-                guard let self = self else { return }
-                self.title = offset.y > self.titleLabel.frame.maxY ? self.viewModel.detail.value?.title : ""
-            })
-            .disposed(by: disposeBag)
         
         feedbackGenerator.prepare()
         updateColors()
@@ -320,6 +316,14 @@ class DetailViewController: UIViewController {
             notePanel.addPanel(toParent: self)
         }
         notePanel.move(to: .full, animated: true)
+    }
+    
+    @objc func showLeetCode() {
+        guard let path = viewModel.detail.value?.titleSlug,
+            let url = URL(string: "https://leetcode.com/problems/\(path)"),
+            UIApplication.shared.canOpenURL(url) else { return }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 
