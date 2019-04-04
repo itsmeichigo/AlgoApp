@@ -226,6 +226,11 @@ class ReminderDetailViewController: UIViewController {
         presentPanModal(controller)
     }
     
+    private func showPremiumDetail() {
+        guard let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        present(detailController, animated: true, completion: nil)
+    }
+    
     private func saveReminder(filter: QuestionFilter? = nil) {
         
         guard AppConfigs.shared.isPremium else {

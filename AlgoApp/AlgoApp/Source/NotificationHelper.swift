@@ -63,7 +63,7 @@ final class NotificationHelper: NSObject {
     }
     
     func updateScheduledNotifications(for reminder: ReminderDetail) {
-        cancelAllScheduledNotifications(for: reminder) { [weak self] in
+        cancelScheduledNotifications(for: reminder) { [weak self] in
             guard reminder.enabled else { return }
             
             let content = UNMutableNotificationContent()
@@ -123,7 +123,7 @@ final class NotificationHelper: NSObject {
         tabbarController.selectedIndex = 0
     }
     
-    func cancelAllScheduledNotifications(for reminder: ReminderDetail, completionHandler: @escaping (() -> Void)) {
+    func cancelScheduledNotifications(for reminder: ReminderDetail, completionHandler: @escaping (() -> Void)) {
         
         center.getPendingNotificationRequests { [weak self] requests in
             var foundRequestIds: [String] = []
@@ -136,6 +136,11 @@ final class NotificationHelper: NSObject {
             self?.center.removePendingNotificationRequests(withIdentifiers: foundRequestIds)
             completionHandler()
         }
+    }
+    
+    func cancelAllScheduledNotifications() {
+        center.removeAllPendingNotificationRequests()
+        Reminder.disableAllReminders()
     }
 }
 

@@ -46,5 +46,6 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         tagsLabel.textColor = .subtitleTextColor()
         markLabel.textColor = .subtitleTextColor()
         cardView.backgroundColor = .primaryColor()
+        contentView.backgroundColor = .backgroundColor()
     }
 }

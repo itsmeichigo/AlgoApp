@@ -210,4 +210,8 @@ extension SettingsController {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.backgroundColor = .backgroundColor()
+    }
 }

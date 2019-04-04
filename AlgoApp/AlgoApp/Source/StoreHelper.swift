@@ -119,11 +119,6 @@ final class StoreHelper {
                 print("Receipt verification failed: \(error)")
             }
             
-            AppConfigs.shared.isPremium = purchased
-            if !purchased && Themer.shared.currentTheme == .dark {
-                Themer.shared.currentTheme = .light
-            }
-            
             completionHandler?(purchased)
         }
     }

@@ -160,6 +160,7 @@ class PremiumDetailViewController: UIViewController {
                 SVProgressHUD.show()
                 StoreHelper.verifySubscription { [weak self] purchased in
                     SVProgressHUD.dismiss()
+                    
                     self?.showAlert(forVerificationResult: purchased)
                 }
             })

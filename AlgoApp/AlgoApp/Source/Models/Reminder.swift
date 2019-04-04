@@ -87,4 +87,14 @@ final class Reminder: Object {
                                       filter: ReminderDetail(with: reminder).filter,
                                       onlyUnsolved: AppConfigs.shared.hidesSolvedProblems).randomElement()?.id
     }
+    
+    static func disableAllReminders() {
+        let realm = try! Realm()
+        
+        try! realm.write {
+            for reminder in realm.objects(Reminder.self) {
+                reminder.enabled = false
+            }
+        }
+    }
 }

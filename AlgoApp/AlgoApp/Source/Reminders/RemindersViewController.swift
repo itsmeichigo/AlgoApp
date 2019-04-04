@@ -44,6 +44,13 @@ class RemindersViewController: UIViewController {
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
+        
+        AppConfigs.shared.isPremiumDriver
+            .filter { !$0 }
+            .drive(onNext: { [weak self] _ in
+                self?.viewModel.disableAllReminders()
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,33 +77,6 @@ class RemindersViewController: UIViewController {
     }
     
     private func configureView() {
-        if let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController,
-            let premiumView = controller.view {
-            
-            view.addSubview(premiumView)
-            premiumView.snp.makeConstraints { maker in
-                maker.bottom.leading.trailing.equalToSuperview()
-                maker.top.equalToSuperview().offset(-20)
-            }
-            
-            premiumViewController = controller
-            
-            controller.dismissHandler = { [weak self] in
-                guard let detailController = self?.storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
-                self?.present(detailController, animated: true, completion: nil)
-            }
-            
-            AppConfigs.shared.isPremiumDriver
-                .drive(premiumView.rx.isHidden)
-                .disposed(by: disposeBag)
-            
-            AppConfigs.shared.isPremiumDriver
-                .filter { !$0 }
-                .drive(onNext: { [weak self] _ in
-                    self?.viewModel.disableAllReminders()
-                })
-                .disposed(by: disposeBag)
-        }
         
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
@@ -114,6 +94,7 @@ class RemindersViewController: UIViewController {
                 .rx.requestAuthorization(options: [.alert, .sound]) }
             .map { $0 }
             .asDriver(onErrorJustReturn: false)
+            .startWith(true)
         
         notificationGranted
             .map { $0 ? UIImage(named: "notification") : UIImage(named: "permission") }
@@ -181,7 +162,13 @@ class RemindersViewController: UIViewController {
             let cell: ReminderCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configureCell(model: model)
             cell.enabledSwitch.rx.controlEvent(UIControl.Event.valueChanged)
-                .subscribe(onNext: { [weak self] in self?.viewModel.toggleReminder(id: model.id) })
+                .subscribe(onNext: { [weak self] in
+                    guard AppConfigs.shared.isPremium else {
+                        self?.showPremiumAlert()
+                        return
+                    }
+                    self?.viewModel.toggleReminder(id: model.id)
+                })
                 .disposed(by: cell.disposeBag)
             return cell
         })
@@ -205,5 +192,20 @@ class RemindersViewController: UIViewController {
         }
         
         UIApplication.shared.open(settingsUrl, completionHandler: nil)
+    }
+    
+    private func showPremiumAlert() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        
+        controller.mode = .alarm
+        controller.dismissHandler = { [weak self] in
+            self?.showPremiumDetail()
+        }
+        presentPanModal(controller)
+    }
+    
+    private func showPremiumDetail() {
+        guard let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        present(detailController, animated: true, completion: nil)
     }
 }
