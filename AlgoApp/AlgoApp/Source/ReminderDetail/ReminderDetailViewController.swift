@@ -216,7 +216,23 @@ class ReminderDetailViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func showPremiumAlert() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        
+        controller.mode = .alarm
+        controller.dismissHandler = { [weak self] in
+            self?.showPremiumDetail()
+        }
+        presentPanModal(controller)
+    }
+    
     private func saveReminder(filter: QuestionFilter? = nil) {
+        
+        guard AppConfigs.shared.isPremium else {
+            showPremiumAlert()
+            return
+        }
+        
         var repeatDays: [Int] = []
         for (index, button) in dayButtons.enumerated() {
             if button.isSelected {
