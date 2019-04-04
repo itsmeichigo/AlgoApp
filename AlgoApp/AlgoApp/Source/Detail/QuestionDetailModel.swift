@@ -18,6 +18,7 @@ struct QuestionDetailModel {
     let articleSlug: String
     let titleSlug: String
     let solved: Bool
+    let saved: Bool
     let note: String
     let noteLanguage: Language
     
@@ -31,6 +32,7 @@ struct QuestionDetailModel {
         articleSlug = question.articleSlug
         titleSlug = question.titleSlug
         solved = question.solved
+        saved = question.saved
         note = question.note
         noteLanguage = Language(rawValue: question.noteLanguage) ?? .markdown
     }

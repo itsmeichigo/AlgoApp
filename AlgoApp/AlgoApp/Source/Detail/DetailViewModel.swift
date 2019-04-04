@@ -83,6 +83,14 @@ final class DetailViewModel {
         }
     }
     
+    func toggleSaved() {
+        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
+        let toggledValue = !question.saved
+        try! realmForWrite.write {
+            question.saved = toggledValue
+        }
+    }
+    
     func updateNote(_ note: String, language: Language) {
         guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
         try! realmForWrite.write {

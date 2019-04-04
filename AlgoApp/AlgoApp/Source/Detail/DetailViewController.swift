@@ -46,6 +46,7 @@ class DetailViewController: UIViewController {
     private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appPurpleColor()]
     private let notePanel = FloatingPanelController()
     private let feedbackGenerator = UISelectionFeedbackGenerator()
+    private let saveButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,8 +94,14 @@ class DetailViewController: UIViewController {
     
     private func configureNavigationBar() {        
         let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
-        noteBarButton.tintColor = .secondaryColor()
-        navigationItem.rightBarButtonItems = [noteBarButton]
+        noteBarButton.tintColor = .appYellowColor()
+        
+        saveButton.setImage(UIImage(named: "bookmark"), for: .normal)
+        saveButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
+        saveButton.tintColor = .appBlueColor()
+        
+        var saveBarButton = UIBarButtonItem(customView: saveButton)
+        navigationItem.rightBarButtonItems = [noteBarButton, saveBarButton]
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
         backButton.tintColor = .subtitleTextColor()
@@ -258,6 +265,20 @@ class DetailViewController: UIViewController {
             .drive(solutionsTitleLabel.rx.text)
             .disposed(by: disposeBag)
     
+        viewModel.detail.asDriver()
+            .filterNil()
+            .map { $0.saved ? "bookmarked" : "bookmark" }
+            .map { UIImage(named: $0) }
+            .drive(onNext: { [weak self] in
+                self?.saveButton.setImage($0, for: .normal)
+            })
+            .disposed(by: disposeBag)
+        
+        saveButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.toggleSaved()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func showWebpage(url: URL, title: String = "", contentSelector: String?) {

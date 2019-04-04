@@ -162,9 +162,13 @@ class RemindersViewController: UIViewController {
             let cell: ReminderCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configureCell(model: model)
             cell.enabledSwitch.rx.controlEvent(UIControl.Event.valueChanged)
-                .subscribe(onNext: { [weak self] in
+                .withLatestFrom(cell.enabledSwitch.rx.isOn)
+                .subscribe(onNext: { [weak self] switchedOn in
                     guard AppConfigs.shared.isPremium else {
-                        self?.showPremiumAlert()
+                        if switchedOn {
+                            self?.showPremiumAlert()
+                            cell.enabledSwitch.isOn = false
+                        }
                         return
                     }
                     self?.viewModel.toggleReminder(id: model.id)

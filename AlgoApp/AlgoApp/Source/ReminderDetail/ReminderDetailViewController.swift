@@ -144,15 +144,17 @@ class ReminderDetailViewController: UIViewController {
     private func addFilterView() {
         filterContainerView.isHidden = true
         
-        guard let filterViewController = storyboard?.instantiateViewController(withIdentifier: "filterViewController") as? FilterViewController,
-            let filterView = filterViewController.view else { return }
-        filterViewController.initialFilter = viewModel.reminder?.filter
-            
+        guard let filterViewController = storyboard?.instantiateViewController(withIdentifier: "filterViewController") as? FilterViewController else { return }
+        filterViewController.hidesSavedTag = true
+        
+        guard let filterView = filterViewController.view else { return }
+        
         filterContainerView.addSubview(filterView)
         filterView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
         
+        filterViewController.initialFilter = viewModel.reminder?.filter
         filterViewController.updateColors()
     
         addChild(filterViewController)
@@ -170,7 +172,7 @@ class ReminderDetailViewController: UIViewController {
         datePicker.setValue(UIColor.titleTextColor(), forKey: "textColor")
         
         cancelButton.tintColor = .subtitleTextColor()
-        saveButton.tintColor = .appPurpleColor()
+        saveButton.tintColor = .appGreenColor()
         sendProblemSwitch.onTintColor = .secondaryColor()
         
         problemsCountLabel.textColor = .subtitleTextColor()

@@ -174,6 +174,7 @@ class SettingsController: UITableViewController {
         
         view.backgroundColor = .backgroundColor()
         
+        tableView.reloadData()
         setNeedsStatusBarAppearanceUpdate()
     }
     

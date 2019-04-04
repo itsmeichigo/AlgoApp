@@ -28,6 +28,7 @@ class FilterViewController: UIViewController {
     private var viewModel: FilterViewModel!
     private let disposeBag = DisposeBag()
     
+    var hidesSavedTag = false
     var initialFilter: QuestionFilter?
     var completionBlock: ((QuestionFilter) -> Void)?
     
@@ -45,7 +46,8 @@ class FilterViewController: UIViewController {
         
         difficultyTagsView.tags = Question.DifficultyLevel.allCases.map { $0.title }.joined(separator: ",")
         
-        otherTagsView.tags = Question.Remarks.allCases.map { $0.title }.joined(separator: ",")
+        let remarkTags = Question.Remarks.allCases.map { $0.title } + (hidesSavedTag ? [] : [viewModel.savedTag])
+        otherTagsView.tags = remarkTags.joined(separator: ",")
         
         viewModel.allTags.asDriver()
             .drive(onNext: { [weak self] in
@@ -105,6 +107,10 @@ class FilterViewController: UIViewController {
         }
         
         if filter.topInterviewed, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == Question.Remarks.topInterviewed.title }) {
+            tagsTouchAction(otherTagsView, tagButton: button)
+        }
+        
+        if filter.saved, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.savedTag }) {
             tagsTouchAction(otherTagsView, tagButton: button)
         }
     }

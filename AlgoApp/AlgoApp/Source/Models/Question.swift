@@ -123,6 +123,11 @@ extension Question {
             predicates.append(topInterviewPredicate)
         }
         
+        if filter?.saved == true {
+            let savedPredicate = NSPredicate(format: "saved = true")
+            predicates.append(savedPredicate)
+        }
+        
         if onlyUnsolved {
             let unsolvedPredicate = NSPredicate(format: "solved = false")
             predicates.append(unsolvedPredicate)
