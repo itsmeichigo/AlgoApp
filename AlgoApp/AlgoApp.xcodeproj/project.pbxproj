@@ -10,6 +10,7 @@
 		4BCEDB176601904A79793AB9 /* Pods_AlgoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */; };
 		8466EA9403B1C5EF1EAEFC28 /* Pods_AlgoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */; };
 		DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */; };
+		DE0B03C52258C00A00770AA7 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03C42258C00A00770AA7 /* NotesViewController.swift */; };
 		DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515122070C2800BFBB0B /* AppDelegate.swift */; };
 		DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515322070C2800BFBB0B /* HomeViewController.swift */; };
 		DE0E515722070C2800BFBB0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE0E515522070C2800BFBB0B /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		6591BD170AE1C7DCDB3DEDB6 /* Pods-AlgoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.debug.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7B2540EDFF9B32ED935A3A23 /* Pods-AlgoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.release.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVProgressHUD+Extension.swift"; sourceTree = "<group>"; };
+		DE0B03C42258C00A00770AA7 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		DE0E514E22070C2800BFBB0B /* AlgoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0E515122070C2800BFBB0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE0E515322070C2800BFBB0B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DE0B03C32258BFEF00770AA7 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				DE0B03C42258C00A00770AA7 /* NotesViewController.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		DE0E514522070C2800BFBB0B = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +259,7 @@
 				DE13A11422226A630091FF96 /* CodeView */,
 				DE1AC96E22317B710044D83D /* Reminders */,
 				DE112E9E22351637003A5796 /* ReminderDetail */,
+				DE0B03C32258BFEF00770AA7 /* Notes */,
 				DE1BA9AB222BA736009C30B0 /* Settings */,
 				DE24271522466CD4000A10ED /* Premium */,
 				DE0E51882208524600BFBB0B /* Extensions */,
@@ -718,6 +729,7 @@
 				DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */,
 				DE139D7F22436EC200879F89 /* Language.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,
+				DE0B03C52258C00A00770AA7 /* NotesViewController.swift in Sources */,
 				DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */,
 				DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */,
 				DE112EA22235169D003A5796 /* RemindersViewModel.swift in Sources */,

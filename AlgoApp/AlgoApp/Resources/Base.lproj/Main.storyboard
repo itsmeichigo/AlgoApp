@@ -19,19 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="gC0-Aj-uiT">
-                                <rect key="frame" x="16" y="273" width="382" height="190.33333333333337"/>
+                                <rect key="frame" x="16" y="330" width="382" height="76.333333333333314"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-result" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-z9-vfe">
-                                        <rect key="frame" x="126" y="0.0" width="130" height="130"/>
+                                        <rect key="frame" x="183" y="0.0" width="16" height="16"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No problems found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OA-hk-Xk4">
-                                        <rect key="frame" x="116" y="141" width="150" height="20.333333333333343"/>
+                                        <rect key="frame" x="116" y="27" width="150" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try adjusting your filters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rd-hY-xpT">
-                                        <rect key="frame" x="108.33333333333333" y="172.33333333333331" width="165.33333333333337" height="18"/>
+                                        <rect key="frame" x="108.33333333333333" y="58.333333333333314" width="165.33333333333337" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -620,25 +620,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="nbe-YH-3Sd">
-                                <rect key="frame" x="16" y="203.99999999999997" width="382" height="268.33333333333326"/>
+                                <rect key="frame" x="16" y="263.33333333333331" width="382" height="149.33333333333331"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification" translatesAutoresizingMaskIntoConstraints="NO" id="Zjf-1z-8gr">
-                                        <rect key="frame" x="126" y="0.0" width="130" height="135"/>
+                                        <rect key="frame" x="183" y="0.0" width="16" height="16"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hi-7K-BWw">
-                                        <rect key="frame" x="169.66666666666666" y="146" width="42.666666666666657" height="20.333333333333343"/>
+                                        <rect key="frame" x="169.66666666666666" y="27" width="42.666666666666657" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep your coding skills sharp with daily challenges" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPt-7b-YPh">
-                                        <rect key="frame" x="91.000000000000014" y="177.33333333333331" width="200.33333333333337" height="36"/>
+                                        <rect key="frame" x="91.000000000000014" y="58.333333333333371" width="200.33333333333337" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SIS-ne-EWz">
-                                        <rect key="frame" x="91" y="224.33333333333331" width="200" height="44"/>
+                                        <rect key="frame" x="91" y="105.33333333333337" width="200" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="BQe-Rd-pp6"/>
                                             <constraint firstAttribute="width" constant="200" id="S4i-1k-c4q"/>
@@ -942,6 +942,7 @@
                     <connections>
                         <segue destination="lKf-0D-Yfr" kind="relationship" relationship="viewControllers" id="oJt-kE-y2V"/>
                         <segue destination="cPN-0Q-sgk" kind="relationship" relationship="viewControllers" id="JWe-W0-MKP"/>
+                        <segue destination="ziI-w0-EcI" kind="relationship" relationship="viewControllers" id="EY0-ko-ZUC"/>
                         <segue destination="kDj-H9-MUx" kind="relationship" relationship="viewControllers" id="odN-eW-YNI"/>
                     </connections>
                 </tabBarController>
@@ -1095,11 +1096,11 @@
                                                                     <state key="normal" title="🔮 Sort problems"/>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="fqm-PW-ctX">
-                                                                    <rect key="frame" x="341" y="22.666666666666671" width="9" height="15"/>
+                                                                    <rect key="frame" x="334" y="22" width="16" height="16"/>
                                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Old to new" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nk6-je-rmm">
-                                                                    <rect key="frame" x="259" y="21" width="74" height="18"/>
+                                                                    <rect key="frame" x="252" y="21" width="74" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1204,7 +1205,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="hPe-dS-D67">
-                                                                    <rect key="frame" x="341" y="22.666666666666668" width="9" height="15.000000000000004"/>
+                                                                    <rect key="frame" x="334" y="22" width="16" height="16"/>
                                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                             </subviews>
@@ -1329,6 +1330,74 @@
             </objects>
             <point key="canvasLocation" x="1871.0144927536232" y="339.94565217391306"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="spl-Cy-Ii7">
+            <objects>
+                <navigationController id="ziI-w0-EcI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="notes" id="Wny-zf-1Db">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fnU-WF-5Hc">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="nQg-JI-Gqm" kind="relationship" relationship="rootViewController" id="Nu6-bK-Mxr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c5x-oP-ehv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1009" y="1125"/>
+        </scene>
+        <!--Notes-->
+        <scene sceneID="era-ze-Wwn">
+            <objects>
+                <viewController id="nQg-JI-Gqm" customClass="NotesViewController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dnu-Oi-UUZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="xnO-d6-O5k">
+                                <rect key="frame" x="16" y="264" width="382" height="208.33333333333337"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="programming" translatesAutoresizingMaskIntoConstraints="NO" id="XoT-j5-ONy">
+                                        <rect key="frame" x="125" y="0.0" width="132" height="130"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No notes yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdT-nP-iOt">
+                                        <rect key="frame" x="141.33333333333334" y="141" width="99.333333333333343" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start by saving code snippets  for any problem" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soF-nu-PU0">
+                                        <rect key="frame" x="89.666666666666686" y="172.33333333333331" width="203" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xnO-d6-O5k" firstAttribute="centerY" secondItem="Dnu-Oi-UUZ" secondAttribute="centerY" id="a25-OS-BVu"/>
+                            <constraint firstItem="xnO-d6-O5k" firstAttribute="leading" secondItem="8bn-g0-kS7" secondAttribute="leading" constant="16" id="a4b-iL-d99"/>
+                            <constraint firstItem="xnO-d6-O5k" firstAttribute="centerX" secondItem="Dnu-Oi-UUZ" secondAttribute="centerX" id="ap8-FR-oWc"/>
+                            <constraint firstItem="8bn-g0-kS7" firstAttribute="trailing" secondItem="xnO-d6-O5k" secondAttribute="trailing" constant="16" id="hMr-RN-UV0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8bn-g0-kS7"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notes" id="lMN-JJ-2rm"/>
+                    <connections>
+                        <outlet property="emptyMessageLabel" destination="soF-nu-PU0" id="57e-pe-5Xc"/>
+                        <outlet property="emptyStackView" destination="xnO-d6-O5k" id="wAa-Y2-FN8"/>
+                        <outlet property="emptyTitleLabel" destination="vdT-nP-iOt" id="B7D-ej-1vf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzK-2Z-VJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1870" y="1125"/>
+        </scene>
         <!--About View Controller-->
         <scene sceneID="dB6-3I-C34">
             <objects>
@@ -1340,7 +1409,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NBv-Qz-Nwc">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">A wise (wo)man once said: "One Leetcode problem a day keeps unemployment away". If you are like me - wanting to practice coding problems for job interviews; or just simply like solving puzzles in form of coding - this app is your buddy. 🤓  All the problems in this app belong to LeetCode - a very popular platform for job interview preparations. Only free problems are included in the app, so if you look for beyond these, please head to the source site for more challenges.  The solutions in this app were collected from GitHub repos listed below. I cannot guarantee the performance of them but here are my kudos 🙏 to all the contributors of the repos:  ・Swift Solutions: https://github.com/soapyigu/LeetCode-Swift ・Java Solutions: https://github.com/fishercoder1534/Leetcode ・Python Solutions: https://github.com/Garvit244/Leetcode ・JavaScript Solutions: https://github.com/hanzichi/leetcode ・C++ Solutions: https://github.com/haoel/leetcode  The notes and code snippets you save in this app are saved locally and can be gone once you uninstall the app (please don't 😿). Fortunately, you can save them somewhere else by exporting them to other apps like Notes app etc.   Last but not least, the icons and logos in this apps were created using vectors from FlatIcon website. I wish I could make them all with my bare hands, but my talents are limited. 😬  Thanks for reading the potentially lengthiest About page ever! Please also buy AlgoDaily Premium to help me buy breakfast 🥓🍳🥯, as you may know, that's the most important meal of the day and I don't want to skip it.</mutableString>
+                                <string key="text">A wise (wo)man once said: "One Leetcode problem a day keeps unemployment away". If you are like me - wanting to practice coding problems for job interviews; or just simply like solving puzzles in form of coding - this app is your buddy. 🤓  All the problems in this app belong to LeetCode - a very popular platform for job interview preparations. Only free problems are included in the app, so if you look for beyond these, please head to the source site for more challenges.  The solutions in this app were collected from GitHub repos listed below. I cannot guarantee the performance of them but here are my kudos 🙏 to all the contributors of the repos:  ・Swift Solutions: https://github.com/soapyigu/LeetCode-Swift ・Java Solutions: https://github.com/fishercoder1534/Leetcode ・Python Solutions: https://github.com/Garvit244/Leetcode ・JavaScript Solutions: https://github.com/hanzichi/leetcode ・C++ Solutions: https://github.com/haoel/leetcode  The notes and code snippets you save in this app are saved locally and can be gone once you uninstall the app (please don't 😿). Fortunately, you can save them somewhere else by exporting them to other apps like Notes app etc.   Last but not least, the icons and logos in this apps were created using vectors from FlatIcon website. I wish I could make them all with my bare hands, but my talents are limited. 😬  Thanks for reading the potentially lengthiest About page ever! Please also buy AlgoDaily Premium to help me buy breakfast 🥓🍳🥯, as you may know, that's the most important meal of the day and I don't want to skip it.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -1361,7 +1430,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31V-w3-553" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1870" y="1091"/>
+            <point key="canvasLocation" x="5296" y="339"/>
         </scene>
         <!--Sort Options View Controller-->
         <scene sceneID="vgN-M5-R7B">
@@ -1401,7 +1470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b0n-tl-EN1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2748" y="1091"/>
+            <point key="canvasLocation" x="6174" y="339"/>
         </scene>
         <!--Premium Alert View Controller-->
         <scene sceneID="at6-Pi-lKI">
@@ -1495,10 +1564,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="premium" translatesAutoresizingMaskIntoConstraints="NO" id="HeD-Mj-72M">
-                                                            <rect key="frame" x="120.66666666666669" y="24" width="134" height="140"/>
+                                                            <rect key="frame" x="179.66666666666666" y="24" width="16" height="16"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Unlock Premium to get access to all features" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myP-kQ-PBy">
-                                                            <rect key="frame" x="16" y="180" width="343" height="36"/>
+                                                            <rect key="frame" x="16" y="56" width="343" height="160"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1792,9 +1861,11 @@
         <image name="disclosure" width="9" height="15"/>
         <image name="garbage" width="20" height="20"/>
         <image name="home" width="24" height="22"/>
+        <image name="notes" width="20" height="22"/>
         <image name="notification" width="130" height="135"/>
         <image name="plus" width="17" height="17"/>
         <image name="premium" width="134" height="140"/>
+        <image name="programming" width="132" height="130"/>
         <image name="reminder" width="23" height="22"/>
         <image name="search-result" width="130" height="130"/>
         <image name="settings" width="24" height="23"/>

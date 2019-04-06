@@ -295,22 +295,6 @@ class DetailViewController: UIViewController {
     }
     
     @objc private func showNotes() {
-        
-        if !AppConfigs.shared.isPremium {
-            if presentedViewController == nil,
-                let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
-                controller.mode = .code
-                
-                if let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") {
-                    controller.dismissHandler = { [weak self] in
-                        self?.present(detailController, animated: true, completion: nil)
-                    }
-                }
-                
-                presentPanModal(controller)
-            }
-            return
-        }
 
         if notePanel.parent == nil {
             notePanel.addPanel(toParent: self)
@@ -341,7 +325,22 @@ extension DetailViewController: CodeViewControllerDelegate {
     }
     
     func codeControlerShouldSave(content: String, language: Language) {
+        if !AppConfigs.shared.isPremium,
+            presentedViewController == nil,
+            let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController,
+            let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") {
+            
+            controller.mode = .code
+            controller.dismissHandler = { [weak self] in
+                self?.present(detailController, animated: true, completion: nil)
+            }
+                
+            presentPanModal(controller)
+            return
+        }
+        
         viewModel.updateNote(content, language: language)
+        notePanel.removePanelFromParent(animated: true)
     }
     
     func codeControllerShouldExpand() {
