@@ -172,7 +172,7 @@ class ReminderDetailViewController: UIViewController {
         datePicker.setValue(UIColor.titleTextColor(), forKey: "textColor")
         
         cancelButton.tintColor = .subtitleTextColor()
-        saveButton.tintColor = .appGreenColor()
+        saveButton.tintColor = .appYellowColor()
         sendProblemSwitch.onTintColor = .secondaryColor()
         
         problemsCountLabel.textColor = .subtitleTextColor()

@@ -46,7 +46,7 @@ class NoteCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var cardView: UIView!
     
-    private let highlighter = Highlightr()
+    private var highlighter: Highlightr?
     
     private(set) var disposeBag = DisposeBag()
     
@@ -77,13 +77,14 @@ class NoteCell: UICollectionViewCell, NibReusable {
     
     private func updateColors() {
         let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
+        highlighter = Highlightr()
         highlighter?.setTheme(to: theme)
         
         lastUpdatedLabel.textColor = .subtitleTextColor()
         titleLabel.textColor = .titleTextColor()
         
         deleteButton.tintColor = .appRedColor()
-        editButton.tintColor = .appBlueColor()
+        editButton.tintColor = .appYellowColor()
         
         contentView.backgroundColor = .backgroundColor()
         cardView.backgroundColor = .primaryColor()

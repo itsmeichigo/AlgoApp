@@ -14,26 +14,26 @@ import SwiftyStoreKit
 
 final class StoreHelper {
     
-    static let weeklyProductId = "com.ichigo.AlgoApp.WeeklyPremium"
-    static let monthlyProductId = "com.ichigo.AlgoApp.3monthPremium"
+    static let monthlyProductId = "com.ichigo.AlgoDaily.monthly"
+    static let yearlyProductId = "com.ichigo.AlgoDaily.Yearly"
     
     var products: Driver<[SKProduct]> {
         return productsRelay.asDriver()
-    }
-    
-    var weeklyProduct: Driver<SKProduct?> {
-        return weeklyProductRelay.asDriver()
     }
     
     var monthlyProduct: Driver<SKProduct?> {
         return monthlyProductRelay.asDriver()
     }
     
+    var yearlyProduct: Driver<SKProduct?> {
+        return yearlyProductRelay.asDriver()
+    }
+    
     let purchaseSuccess = PublishRelay<Void>()
     let purchaseError = PublishRelay<SKError>()
     
-    private let weeklyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
     private let monthlyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
+    private let yearlyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
     private let productsRelay = BehaviorRelay<[SKProduct]>(value: [])
     
     private static let sharedSecret = "416fafcd56174d3b9d4174ebab9b5512"
@@ -55,12 +55,12 @@ final class StoreHelper {
     }
     
     func fetchProductsInfo() {
-        SwiftyStoreKit.retrieveProductsInfo([StoreHelper.weeklyProductId, StoreHelper.monthlyProductId]) { [weak self] results in
+        SwiftyStoreKit.retrieveProductsInfo([StoreHelper.monthlyProductId, StoreHelper.yearlyProductId]) { [weak self] results in
             for product in results.retrievedProducts {
-                if product.productIdentifier == StoreHelper.weeklyProductId {
-                    self?.weeklyProductRelay.accept(product)
-                } else if product.productIdentifier == StoreHelper.monthlyProductId {
+                if product.productIdentifier == StoreHelper.monthlyProductId {
                     self?.monthlyProductRelay.accept(product)
+                } else if product.productIdentifier == StoreHelper.yearlyProductId {
+                    self?.yearlyProductRelay.accept(product)
                 }
             }
             self?.productsRelay.accept(Array(results.retrievedProducts))
@@ -92,7 +92,7 @@ final class StoreHelper {
                 // Verify the purchase of weekly subscription
                 let purchaseWeeklyResult = SwiftyStoreKit.verifySubscription(
                     ofType: .autoRenewable,
-                    productId: StoreHelper.weeklyProductId,
+                    productId: StoreHelper.monthlyProductId,
                     inReceipt: receipt)
                 
                 switch purchaseWeeklyResult {
@@ -105,7 +105,7 @@ final class StoreHelper {
                 // Verify the purchase of monthly subscription
                 let purchaseMonthlyResult = SwiftyStoreKit.verifySubscription(
                     ofType: .autoRenewable,
-                    productId: StoreHelper.monthlyProductId,
+                    productId: StoreHelper.yearlyProductId,
                     inReceipt: receipt)
                 
                 switch purchaseMonthlyResult {

@@ -77,17 +77,17 @@ class PremiumDetailViewController: UIViewController {
     @IBOutlet private weak var continueButton: UIButton!
     @IBOutlet private weak var dismissButton: UIBarButtonItem!
     
-    @IBOutlet private weak var weeklyProductView: UIView!
-    @IBOutlet private weak var weeklyProductNameLabel: UILabel!
-    @IBOutlet private weak var weeklyProductPriceLabel: UILabel!
-    @IBOutlet private weak var weeklyProductDescriptionLabel: UILabel!
-    @IBOutlet weak var weeklyProductButton: UIButton!
-    
     @IBOutlet private weak var monthlyProductView: UIView!
     @IBOutlet private weak var monthlyProductNameLabel: UILabel!
     @IBOutlet private weak var monthlyProductPriceLabel: UILabel!
     @IBOutlet private weak var monthlyProductDescriptionLabel: UILabel!
-    @IBOutlet weak var monthlyProductButton: UIButton!
+    @IBOutlet private weak var monthlyProductButton: UIButton!
+    
+    @IBOutlet private weak var yearlyProductView: UIView!
+    @IBOutlet private weak var yearlyProductNameLabel: UILabel!
+    @IBOutlet private weak var yearlyProductPriceLabel: UILabel!
+    @IBOutlet private weak var yearlyProductDescriptionLabel: UILabel!
+    @IBOutlet private weak var yearlyProductButton: UIButton!
     
     @IBOutlet weak var loadingProductsView: UIView!
     
@@ -140,7 +140,7 @@ class PremiumDetailViewController: UIViewController {
         continueButton.backgroundColor = .subtitleTextColor()
         continueButton.layer.cornerRadius = 8.0
         
-        [weeklyProductView, monthlyProductView].forEach { view in
+        [monthlyProductView, yearlyProductView].forEach { view in
             view?.layer.cornerRadius = 8.0
             view?.dropCardShadow()
             view?.layer.borderColor = UIColor.appRedColor().cgColor
@@ -192,25 +192,25 @@ class PremiumDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        weeklyProductButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                self?.weeklyProductButton.isSelected = true
-                self?.weeklyProductView.layer.borderWidth = 3.0
-                self?.monthlyProductView.layer.borderWidth = 0.0
-                self?.monthlyProductButton.isSelected = false
-            })
-            .disposed(by: disposeBag)
-        
         monthlyProductButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in
-                self?.weeklyProductButton.isSelected = false
-                self?.weeklyProductView.layer.borderWidth = 0.0
-                self?.monthlyProductView.layer.borderWidth = 3.0
                 self?.monthlyProductButton.isSelected = true
+                self?.monthlyProductView.layer.borderWidth = 3.0
+                self?.yearlyProductView.layer.borderWidth = 0.0
+                self?.yearlyProductButton.isSelected = false
             })
             .disposed(by: disposeBag)
         
-        Driver.merge(weeklyProductButton.rx.tap.asDriver(), monthlyProductButton.rx.tap.asDriver())
+        yearlyProductButton.rx.tap.asDriver()
+            .drive(onNext: { [weak self] in
+                self?.monthlyProductButton.isSelected = false
+                self?.monthlyProductView.layer.borderWidth = 0.0
+                self?.yearlyProductView.layer.borderWidth = 3.0
+                self?.yearlyProductButton.isSelected = true
+            })
+            .disposed(by: disposeBag)
+        
+        Driver.merge(monthlyProductButton.rx.tap.asDriver(), yearlyProductButton.rx.tap.asDriver())
             .map { true }
             .do(onNext: { [weak self] _ in
                 self?.continueButton.backgroundColor = .appRedColor()
@@ -222,11 +222,11 @@ class PremiumDetailViewController: UIViewController {
             .withLatestFrom(store.products)
             .drive(onNext: { [weak self] products in
                 guard let self = self else { return }
-                if self.weeklyProductButton.isSelected == true,
-                    let product = products.first(where: { $0.productIdentifier == StoreHelper.weeklyProductId }) {
-                    self.store.purchase(product: product)
-                } else if self.monthlyProductButton.isSelected == true,
+                if self.monthlyProductButton.isSelected == true,
                     let product = products.first(where: { $0.productIdentifier == StoreHelper.monthlyProductId }) {
+                    self.store.purchase(product: product)
+                } else if self.yearlyProductButton.isSelected == true,
+                    let product = products.first(where: { $0.productIdentifier == StoreHelper.yearlyProductId }) {
                     self.store.purchase(product: product)
                 }
                 
@@ -240,24 +240,9 @@ class PremiumDetailViewController: UIViewController {
             .map { !$0.isEmpty }
             .drive(onNext: { [weak self] in
                 self?.loadingProductsView.isHidden = $0
-                self?.weeklyProductView.isHidden = !$0
                 self?.monthlyProductView.isHidden = !$0
+                self?.yearlyProductView.isHidden = !$0
             })
-            .disposed(by: disposeBag)
-        
-        store.weeklyProduct
-            .map { $0?.localizedTitle }
-            .drive(weeklyProductNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.weeklyProduct
-            .map { $0?.localizedPrice }
-            .drive(weeklyProductPriceLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.weeklyProduct
-            .map { $0?.localizedDescription }
-            .drive(weeklyProductDescriptionLabel.rx.text)
             .disposed(by: disposeBag)
         
         store.monthlyProduct
@@ -273,6 +258,21 @@ class PremiumDetailViewController: UIViewController {
         store.monthlyProduct
             .map { $0?.localizedDescription }
             .drive(monthlyProductDescriptionLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.yearlyProduct
+            .map { $0?.localizedTitle }
+            .drive(yearlyProductNameLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.yearlyProduct
+            .map { $0?.localizedPrice }
+            .drive(yearlyProductPriceLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        store.yearlyProduct
+            .map { $0?.localizedDescription }
+            .drive(yearlyProductDescriptionLabel.rx.text)
             .disposed(by: disposeBag)
         
         store.purchaseSuccess
