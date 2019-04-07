@@ -72,7 +72,7 @@ class NoteCell: UICollectionViewCell, NibReusable {
         dateFormatter.dateFormat = "MMM dd YYYY"
         lastUpdatedLabel.text = "Last Updated: " + dateFormatter.string(from: model.lastUpdated)
         
-        contentTextView.attributedText = highlighter?.highlight(model.content, as: model.language.rawLanguageName, fastRender: true)
+        contentTextView.attributedText = highlighter?.highlight(model.content, as: model.language.rawLanguageName, fastRender: false)
         contentTextView.scrollRangeToVisible(NSRange(location: 0, length: 1))
         
         languageLabel.text = "\(model.language.rawValue) Snippet"
