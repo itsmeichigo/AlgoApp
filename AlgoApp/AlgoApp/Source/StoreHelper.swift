@@ -83,7 +83,7 @@ final class StoreHelper {
     
     static func verifySubscription(completionHandler: ((Bool) -> Void)? = nil) {
         // FIXME: update service type here!!!
-        let appleValidator = AppleReceiptValidator(service: .sandbox, sharedSecret: sharedSecret)
+        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: sharedSecret)
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             var purchased = false
             

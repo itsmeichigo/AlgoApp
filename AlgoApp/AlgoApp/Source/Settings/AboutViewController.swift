@@ -44,12 +44,14 @@ class AboutViewController: UIViewController {
         let attributedString = NSMutableAttributedString(string: string)
         attributedString.addAttributes([.foregroundColor: UIColor.titleTextColor(), .font: UIFont.systemFont(ofSize: 15)], range: NSRange(location: 0, length: string.count))
         
-        if let range = string.range(of: "LeetCode") {
-            attributedString.addAttribute(.link, value: "https://leetcode.com/", range: NSRange(range, in: string))
-        }
-        
-        if let range = string.range(of: "FlatIcon") {
-            attributedString.addAttribute(.link, value: "https://www.flaticon.com/", range: NSRange(range, in: string))
+        string.enumerateSubstrings(in: string.startIndex..<string.endIndex, options: .byWords) { (substring, range, _, _) in
+            if substring == "LeetCode", string[range.upperBound].isWhitespace {
+                attributedString.addAttribute(.link, value: "https://leetcode.com/", range: NSRange(range, in: string))
+            }
+            
+            if substring == "FlatIcon" {
+                attributedString.addAttribute(.link, value: "https://www.flaticon.com/", range: NSRange(range, in: string))
+            }
         }
         
         contentTextView.attributedText = attributedString
