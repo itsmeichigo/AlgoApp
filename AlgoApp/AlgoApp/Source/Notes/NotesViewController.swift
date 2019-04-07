@@ -20,6 +20,7 @@ class NotesViewController: UIViewController {
     @IBOutlet weak var emptyTitleLabel: UILabel!
     @IBOutlet weak var emptyMessageLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageCountLabel: UILabel!
     
     private let disposeBag = DisposeBag()
     private let viewModel = NotesViewModel()
@@ -58,6 +59,7 @@ class NotesViewController: UIViewController {
         
         emptyTitleLabel.textColor = .subtitleTextColor()
         emptyMessageLabel.textColor = .subtitleTextColor()
+        pageCountLabel.textColor = .subtitleTextColor()
         
         view.backgroundColor = .backgroundColor()
         
@@ -71,6 +73,14 @@ class NotesViewController: UIViewController {
         viewModel.notes.asDriver()
             .map { $0.isEmpty }
             .drive(collectionView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.notes.asDriver()
+            .do(onNext: { [weak self] in
+                self?.updateCountLabel(total: $0.count)
+            })
+            .map { $0.isEmpty }
+            .drive(pageCountLabel.rx.isHidden)
             .disposed(by: disposeBag)
     }
     
@@ -140,9 +150,9 @@ class NotesViewController: UIViewController {
     
     private func configureCollectionViewLayoutItemSize() {
         let inset: CGFloat = calculateSectionInset()
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         
-        collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: collectionView.frame.height - inset * 2)
+        collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: collectionView.frame.height)
     }
     
     private func indexOfMajorCell() -> Int {
@@ -153,11 +163,19 @@ class NotesViewController: UIViewController {
         let safeIndex = max(0, min(numberOfItems - 1, index))
         return safeIndex
     }
+    
+    private func updateCountLabel(total: Int) {
+        pageCountLabel.text = "Note \(indexOfMajorCell() + 1) of \(total)"
+    }
 }
 
 extension NotesViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         indexOfCellBeforeDragging = indexOfMajorCell()
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateCountLabel(total: collectionView.numberOfItems(inSection: 0))
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
