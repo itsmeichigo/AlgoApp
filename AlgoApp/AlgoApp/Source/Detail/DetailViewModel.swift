@@ -91,11 +91,23 @@ final class DetailViewModel {
         }
     }
     
-    func updateNote(_ note: String, language: Language) {
+    func updateNote(_ content: String, language: Language) {
         guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
         try! realmForWrite.write {
-            question.note = note
-            question.noteLanguage = language.rawValue
+            if let note = question.note {
+                note.content = content
+                note.language = language.rawValue
+                note.questionId = question.id
+                note.questionTitle = question.title
+            } else {
+                let note = Note()
+                note.content = content
+                note.language = language.rawValue
+                note.questionId = question.id
+                note.questionTitle = question.title
+                question.note = note
+            }
+            
         }
     }
 }

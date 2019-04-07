@@ -41,6 +41,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     
     var viewModel: DetailViewModel!
+    var shouldShowNote = false
     
     private let disposeBag = DisposeBag()
     private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appPurpleColor()]
@@ -64,6 +65,14 @@ class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         AppUtility.lockOrientation(.all)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldShowNote {
+            shouldShowNote = false
+            showNotes()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

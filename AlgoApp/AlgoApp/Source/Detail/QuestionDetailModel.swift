@@ -33,7 +33,11 @@ struct QuestionDetailModel {
         titleSlug = question.titleSlug
         solved = question.solved
         saved = question.saved
-        note = question.note
-        noteLanguage = Language(rawValue: question.noteLanguage) ?? .markdown
+        note = question.note?.content ?? ""
+        if let language = question.note?.language {
+            noteLanguage = Language(rawValue: language) ?? .markdown
+        } else {
+            noteLanguage = .markdown
+        }
     }
 }

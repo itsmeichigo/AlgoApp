@@ -22,9 +22,9 @@ final class Question: Object {
     @objc dynamic var saved = false
     
     @objc dynamic var solved = false
-    @objc dynamic var note = ""
-    @objc dynamic var noteLanguage = "Markdown"
     @objc dynamic var emoji = ""
+    
+    @objc dynamic var note: Note?
     
     var tags = List<Tag>()
     var companies = List<Company>()

@@ -11,6 +11,9 @@
 		8466EA9403B1C5EF1EAEFC28 /* Pods_AlgoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */; };
 		DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */; };
 		DE0B03C52258C00A00770AA7 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03C42258C00A00770AA7 /* NotesViewController.swift */; };
+		DE0B03CE2258F04400770AA7 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03CD2258F04400770AA7 /* NoteCell.swift */; };
+		DE0B03D022599E2400770AA7 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03CF22599E2400770AA7 /* NotesViewModel.swift */; };
+		DE0B03D222599F5800770AA7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03D122599F5800770AA7 /* Note.swift */; };
 		DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515122070C2800BFBB0B /* AppDelegate.swift */; };
 		DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515322070C2800BFBB0B /* HomeViewController.swift */; };
 		DE0E515722070C2800BFBB0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE0E515522070C2800BFBB0B /* Main.storyboard */; };
@@ -83,6 +86,9 @@
 		7B2540EDFF9B32ED935A3A23 /* Pods-AlgoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.release.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVProgressHUD+Extension.swift"; sourceTree = "<group>"; };
 		DE0B03C42258C00A00770AA7 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		DE0B03CD2258F04400770AA7 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		DE0B03CF22599E2400770AA7 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		DE0B03D122599F5800770AA7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		DE0E514E22070C2800BFBB0B /* AlgoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0E515122070C2800BFBB0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE0E515322070C2800BFBB0B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +193,9 @@
 		DE0B03C32258BFEF00770AA7 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				DE0B03CF22599E2400770AA7 /* NotesViewModel.swift */,
 				DE0B03C42258C00A00770AA7 /* NotesViewController.swift */,
+				DE0B03CD2258F04400770AA7 /* NoteCell.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -295,6 +303,7 @@
 				DE0E51842208416100BFBB0B /* QuestionList.swift */,
 				DE112E9A223510D5003A5796 /* Reminder.swift */,
 				DE112E9C223511B5003A5796 /* QuestionFilter.swift */,
+				DE0B03D122599F5800770AA7 /* Note.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -521,7 +530,6 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
@@ -548,7 +556,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
@@ -603,7 +610,6 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
@@ -629,7 +635,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
@@ -711,6 +716,7 @@
 				DE112E9722337451003A5796 /* ReminderDetailViewController.swift in Sources */,
 				DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */,
 				DE112EA022351652003A5796 /* ReminderDetailViewModel.swift in Sources */,
+				DE0B03CE2258F04400770AA7 /* NoteCell.swift in Sources */,
 				DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */,
 				DE0F99FB222F900F0034BF3E /* SolutionScraper.swift in Sources */,
 				DE0E51852208416100BFBB0B /* QuestionList.swift in Sources */,
@@ -724,11 +730,13 @@
 				DE0E5180220840A400BFBB0B /* Tag.swift in Sources */,
 				DEBFEE1322409539005B1A7A /* RxApplicationDelegateProxy.swift in Sources */,
 				DE112E9B223510D5003A5796 /* Reminder.swift in Sources */,
+				DE0B03D022599E2400770AA7 /* NotesViewModel.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
 				DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */,
 				DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */,
 				DE139D7F22436EC200879F89 /* Language.swift in Sources */,
 				DE0E51832208413E00BFBB0B /* Company.swift in Sources */,
+				DE0B03D222599F5800770AA7 /* Note.swift in Sources */,
 				DE0B03C52258C00A00770AA7 /* NotesViewController.swift in Sources */,
 				DE1BA9B1222C0D44009C30B0 /* UINavigationBar+Extension.swift in Sources */,
 				DE157EA7221D399E0040B4E9 /* FilterViewController.swift in Sources */,
