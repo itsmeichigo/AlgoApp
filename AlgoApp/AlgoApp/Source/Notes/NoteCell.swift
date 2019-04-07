@@ -80,7 +80,8 @@ class NoteCell: UICollectionViewCell, NibReusable {
     
     private func updateColors() {
         let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
-        highlighter = Highlightr()
+        let path = Bundle.main.path(forResource: "highlight.min", ofType: "js")
+        highlighter = Highlightr(highlightPath: path)
         highlighter?.setTheme(to: theme)
         
         languageLabel.textColor = .subtitleTextColor()

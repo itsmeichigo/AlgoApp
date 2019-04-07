@@ -37,22 +37,26 @@ final class CodeViewModel {
         
         self.language.accept(language)
         
-        highlighter = Highlightr()
+        let path = Bundle.main.path(forResource: "highlight.min", ofType: "js")
+        highlighter = Highlightr(highlightPath: path)
+        
         let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
         highlighter?.setTheme(to: theme)
         
         self.language
-            .map { [weak self] language -> NSLayoutManager? in
-                guard let highlighter = self?.highlighter else { return nil }
-                
-                let textStorage = CodeAttributedString(highlightr: highlighter)
-                textStorage.language = language.rawLanguageName
-                let layoutManager = NSLayoutManager()
-                textStorage.addLayoutManager(layoutManager)
-                
-                return layoutManager
-            }
+            .map { [weak self] in self?.setupLayoutManager(for: $0) }
             .bind(to: layoutManager)
-            .disposed(by: disposeBag)
+            .disposed(by: disposeBag)        
+    }
+    
+    private func setupLayoutManager(for language: Language) -> NSLayoutManager? {
+        guard let highlighter = self.highlighter else { return nil }
+        
+        let textStorage = CodeAttributedString(highlightr: highlighter)
+        textStorage.language = language.rawLanguageName
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        
+        return layoutManager
     }
 }

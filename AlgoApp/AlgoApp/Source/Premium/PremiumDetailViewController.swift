@@ -154,7 +154,7 @@ class PremiumDetailViewController: UIViewController {
         
         confettiView.type = .mixed
         confettiView.isUserInteractionEnabled = false
-        view.addSubview(confettiView)
+        UIApplication.shared.keyWindow?.addSubview(confettiView)
         confettiView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
