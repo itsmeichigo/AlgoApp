@@ -297,6 +297,7 @@
 		DE0E517D2208408E00BFBB0B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE139D7E22436EC200879F89 /* Language.swift */,
 				DE0E517F220840A400BFBB0B /* Question.swift */,
 				DE0E517E220840A400BFBB0B /* Tag.swift */,
 				DE0E51822208413E00BFBB0B /* Company.swift */,
@@ -348,7 +349,6 @@
 			children = (
 				DE13A11722226B920091FF96 /* CodeViewModel.swift */,
 				DE13A11522226A7F0091FF96 /* CodeViewController.swift */,
-				DE139D7E22436EC200879F89 /* Language.swift */,
 			);
 			path = CodeView;
 			sourceTree = "<group>";

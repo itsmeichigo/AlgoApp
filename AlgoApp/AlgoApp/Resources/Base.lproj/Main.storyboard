@@ -1397,7 +1397,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2l0-MN-uNe">
                                                     <rect key="frame" x="8" y="32" width="354" height="436"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated: May 10th" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bST-UZ-FLh">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Java Snippet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bST-UZ-FLh">
                                                             <rect key="frame" x="16" y="31.999999999999996" width="322" height="14.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1434,10 +1434,17 @@
                                                             <color key="tintColor" red="0.3803921569" green="0.5568627451" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <state key="normal" image="pencil"/>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated: May 20th" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAt-fK-pGe">
+                                                            <rect key="frame" x="16" y="393" width="134.33333333333334" height="14.333333333333314"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="G9I-mc-ner" secondAttribute="trailing" constant="16" id="5jm-8W-XB2"/>
+                                                        <constraint firstItem="jAt-fK-pGe" firstAttribute="leading" secondItem="2l0-MN-uNe" secondAttribute="leading" constant="16" id="71B-Vs-lgX"/>
                                                         <constraint firstItem="K0s-rl-bYC" firstAttribute="centerY" secondItem="G9I-mc-ner" secondAttribute="centerY" id="GFs-NA-KAl"/>
                                                         <constraint firstItem="9HI-ky-6pk" firstAttribute="top" secondItem="bST-UZ-FLh" secondAttribute="bottom" constant="8" id="GTc-fo-avp"/>
                                                         <constraint firstItem="Qcv-uk-SgZ" firstAttribute="leading" secondItem="2l0-MN-uNe" secondAttribute="leading" constant="16" id="IA2-vT-on3"/>
@@ -1445,9 +1452,11 @@
                                                         <constraint firstAttribute="trailing" secondItem="bST-UZ-FLh" secondAttribute="trailing" constant="16" id="TPL-pt-Spr"/>
                                                         <constraint firstItem="bST-UZ-FLh" firstAttribute="leading" secondItem="2l0-MN-uNe" secondAttribute="leading" constant="16" id="U6u-nr-PE5"/>
                                                         <constraint firstItem="G9I-mc-ner" firstAttribute="top" secondItem="Qcv-uk-SgZ" secondAttribute="bottom" constant="16" id="Z6d-c2-7Z2"/>
+                                                        <constraint firstItem="jAt-fK-pGe" firstAttribute="centerY" secondItem="K0s-rl-bYC" secondAttribute="centerY" id="ZhQ-EI-0hw"/>
                                                         <constraint firstAttribute="trailing" secondItem="9HI-ky-6pk" secondAttribute="trailing" constant="16" id="fGE-Cn-lcT"/>
                                                         <constraint firstItem="bST-UZ-FLh" firstAttribute="top" secondItem="2l0-MN-uNe" secondAttribute="top" constant="32" id="h8S-jB-njv"/>
                                                         <constraint firstItem="Qcv-uk-SgZ" firstAttribute="top" secondItem="9HI-ky-6pk" secondAttribute="bottom" constant="16" id="kP6-Ce-A9j"/>
+                                                        <constraint firstItem="K0s-rl-bYC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jAt-fK-pGe" secondAttribute="trailing" constant="8" id="lpI-v8-Z1n"/>
                                                         <constraint firstItem="9HI-ky-6pk" firstAttribute="leading" secondItem="2l0-MN-uNe" secondAttribute="leading" constant="16" id="sYG-O4-T0c"/>
                                                         <constraint firstAttribute="bottom" secondItem="G9I-mc-ner" secondAttribute="bottom" constant="16" id="upQ-jf-4Wa"/>
                                                         <constraint firstAttribute="trailing" secondItem="Qcv-uk-SgZ" secondAttribute="trailing" constant="16" id="yho-ew-DL3"/>
@@ -1466,7 +1475,8 @@
                                             <outlet property="contentTextView" destination="Qcv-uk-SgZ" id="JYP-kS-EJj"/>
                                             <outlet property="deleteButton" destination="G9I-mc-ner" id="lEK-UN-Kq0"/>
                                             <outlet property="editButton" destination="K0s-rl-bYC" id="Owk-qc-GOy"/>
-                                            <outlet property="lastUpdatedLabel" destination="bST-UZ-FLh" id="TzF-Dt-b4l"/>
+                                            <outlet property="languageLabel" destination="bST-UZ-FLh" id="BuW-U3-D4U"/>
+                                            <outlet property="lastUpdatedLabel" destination="jAt-fK-pGe" id="Vbb-sd-otA"/>
                                             <outlet property="titleLabel" destination="9HI-ky-6pk" id="Wry-BY-U7a"/>
                                         </connections>
                                     </collectionViewCell>

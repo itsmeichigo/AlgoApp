@@ -45,6 +45,7 @@ class NoteCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var languageLabel: UILabel!
     
     private var highlighter: Highlightr?
     
@@ -73,6 +74,8 @@ class NoteCell: UICollectionViewCell, NibReusable {
         
         contentTextView.attributedText = highlighter?.highlight(model.content, as: model.language.rawLanguageName, fastRender: true)
         contentTextView.scrollRangeToVisible(NSRange(location: 0, length: 1))
+        
+        languageLabel.text = "\(model.language.rawValue) Snippet"
     }
     
     private func updateColors() {
@@ -80,6 +83,7 @@ class NoteCell: UICollectionViewCell, NibReusable {
         highlighter = Highlightr()
         highlighter?.setTheme(to: theme)
         
+        languageLabel.textColor = .subtitleTextColor()
         lastUpdatedLabel.textColor = .subtitleTextColor()
         titleLabel.textColor = .titleTextColor()
         
