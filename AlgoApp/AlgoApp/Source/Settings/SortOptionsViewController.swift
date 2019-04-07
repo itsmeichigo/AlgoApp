@@ -64,11 +64,6 @@ extension SortOptionsViewController: UIPickerViewDataSource, UIPickerViewDelegat
 }
 
 extension SortOptionsViewController: PanModalPresentable {
-    
-    var isPanScrollEnabled: Bool {
-        return false
-    }
-    
     var panScrollable: UIScrollView? {
         return nil
     }
@@ -83,6 +78,10 @@ extension SortOptionsViewController: PanModalPresentable {
     }
     
     var showDragIndicator: Bool {
+        return false
+    }
+    
+    func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return false
     }
 }
