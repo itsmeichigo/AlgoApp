@@ -58,6 +58,7 @@
 		DE1D26D0223CE9EA00AA9F68 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */; };
 		DE1D26D2223CFD2500AA9F68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */; };
 		DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */; };
+		DE1E284D225CFF7900F6E04E /* String+FormattedDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E284C225CFF7900F6E04E /* String+FormattedDescription.swift */; };
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 		DE24271422460E95000A10ED /* PannableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271322460E95000A10ED /* PannableNavigationController.swift */; };
 		DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */; };
@@ -138,6 +139,7 @@
 		DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
 		DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		DE1E284C225CFF7900F6E04E /* String+FormattedDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FormattedDescription.swift"; sourceTree = "<group>"; };
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		DE24271322460E95000A10ED /* PannableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableNavigationController.swift; sourceTree = "<group>"; };
 		DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumAlertViewController.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */,
 				DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */,
 				DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */,
+				DE1E284C225CFF7900F6E04E /* String+FormattedDescription.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				DE112E9B223510D5003A5796 /* Reminder.swift in Sources */,
 				DE0B03D022599E2400770AA7 /* NotesViewModel.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
+				DE1E284D225CFF7900F6E04E /* String+FormattedDescription.swift in Sources */,
 				DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */,
 				DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */,
 				DE139D7F22436EC200879F89 /* Language.swift in Sources */,

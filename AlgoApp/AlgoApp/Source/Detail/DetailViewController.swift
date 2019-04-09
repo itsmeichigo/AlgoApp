@@ -185,8 +185,8 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.detail
-            .map { $0?.content.stringByDecodingHTMLEntities }
-            .bind(to: descriptionTextView.rx.text)
+            .map { $0?.content.stringByDecodingHTMLEntities.formattedDescription }
+            .bind(to: descriptionTextView.rx.attributedText)
             .disposed(by: disposeBag)
         
         viewModel.detail

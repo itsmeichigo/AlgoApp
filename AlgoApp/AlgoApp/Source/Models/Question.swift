@@ -93,7 +93,7 @@ extension Question {
         var predicates: [NSPredicate] = []
         var results = realm.objects(Question.self)
         if let query = query, !query.isEmpty {
-            let predicate = NSPredicate(format: "title contains %@", query)
+            let predicate = NSPredicate(format: "title contains[cd] %@", query)
             predicates.append(predicate)
         }
         
