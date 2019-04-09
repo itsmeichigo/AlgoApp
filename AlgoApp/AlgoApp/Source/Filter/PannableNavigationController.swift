@@ -14,7 +14,11 @@ class PannableNavigationController: UINavigationController, PanModalPresentable 
     // MARK: - Pan Modal Presentable
 
     var panScrollable: UIScrollView? {
-        return (topViewController as? PanModalPresentable)?.panScrollable
+        return nil
+    }
+    
+    var longFormHeight: PanModalHeight {
+        return shortFormHeight
     }
 
     var shortFormHeight: PanModalHeight {
@@ -23,6 +27,10 @@ class PannableNavigationController: UINavigationController, PanModalPresentable 
     }
     
     var showDragIndicator: Bool {
+        return false
+    }
+    
+    func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return false
     }
 }
