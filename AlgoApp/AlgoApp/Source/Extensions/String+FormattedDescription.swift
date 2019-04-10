@@ -18,7 +18,7 @@ extension String {
             .font: regularFont
             ])
         
-        guard let monospacefont = UIFont(name: "Courier", size: 15) else { return attributedString }
+        guard let monospacefont = UIFont(name: "Consolas", size: 15) else { return attributedString }
         
         var isExample = false
         self.enumerateSubstrings(in: self.startIndex..<self.endIndex, options: .byParagraphs, { (substring, range, _, _) in
@@ -44,18 +44,9 @@ extension String {
         })
         
         let range = NSRange(self.startIndex..., in: self)
-        let titles = ["Input:", "Output:", "Explanation:", "Clarification:", "Note:", "Follow up:", "Example(\\s\\d){0,1}:"]
-        titles.forEach { title in
-            if let regex = try? NSRegularExpression(pattern: title, options: []) {
-                let matches = regex.matches(in: self, options: [], range: range)
-                for match in matches {
-                    attributedString.addAttribute(.font, value: boldFont, range: match.range)
-                }
-            }
-        }
         
         let codePatterns = [
-            "\\b([b-z]|[A-Z]){1}\\b", // eg: x, y
+            "\\b([b-z]|[A-Z]|[0-9]){1}\\b", // eg: x, y
             "\\b\\w{1,20}\\d\\b", // eg: num1, a2
             "(\\w){1,10}\\((.){0,20}\\)", // eg: sqrt(x)
             "\\[(.){1,30}\\]", // eg: [2]
@@ -73,10 +64,16 @@ extension String {
             }
         }
         
+        let titles = ["Input:", "Output:", "Explanation:", "Clarification:", "Note:", "Notes:", "Follow up:", "For example:", "Example((\\s){0,1}\\d){0,1}:"]
+        titles.forEach { title in
+            if let regex = try? NSRegularExpression(pattern: title, options: []) {
+                let matches = regex.matches(in: self, options: [], range: range)
+                for match in matches {
+                    attributedString.addAttribute(.font, value: boldFont, range: match.range)
+                }
+            }
+        }
+        
         return attributedString
-    }
-    
-    var isNumeric: Bool {
-        return Int(self) != nil
     }
 }
