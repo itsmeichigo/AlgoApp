@@ -39,13 +39,13 @@ struct NoteCellModel: IdentifiableType, Equatable {
 
 class NoteCell: UICollectionViewCell, NibReusable {
     
-    @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var shareButton: UIButton!
     
     private var highlighter: Highlightr?
     
@@ -68,10 +68,6 @@ class NoteCell: UICollectionViewCell, NibReusable {
         
         titleLabel.text = model.questionTitle
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd YYYY"
-        lastUpdatedLabel.text = "Last Updated: " + dateFormatter.string(from: model.lastUpdated)
-        
         contentTextView.attributedText = highlighter?.highlight(model.content, as: model.language.rawLanguageName, fastRender: false)
         contentTextView.scrollRangeToVisible(NSRange(location: 0, length: 1))
         
@@ -85,11 +81,11 @@ class NoteCell: UICollectionViewCell, NibReusable {
         highlighter?.setTheme(to: theme)
         
         languageLabel.textColor = .subtitleTextColor()
-        lastUpdatedLabel.textColor = .subtitleTextColor()
         titleLabel.textColor = .titleTextColor()
         
         deleteButton.tintColor = .appRedColor()
         editButton.tintColor = .appYellowColor()
+        shareButton.tintColor = .appGreenColor()
         
         contentView.backgroundColor = .backgroundColor()
         cardView.backgroundColor = .primaryColor()

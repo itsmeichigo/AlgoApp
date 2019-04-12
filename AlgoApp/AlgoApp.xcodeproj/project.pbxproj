@@ -59,7 +59,6 @@
 		DE1D26D2223CFD2500AA9F68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */; };
 		DE1D26D4223E3C7800AA9F68 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */; };
 		DE1E284D225CFF7900F6E04E /* String+FormattedDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E284C225CFF7900F6E04E /* String+FormattedDescription.swift */; };
-		DE1E284F225E4B3300F6E04E /* CONSOLA.TTF in Resources */ = {isa = PBXBuildFile; fileRef = DE1E284E225E4B3300F6E04E /* CONSOLA.TTF */; };
 		DE1E399F2236C82900DD3465 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E399E2236C82900DD3465 /* ReminderCell.swift */; };
 		DE24271422460E95000A10ED /* PannableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271322460E95000A10ED /* PannableNavigationController.swift */; };
 		DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */; };
@@ -141,7 +140,6 @@
 		DE1D26D1223CFD2500AA9F68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		DE1E284C225CFF7900F6E04E /* String+FormattedDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FormattedDescription.swift"; sourceTree = "<group>"; };
-		DE1E284E225E4B3300F6E04E /* CONSOLA.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = CONSOLA.TTF; sourceTree = "<group>"; };
 		DE1E399E2236C82900DD3465 /* ReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		DE24271322460E95000A10ED /* PannableNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableNavigationController.swift; sourceTree = "<group>"; };
 		DE24271622466CFD000A10ED /* PremiumAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumAlertViewController.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 		DE0E517B220830B200BFBB0B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DE1E284E225E4B3300F6E04E /* CONSOLA.TTF */,
 				DE0B03D4225A697A00770AA7 /* highlight.min.js */,
 				DE0E515522070C2800BFBB0B /* Main.storyboard */,
 				DE0E515A22070C2A00BFBB0B /* LaunchScreen.storyboard */,
@@ -506,7 +503,6 @@
 				DE13936E221A491200F70F80 /* default.realm in Resources */,
 				DE1A9A1F22429076007E79F6 /* GoogleService-Info.plist in Resources */,
 				DE0B03D5225A697B00770AA7 /* highlight.min.js in Resources */,
-				DE1E284F225E4B3300F6E04E /* CONSOLA.TTF in Resources */,
 				DE0E515922070C2A00BFBB0B /* Assets.xcassets in Resources */,
 				DE0E515722070C2800BFBB0B /* Main.storyboard in Resources */,
 			);

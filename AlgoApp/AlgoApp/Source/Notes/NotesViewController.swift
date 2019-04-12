@@ -45,6 +45,11 @@ class NotesViewController: UIViewController {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.tintColor = .appBlueColor()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configureCollectionViewLayoutItemSize()
+    }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
@@ -111,9 +116,21 @@ class NotesViewController: UIViewController {
                 })
                 .disposed(by: cell.disposeBag)
             
+            cell.shareButton.rx.tap
+                .subscribe(onNext: { [weak self] in
+                    self?.shareNote(content: model.content)
+                })
+                .disposed(by: cell.disposeBag)
+            
             return cell
         })
     }
+    
+    private func shareNote(content: String) {
+        let controller = UIActivityViewController(activityItems: [content], applicationActivities: nil)
+        present(controller, animated: true, completion: nil)
+    }
+
     
     private func showDeleteAlert(for noteId: String) {
         let alert = UIAlertController(title: "Delete Note", message: "Are you sure you want to remove this note?", preferredStyle: .alert)

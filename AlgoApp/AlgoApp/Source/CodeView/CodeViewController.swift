@@ -23,7 +23,6 @@ class CodeViewController: UIViewController {
     weak var delegate: CodeViewControllerDelegate?
     
     private var codeTextView: UITextView!
-    private lazy var shareButton = UIBarButtonItem(image: UIImage(named: "share"), style: .plain, target: self, action: #selector(shareNote))
  
     private let languageButton = UIButton(type: .system)
     private let pickerView = UIPickerView(frame: .zero)
@@ -97,9 +96,7 @@ private extension CodeViewController {
             let saveButton = UIBarButtonItem(image: UIImage(named: "done"), style: .plain, target: self, action: #selector(saveContent))
             saveButton.tintColor = .appGreenColor()
             
-            shareButton.tintColor = .subtitleTextColor()
-            
-            navigationItem.rightBarButtonItems = [saveButton, shareButton]
+            navigationItem.rightBarButtonItems = [saveButton]
             
             viewModel.language
                 .subscribe(onNext: { [weak self] in
@@ -174,11 +171,6 @@ private extension CodeViewController {
         } else {
             codeTextView.text = placeholder
         }
-        
-        codeTextView.rx.attributedText.asDriver()
-            .map { $0 != nil }
-            .drive(shareButton.rx.isEnabled)
-            .disposed(by: disposeBag)
     }
     
     func togglePickerView(show: Bool) {
@@ -225,13 +217,6 @@ private extension CodeViewController {
         codeTextView.snp.updateConstraints { maker in
             maker.bottom.equalToSuperview().offset(0)
         }
-    }
-    
-    @objc func shareNote() {
-        guard let content = codeTextView.attributedText?.string else { return }
-        
-        let controller = UIActivityViewController(activityItems: [content], applicationActivities: nil)
-        present(controller, animated: true, completion: nil)
     }
     
     @objc func orientationChanged(notification : NSNotification) {

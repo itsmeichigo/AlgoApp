@@ -10,7 +10,8 @@ import UIKit
 
 extension String {
     var formattedDescription: NSAttributedString {
-        let boldFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+        let boldFont = UIFont.systemFont(ofSize: 15, weight: .semibold
+        )
         let regularFont = UIFont.systemFont(ofSize: 15)
         
         let attributedString = NSMutableAttributedString(string: self, attributes: [
@@ -18,27 +19,28 @@ extension String {
             .font: regularFont
             ])
         
-        guard let monospacefont = UIFont(name: "Consolas", size: 15) else { return attributedString }
+        guard let monospacefont = UIFont(name: "Courier", size: 15) else { return attributedString }
         
         var isExample = false
         self.enumerateSubstrings(in: self.startIndex..<self.endIndex, options: .byParagraphs, { (substring, range, _, _) in
 
             guard let substring = substring else { return }
             let endsWithPunctuations = [".", ":", ";", "?", ")", "\""].contains(String(substring.trimmingCharacters(in: .whitespaces).suffix(1)))
-            let isCommentBlock = substring.starts(with: "//")
+            let isCommentBlock = substring.contains("//")
 
             let nsrange = NSRange(range, in: self)
             if substring.starts(with: "Example") == true || isCommentBlock {
                 isExample = true
             } else if substring.starts(with: "Clarification:") == true ||
                 substring.starts(with: "Note:") == true ||
-                substring.starts(with: "Follow up:") == true {
+                substring.starts(with: "Follow up:") == true ||
+                substring.starts(with: "Explanation") == true {
                 isExample = false
             }
             
             if isExample || !endsWithPunctuations || isCommentBlock {
                 attributedString.addAttribute(.font, value: monospacefont, range: nsrange)
-            } else if !isExample {
+            } else {
                 attributedString.addAttribute(.font, value: regularFont, range: nsrange)
             }
         })
@@ -64,7 +66,7 @@ extension String {
             }
         }
         
-        let titles = ["Input:", "Output:", "Explanation:", "Clarification:", "Note:", "Notes:", "Follow up:", "For example:", "Example((\\s){0,1}\\d){0,1}:"]
+        let titles = ["Input:", "Output:", "Explanation:", "Clarification:", "Note:", "Notes:", "Follow up:", "For example:", "Example((\\s){0,1}\\d){0,1}:", "Examples:"]
         titles.forEach { title in
             if let regex = try? NSRegularExpression(pattern: title, options: []) {
                 let matches = regex.matches(in: self, options: [], range: range)

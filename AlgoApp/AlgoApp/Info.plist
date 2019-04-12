@@ -47,9 +47,5 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>CONSOLA.TTF</string>
-	</array>
 </dict>
 </plist>
