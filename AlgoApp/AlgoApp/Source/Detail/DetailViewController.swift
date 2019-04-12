@@ -130,8 +130,15 @@ class DetailViewController: UIViewController {
     private func configureViews() {
         
         otherSolutionsTagView.backgroundColor = .clear
+        otherSolutionsTagView.paddingVertical = 6.0
+        otherSolutionsTagView.paddingHorizontal = 10.0
+        otherSolutionsTagView.tagFont = .systemFont(ofSize: 15)
         otherSolutionsTagView.delegate = self
+        
         tagsView.isUserInteractionEnabled = false
+        tagsView.paddingVertical = 6.0
+        tagsView.paddingHorizontal = 10.0
+        tagsView.tagFont = .systemFont(ofSize: 15)
         
         markAsSolvedButton.layer.cornerRadius = 8
         markAsSolvedButton.setTitle("🤯 Mark as Solved", for: .normal)
