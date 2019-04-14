@@ -39,10 +39,13 @@ class AboutViewController: UIViewController {
     private func configureTextView() {
         contentTextView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         contentTextView.backgroundColor = .backgroundColor()
+        contentTextView.linkTextAttributes = [.foregroundColor: UIColor.appBlueColor()]
         
         guard let string = contentTextView.text else { return }
+        let allRange = string.startIndex..<string.endIndex
+        
         let attributedString = NSMutableAttributedString(string: string)
-        attributedString.addAttributes([.foregroundColor: UIColor.titleTextColor(), .font: UIFont.systemFont(ofSize: 15)], range: NSRange(location: 0, length: string.count))
+        attributedString.addAttributes([.foregroundColor: UIColor.titleTextColor(), .font: UIFont.systemFont(ofSize: 15)], range: NSRange(allRange, in: string))
         
         string.enumerateSubstrings(in: string.startIndex..<string.endIndex, options: .byWords) { (substring, range, _, _) in
             if substring == "LeetCode", string[range.upperBound].isWhitespace {
