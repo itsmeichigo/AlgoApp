@@ -42,56 +42,16 @@ enum PremiumDetailType: CaseIterable {
     }
 }
 
-enum LegalType {
-    case privacyPolicy
-    case terms
-    
-    var title: String {
-        switch self {
-        case .privacyPolicy: return "Privacy Policy"
-        case .terms: return "Terms"
-        }
-    }
-    
-    var link: String {
-        switch self {
-        case .privacyPolicy: return "https://gist.github.com/16bitsapps/0825806307a34381b30e4f7f51327bf1"
-        case .terms: return "https://gist.github.com/16bitsapps/abbb4b23d1e2cfe054fc947ede565266"
-        }
-    }
-    
-    var contentSelector: String {
-        switch self {
-        case .privacyPolicy: return "#file-algodaily-policy-md"
-        case .terms: return "#file-algodaily-terms-md"
-        }
-    }
-}
-
 class PremiumDetailViewController: UIViewController {
 
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var pageControl: UIPageControl!
     
-    @IBOutlet private weak var continueButton: UIButton!
+    @IBOutlet weak private var purchaseButton: UIButton!
     @IBOutlet private weak var dismissButton: UIBarButtonItem!
     
-    @IBOutlet private weak var monthlyProductView: UIView!
-    @IBOutlet private weak var monthlyProductNameLabel: UILabel!
-    @IBOutlet private weak var monthlyProductPriceLabel: UILabel!
-    @IBOutlet private weak var monthlyProductDescriptionLabel: UILabel!
-    @IBOutlet private weak var monthlyProductButton: UIButton!
-    
-    @IBOutlet private weak var yearlyProductView: UIView!
-    @IBOutlet private weak var yearlyProductNameLabel: UILabel!
-    @IBOutlet private weak var yearlyProductPriceLabel: UILabel!
-    @IBOutlet private weak var yearlyProductDescriptionLabel: UILabel!
-    @IBOutlet private weak var yearlyProductButton: UIButton!
-    
     @IBOutlet weak var loadingProductsView: UIView!
-    
-    @IBOutlet weak var termsTextView: UITextView!
     
     @IBOutlet weak var purchasedLabel: UILabel!
     @IBOutlet weak var restoreButton: UIButton!
@@ -110,7 +70,6 @@ class PremiumDetailViewController: UIViewController {
 
         configureColors()
         configureCollectionView()
-        configureTermsTextView()
         configureButtons()
         configureStore()
         
@@ -135,21 +94,14 @@ class PremiumDetailViewController: UIViewController {
         pageControl.pageIndicatorTintColor = UIColor.appRedColor().withAlphaComponent(0.2)
         pageControl.numberOfPages = PremiumDetailType.allCases.count
         
-        continueButton.isEnabled = false
-        continueButton.setTitleColor(.white, for: .normal)
-        continueButton.backgroundColor = .subtitleTextColor()
-        continueButton.layer.cornerRadius = 8.0
-        
-        [monthlyProductView, yearlyProductView].forEach { view in
-            view?.layer.cornerRadius = 8.0
-            view?.dropCardShadow()
-            view?.layer.borderColor = UIColor.appRedColor().cgColor
-            view?.layer.borderWidth = 0.0
-        }
+        purchaseButton.isEnabled = true
+        purchaseButton.setTitleColor(.white, for: .normal)
+        purchaseButton.backgroundColor = .appRedColor()
+        purchaseButton.layer.cornerRadius = 8.0
         
         dismissButton.tintColor = .subtitleTextColor()
         
-        purchasedLabel.textColor = .appRedColor()
+        purchasedLabel.textColor = .subtitleTextColor()
         restoreButton.tintColor = .appRedColor()
         
         confettiView.type = .mixed
@@ -184,95 +136,39 @@ class PremiumDetailViewController: UIViewController {
         restoreButton.rx.tap
             .subscribe(onNext: {
                 SVProgressHUD.show()
-                StoreHelper.verifySubscription { [weak self] purchased in
+                StoreHelper.restorePurchase() { [weak self] (purchased, error) in
                     SVProgressHUD.dismiss()
                     
-                    self?.showAlert(forVerificationResult: purchased)
+                    AppConfigs.shared.isPremium = purchased
+                    self?.showAlert(forResult: purchased, error: error)
                 }
             })
             .disposed(by: disposeBag)
         
-        monthlyProductButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                self?.monthlyProductButton.isSelected = true
-                self?.monthlyProductView.layer.borderWidth = 3.0
-                self?.yearlyProductView.layer.borderWidth = 0.0
-                self?.yearlyProductButton.isSelected = false
-            })
-            .disposed(by: disposeBag)
-        
-        yearlyProductButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                self?.monthlyProductButton.isSelected = false
-                self?.monthlyProductView.layer.borderWidth = 0.0
-                self?.yearlyProductView.layer.borderWidth = 3.0
-                self?.yearlyProductButton.isSelected = true
-            })
-            .disposed(by: disposeBag)
-        
-        Driver.merge(monthlyProductButton.rx.tap.asDriver(), yearlyProductButton.rx.tap.asDriver())
-            .map { true }
-            .do(onNext: { [weak self] _ in
-                self?.continueButton.backgroundColor = .appRedColor()
-            })
-            .drive(continueButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        continueButton.rx.tap.asDriver()
-            .withLatestFrom(store.products)
-            .drive(onNext: { [weak self] products in
-                guard let self = self else { return }
-                if self.monthlyProductButton.isSelected == true,
-                    let product = products.first(where: { $0.productIdentifier == StoreHelper.monthlyProductId }) {
-                    self.store.purchase(product: product)
-                } else if self.yearlyProductButton.isSelected == true,
-                    let product = products.first(where: { $0.productIdentifier == StoreHelper.yearlyProductId }) {
-                    self.store.purchase(product: product)
-                }
-                
+        purchaseButton.rx.tap.asDriver()
+            .withLatestFrom(store.product)
+            .drive(onNext: { [weak self] product in
+                guard let self = self, let product = product else { return }
+                self.store.purchase(product: product)
                 SVProgressHUD.show()
             })
             .disposed(by: disposeBag)
     }
     
     private func configureStore() {
-        store.products
-            .map { !$0.isEmpty }
+        store.product
+            .map { $0 != nil }
             .drive(onNext: { [weak self] in
                 self?.loadingProductsView.isHidden = $0
-                self?.monthlyProductView.isHidden = !$0
-                self?.yearlyProductView.isHidden = !$0
+                self?.purchaseButton.isHidden = !$0
             })
             .disposed(by: disposeBag)
         
-        store.monthlyProduct
-            .map { $0?.localizedTitle }
-            .drive(monthlyProductNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.monthlyProduct
+        store.product
             .map { $0?.localizedPrice }
-            .drive(monthlyProductPriceLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.monthlyProduct
-            .map { $0?.localizedDescription }
-            .drive(monthlyProductDescriptionLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.yearlyProduct
-            .map { $0?.localizedTitle }
-            .drive(yearlyProductNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.yearlyProduct
-            .map { $0?.localizedPrice }
-            .drive(yearlyProductPriceLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        store.yearlyProduct
-            .map { $0?.localizedDescription }
-            .drive(yearlyProductDescriptionLabel.rx.text)
+            .filterNil()
+            .map { "Purchase with \($0)" }
+            .drive(onNext: { [weak self] in self?.purchaseButton.setTitle($0, for: .normal) })
             .disposed(by: disposeBag)
         
         store.purchaseSuccess
@@ -280,12 +176,7 @@ class PremiumDetailViewController: UIViewController {
             .drive(onNext: { [weak self] in
                 SVProgressHUD.dismiss()
                 AppConfigs.shared.isPremium = true
-                self?.confettiView.startConfetti()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                    self?.confettiView.stopConfetti()
-                    self?.dismiss(animated: true, completion: nil)
-                })
-                
+                self?.showerConfetti()
             })
             .disposed(by: disposeBag)
         
@@ -298,21 +189,12 @@ class PremiumDetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func configureTermsTextView() {
-        let string = "Payment will be charged to your Apple ID account at the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase. By tapping \"Start Subscription\" you agree to AlgoDaily's Privacy Policy and Terms."
-        let attributedString = NSMutableAttributedString(string: string)
-        attributedString.addAttribute(.foregroundColor, value: UIColor.subtitleTextColor(), range: NSRange(location: 0, length: string.count))
-        
-        if let range = string.range(of: LegalType.privacyPolicy.title) {
-            attributedString.addAttribute(.link, value: LegalType.privacyPolicy.link, range: NSRange(range, in: string))
-        }
-        
-        if let range = string.range(of: LegalType.terms.title) {
-            attributedString.addAttribute(.link, value: LegalType.terms.link, range: NSRange(range, in: string))
-        }
-        
-        termsTextView.attributedText = attributedString
-        termsTextView.delegate = self
+    private func showerConfetti() {
+        confettiView.startConfetti()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            self.confettiView.stopConfetti()
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     private func configureDatasource() -> Datasource {
@@ -323,10 +205,10 @@ class PremiumDetailViewController: UIViewController {
         })
     }
     
-    private func showAlert(forVerificationResult purchased: Bool) {
-        let message = purchased ? "Voila 🎉 Your subscription has been updated!" : "Uh oh 😕 You haven't purchased any subscription."
+    private func showAlert(forResult purchased: Bool, error: SKError?) {
+        let message = error != nil ? (error?.localizedDescription ?? "") : (purchased ? "Voila 🎉 You have unlocked Premium!" : "Uh oh 😕 You haven't purchased Premium.")
         
-        let alert = UIAlertController(title: "Restore Subscription", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Restore Purchase", message: message, preferredStyle: .alert)
         
         if purchased {
             let action = UIAlertAction(title: "Thanks!", style: .default) { [unowned self] _ in self.dismiss(animated: true, completion: nil) }
@@ -336,7 +218,9 @@ class PremiumDetailViewController: UIViewController {
             alert.addAction(action)
         }
         
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true) {
+            if purchased { self.showerConfetti() }
+        }
     }
     
     private func showAlert(for error: SKError) {
@@ -379,20 +263,4 @@ extension PremiumDetailViewController: UICollectionViewDelegate {
        pageControl.currentPage = indexPath.item
     }
     
-}
-
-extension PremiumDetailViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        let type: LegalType = URL.absoluteString == LegalType.privacyPolicy.link ? .privacyPolicy : .terms
-        showWebpage(url: URL, title: type.title, contentSelector: type.contentSelector)
-        return false
-    }
-    
-    private func showWebpage(url: URL, title: String = "", contentSelector: String?) {
-        let viewController = WebViewController()
-        viewController.url = url
-        viewController.title = title
-        viewController.contentSelector = contentSelector
-        navigationController?.pushViewController(viewController, animated: true)
-    }
 }

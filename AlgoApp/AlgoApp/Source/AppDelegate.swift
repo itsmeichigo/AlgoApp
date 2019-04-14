@@ -37,17 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        StoreHelper.verifySubscription { purchased in
-            AppConfigs.shared.isPremium = purchased
-            if !purchased && Themer.shared.currentTheme == .dark {
-                Themer.shared.currentTheme = .light
-            } else if !purchased {
-                NotificationHelper.shared.cancelAllScheduledNotifications()
-            }
-        }
-    }
 
     private func configureRealm() {
         let config = Realm.Configuration(

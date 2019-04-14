@@ -14,30 +14,17 @@ import SwiftyStoreKit
 
 final class StoreHelper {
     
-    static let monthlyProductId = "com.ichigo.AlgoDaily.monthly"
-    static let yearlyProductId = "com.ichigo.AlgoDaily.Yearly"
+    static let premiumProductId = "com.ichigo.AlgoKitty.Premium"
     
-    var products: Driver<[SKProduct]> {
-        return productsRelay.asDriver()
-    }
-    
-    var monthlyProduct: Driver<SKProduct?> {
-        return monthlyProductRelay.asDriver()
-    }
-    
-    var yearlyProduct: Driver<SKProduct?> {
-        return yearlyProductRelay.asDriver()
+    var product: Driver<SKProduct?> {
+        return productRelay.asDriver()
     }
     
     let purchaseSuccess = PublishRelay<Void>()
     let purchaseError = PublishRelay<SKError>()
     
-    private let monthlyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
-    private let yearlyProductRelay = BehaviorRelay<SKProduct?>(value: nil)
-    private let productsRelay = BehaviorRelay<[SKProduct]>(value: [])
-    
-    private static let sharedSecret = "416fafcd56174d3b9d4174ebab9b5512"
-    
+    private let productRelay = BehaviorRelay<SKProduct?>(value: nil)
+        
     static func checkPendingTransactions() {
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
@@ -55,15 +42,12 @@ final class StoreHelper {
     }
     
     func fetchProductsInfo() {
-        SwiftyStoreKit.retrieveProductsInfo([StoreHelper.monthlyProductId, StoreHelper.yearlyProductId]) { [weak self] results in
+        SwiftyStoreKit.retrieveProductsInfo([StoreHelper.premiumProductId]) { [weak self] results in
             for product in results.retrievedProducts {
-                if product.productIdentifier == StoreHelper.monthlyProductId {
-                    self?.monthlyProductRelay.accept(product)
-                } else if product.productIdentifier == StoreHelper.yearlyProductId {
-                    self?.yearlyProductRelay.accept(product)
+                if product.productIdentifier == StoreHelper.premiumProductId {
+                    self?.productRelay.accept(product)
                 }
             }
-            self?.productsRelay.accept(Array(results.retrievedProducts))
         }
     }
     
@@ -81,45 +65,20 @@ final class StoreHelper {
         }
     }
     
-    static func verifySubscription(completionHandler: ((Bool) -> Void)? = nil) {
-        // FIXME: update service type here!!!
-        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: sharedSecret)
-        SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
-            var purchased = false
-            
-            switch result {
-            case .success(let receipt):
-                // Verify the purchase of weekly subscription
-                let purchaseWeeklyResult = SwiftyStoreKit.verifySubscription(
-                    ofType: .autoRenewable,
-                    productId: StoreHelper.monthlyProductId,
-                    inReceipt: receipt)
+    static func restorePurchase(completionHandler: ((Bool, SKError?) -> Void)? = nil) {
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if let failure = results.restoreFailedPurchases.first {
+                #if DEBUG
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+                #endif
                 
-                switch purchaseWeeklyResult {
-                case .purchased:
-                    purchased = true
-                default:
-                    break
-                }
-                
-                // Verify the purchase of monthly subscription
-                let purchaseMonthlyResult = SwiftyStoreKit.verifySubscription(
-                    ofType: .autoRenewable,
-                    productId: StoreHelper.yearlyProductId,
-                    inReceipt: receipt)
-                
-                switch purchaseMonthlyResult {
-                case .purchased:
-                    purchased = true
-                default:
-                    break
-                }
-                
-            case .error(let error):
-                print("Receipt verification failed: \(error)")
+                completionHandler?(false, failure.0)
+            } else if let purchase = results.restoredPurchases.first,
+                purchase.productId == StoreHelper.premiumProductId {
+                completionHandler?(true, nil)
+            } else {
+                completionHandler?(false, nil)
             }
-            
-            completionHandler?(purchased)
         }
     }
 }
