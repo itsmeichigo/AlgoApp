@@ -47,6 +47,7 @@ class PremiumDetailViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet weak var collectionViewTopSpace: NSLayoutConstraint!
     
     @IBOutlet weak private var purchaseButton: UIButton!
     @IBOutlet private weak var dismissButton: UIBarButtonItem!
@@ -81,6 +82,16 @@ class PremiumDetailViewController: UIViewController {
         SVProgressHUD.dismiss()
         super.viewWillDisappear(animated)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if restoreButton.frame.maxY < scrollView.frame.maxY {
+            let margin = (scrollView.frame.maxY - restoreButton.frame.maxY) / 2
+            collectionViewTopSpace.constant = margin - 20
+        } else {
+            collectionViewTopSpace.constant = 0
+        }
+    }
 
     private func configureColors() {
         
@@ -94,7 +105,7 @@ class PremiumDetailViewController: UIViewController {
         pageControl.pageIndicatorTintColor = UIColor.appRedColor().withAlphaComponent(0.2)
         pageControl.numberOfPages = PremiumDetailType.allCases.count
         
-        purchaseButton.isEnabled = true
+        purchaseButton.isHidden = true
         purchaseButton.setTitleColor(.white, for: .normal)
         purchaseButton.backgroundColor = .appRedColor()
         purchaseButton.layer.cornerRadius = 8.0
