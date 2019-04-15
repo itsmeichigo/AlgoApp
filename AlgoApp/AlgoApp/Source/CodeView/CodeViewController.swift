@@ -104,8 +104,13 @@ private extension CodeViewController {
                 })
                 .disposed(by: disposeBag)
             
-            languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-            languageButton.frame = CGRect(x: 0, y: 0, width: 100, height: 44)
+            languageButton.setImage(UIImage(named: "arrow-down"), for: .normal)
+            languageButton.imageEdgeInsets = UIEdgeInsets(top: 1, left: 7, bottom: 0, right: 0)
+            languageButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 7)
+            languageButton.semanticContentAttribute = .forceRightToLeft
+            
+            languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            languageButton.frame = CGRect(x: 0, y: 0, width: 150, height: 44)
             languageButton.tintColor = .appOrangeColor()
             languageButton.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
             navigationItem.titleView = languageButton
