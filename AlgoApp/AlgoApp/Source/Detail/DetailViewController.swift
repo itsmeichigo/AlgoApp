@@ -27,8 +27,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var descriptionTitleLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
     
-    @IBOutlet private weak var tagTitleLabel: UILabel!
-    @IBOutlet private weak var tagsView: TagsView!
+    @IBOutlet weak var tagsLabel: UILabel!
     
     @IBOutlet private weak var solutionsTitleLabel: UILabel!
     @IBOutlet private weak var officialSolutionButton: UIButton!
@@ -44,7 +43,7 @@ class DetailViewController: UIViewController {
     var shouldShowNote = false
     
     private let disposeBag = DisposeBag()
-    private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appPurpleColor()]
+    private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appYellowColor(), .appPurpleColor(), .appOrangeColor()]
     private let notePanel = FloatingPanelController()
     private let feedbackGenerator = UISelectionFeedbackGenerator()
     private let saveButton = UIButton(type: .system)
@@ -135,11 +134,6 @@ class DetailViewController: UIViewController {
         otherSolutionsTagView.tagFont = .systemFont(ofSize: 15)
         otherSolutionsTagView.delegate = self
         
-        tagsView.isUserInteractionEnabled = false
-        tagsView.paddingVertical = 6.0
-        tagsView.paddingHorizontal = 10.0
-        tagsView.tagFont = .systemFont(ofSize: 15)
-        
         markAsSolvedButton.layer.cornerRadius = 8
         markAsSolvedButton.setTitle("🤯 Mark as Solved", for: .normal)
         markAsSolvedButton.setTitle("🤭 Mark as Unsolved", for: .selected)
@@ -160,7 +154,7 @@ class DetailViewController: UIViewController {
         titleLabel.textColor = .titleTextColor()
         descriptionTextView.textColor = .titleTextColor()
         descriptionTitleLabel.textColor = .titleTextColor()
-        tagTitleLabel.textColor = .titleTextColor()
+        tagsLabel.textColor = .secondaryColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
         officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)
@@ -197,20 +191,8 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.detail
-            .map { $0?.tags.joined(separator: ",") ?? "" }
-            .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.tagsView.tags = $0
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                    for (index, tagButton) in self.tagsView.tagArray.enumerated() {
-                        let currentColor = self.tagColors[index % self.tagColors.count]
-                        tagButton.setTitleColor(currentColor, for: .normal)
-                        tagButton.backgroundColor = currentColor.withAlphaComponent(0.1)
-                        tagButton.layer.borderColor = UIColor.clear.cgColor
-                    }
-                })
-            })
+            .map { $0?.tags.joined(separator: "・") ?? "" }
+            .bind(to: tagsLabel.rx.text)
             .disposed(by: disposeBag)
         
         viewModel.detail
@@ -224,7 +206,15 @@ class DetailViewController: UIViewController {
             .map { $0.keys.map { $0.rawValue }.joined(separator: ",") }
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] in
-                self?.otherSolutionsTagView.tags = $0
+                guard let self = self else { return }
+                self.otherSolutionsTagView.tags = $0
+                
+                for (index, tagButton) in self.otherSolutionsTagView.tagArray.enumerated() {
+                    let currentColor = self.tagColors[index % self.tagColors.count]
+                    tagButton.setTitleColor(currentColor, for: .normal)
+                    tagButton.backgroundColor = currentColor.withAlphaComponent(0.1)
+                    tagButton.layer.borderColor = UIColor.clear.cgColor
+                }
             })
             .disposed(by: disposeBag)
     }
