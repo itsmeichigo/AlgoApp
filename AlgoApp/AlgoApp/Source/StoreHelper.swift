@@ -14,7 +14,7 @@ import SwiftyStoreKit
 
 final class StoreHelper {
     
-    static let premiumProductId = "com.ichigo.AlgoKitty.Premium"
+    static let premiumProductId = "com.ichigo.AlgoKitty.PremiumPack"
     
     var product: Driver<SKProduct?> {
         return productRelay.asDriver()
@@ -73,8 +73,7 @@ final class StoreHelper {
                 #endif
                 
                 completionHandler?(false, failure.0)
-            } else if let purchase = results.restoredPurchases.first,
-                purchase.productId == StoreHelper.premiumProductId {
+            } else if let _ = results.restoredPurchases.first(where: { $0.productId == StoreHelper.premiumProductId }) {
                 completionHandler?(true, nil)
             } else {
                 completionHandler?(false, nil)
