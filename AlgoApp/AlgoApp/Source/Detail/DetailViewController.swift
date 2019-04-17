@@ -43,7 +43,7 @@ class DetailViewController: UIViewController {
     var shouldShowNote = false
     
     private let disposeBag = DisposeBag()
-    private let tagColors: [UIColor] = [.appRedColor(), .appBlueColor(), .appGreenColor(), .appYellowColor(), .appPurpleColor(), .appOrangeColor()]
+    private let tagColors: [UIColor] = [.appRedColor(), .appYellowColor(), .appBlueColor(), .appGreenColor(), .appOrangeColor(), .appPurpleColor()]
     private let notePanel = FloatingPanelController()
     private let feedbackGenerator = UISelectionFeedbackGenerator()
     private let saveButton = UIButton(type: .system)

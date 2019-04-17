@@ -68,7 +68,6 @@ class SettingsController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.tabBar.tintColor = .appPurpleColor()
         tableView.reloadData()
         super.viewWillAppear(animated)
     }

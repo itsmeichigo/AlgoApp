@@ -52,11 +52,6 @@ final class HomeViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        tabBarController?.tabBar.tintColor = .appRedColor()
-        super.viewWillAppear(animated)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchBar.resignFirstResponder()
@@ -67,6 +62,8 @@ final class HomeViewController: UIViewController {
     }
     
     private func updateColors() {
+        tabBarController?.tabBar.tintColor = .appOrangeColor()
+        
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
