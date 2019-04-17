@@ -41,6 +41,11 @@ class NotesViewController: UIViewController {
         viewModel.loadNotes()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.tintColor = .appBlueColor()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         configureCollectionViewLayoutItemSize()
