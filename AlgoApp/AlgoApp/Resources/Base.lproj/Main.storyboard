@@ -1852,15 +1852,15 @@
         <image name="cat" width="23" height="21"/>
         <image name="disclosure" width="9" height="15"/>
         <image name="garbage" width="20" height="20"/>
-        <image name="notes" width="20" height="22"/>
+        <image name="notes" width="22" height="22"/>
         <image name="notification" width="134" height="138"/>
         <image name="pencil" width="20" height="20"/>
         <image name="plus" width="17" height="17"/>
         <image name="premium" width="134" height="140"/>
         <image name="programming" width="132" height="130"/>
-        <image name="reminder" width="23" height="22"/>
+        <image name="reminder" width="22" height="27"/>
         <image name="search-result" width="130" height="130"/>
-        <image name="settings" width="24" height="23"/>
+        <image name="settings" width="23" height="22"/>
         <image name="share" width="21" height="21"/>
     </resources>
 </document>
