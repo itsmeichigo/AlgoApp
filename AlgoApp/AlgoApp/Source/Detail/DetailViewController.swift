@@ -154,7 +154,7 @@ class DetailViewController: UIViewController {
         titleLabel.textColor = .titleTextColor()
         descriptionTextView.textColor = .titleTextColor()
         descriptionTitleLabel.textColor = .titleTextColor()
-        tagsLabel.textColor = .secondaryColor()
+        tagsLabel.textColor = .appBlueColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
         officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)

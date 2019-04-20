@@ -52,6 +52,11 @@ final class HomeViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.tintColor = .appOrangeColor()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchBar.resignFirstResponder()
@@ -67,7 +72,6 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         tabBarController?.tabBar.barTintColor = .backgroundColor()
-        tabBarController?.tabBar.tintColor = .titleTextColor()
         
         tableView.reloadData()
         
