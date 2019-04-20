@@ -150,13 +150,13 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .backgroundColor()
         loadingView.backgroundColor = .backgroundColor()
         
-        remarkLabel.textColor = .subtitleTextColor()
-        difficultyLabel.textColor = .subtitleTextColor()
+        remarkLabel.textColor = .appOrangeColor()
+        difficultyLabel.textColor = .appOrangeColor()
         
         titleLabel.textColor = .titleTextColor()
         descriptionTextView.textColor = .titleTextColor()
         descriptionTitleLabel.textColor = .titleTextColor()
-        tagsLabel.textColor = .appOrangeColor()
+        tagsLabel.textColor = .subtitleTextColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
         officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)
