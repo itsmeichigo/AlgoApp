@@ -41,6 +41,8 @@ extension String {
             
             if isExample || !endsWithPunctuations || isCommentBlock {
                 attributedString.addAttribute(.font, value: fontMetrics.scaledFont(for: monospacefont), range: nsrange)
+            } else if substring.isEmpty {
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 12), range: nsrange)
             } else {
                 attributedString.addAttribute(.font, value: regularFont, range: nsrange)
             }
@@ -67,7 +69,7 @@ extension String {
             }
         }
         
-        let titles = ["Input:", "Output:", "Explanation:", "Clarification:", "Note:", "Notes:", "Follow up:", "For example:", "Example((\\s){0,1}\\d){0,1}:", "Examples:"]
+        let titles = ["Input:", "Output:", "Explanation:", "Clarification:", "Note:", "Notes:", "Follow up:", "For example:", "Example((\\s){0,1}\\d){0,1}:", "Examples:", "Example :"]
         titles.forEach { title in
             if let regex = try? NSRegularExpression(pattern: title, options: []) {
                 let matches = regex.matches(in: self, options: [], range: range)

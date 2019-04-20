@@ -193,7 +193,8 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.detail
-            .map { "🏷 " + ($0?.tags.joined(separator: "・") ?? "") }
+            .map { $0?.tags.joined(separator: "・") ?? "" }
+            .map { $0.isEmpty ? $0 : "🏷 \($0)" }
             .bind(to: tagsLabel.rx.text)
             .disposed(by: disposeBag)
         
