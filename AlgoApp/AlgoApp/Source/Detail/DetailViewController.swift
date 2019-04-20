@@ -131,7 +131,7 @@ class DetailViewController: UIViewController {
         otherSolutionsTagView.backgroundColor = .clear
         otherSolutionsTagView.paddingVertical = 6.0
         otherSolutionsTagView.paddingHorizontal = 10.0
-        otherSolutionsTagView.tagFont = .systemFont(ofSize: 15)
+        otherSolutionsTagView.tagFont = UIFont.preferredFont(forTextStyle: .callout)
         otherSolutionsTagView.delegate = self
         
         markAsSolvedButton.layer.cornerRadius = 8
@@ -139,6 +139,8 @@ class DetailViewController: UIViewController {
         markAsSolvedButton.setTitle("🤭 Mark as Unsolved", for: .selected)
         markAsSolvedButton.setTitleColor(.white, for: .normal)
         markAsSolvedButton.setTitleColor(.white, for: .selected)
+        
+        descriptionTextView.adjustsFontForContentSizeCategory = true
         
         feedbackGenerator.prepare()
         updateColors()
@@ -154,7 +156,7 @@ class DetailViewController: UIViewController {
         titleLabel.textColor = .titleTextColor()
         descriptionTextView.textColor = .titleTextColor()
         descriptionTitleLabel.textColor = .titleTextColor()
-        tagsLabel.textColor = .appBlueColor()
+        tagsLabel.textColor = .appOrangeColor()
         solutionsTitleLabel.textColor = .titleTextColor()
         
         officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)
@@ -191,7 +193,7 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.detail
-            .map { $0?.tags.joined(separator: "・") ?? "" }
+            .map { "🏷 " + ($0?.tags.joined(separator: "・") ?? "") }
             .bind(to: tagsLabel.rx.text)
             .disposed(by: disposeBag)
         

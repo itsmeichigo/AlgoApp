@@ -109,7 +109,7 @@ private extension CodeViewController {
             languageButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 7)
             languageButton.semanticContentAttribute = .forceRightToLeft
             
-            languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            languageButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
             languageButton.frame = CGRect(x: 0, y: 0, width: 150, height: 44)
             languageButton.tintColor = .appOrangeColor()
             languageButton.addTarget(self, action: #selector(switchLanguage), for: .touchUpInside)
@@ -159,7 +159,6 @@ private extension CodeViewController {
         codeTextView.autocorrectionType = .no
         codeTextView.isEditable = !viewModel.readOnly
         codeTextView.delegate = self
-        codeTextView.font = UIFont.systemFont(ofSize: 16)
         codeTextView.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
  
         codeTextView.translatesAutoresizingMaskIntoConstraints = false

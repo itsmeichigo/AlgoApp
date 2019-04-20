@@ -10,9 +10,10 @@ import UIKit
 
 extension String {
     var formattedDescription: NSAttributedString {
-        let boldFont = UIFont.systemFont(ofSize: 15, weight: .semibold
+        let boldFont = UIFont.systemFont(ofSize: 17, weight: .medium
         )
-        let regularFont = UIFont.systemFont(ofSize: 15)
+        let regularFont = UIFont.preferredFont(forTextStyle: .callout)
+        let fontMetrics = UIFontMetrics(forTextStyle: .callout)
         
         let attributedString = NSMutableAttributedString(string: self, attributes: [
             .foregroundColor: UIColor.titleTextColor(),
@@ -39,7 +40,7 @@ extension String {
             }
             
             if isExample || !endsWithPunctuations || isCommentBlock {
-                attributedString.addAttribute(.font, value: monospacefont, range: nsrange)
+                attributedString.addAttribute(.font, value: fontMetrics.scaledFont(for: monospacefont), range: nsrange)
             } else {
                 attributedString.addAttribute(.font, value: regularFont, range: nsrange)
             }
@@ -61,7 +62,7 @@ extension String {
             if let regex = try? NSRegularExpression(pattern: code, options: []) {
                 let matches = regex.matches(in: self, options: [], range: range)
                 for match in matches {
-                    attributedString.addAttribute(.font, value: monospacefont, range: match.range)
+                    attributedString.addAttribute(.font, value: fontMetrics.scaledFont(for: monospacefont), range: match.range)
                 }
             }
         }
@@ -71,7 +72,7 @@ extension String {
             if let regex = try? NSRegularExpression(pattern: title, options: []) {
                 let matches = regex.matches(in: self, options: [], range: range)
                 for match in matches {
-                    attributedString.addAttribute(.font, value: boldFont, range: match.range)
+                    attributedString.addAttribute(.font, value: fontMetrics.scaledFont(for: boldFont), range: match.range)
                 }
             }
         }

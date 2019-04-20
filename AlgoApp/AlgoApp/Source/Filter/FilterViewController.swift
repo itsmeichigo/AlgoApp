@@ -66,6 +66,7 @@ class FilterViewController: UIViewController {
             tagView?.tagLayerColor = .borderColor()
             tagView?.tagTitleColor = .titleTextColor()
             tagView?.backgroundColor = .clear
+            tagView?.tagFont = UIFont.preferredFont(forTextStyle: .callout)
         }
         
         updateColors()

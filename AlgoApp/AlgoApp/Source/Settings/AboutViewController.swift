@@ -45,7 +45,7 @@ class AboutViewController: UIViewController {
         let allRange = string.startIndex..<string.endIndex
         
         let attributedString = NSMutableAttributedString(string: string)
-        attributedString.addAttributes([.foregroundColor: UIColor.titleTextColor(), .font: UIFont.systemFont(ofSize: 15)], range: NSRange(allRange, in: string))
+        attributedString.addAttributes([.foregroundColor: UIColor.titleTextColor(), .font: UIFont.preferredFont(forTextStyle: .callout)], range: NSRange(allRange, in: string))
         
         string.enumerateSubstrings(in: string.startIndex..<string.endIndex, options: .byWords) { (substring, range, _, _) in
             if substring == "LeetCode", string[range.upperBound].isWhitespace {
@@ -58,6 +58,7 @@ class AboutViewController: UIViewController {
         }
         
         contentTextView.attributedText = attributedString
+        contentTextView.adjustsFontForContentSizeCategory = true
     }
     
     @objc private func popView() {
