@@ -179,7 +179,10 @@ class SettingsController: UITableViewController {
     
     private func showSortOptions() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "SortOptionsViewController") as? SortOptionsViewController else { return }
-        presentPanModal(controller)
+        
+        presentPanModal(controller, sourceView: sortOptionLabel, sourceRect: CGRect(x: sortOptionLabel.frame.width / 2, y: sortOptionLabel.frame.height, width: 0, height: 0))
+        
+        controller.popoverPresentationController?.backgroundColor = .backgroundColor()
     }
 
     private func showPremiumAlert() {
@@ -189,7 +192,9 @@ class SettingsController: UITableViewController {
         controller.dismissHandler = { [weak self] in
             self?.showPremiumDetail()
         }
-        presentPanModal(controller)
+        presentPanModal(controller, sourceView: darkModeSwitch, sourceRect: CGRect(x: darkModeSwitch.frame.width / 2, y: darkModeSwitch.frame.height, width: 0, height: 0))
+        
+        controller.popoverPresentationController?.backgroundColor = .backgroundColor()
     }
     
     private func showPremiumDetail() {

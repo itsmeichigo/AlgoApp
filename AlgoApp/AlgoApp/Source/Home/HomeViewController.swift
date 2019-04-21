@@ -6,7 +6,6 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
-import Hero
 import PanModal
 import UIKit
 import RxCocoa
@@ -25,8 +24,17 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
    
-    private lazy var filterButton = UIBarButtonItem(image: UIImage(named: "shuffle"), style: .plain, target: self, action: #selector(showRandomQuestion))
-    private lazy var shuffleButton = UIBarButtonItem(image: UIImage(named: "filter"), style: .plain, target: self, action: #selector(showFilter))
+    private lazy var filterButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "filter"), for: .normal)
+        button.tintColor = .appOrangeColor()
+        button.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
+        button.addTarget(self, action: #selector(showFilter), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var filterBarButton = UIBarButtonItem(customView: filterButton)
+    private lazy var shuffleButton = UIBarButtonItem(image: UIImage(named: "shuffle"), style: .plain, target: self, action: #selector(showRandomQuestion))
     
     fileprivate var searchBar: UISearchBar!
     
@@ -43,6 +51,7 @@ final class HomeViewController: UIViewController {
     
         configureNavigationBar()
         configureView()
+        updateColors()
         
         Themer.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
@@ -102,17 +111,13 @@ final class HomeViewController: UIViewController {
         searchBar.delegate = self
         navigationItem.titleView = searchBar
         
-        filterButton.tintColor = .appBlueColor()
-        shuffleButton.tintColor = .appOrangeColor()
-        navigationItem.rightBarButtonItems = [filterButton, shuffleButton]
-        
-        navigationController?.hero.isEnabled = true
-        navigationController?.hero.navigationAnimationType = .selectBy(presenting: .cover(direction: .left), dismissing: .uncover(direction: .right))
+        filterButton.tintColor = .appOrangeColor()
+        shuffleButton.tintColor = .appBlueColor()
+        navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
     }
     
     private func configureView() {
         
-        updateColors()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.rx.modelSelected(QuestionCellModel.self)
@@ -169,7 +174,9 @@ final class HomeViewController: UIViewController {
         filterController.initialFilter = currentFilter.value
         filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
         
-        presentPanModal(navigationController)
+        presentPanModal(navigationController, sourceView: filterButton, sourceRect: CGRect(x: 25, y: 44, width: 0, height: 0))
+        
+        filterController.popoverPresentationController?.backgroundColor = UIColor.backgroundColor()
     }
 }
 
@@ -180,7 +187,7 @@ extension HomeViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        navigationItem.rightBarButtonItems = [filterButton, shuffleButton]
+        navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
         searchBar.showsCancelButton = false
     }
     

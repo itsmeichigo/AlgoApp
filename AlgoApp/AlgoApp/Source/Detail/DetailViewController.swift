@@ -6,7 +6,6 @@
 //  Copyright © 2019 Huong Do. All rights reserved.
 //
 
-import Hero
 import PanModal
 import RxOptional
 import RxSwift
