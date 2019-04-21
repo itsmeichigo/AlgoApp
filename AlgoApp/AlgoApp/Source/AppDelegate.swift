@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureRealm()
         StoreHelper.checkPendingTransactions()
         
+        setupRootController()
+        
         NotificationHelper.shared.showPendingQuestion()
         
         return true
@@ -60,5 +62,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch let error as NSError {
             print("error occurred, here are the details:\n \(error)")
         }
+    }
+    
+    private func setupRootController() {
+        let tabbarController = UITabBarController(nibName: nil, bundle: nil)
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = tabbarController
+        window?.makeKeyAndVisible()
+        
+        guard let homeController = StoryboardHelper.homeStoryboard().instantiateInitialViewController(),
+            let remindersController = StoryboardHelper.remindersStoryboard().instantiateInitialViewController(),
+            let notesController = StoryboardHelper.notesStoryboard().instantiateInitialViewController(),
+            let settingsController = StoryboardHelper.settingsStoryboard().instantiateInitialViewController() else { return }
+        
+        homeController.tabBarItem.image = UIImage(named: "cat")
+        remindersController.tabBarItem.image = UIImage(named: "reminder")
+        notesController.tabBarItem.image = UIImage(named: "notes")
+        settingsController.tabBarItem.image = UIImage(named: "settings")
+        
+        let controllers = [homeController, remindersController, notesController, settingsController]
+        controllers.forEach { controllers in
+            controllers.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        }
+
+        tabbarController.viewControllers = controllers
+    }
+}
+
+enum StoryboardHelper {
+    static func homeStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Home", bundle: nil)
+    }
+    
+    static func remindersStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Reminders", bundle: nil)
+    }
+    
+    static func notesStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Notes", bundle: nil)
+    }
+    
+    static func settingsStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Settings", bundle: nil)
     }
 }
