@@ -24,11 +24,13 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
    
+    private lazy var detailController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+    
     private lazy var filterButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "filter"), for: .normal)
         button.tintColor = .appOrangeColor()
-        button.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
+        button.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         button.addTarget(self, action: #selector(showFilter), for: .touchUpInside)
         return button
     }()
@@ -59,6 +61,7 @@ final class HomeViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        splitViewController?.preferredDisplayMode = AppHelper.isIpad ? .allVisible : .primaryOverlay
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,9 +81,9 @@ final class HomeViewController: UIViewController {
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
         tabBarController?.tabBar.barTintColor = .backgroundColor()
+        tabBarController?.tabBar.tintColor = .appOrangeColor()
         
         tableView.reloadData()
         
@@ -116,17 +119,33 @@ final class HomeViewController: UIViewController {
         navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
     }
     
+    private func updateDetailController(with questionId: Int, shouldShowDetail: Bool = true) {
+        guard let detailController = self.detailController else { return }
+        if detailController.viewModel != nil {
+            detailController.viewModel.updateDetails(with: questionId)
+        } else {
+            detailController.viewModel = DetailViewModel(question: questionId)
+        }
+        
+        guard shouldShowDetail else { return }
+        if let controller = detailController.navigationController {
+            controller.popToRootViewController(animated: true)
+            splitViewController?.showDetailViewController(controller, sender: nil)
+        } else {
+            let navigationController = UINavigationController(rootViewController: detailController)
+            splitViewController?.showDetailViewController(navigationController, sender: nil)
+        }
+        
+    }
+    
     private func configureView() {
         
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.rx.modelSelected(QuestionCellModel.self)
             .asDriver()
-            .map { DetailViewModel(questionId: $0.id) }
-            .drive(onNext: { [unowned self] model in
-                guard let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-                viewController.viewModel = model
-                self.navigationController?.pushViewController(viewController, animated: true)
+            .drive(onNext: { [unowned self] question in
+                self.updateDetailController(with: question.id)
             })
             .disposed(by: disposeBag)
         
@@ -140,6 +159,15 @@ final class HomeViewController: UIViewController {
             .asDriver()
             .map { [QuestionSection(model: "", items: $0)] }
             .drive(tableView.rx.items(dataSource: datasource))
+            .disposed(by: disposeBag)
+        
+        viewModel.questions
+            .map { $0.first }
+            .filterNil()
+            .subscribe(onNext: { [weak self] question in
+                self?.updateDetailController(with: question.id, shouldShowDetail: AppHelper.isIpad)
+                self?.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+            })
             .disposed(by: disposeBag)
         
         // hack: trigger getters to update drivers
@@ -161,10 +189,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func showRandomQuestion() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        
-        controller.viewModel = viewModel.randomDetailModel()
-        navigationController?.pushViewController(controller, animated: true)
+        updateDetailController(with: viewModel.randomQuestionId)
     }
     
     @objc private func showFilter() {

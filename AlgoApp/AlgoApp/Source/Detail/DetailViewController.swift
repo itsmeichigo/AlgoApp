@@ -57,6 +57,12 @@ class DetailViewController: UIViewController {
         configureNotePanel()
         
         viewModel.scrapeSolutions()
+        
+        Themer.shared.currentThemeDriver
+            .drive(onNext: { [weak self] theme in
+                self?.updateColors()
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,17 +118,6 @@ class DetailViewController: UIViewController {
         linkBarButton.tintColor = .appGreenColor()
         
         navigationItem.rightBarButtonItems = [noteBarButton, saveBarButton, linkBarButton]
-        
-        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
-        backButton.tintColor = .subtitleTextColor()
-        navigationItem.leftBarButtonItem = backButton
-        
-        navigationController?.interactivePopGestureRecognizer?.delegate = self;
-
-    }
-    
-    @objc private func popView() {
-        navigationController?.popViewController(animated: true)
     }
     
     private func configureViews() {
@@ -146,6 +141,9 @@ class DetailViewController: UIViewController {
     }
     
     private func updateColors() {
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
+        
         view.backgroundColor = .backgroundColor()
         loadingView.backgroundColor = .backgroundColor()
         
@@ -368,11 +366,5 @@ extension DetailViewController: TagsDelegate {
                 break
             }
         }
-    }
-}
-
-extension DetailViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }

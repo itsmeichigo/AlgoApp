@@ -113,11 +113,11 @@ final class NotificationHelper: NSObject {
         
         navigationController.popToRootViewController(animated: false)
         
-        let storyboard = StoryboardHelper.homeStoryboard()
+        let storyboard = AppHelper.homeStoryboard
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
             let questionId = Reminder.randomQuestionId(for: id) else { return }
         
-        viewController.viewModel = DetailViewModel(questionId: questionId)
+        viewController.viewModel = DetailViewModel(question: questionId)
         navigationController.pushViewController(viewController, animated: true)
         
         tabbarController.selectedIndex = 0
@@ -165,11 +165,11 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
             
             navigationController.popToRootViewController(animated: false)
             
-            let storyboard = StoryboardHelper.homeStoryboard()
+            let storyboard = AppHelper.homeStoryboard
             guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
                 let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
             
-            viewController.viewModel = DetailViewModel(questionId: questionId)
+            viewController.viewModel = DetailViewModel(question: questionId)
             navigationController.pushViewController(viewController, animated: true)
             
             tabbarController.selectedIndex = 0

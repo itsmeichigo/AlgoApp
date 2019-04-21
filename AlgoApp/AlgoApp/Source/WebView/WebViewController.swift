@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import SnapKit
+import RxSwift
 
 class WebViewController: UIViewController {
 
@@ -18,6 +19,8 @@ class WebViewController: UIViewController {
     
     var url: URL!
     var contentSelector: String?
+    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +53,11 @@ class WebViewController: UIViewController {
         
         loadPage(url: url, partialContentQuerySelector: contentSelector)
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
-        backButton.tintColor = .subtitleTextColor()
-        navigationItem.leftBarButtonItem = backButton
-    }
-    
-    @objc private func popView() {
-        navigationController?.popViewController(animated: true)
+        Themer.shared.currentThemeDriver
+            .drive(onNext: { [weak self] theme in
+                self?.updateColors()
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +74,12 @@ class WebViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
+    }
+    
+    private func updateColors() {
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.titleTextColor()]
     }
     
     private func loadPage(url: URL, partialContentQuerySelector selector: String?) {

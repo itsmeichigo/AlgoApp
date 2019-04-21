@@ -22,14 +22,24 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         super.awakeFromNib()
         cardView.layer.cornerRadius = 8.0
         cardView.dropCardShadow()
+        
+        selectionStyle = .none
     }
-
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        cardView.backgroundColor = highlighted ? .selectedBackgroundColor() : .primaryColor()
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if selected {
+        cardView.backgroundColor = selected ? .selectedBackgroundColor() : .primaryColor()
+        
+        if !AppHelper.isIpad, selected {
             setSelected(false, animated: true)
         }
-    }
+    } 
+
 
     func configureCell(with model: QuestionCellModel) {
         updateColors()
@@ -41,11 +51,11 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         difficultyLabel.text = model.difficulty
     }
     
-    private func updateColors() {
+    func updateColors() {
         titleLabel.textColor = .titleTextColor()
         tagsLabel.textColor = .subtitleTextColor()
         markLabel.textColor = .subtitleTextColor()
-        cardView.backgroundColor = .primaryColor()
+        cardView.backgroundColor = isSelected ? .selectedBackgroundColor() : .primaryColor()
         contentView.backgroundColor = .backgroundColor()
     }
 }

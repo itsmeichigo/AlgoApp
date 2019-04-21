@@ -144,7 +144,7 @@ class ReminderDetailViewController: UIViewController {
     private func addFilterView() {
         filterContainerView.isHidden = true
         
-        let storyboard = StoryboardHelper.homeStoryboard()
+        let storyboard = AppHelper.homeStoryboard
         guard let filterViewController = storyboard.instantiateViewController(withIdentifier: "filterViewController") as? FilterViewController else { return }
         filterViewController.hidesSavedTag = true
         

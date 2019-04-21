@@ -146,10 +146,10 @@ class NotesViewController: UIViewController {
     }
     
     private func showQuestion(id: Int) {
-        let storyboard = StoryboardHelper.homeStoryboard()
+        let storyboard = AppHelper.homeStoryboard
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         
-        viewController.viewModel = DetailViewModel(questionId: id)
+        viewController.viewModel = DetailViewModel(question: id)
         viewController.shouldShowNote = true
         navigationController?.pushViewController(viewController, animated: true)
     }

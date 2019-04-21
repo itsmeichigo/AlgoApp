@@ -15,6 +15,9 @@ import RxSwift
 final class HomeViewModel {
     
     let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
+    var randomQuestionId: Int {
+        return Int.random(in: 0..<questions.value.count)
+    }
     
     private let disposeBag = DisposeBag()
     private lazy var realm = try! Realm()
@@ -29,11 +32,5 @@ final class HomeViewModel {
             }
             .bind(to: questions)
             .disposed(by: disposeBag)
-    }
-    
-    func randomDetailModel() -> DetailViewModel {
-        let randomIndex = Int.random(in: 0..<questions.value.count)
-        let question = questions.value[randomIndex]
-        return DetailViewModel(questionId: question.id)
     }
 }

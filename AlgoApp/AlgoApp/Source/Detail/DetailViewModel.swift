@@ -25,7 +25,7 @@ final class DetailViewModel {
     
     private let disposeBag = DisposeBag()
     private let scraper = SolutionScraper()
-    private let questionId: Int
+    private var questionId = BehaviorRelay<Int?>(value: nil)
     
     private let scrapingSwiftSolution = BehaviorRelay<Bool>(value: true)
     private let scrapingJavaSolution = BehaviorRelay<Bool>(value: true)
@@ -39,11 +39,11 @@ final class DetailViewModel {
         }
     }
     
-    init(questionId: Int) {
-        self.questionId = questionId
+    init(question id: Int) {
+        questionId.accept(id)
         
-        Observable.collection(from: realmForRead.objects(Question.self))
-            .map { $0.first(where: { $0.id == questionId }) }
+        Observable.combineLatest(Observable.collection(from: realmForRead.objects(Question.self)), questionId)
+            .map { (questions, id) in questions.first(where: { $0.id == id }) }
             .map { question -> QuestionDetailModel? in
                 guard let question = question else { return nil }
                 return QuestionDetailModel(with: question)
@@ -55,6 +55,10 @@ final class DetailViewModel {
             .map { $0.0 || $0.1 || $0.2 || $0.3 || $0.4 }
             .bind(to: scrapingSolutions)
             .disposed(by: disposeBag)
+    }
+    
+    func updateDetails(with questionId: Int) {
+        self.questionId.accept(questionId)
     }
     
     func scrapeSolutions() {

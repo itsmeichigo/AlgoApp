@@ -89,4 +89,11 @@ extension UIColor {
         case .dark: return UIColor(rgb: 0x424242)
         }
     }
+    
+    static func selectedBackgroundColor() -> UIColor {
+        switch Themer.shared.currentTheme {
+        case .light: return UIColor(rgb: 0xe0e0e0)
+        case .dark: return UIColor(rgb: 0x242424)
+        }
+    }
 }

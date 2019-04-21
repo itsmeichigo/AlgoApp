@@ -13,3 +13,9 @@ extension UITabBarController {
         return selectedViewController
     }
 }
+
+extension UISplitViewController {
+    open override var childForStatusBarStyle: UIViewController? {
+        return viewControllers.first
+    }
+}

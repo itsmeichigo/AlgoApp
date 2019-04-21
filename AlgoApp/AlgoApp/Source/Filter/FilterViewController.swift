@@ -79,11 +79,6 @@ class FilterViewController: UIViewController {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        dismiss(animated: true, completion: nil)
-    }
-    
     private func loadInitialFilter(_ filter: QuestionFilter) {
         for level in filter.levels {
             if let button = difficultyTagsView.tagArray.first(where: { $0.title(for: .normal) == level.title }) {
