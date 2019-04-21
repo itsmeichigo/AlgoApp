@@ -113,7 +113,7 @@ final class NotificationHelper: NSObject {
         
         navigationController.popToRootViewController(animated: false)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = StoryboardHelper.homeStoryboard()
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
             let questionId = Reminder.randomQuestionId(for: id) else { return }
         
@@ -165,7 +165,7 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
             
             navigationController.popToRootViewController(animated: false)
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = StoryboardHelper.homeStoryboard()
             guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
                 let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
             

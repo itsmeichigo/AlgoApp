@@ -146,7 +146,7 @@ class NotesViewController: UIViewController {
     }
     
     private func showQuestion(id: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = StoryboardHelper.homeStoryboard()
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         
         viewController.viewModel = DetailViewModel(questionId: id)

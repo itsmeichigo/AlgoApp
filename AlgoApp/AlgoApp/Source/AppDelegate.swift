@@ -76,14 +76,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let notesController = StoryboardHelper.notesStoryboard().instantiateInitialViewController(),
             let settingsController = StoryboardHelper.settingsStoryboard().instantiateInitialViewController() else { return }
         
-        homeController.tabBarItem.image = UIImage(named: "cat")
-        remindersController.tabBarItem.image = UIImage(named: "reminder")
-        notesController.tabBarItem.image = UIImage(named: "notes")
-        settingsController.tabBarItem.image = UIImage(named: "settings")
-        
+        let images: [UIImage?] = [UIImage(named: "cat"), UIImage(named: "reminder"), UIImage(named: "notes"), UIImage(named: "settings")]
         let controllers = [homeController, remindersController, notesController, settingsController]
-        controllers.forEach { controllers in
-            controllers.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        for (index, controller) in controllers.enumerated() {
+            controller.tabBarItem.image = images[index]
+            controller.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            controller.tabBarItem.title = ""
         }
 
         tabbarController.viewControllers = controllers
