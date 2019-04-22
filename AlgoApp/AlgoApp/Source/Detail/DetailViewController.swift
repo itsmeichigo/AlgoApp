@@ -118,6 +118,7 @@ class DetailViewController: UIViewController {
         linkBarButton.tintColor = .appGreenColor()
         
         navigationItem.rightBarButtonItems = [noteBarButton, saveBarButton, linkBarButton]
+        
     }
     
     private func configureViews() {
@@ -141,7 +142,7 @@ class DetailViewController: UIViewController {
     }
     
     private func updateColors() {
-        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.tintColor = .subtitleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         view.backgroundColor = .backgroundColor()

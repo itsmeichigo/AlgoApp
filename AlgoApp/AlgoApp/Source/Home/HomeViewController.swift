@@ -117,6 +117,10 @@ final class HomeViewController: UIViewController {
         filterButton.tintColor = .appOrangeColor()
         shuffleButton.tintColor = .appBlueColor()
         navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
+        
+        let backImage = UIImage(named: "back")
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
     }
     
     private func updateDetailController(with questionId: Int, shouldShowDetail: Bool = true) {
