@@ -220,7 +220,7 @@ class ReminderDetailViewController: UIViewController {
     }
     
     private func showPremiumAlert() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        guard let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
         
         controller.mode = .alarm
         controller.dismissHandler = { [weak self] in
@@ -230,7 +230,7 @@ class ReminderDetailViewController: UIViewController {
     }
     
     private func showPremiumDetail() {
-        guard let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        let detailController = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumDetailNavigationController")
         present(detailController, animated: true, completion: nil)
     }
     

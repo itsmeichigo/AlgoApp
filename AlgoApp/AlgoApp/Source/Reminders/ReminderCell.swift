@@ -11,7 +11,7 @@ import Reusable
 import RxCocoa
 import RxSwift
 
-class ReminderCell: UITableViewCell, NibReusable {
+class ReminderCell: UICollectionViewCell, NibReusable {
 
     @IBOutlet weak var enabledSwitch: UISwitch!
     @IBOutlet private weak var cardView: UIView!
@@ -32,13 +32,6 @@ class ReminderCell: UITableViewCell, NibReusable {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if selected {
-            setSelected(false, animated: true)
-        }
     }
 
     func configureCell(model: ReminderDetail) {

@@ -132,6 +132,9 @@ final class HomeViewController: UIViewController {
         }
         
         guard shouldShowDetail else { return }
+        
+        detailController.codeControllerWillDismiss()
+        
         if let controller = detailController.navigationController {
             controller.popToRootViewController(animated: true)
             splitViewController?.showDetailViewController(controller, sender: nil)

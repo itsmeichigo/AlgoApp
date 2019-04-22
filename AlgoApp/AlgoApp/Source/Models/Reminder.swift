@@ -62,7 +62,8 @@ extension ReminderDetail {
                 .map { days[$0 - 1] }
                 .joined(separator: ", ")
         }
-        return ""
+        
+        return "☝️ Reminded Once"
     }
     
 }

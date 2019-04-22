@@ -334,9 +334,9 @@ extension DetailViewController: CodeViewControllerDelegate {
     func codeControlerShouldSave(content: String, language: Language) {
         if !AppConfigs.shared.isPremium,
             presentedViewController == nil,
-            let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController,
-            let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") {
+            let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
             
+            let detailController = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumDetailNavigationController")
             controller.mode = .code
             controller.dismissHandler = { [weak self] in
                 self?.present(detailController, animated: true, completion: nil)
