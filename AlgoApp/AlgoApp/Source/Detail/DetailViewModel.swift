@@ -25,7 +25,7 @@ final class DetailViewModel {
     
     private let disposeBag = DisposeBag()
     private let scraper = SolutionScraper()
-    private var questionId = BehaviorRelay<Int?>(value: nil)
+    private var questionId = BehaviorRelay<Int>(value: 0)
     
     private let scrapingSwiftSolution = BehaviorRelay<Bool>(value: true)
     private let scrapingJavaSolution = BehaviorRelay<Bool>(value: true)
@@ -80,7 +80,7 @@ final class DetailViewModel {
     }
     
     func toggleSolved() {
-        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
+        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId.value) else { return }
         let toggledValue = !question.solved
         try! realmForWrite.write {
             question.solved = toggledValue
@@ -88,7 +88,7 @@ final class DetailViewModel {
     }
     
     func toggleSaved() {
-        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
+        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId.value) else { return }
         let toggledValue = !question.saved
         try! realmForWrite.write {
             question.saved = toggledValue
@@ -96,7 +96,7 @@ final class DetailViewModel {
     }
     
     func updateNote(_ content: String, language: Language) {
-        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId) else { return }
+        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId.value) else { return }
         try! realmForWrite.write {
             if let note = question.note {
                 note.content = content

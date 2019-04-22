@@ -164,6 +164,7 @@ final class HomeViewController: UIViewController {
         viewModel.questions
             .map { $0.first }
             .filterNil()
+            .take(1)
             .subscribe(onNext: { [weak self] question in
                 self?.updateDetailController(with: question.id, shouldShowDetail: AppHelper.isIpad)
                 self?.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
