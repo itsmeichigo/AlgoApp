@@ -594,11 +594,12 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-es-dEn">
-                                        <rect key="frame" x="50" y="319" width="314" height="50"/>
+                                        <rect key="frame" x="177" y="319" width="60" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="jeA-ln-MzN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already Purchased?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNi-1e-LSq">
                                         <rect key="frame" x="16" y="417" width="382" height="19.5"/>
@@ -622,14 +623,13 @@
                                     <constraint firstItem="e8D-kS-43W" firstAttribute="top" secondItem="GIi-ic-Bdz" secondAttribute="bottom" id="Kwv-3R-AuG"/>
                                     <constraint firstItem="lzd-es-dEn" firstAttribute="top" secondItem="pnx-tv-eER" secondAttribute="top" id="MpX-XJ-cTR"/>
                                     <constraint firstItem="RfY-Rf-MNv" firstAttribute="centerX" secondItem="czx-nK-rXs" secondAttribute="centerX" id="Qbp-c9-m3X"/>
+                                    <constraint firstItem="lzd-es-dEn" firstAttribute="centerX" secondItem="czx-nK-rXs" secondAttribute="centerX" id="Wdg-jB-2QQ"/>
                                     <constraint firstItem="e8D-kS-43W" firstAttribute="centerX" secondItem="czx-nK-rXs" secondAttribute="centerX" id="bqD-2C-WaL"/>
                                     <constraint firstAttribute="bottom" secondItem="RfY-Rf-MNv" secondAttribute="bottom" constant="16" id="dCV-TE-31n"/>
                                     <constraint firstItem="pnx-tv-eER" firstAttribute="top" secondItem="e8D-kS-43W" secondAttribute="bottom" constant="32" id="dtf-8h-M4v"/>
                                     <constraint firstItem="pnx-tv-eER" firstAttribute="leading" secondItem="czx-nK-rXs" secondAttribute="leading" constant="50" id="eI0-HX-Vtt"/>
                                     <constraint firstItem="lNi-1e-LSq" firstAttribute="top" secondItem="pnx-tv-eER" secondAttribute="bottom" constant="48" id="eoh-Ml-UZF"/>
-                                    <constraint firstItem="lzd-es-dEn" firstAttribute="leading" secondItem="czx-nK-rXs" secondAttribute="leading" constant="50" id="f1c-KD-NGm"/>
                                     <constraint firstAttribute="trailing" secondItem="lNi-1e-LSq" secondAttribute="trailing" constant="16" id="kVD-5V-Crk"/>
-                                    <constraint firstAttribute="trailing" secondItem="lzd-es-dEn" secondAttribute="trailing" constant="50" id="ofe-sN-xs9"/>
                                     <constraint firstItem="GIi-ic-Bdz" firstAttribute="leading" secondItem="czx-nK-rXs" secondAttribute="leading" id="qPg-F6-m2Q"/>
                                     <constraint firstAttribute="trailing" secondItem="pnx-tv-eER" secondAttribute="trailing" constant="50" id="suZ-IV-9hf"/>
                                     <constraint firstItem="lNi-1e-LSq" firstAttribute="bottom" secondItem="RfY-Rf-MNv" secondAttribute="top" constant="8" id="tFM-Ev-wnO"/>

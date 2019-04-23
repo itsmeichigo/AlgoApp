@@ -223,9 +223,7 @@ class ReminderDetailViewController: UIViewController {
         guard let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
         
         controller.mode = .alarm
-        controller.dismissHandler = { [weak self] in
-            self?.showPremiumDetail()
-        }
+        controller.dismissHandler = { [weak self] in self?.showPremiumDetail() }
         presentPanModal(controller)
     }
     

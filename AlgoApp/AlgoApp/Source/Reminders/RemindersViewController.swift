@@ -173,15 +173,7 @@ class RemindersViewController: UIViewController {
             let cell: ReminderCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.configureCell(model: model)
             cell.enabledSwitch.rx.controlEvent(UIControl.Event.valueChanged)
-                .withLatestFrom(cell.enabledSwitch.rx.isOn)
-                .subscribe(onNext: { [weak self] switchedOn in
-                    guard AppConfigs.shared.isPremium else {
-                        if switchedOn {
-                            self?.showPremiumAlert()
-                            cell.enabledSwitch.isOn = false
-                        }
-                        return
-                    }
+                .subscribe(onNext: { [weak self] in
                     self?.viewModel.toggleReminder(id: model.id)
                 })
                 .disposed(by: cell.disposeBag)
@@ -190,7 +182,11 @@ class RemindersViewController: UIViewController {
     }
     
     @objc private func addNewReminder() {
-        showDetail(model: nil, sourceView: addButton, sourceRect: CGRect(x: addButton.frame.width / 2, y: addButton.frame.height, width: 0, height: 0))
+        if AppHelper.isIpad && !AppConfigs.shared.isPremium {
+            showPremiumAlert()
+        } else {
+            showDetail(model: nil, sourceView: addButton, sourceRect: CGRect(x: addButton.frame.width / 2, y: addButton.frame.height, width: 0, height: 0))
+        }
     }
     
     private func showDetail(model: ReminderDetail?, sourceView: UIView? = nil, sourceRect: CGRect = .zero) {
@@ -220,17 +216,17 @@ class RemindersViewController: UIViewController {
     }
     
     private func showPremiumAlert() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        guard let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
         
         controller.mode = .alarm
         controller.dismissHandler = { [weak self] in
             self?.showPremiumDetail()
         }
-        presentPanModal(controller)
+        presentPanModal(controller, sourceView: addButton, sourceRect: CGRect(x: addButton.frame.width / 2, y: addButton.frame.height, width: 0, height: 0))
     }
     
     private func showPremiumDetail() {
-        guard let detailController = storyboard?.instantiateViewController(withIdentifier: "PremiumDetailNavigationController") else { return }
+        let detailController = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumDetailNavigationController")
         present(detailController, animated: true, completion: nil)
     }
 }

@@ -40,12 +40,16 @@ class DetailViewController: UIViewController {
     
     var viewModel: DetailViewModel!
     var shouldShowNote = false
+    var shouldLockOrientationOnDisappear = true
     
     private let disposeBag = DisposeBag()
     private let tagColors: [UIColor] = [.appRedColor(), .appYellowColor(), .appBlueColor(), .appGreenColor(), .appOrangeColor(), .appPurpleColor()]
+    
     private let notePanel = FloatingPanelController()
     private let feedbackGenerator = UISelectionFeedbackGenerator()
+    
     private let saveButton = UIButton(type: .system)
+    private let noteButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +86,11 @@ class DetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        if !shouldLockOrientationOnDisappear {
+            shouldLockOrientationOnDisappear = true
+        } else {
+            AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -105,9 +113,13 @@ class DetailViewController: UIViewController {
         notePanel.set(contentViewController: navigationController)
     }
     
-    private func configureNavigationBar() {        
-        let noteBarButton = UIBarButtonItem(image: UIImage(named: "notepad"), style: .plain, target: self, action: #selector(showNotes))
-        noteBarButton.tintColor = .appYellowColor()
+    private func configureNavigationBar() {
+        noteButton.setImage(UIImage(named: "notepad"), for: .normal)
+        noteButton.frame = CGRect(x: 0, y: 0, width: 50, height: 44)
+        noteButton.tintColor = .appYellowColor()
+        noteButton.addTarget(self, action: #selector(showNotes), for: .touchUpInside)
+        
+        let noteBarButton = UIBarButtonItem(customView: noteButton)
         
         saveButton.setImage(UIImage(named: "bookmark"), for: .normal)
         saveButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
@@ -142,7 +154,7 @@ class DetailViewController: UIViewController {
     }
     
     private func updateColors() {
-        navigationController?.navigationBar.tintColor = .subtitleTextColor()
+        navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         view.backgroundColor = .backgroundColor()
@@ -301,8 +313,30 @@ class DetailViewController: UIViewController {
         return UINavigationController(rootViewController: codeController)
     }
     
+    private func showPremiumPopup() {
+        guard presentedViewController == nil,
+            let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        
+        controller.mode = .code
+        controller.dismissHandler = { [weak self] in self?.presentPremiumDetail() }
+        
+        presentPanModal(controller, sourceView: noteButton, sourceRect: CGRect(x: noteButton.frame.width / 2, y: noteButton.frame.height, width: 0, height: 0))
+        
+        controller.popoverPresentationController?.backgroundColor = .backgroundColor()
+    }
+    
+    private func presentPremiumDetail() {
+        let detailController = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumDetailNavigationController")
+        present(detailController, animated: true, completion: nil)
+    }
+    
     @objc private func showNotes() {
 
+        if AppHelper.isIpad && !AppConfigs.shared.isPremium {
+            showPremiumPopup()
+            return
+        }
+        
         if notePanel.parent == nil {
             notePanel.addPanel(toParent: self)
         }
@@ -332,17 +366,8 @@ extension DetailViewController: CodeViewControllerDelegate {
     }
     
     func codeControlerShouldSave(content: String, language: Language) {
-        if !AppConfigs.shared.isPremium,
-            presentedViewController == nil,
-            let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController {
-            
-            let detailController = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumDetailNavigationController")
-            controller.mode = .code
-            controller.dismissHandler = { [weak self] in
-                self?.present(detailController, animated: true, completion: nil)
-            }
-                
-            presentPanModal(controller)
+        if !AppConfigs.shared.isPremium {
+            showPremiumPopup()
             return
         }
         
@@ -363,6 +388,7 @@ extension DetailViewController: TagsDelegate {
             if language.rawValue == title {
                 let title = "\(language.rawValue.capitalized) Solution"
                 let controller = setupCodeController(title: title, content: content, language: language)
+                shouldLockOrientationOnDisappear = false
                 present(controller, animated: true, completion: nil)
                 break
             }
