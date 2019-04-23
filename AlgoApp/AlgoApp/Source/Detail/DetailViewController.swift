@@ -40,7 +40,6 @@ class DetailViewController: UIViewController {
     
     var viewModel: DetailViewModel!
     var shouldShowNote = false
-    var shouldLockOrientationOnDisappear = true
     
     private let disposeBag = DisposeBag()
     private let tagColors: [UIColor] = [.appRedColor(), .appYellowColor(), .appBlueColor(), .appGreenColor(), .appOrangeColor(), .appPurpleColor()]
@@ -69,27 +68,11 @@ class DetailViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        AppUtility.lockOrientation(.all)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if shouldShowNote {
             shouldShowNote = false
             showNotes()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if !shouldLockOrientationOnDisappear {
-            shouldLockOrientationOnDisappear = true
-        } else {
-            AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
         }
     }
     
@@ -388,7 +371,6 @@ extension DetailViewController: TagsDelegate {
             if language.rawValue == title {
                 let title = "\(language.rawValue.capitalized) Solution"
                 let controller = setupCodeController(title: title, content: content, language: language)
-                shouldLockOrientationOnDisappear = false
                 present(controller, animated: true, completion: nil)
                 break
             }

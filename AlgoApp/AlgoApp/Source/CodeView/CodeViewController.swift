@@ -38,6 +38,10 @@ class CodeViewController: UIViewController {
         
         configureNavigationBar()
         configureSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         NotificationCenter.default.addObserver(
             self,
@@ -61,12 +65,6 @@ class CodeViewController: UIViewController {
             selector: #selector(orientationChanged(notification:)),
             name: UIDevice.orientationDidChangeNotification,
             object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        AppUtility.lockOrientation(.all)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

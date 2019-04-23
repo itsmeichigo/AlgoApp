@@ -28,11 +28,9 @@ class AboutViewController: UIViewController {
         
         title = "About 🐱💻"
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(popView))
+        let backButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
         backButton.tintColor = .subtitleTextColor()
         navigationItem.leftBarButtonItem = backButton
-        
-        navigationController?.interactivePopGestureRecognizer?.delegate = self;
         
     }
     
@@ -61,13 +59,7 @@ class AboutViewController: UIViewController {
         contentTextView.adjustsFontForContentSizeCategory = true
     }
     
-    @objc private func popView() {
+    @objc private func dismissView() {
         navigationController?.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension AboutViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }
