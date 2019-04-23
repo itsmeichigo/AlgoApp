@@ -118,7 +118,7 @@ class NotesViewController: UIViewController {
             
             cell.shareButton.rx.tap
                 .subscribe(onNext: { [weak self] in
-                    self?.shareNote(content: model.content)
+                    self?.shareNote(content: model.content, sourceView: cell.shareButton, sourceRect: CGRect(x: cell.shareButton.frame.width / 2, y: cell.shareButton.frame.height / 2, width: 0, height: 0))
                 })
                 .disposed(by: cell.disposeBag)
             
@@ -126,9 +126,13 @@ class NotesViewController: UIViewController {
         })
     }
     
-    private func shareNote(content: String) {
+    private func shareNote(content: String, sourceView: UIView? = nil, sourceRect: CGRect = .zero) {
         let controller = UIActivityViewController(activityItems: [content], applicationActivities: nil)
+        controller.popoverPresentationController?.sourceView = sourceView
+        controller.popoverPresentationController?.sourceRect = sourceRect
         present(controller, animated: true, completion: nil)
+        
+        controller.popoverPresentationController?.backgroundColor = .backgroundColor()
     }
 
     
