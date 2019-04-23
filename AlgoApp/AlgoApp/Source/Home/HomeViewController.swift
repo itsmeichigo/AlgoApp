@@ -156,6 +156,15 @@ final class HomeViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        tableView.rx.willBeginDragging
+            .asDriver()
+            .drive(onNext: { [unowned self] in
+                if self.searchBar.isFirstResponder {
+                    self.searchBar.resignFirstResponder()
+                }
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.questions
             .asDriver()
             .map { !$0.isEmpty }

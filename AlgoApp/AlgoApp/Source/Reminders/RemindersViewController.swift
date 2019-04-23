@@ -132,12 +132,6 @@ class RemindersViewController: UIViewController {
             .map { !$0.0.isEmpty && $0.1 }
             .drive(emptyStackView.rx.isHidden)
             .disposed(by: disposeBag)
-        
-//        collectionView.rx.modelSelected(ReminderDetail.self)
-//            .subscribe(onNext: { [unowned self] in
-//                self.showDetail(model: $0)
-//            })
-//            .disposed(by: disposeBag)
     }
     
     private func updateColors() {
@@ -212,7 +206,8 @@ class RemindersViewController: UIViewController {
         }
         
         present(navigationController, animated: true, completion: nil)
-//        collectionView.reloadData()
+        
+        navigationController.popoverPresentationController?.backgroundColor = UIColor.backgroundColor()
     }
     
     private func openSettings() {
