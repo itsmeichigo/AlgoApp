@@ -28,7 +28,7 @@ class AboutViewController: UIViewController {
         
         title = "About 🐱💻"
         
-        let backButton = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(popView))
+        let backButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(popView))
         backButton.tintColor = .subtitleTextColor()
         navigationItem.leftBarButtonItem = backButton
         
@@ -62,7 +62,7 @@ class AboutViewController: UIViewController {
     }
     
     @objc private func popView() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -244,7 +244,7 @@
                                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <state key="normal" title="📄 About &amp; Credits"/>
                                                                     <connections>
-                                                                        <segue destination="YBL-Xe-p3p" kind="show" id="gEH-gz-pyl"/>
+                                                                        <segue destination="fx0-9J-wsI" kind="presentation" id="z7s-yv-a7Y"/>
                                                                     </connections>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="8UQ-qZ-ley">
@@ -401,13 +401,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xIy-vm-WSk"/>
                     </view>
+                    <navigationItem key="navigationItem" id="1AV-52-WQx"/>
                     <connections>
                         <outlet property="contentTextView" destination="HUG-X4-CEh" id="nsG-UE-5pK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lqi-S5-oSx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2922" y="-521"/>
+            <point key="canvasLocation" x="3831.884057971015" y="-521.65178571428567"/>
         </scene>
         <!--Sort Options View Controller-->
         <scene sceneID="7JK-3T-3SS">
@@ -684,6 +685,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7bR-LY-NNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2923" y="340"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Rda-5S-hVd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fx0-9J-wsI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zAD-SK-Kdg">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YBL-Xe-p3p" kind="relationship" relationship="rootViewController" id="l9I-69-g81"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yTE-DB-XD6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2921.739130434783" y="-521.65178571428567"/>
         </scene>
     </scenes>
     <resources>

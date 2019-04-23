@@ -77,15 +77,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let settingsController = AppHelper.settingsStoryboard.instantiateInitialViewController() else { return }
         
         let images: [UIImage?] = [UIImage(named: "cat"), UIImage(named: "reminder"), UIImage(named: "notes"), UIImage(named: "settings")]
+        let names = ["Challenges", "Reminders", "Notes", "Settings"]
         let controllers = [homeController, remindersController, notesController, settingsController]
         for (index, controller) in controllers.enumerated() {
             controller.tabBarItem.image = images[index]
-            controller.tabBarItem.title = ""
+            controller.tabBarItem.title = AppHelper.isIpad ? names[index] : ""
             
             let offset: CGFloat = AppHelper.isIpad ? 0 : 6
             controller.tabBarItem.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0)
         }
 
-        tabbarController.viewControllers = controllers
+        if AppHelper.isIpad {
+            tabbarController.viewControllers = [homeController, remindersController, notesController]
+        } else {
+            tabbarController.viewControllers = controllers
+        }
     }
 }
