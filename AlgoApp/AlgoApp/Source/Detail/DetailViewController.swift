@@ -73,6 +73,8 @@ class DetailViewController: UIViewController {
         if shouldShowNote {
             shouldShowNote = false
             showNotes()
+        } else {
+            codeControllerWillDismiss()
         }
     }
     
@@ -87,9 +89,10 @@ class DetailViewController: UIViewController {
         notePanel.surfaceView.cornerRadius = 16.0
         notePanel.surfaceView.shadowHidden = false
         notePanel.surfaceView.grabberHandle.isHidden = true
-        
-        let note = viewModel.detail.value?.note
-        let text = note?.isEmpty != false ? "" : note
+    }
+    
+    private func updateNotePanelContent(_ content: String?) {
+        let text = content?.isEmpty != false ? "" : content
         let language = viewModel.detail.value?.noteLanguage ?? .markdown
         let navigationController = setupCodeController(title: "", content: text, language: language, readOnly: false, delegate: self)
         
@@ -212,6 +215,11 @@ class DetailViewController: UIViewController {
                     tagButton.layer.borderColor = UIColor.clear.cgColor
                 }
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.detail.asDriver()
+            .map { $0?.note }
+            .drive(onNext: { [weak self] in self?.updateNotePanelContent($0) })
             .disposed(by: disposeBag)
     }
     

@@ -42,8 +42,8 @@ final class DetailViewModel {
     init(question id: Int) {
         questionId.accept(id)
         
-        Observable.combineLatest(Observable.collection(from: realmForRead.objects(Question.self)), questionId)
-            .map { (questions, id) in questions.first(where: { $0.id == id }) }
+        questionId
+            .map { [weak self] in self?.realmForRead.object(ofType: Question.self, forPrimaryKey: $0) }
             .map { question -> QuestionDetailModel? in
                 guard let question = question else { return nil }
                 return QuestionDetailModel(with: question)
@@ -103,6 +103,7 @@ final class DetailViewModel {
                 note.language = language.rawValue
                 note.questionId = question.id
                 note.questionTitle = question.title
+                question.note = note
             } else {
                 let note = Note()
                 note.content = content

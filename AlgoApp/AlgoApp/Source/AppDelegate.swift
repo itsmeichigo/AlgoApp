@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupRootController()
         
         NotificationHelper.shared.showPendingQuestion()
-        
+        AppConfigs.shared.isPremium = true
         return true
     }
 
@@ -87,10 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             controller.tabBarItem.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0)
         }
 
-        if AppHelper.isIpad {
-            tabbarController.viewControllers = [homeController, remindersController, notesController]
-        } else {
-            tabbarController.viewControllers = controllers
-        }
+        tabbarController.viewControllers = controllers
     }
 }

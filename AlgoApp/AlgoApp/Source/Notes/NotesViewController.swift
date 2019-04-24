@@ -106,7 +106,7 @@ class NotesViewController: UIViewController {
             cell.configureCell(model: model)
             cell.deleteButton.rx.tap
                 .subscribe(onNext: { [weak self] in
-                    self?.showDeleteAlert(for: model.id)
+                    self?.showDeleteAlert(for: model)
                 })
                 .disposed(by: cell.disposeBag)
             
@@ -136,11 +136,13 @@ class NotesViewController: UIViewController {
     }
 
     
-    private func showDeleteAlert(for noteId: String) {
+    private func showDeleteAlert(for note: NoteCellModel) {
         let alert = UIAlertController(title: "Delete Note", message: "Are you sure you want to remove this note?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Yes", style: .default) { [unowned self] _ in
-            self.viewModel.deleteNote(id: noteId)
+            self.viewModel.deleteNote(note) { [weak self] in
+                self?.updateQuestion(id: note.questionId)
+            }
         }
         
         alert.addAction(cancelAction)
@@ -150,12 +152,35 @@ class NotesViewController: UIViewController {
     }
     
     private func showQuestion(id: Int) {
-        let storyboard = AppHelper.homeStoryboard
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        guard let splitViewController = tabBarController?.viewControllers?.first as? UISplitViewController,
+            let navigationController = splitViewController.viewControllers.first as? UINavigationController else { return }
         
-        viewController.viewModel = DetailViewModel(question: id)
-        viewController.shouldShowNote = true
-        navigationController?.pushViewController(viewController, animated: true)
+        if let presentedController = splitViewController.presentedViewController {
+            presentedController.dismiss(animated: false, completion: nil)
+        }
+        
+        if let homeViewController = navigationController.topViewController as? HomeViewController {
+            homeViewController.updateDetailController(with: id, shouldShowNote: true)
+        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController,
+            let detailController = detailNavigationController.topViewController as? DetailViewController {
+            detailNavigationController.popToRootViewController(animated: true)
+            detailController.viewModel.updateDetails(with: id)
+            detailController.shouldShowNote = true
+        }
+        
+        tabBarController?.selectedIndex = 0
+    }
+    
+    private func updateQuestion(id: Int) {
+        guard let splitViewController = tabBarController?.viewControllers?.first as? UISplitViewController,
+            let navigationController = splitViewController.viewControllers.first as? UINavigationController else { return }
+        
+        if let homeViewController = navigationController.topViewController as? HomeViewController {
+            homeViewController.updateDetailController(with: id, shouldShowDetail: false)
+        } else if let detailController = (navigationController.topViewController as? UINavigationController)?.topViewController as? DetailViewController {
+            detailController.viewModel.updateDetails(with: id)
+        }
+        
     }
     
     

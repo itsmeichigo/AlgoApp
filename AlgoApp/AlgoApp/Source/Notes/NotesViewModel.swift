@@ -28,10 +28,13 @@ final class NotesViewModel {
             .disposed(by: disposeBag)
     }
     
-    func deleteNote(id: String) {
-        guard let model = realm.object(ofType: Note.self, forPrimaryKey: id) else { return }
+    func deleteNote(_ note: NoteCellModel, completion: (() -> Void)) {
+        guard let model = realm.object(ofType: Note.self, forPrimaryKey: note.id),
+            let question = realm.object(ofType: Question.self, forPrimaryKey: note.questionId) else { return }
         try! realm.write {
             realm.delete(model)
+            question.note = nil
         }
+        completion()
     }
 }

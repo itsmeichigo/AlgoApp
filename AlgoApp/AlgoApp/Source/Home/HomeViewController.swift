@@ -37,7 +37,6 @@ final class HomeViewController: UIViewController {
     
     private lazy var filterBarButton = UIBarButtonItem(customView: filterButton)
     private lazy var shuffleButton = UIBarButtonItem(image: UIImage(named: "shuffle"), style: .plain, target: self, action: #selector(showRandomQuestion))
-    private lazy var settingsButton = UIBarButtonItem(image: UIImage(named: "settings-small"), style: .plain, target: self, action: #selector(showSettings))
     
     fileprivate var searchBar: UISearchBar!
     
@@ -79,6 +78,28 @@ final class HomeViewController: UIViewController {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
     
+    func updateDetailController(with questionId: Int, shouldShowNote: Bool = false, shouldShowDetail: Bool = true) {
+        guard let detailController = self.detailController else { return }
+        if detailController.viewModel != nil {
+            detailController.viewModel.updateDetails(with: questionId)
+        } else {
+            detailController.viewModel = DetailViewModel(question: questionId)
+        }
+        
+        guard shouldShowDetail else { return }
+        
+        detailController.shouldShowNote = shouldShowNote
+        
+        if let controller = detailController.navigationController {
+            controller.popToRootViewController(animated: true)
+            splitViewController?.showDetailViewController(controller, sender: nil)
+        } else {
+            let navigationController = UINavigationController(rootViewController: detailController)
+            splitViewController?.showDetailViewController(navigationController, sender: nil)
+        }
+        
+    }
+    
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
@@ -117,39 +138,12 @@ final class HomeViewController: UIViewController {
         
         filterButton.tintColor = .appOrangeColor()
         shuffleButton.tintColor = .appBlueColor()
-        settingsButton.tintColor = .appPurpleColor()
         
-        if AppHelper.isIpad {
-            navigationItem.rightBarButtonItems = [settingsButton, shuffleButton, filterBarButton]
-        } else {
-            navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
-        }
+        navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
         
         let backImage = UIImage(named: "back")
         navigationController?.navigationBar.backIndicatorImage = backImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-    }
-    
-    private func updateDetailController(with questionId: Int, shouldShowDetail: Bool = true) {
-        guard let detailController = self.detailController else { return }
-        if detailController.viewModel != nil {
-            detailController.viewModel.updateDetails(with: questionId)
-        } else {
-            detailController.viewModel = DetailViewModel(question: questionId)
-        }
-        
-        guard shouldShowDetail else { return }
-        
-        detailController.codeControllerWillDismiss()
-        
-        if let controller = detailController.navigationController {
-            controller.popToRootViewController(animated: true)
-            splitViewController?.showDetailViewController(controller, sender: nil)
-        } else {
-            let navigationController = UINavigationController(rootViewController: detailController)
-            splitViewController?.showDetailViewController(navigationController, sender: nil)
-        }
-        
     }
     
     private func configureView() {
@@ -228,15 +222,6 @@ final class HomeViewController: UIViewController {
         
         filterController.popoverPresentationController?.backgroundColor = UIColor.backgroundColor()
     }
-    
-    @objc private func showSettings() {
-        guard let controller = AppHelper.settingsStoryboard.instantiateInitialViewController() else { return }
-        controller.modalPresentationStyle = .popover
-        controller.popoverPresentationController?.barButtonItem = settingsButton
-        present(controller, animated: true, completion: nil)
-        
-        controller.popoverPresentationController?.backgroundColor = .backgroundColor()
-    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -246,11 +231,7 @@ extension HomeViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if AppHelper.isIpad {
-            navigationItem.rightBarButtonItems = [settingsButton, shuffleButton, filterBarButton]
-        } else {
-            navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
-        }
+        navigationItem.rightBarButtonItems = [shuffleButton, filterBarButton]
         searchBar.showsCancelButton = false
     }
     

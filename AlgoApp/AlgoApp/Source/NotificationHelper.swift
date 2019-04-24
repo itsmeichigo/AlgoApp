@@ -99,28 +99,7 @@ final class NotificationHelper: NSObject {
     
     func showPendingQuestion() {
         guard let id = pendingReminderId else { return }
-        
-        guard let window = UIApplication.shared.keyWindow,
-            let tabbarController = window.rootViewController as? UITabBarController,
-            let navigationController = tabbarController.viewControllers?.first as? UINavigationController else {
-                
-            return
-        }
-        
-        if let presentedController = navigationController.topViewController?.presentedViewController {
-            presentedController.dismiss(animated: false, completion: nil)
-        }
-        
-        navigationController.popToRootViewController(animated: false)
-        
-        let storyboard = AppHelper.homeStoryboard
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
-            let questionId = Reminder.randomQuestionId(for: id) else { return }
-        
-        viewController.viewModel = DetailViewModel(question: questionId)
-        navigationController.pushViewController(viewController, animated: true)
-        
-        tabbarController.selectedIndex = 0
+        showQuestionDetail(for: id)
     }
     
     func cancelScheduledNotifications(for reminder: ReminderDetail, completionHandler: @escaping (() -> Void)) {
@@ -142,6 +121,34 @@ final class NotificationHelper: NSObject {
         center.removeAllPendingNotificationRequests()
         Reminder.disableAllReminders()
     }
+    
+    private func showQuestionDetail(for reminderId: String) {
+        guard let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
+        
+        guard let window = UIApplication.shared.keyWindow,
+            let tabbarController = window.rootViewController as? UITabBarController,
+            let splitViewController = tabbarController.viewControllers?.first as? UISplitViewController else {
+                
+                self.pendingReminderId = reminderId
+                return
+        }
+        
+        if let presentedController = splitViewController.presentedViewController {
+            presentedController.dismiss(animated: false, completion: nil)
+        }
+        
+        guard let navigationController = splitViewController.viewControllers.first as? UINavigationController else { return }
+        
+        if let homeViewController = navigationController.topViewController as? HomeViewController {
+            homeViewController.updateDetailController(with: questionId)
+        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController,
+            let detailController = detailNavigationController.topViewController as? DetailViewController {
+            detailNavigationController.popToRootViewController(animated: true)
+            detailController.viewModel.updateDetails(with: questionId)
+         }
+        
+        tabbarController.selectedIndex = 0
+    }
 }
 
 extension NotificationHelper: UNUserNotificationCenterDelegate {
@@ -151,29 +158,7 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
         
         if let reminderId = response.notification.request.content.userInfo[NotificationHelper.reminderIdKey] as? String {
             
-            guard let window = UIApplication.shared.keyWindow,
-                let tabbarController = window.rootViewController as? UITabBarController,
-                let navigationController = tabbarController.viewControllers?.first as? UINavigationController else {
-                    
-                self.pendingReminderId = reminderId
-                return
-            }
-            
-            if let presentedController = navigationController.topViewController?.presentedViewController {
-                presentedController.dismiss(animated: false, completion: nil)
-            }
-            
-            navigationController.popToRootViewController(animated: false)
-            
-            let storyboard = AppHelper.homeStoryboard
-            guard let viewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController,
-                let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
-            
-            viewController.viewModel = DetailViewModel(question: questionId)
-            navigationController.pushViewController(viewController, animated: true)
-            
-            tabbarController.selectedIndex = 0
-            
+            showQuestionDetail(for: reminderId)
         }
     }
     
