@@ -140,9 +140,7 @@ class NotesViewController: UIViewController {
         let alert = UIAlertController(title: "Delete Note", message: "Are you sure you want to remove this note?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Yes", style: .default) { [unowned self] _ in
-            self.viewModel.deleteNote(note) { [weak self] in
-                self?.updateQuestion(id: note.questionId)
-            }
+            self.viewModel.deleteNote(note)
         }
         
         alert.addAction(cancelAction)
@@ -171,19 +169,6 @@ class NotesViewController: UIViewController {
         
         tabBarController?.selectedIndex = 0
     }
-    
-    private func updateQuestion(id: Int) {
-        guard let splitViewController = tabBarController?.viewControllers?.first as? UISplitViewController,
-            let navigationController = splitViewController.viewControllers.first as? UINavigationController else { return }
-        
-        if let homeViewController = navigationController.topViewController as? HomeViewController {
-            homeViewController.updateDetailController(with: id, shouldShowDetail: false)
-        } else if let detailController = (navigationController.topViewController as? UINavigationController)?.topViewController as? DetailViewController {
-            detailController.viewModel.updateDetails(with: id)
-        }
-        
-    }
-    
     
     // MARK: - collection view magic
     private var indexOfCellBeforeDragging = 0

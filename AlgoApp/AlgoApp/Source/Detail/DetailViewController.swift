@@ -101,7 +101,7 @@ class DetailViewController: UIViewController {
     
     private func configureNavigationBar() {
         noteButton.setImage(UIImage(named: "notepad"), for: .normal)
-        noteButton.frame = CGRect(x: 0, y: 0, width: 50, height: 44)
+        noteButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         noteButton.tintColor = .appYellowColor()
         noteButton.addTarget(self, action: #selector(showNotes), for: .touchUpInside)
         
