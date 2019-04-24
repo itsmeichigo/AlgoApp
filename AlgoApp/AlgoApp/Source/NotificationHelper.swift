@@ -141,10 +141,12 @@ final class NotificationHelper: NSObject {
         
         if let homeViewController = navigationController.topViewController as? HomeViewController {
             homeViewController.updateDetailController(with: questionId)
-        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController,
-            let detailController = detailNavigationController.topViewController as? DetailViewController {
-            detailNavigationController.popToRootViewController(animated: true)
-            detailController.viewModel.updateDetails(with: questionId)
+        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController {
+            detailNavigationController.popToRootViewController(animated: false)
+            
+            if let detailController = detailNavigationController.topViewController as? DetailViewController {
+                detailController.viewModel.updateDetails(with: questionId)
+            }
          }
         
         tabbarController.selectedIndex = 0

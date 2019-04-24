@@ -161,11 +161,12 @@ class NotesViewController: UIViewController {
         
         if let homeViewController = navigationController.topViewController as? HomeViewController {
             homeViewController.updateDetailController(with: id, shouldShowNote: true)
-        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController,
-            let detailController = detailNavigationController.topViewController as? DetailViewController {
-            detailNavigationController.popToRootViewController(animated: true)
-            detailController.viewModel.updateDetails(with: id)
-            detailController.shouldShowNote = true
+        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController  {
+            detailNavigationController.popToRootViewController(animated: false)
+            if let detailController = detailNavigationController.topViewController as? DetailViewController {
+                detailController.viewModel.updateDetails(with: id)
+                detailController.shouldShowNote = true
+            }
         }
         
         tabBarController?.selectedIndex = 0
