@@ -62,6 +62,7 @@ class RemindersViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.tintColor = .appYellowColor()
+        viewModel.disableExpiredReminders()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

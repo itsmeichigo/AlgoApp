@@ -20,7 +20,6 @@ final class RemindersViewModel {
     
     func loadReminders() {
         Observable.collection(from: realm.objects(Reminder.self))
-            .do(onNext: { [weak self] _ in self?.disableExpiredReminders() })
             .map { Array($0).map { ReminderDetail(with: $0) } }
             .bind(to: reminders)
             .disposed(by: disposeBag)
@@ -29,8 +28,13 @@ final class RemindersViewModel {
     func toggleReminder(id: String) {
         let realm = try! Realm()
         guard let reminder = realm.object(ofType: Reminder.self, forPrimaryKey: id) else { return }
+        let toggledValue = !reminder.enabled
+        let reminderDate = reminder.date
         try! realm.write {
-            reminder.enabled = !reminder.enabled
+            reminder.enabled = toggledValue
+            if toggledValue && reminderDate < Date() && reminder.repeatDays.isEmpty {
+                reminder.date = reminderDate.addingTimeInterval(24*60*60)
+            }
             NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
         }
     }
@@ -46,14 +50,12 @@ final class RemindersViewModel {
         }
     }
     
-    private func disableExpiredReminders() {
+   func disableExpiredReminders() {
         let realm = try! Realm()
         let reminders = realm.objects(Reminder.self)
         try! realm.write {
-            for reminder in reminders {
-                if reminder.repeatDays.isEmpty && reminder.date < Date() {
-                    reminder.enabled = false
-                }
+            for reminder in reminders where reminder.repeatDays.isEmpty && reminder.date < Date() {
+                reminder.enabled = false
             }
         }
     }
