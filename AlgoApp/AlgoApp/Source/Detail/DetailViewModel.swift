@@ -62,6 +62,13 @@ final class DetailViewModel {
     }
     
     func scrapeSolutions() {
+        githubSolutionsRelay.accept([:])
+        scrapingCppSolution.accept(true)
+        scrapingJavaSolution.accept(true)
+        scrapingSwiftSolution.accept(true)
+        scrapingPythonSolution.accept(true)
+        scrapingJavascriptSolution.accept(true)
+        
         let languages: [Language] = [.swift, .java, .python, .javascript, .cPP]
         languages.forEach { language in
             let relay = scrapingProgressRelay(for: language)
@@ -72,7 +79,8 @@ final class DetailViewModel {
                     return
             }
             
-            scraper.scrapeSolution(at: url, searchBlock: searchBlock, completionBlock: { [weak self] content in
+            scraper.scrapeSolution(at: url, titleSlug: titleSlug, searchBlock: searchBlock, completionBlock: { [weak self] content in
+                if self?.detail.value?.titleSlug != titleSlug { return }
                 self?.githubSolutions[language] = content
                 relay?.accept(false)
             }, failureBlock: { relay?.accept(false) })

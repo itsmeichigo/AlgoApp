@@ -59,8 +59,6 @@ class DetailViewController: UIViewController {
         configureButtons()
         configureNotePanel()
         
-        viewModel.scrapeSolutions()
-        
         Themer.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
@@ -166,6 +164,12 @@ class DetailViewController: UIViewController {
     }
 
     private func configureContent() {
+        
+        viewModel.detail
+            .map { $0?.id }
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in self?.viewModel.scrapeSolutions() })
+            .disposed(by: disposeBag)
         
         viewModel.detail
             .map { $0?.title }
@@ -289,6 +293,7 @@ class DetailViewController: UIViewController {
     
     private func showWebpage(url: URL, title: String = "", contentSelector: String?) {
         let viewController = WebViewController()
+        viewController.hidesBottomBarWhenPushed = true
         viewController.url = url
         viewController.title = title
         viewController.contentSelector = contentSelector
