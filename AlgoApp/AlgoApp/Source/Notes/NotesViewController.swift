@@ -177,7 +177,7 @@ class NotesViewController: UIViewController {
     }
     
     private func calculateSectionInset() -> CGFloat {
-        return 16
+        return AppHelper.isIpad ? 48 : 16
     }
     
     private func configureCollectionViewLayoutItemSize() {

@@ -68,7 +68,19 @@ class NoteCell: UICollectionViewCell, NibReusable {
         
         titleLabel.text = model.questionTitle
         
-        contentTextView.attributedText = highlighter?.highlight(model.content, as: model.language.rawLanguageName, fastRender: false)
+        let attributedString = highlighter?.highlight(model.content, as: model.language.rawLanguageName, fastRender: false)
+        contentTextView.attributedText = attributedString
+        
+        if let attributedString = attributedString,
+            let font = attributedString.attribute(.font, at: 0, effectiveRange: nil) as? UIFont {
+            let size = UIFontDescriptor.preferredFontDescriptor(withTextStyle: AppHelper.isIpad ? .body : .callout).pointSize
+            let newFont = font.withSize(size)
+            let mutableString = NSMutableAttributedString(attributedString: attributedString)
+            mutableString.addAttribute(.font, value: newFont, range: NSMakeRange(0, attributedString.length))
+            
+            contentTextView.attributedText = mutableString
+        }
+    
         contentTextView.scrollRangeToVisible(NSRange(location: 0, length: 1))
         
         languageLabel.text = "\(model.language.rawValue) Snippet"
