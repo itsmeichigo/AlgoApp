@@ -56,6 +56,9 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                            </variation>
                                                         </label>
                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5vM-oV-vAG">
                                                             <rect key="frame" x="317" y="14.5" width="51" height="31"/>
@@ -73,10 +76,16 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="xKv-aw-YkW" firstAttribute="leading" secondItem="9zE-UN-n9R" secondAttribute="leading" constant="16" id="AFR-Il-CO7"/>
+                                                <constraint firstItem="xKv-aw-YkW" firstAttribute="leading" secondItem="9zE-UN-n9R" secondAttribute="leading" constant="16" id="AFR-Il-CO7">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="xKv-aw-YkW" secondAttribute="bottom" constant="8" id="Mnz-Cu-oPw"/>
-                                                <constraint firstItem="xKv-aw-YkW" firstAttribute="top" secondItem="9zE-UN-n9R" secondAttribute="top" constant="16" id="UfA-a4-PjR"/>
-                                                <constraint firstAttribute="trailing" secondItem="xKv-aw-YkW" secondAttribute="trailing" constant="16" id="ZY7-js-hfl"/>
+                                                <constraint firstItem="xKv-aw-YkW" firstAttribute="top" secondItem="9zE-UN-n9R" secondAttribute="top" constant="16" id="UfA-a4-PjR">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="xKv-aw-YkW" secondAttribute="trailing" constant="16" id="ZY7-js-hfl">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -99,6 +108,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                    </variation>
                                                                 </label>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-dc-Khp">
                                                                     <rect key="frame" x="301" y="14.5" width="51" height="31"/>
@@ -113,7 +125,6 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="2Pq-76-Ff3"/>
                                                                 <constraint firstItem="XMC-YK-lVJ" firstAttribute="centerY" secondItem="zbK-bO-UDi" secondAttribute="centerY" id="B6s-Hi-Nql"/>
                                                                 <constraint firstItem="XMC-YK-lVJ" firstAttribute="leading" secondItem="zbK-bO-UDi" secondAttribute="leading" id="HoA-wL-7mF"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Mos-dc-Khp" secondAttribute="trailing" id="MET-Qp-g2L"/>
@@ -132,6 +143,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <state key="normal" title="🔮 Sort problems"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                    </variation>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="9C8-Pu-zv1">
                                                                     <rect key="frame" x="341" y="22.5" width="9" height="15"/>
@@ -142,6 +156,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                    </variation>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -150,11 +167,12 @@
                                                                 <constraint firstItem="9C8-Pu-zv1" firstAttribute="centerY" secondItem="eT4-Cv-1Nt" secondAttribute="centerY" id="CDn-A0-LWm"/>
                                                                 <constraint firstAttribute="bottom" secondItem="xaI-fu-pzM" secondAttribute="bottom" id="CnT-Yj-20P"/>
                                                                 <constraint firstAttribute="trailing" secondItem="9C8-Pu-zv1" secondAttribute="trailing" id="L5M-zh-YTJ"/>
-                                                                <constraint firstAttribute="height" constant="60" id="Nj5-iN-aNO"/>
                                                                 <constraint firstAttribute="trailing" secondItem="xaI-fu-pzM" secondAttribute="trailing" id="UYC-86-jo5"/>
                                                                 <constraint firstItem="xaI-fu-pzM" firstAttribute="leading" secondItem="eT4-Cv-1Nt" secondAttribute="leading" id="aQf-9A-tjr"/>
                                                                 <constraint firstItem="xaI-fu-pzM" firstAttribute="top" secondItem="eT4-Cv-1Nt" secondAttribute="top" id="blU-ti-o29"/>
-                                                                <constraint firstItem="9C8-Pu-zv1" firstAttribute="leading" secondItem="aVP-K3-FFk" secondAttribute="trailing" constant="8" id="exc-Lv-q65"/>
+                                                                <constraint firstItem="9C8-Pu-zv1" firstAttribute="leading" secondItem="aVP-K3-FFk" secondAttribute="trailing" constant="8" id="exc-Lv-q65">
+                                                                    <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                                                </constraint>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -163,7 +181,9 @@
                                                         <constraint firstItem="zbK-bO-UDi" firstAttribute="leading" secondItem="PVQ-Ca-da5" secondAttribute="leading" constant="16" id="Hos-YF-3r4"/>
                                                         <constraint firstItem="eT4-Cv-1Nt" firstAttribute="leading" secondItem="PVQ-Ca-da5" secondAttribute="leading" constant="16" id="Is1-ff-DaM"/>
                                                         <constraint firstAttribute="trailing" secondItem="zbK-bO-UDi" secondAttribute="trailing" constant="16" id="NQU-sN-0Su"/>
+                                                        <constraint firstItem="zbK-bO-UDi" firstAttribute="height" secondItem="PVQ-Ca-da5" secondAttribute="height" multiplier="0.5" id="OQ2-KX-Hbw"/>
                                                         <constraint firstItem="zbK-bO-UDi" firstAttribute="top" secondItem="PVQ-Ca-da5" secondAttribute="top" id="d6R-tc-p3U"/>
+                                                        <constraint firstItem="eT4-Cv-1Nt" firstAttribute="height" secondItem="zbK-bO-UDi" secondAttribute="height" id="dIf-MJ-0h3"/>
                                                         <constraint firstItem="eT4-Cv-1Nt" firstAttribute="top" secondItem="zbK-bO-UDi" secondAttribute="bottom" id="hKk-tR-Srd"/>
                                                         <constraint firstAttribute="trailing" secondItem="eT4-Cv-1Nt" secondAttribute="trailing" constant="16" id="wFJ-Df-QzG"/>
                                                     </constraints>
@@ -171,9 +191,13 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="PVQ-Ca-da5" secondAttribute="trailing" constant="16" id="GZ3-bb-ui2"/>
+                                                <constraint firstAttribute="trailing" secondItem="PVQ-Ca-da5" secondAttribute="trailing" constant="16" id="GZ3-bb-ui2">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
                                                 <constraint firstItem="PVQ-Ca-da5" firstAttribute="top" secondItem="XPs-GF-Ekg" secondAttribute="top" constant="8" id="HG5-Ro-vaJ"/>
-                                                <constraint firstItem="PVQ-Ca-da5" firstAttribute="leading" secondItem="XPs-GF-Ekg" secondAttribute="leading" constant="16" id="YKf-G4-lUz"/>
+                                                <constraint firstItem="PVQ-Ca-da5" firstAttribute="leading" secondItem="XPs-GF-Ekg" secondAttribute="leading" constant="16" id="YKf-G4-lUz">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="PVQ-Ca-da5" secondAttribute="bottom" constant="8" id="nNy-W7-oRk"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -194,6 +218,9 @@
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <state key="normal" title="🚀 Go Premium"/>
+                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                            </variation>
                                                             <connections>
                                                                 <segue destination="zGB-kw-W4R" kind="show" id="DIu-FT-Ncc"/>
                                                             </connections>
@@ -211,8 +238,12 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Qcy-Sk-nfp" secondAttribute="bottom" priority="900" constant="8" id="4PV-pY-6CQ"/>
-                                                <constraint firstItem="Qcy-Sk-nfp" firstAttribute="leading" secondItem="1JB-qr-rVW" secondAttribute="leading" constant="16" id="7pr-8K-ink"/>
-                                                <constraint firstAttribute="trailing" secondItem="Qcy-Sk-nfp" secondAttribute="trailing" constant="16" id="a48-Bf-iJv"/>
+                                                <constraint firstItem="Qcy-Sk-nfp" firstAttribute="leading" secondItem="1JB-qr-rVW" secondAttribute="leading" constant="16" id="7pr-8K-ink">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="Qcy-Sk-nfp" secondAttribute="trailing" constant="16" id="a48-Bf-iJv">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
                                                 <constraint firstItem="Qcy-Sk-nfp" firstAttribute="top" secondItem="1JB-qr-rVW" secondAttribute="top" constant="8" id="bxa-tC-Ay9"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -243,6 +274,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <state key="normal" title="📄 About &amp; Credits"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                    </variation>
                                                                     <connections>
                                                                         <segue destination="fx0-9J-wsI" kind="presentation" id="z7s-yv-a7Y"/>
                                                                     </connections>
@@ -257,7 +291,6 @@
                                                                 <constraint firstItem="CGR-yX-PFY" firstAttribute="leading" secondItem="4Tw-EW-gBi" secondAttribute="leading" id="1hT-bt-Dj1"/>
                                                                 <constraint firstAttribute="trailing" secondItem="CGR-yX-PFY" secondAttribute="trailing" id="44h-eD-kJx"/>
                                                                 <constraint firstItem="CGR-yX-PFY" firstAttribute="top" secondItem="4Tw-EW-gBi" secondAttribute="top" id="9DQ-to-sft"/>
-                                                                <constraint firstAttribute="height" constant="60" id="E4q-Qg-dGf"/>
                                                                 <constraint firstAttribute="trailing" secondItem="R4T-QN-ydF" secondAttribute="trailing" id="IiZ-oq-PDP"/>
                                                                 <constraint firstAttribute="bottom" secondItem="R4T-QN-ydF" secondAttribute="bottom" id="WWK-ZL-pFS"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8UQ-qZ-ley" secondAttribute="trailing" id="YkQ-3C-jUq"/>
@@ -274,6 +307,9 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <state key="normal" title="❤️ Leave a review"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                    </variation>
                                                                 </button>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6cm-LZ-NMw">
                                                                     <rect key="frame" x="0.0" y="59.5" width="350" height="0.5"/>
@@ -291,7 +327,6 @@
                                                                 <constraint firstItem="plu-4n-EgE" firstAttribute="leading" secondItem="4lu-W0-euJ" secondAttribute="leading" id="WXr-qL-OuP"/>
                                                                 <constraint firstAttribute="bottom" secondItem="plu-4n-EgE" secondAttribute="bottom" id="amu-xB-7xf"/>
                                                                 <constraint firstAttribute="trailing" secondItem="plu-4n-EgE" secondAttribute="trailing" id="ror-43-vUu"/>
-                                                                <constraint firstAttribute="height" constant="60" id="ujL-tT-YLv"/>
                                                                 <constraint firstAttribute="trailing" secondItem="6cm-LZ-NMw" secondAttribute="trailing" id="vzE-6x-07x"/>
                                                             </constraints>
                                                         </view>
@@ -303,12 +338,14 @@
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <state key="normal" title="👩‍💻 Contact Developer"/>
+                                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                                    </variation>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="yE1-z0-sXf" secondAttribute="bottom" id="6Ek-OL-JvK"/>
-                                                                <constraint firstAttribute="height" constant="60" id="Ucv-fA-t8V"/>
                                                                 <constraint firstItem="yE1-z0-sXf" firstAttribute="leading" secondItem="u1H-Lz-ETE" secondAttribute="leading" id="itY-aI-aIC"/>
                                                                 <constraint firstAttribute="trailing" secondItem="yE1-z0-sXf" secondAttribute="trailing" id="o85-kv-auR"/>
                                                                 <constraint firstItem="yE1-z0-sXf" firstAttribute="top" secondItem="u1H-Lz-ETE" secondAttribute="top" id="wKA-YQ-Nc2"/>
@@ -320,13 +357,16 @@
                                                         <constraint firstItem="u1H-Lz-ETE" firstAttribute="leading" secondItem="TwQ-ci-M8T" secondAttribute="leading" constant="16" id="5wu-Ue-klW"/>
                                                         <constraint firstAttribute="trailing" secondItem="4lu-W0-euJ" secondAttribute="trailing" constant="16" id="Csc-b0-FbQ"/>
                                                         <constraint firstItem="4Tw-EW-gBi" firstAttribute="leading" secondItem="TwQ-ci-M8T" secondAttribute="leading" constant="16" id="EIA-nZ-UVy"/>
+                                                        <constraint firstItem="4lu-W0-euJ" firstAttribute="height" secondItem="4Tw-EW-gBi" secondAttribute="height" id="Uti-gd-uRW"/>
                                                         <constraint firstItem="4lu-W0-euJ" firstAttribute="leading" secondItem="TwQ-ci-M8T" secondAttribute="leading" constant="16" id="XAp-1T-y8l"/>
                                                         <constraint firstAttribute="trailing" secondItem="4Tw-EW-gBi" secondAttribute="trailing" constant="16" id="oVw-4D-Iuh"/>
                                                         <constraint firstAttribute="trailing" secondItem="u1H-Lz-ETE" secondAttribute="trailing" constant="16" id="qh1-qc-5qB"/>
+                                                        <constraint firstItem="u1H-Lz-ETE" firstAttribute="height" secondItem="4lu-W0-euJ" secondAttribute="height" id="rKi-Og-Dm1"/>
                                                         <constraint firstItem="u1H-Lz-ETE" firstAttribute="top" secondItem="4lu-W0-euJ" secondAttribute="bottom" id="rgx-1B-3u4"/>
                                                         <constraint firstItem="4Tw-EW-gBi" firstAttribute="top" secondItem="TwQ-ci-M8T" secondAttribute="top" id="xMs-v0-f6K"/>
                                                         <constraint firstAttribute="bottom" secondItem="u1H-Lz-ETE" secondAttribute="bottom" id="yVA-zw-a3z"/>
                                                         <constraint firstItem="4lu-W0-euJ" firstAttribute="top" secondItem="4Tw-EW-gBi" secondAttribute="bottom" id="yz0-6t-P4J"/>
+                                                        <constraint firstItem="4Tw-EW-gBi" firstAttribute="height" secondItem="TwQ-ci-M8T" secondAttribute="height" multiplier="1/3" id="zPi-1W-Ooa"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -334,8 +374,12 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="TwQ-ci-M8T" secondAttribute="bottom" constant="16" id="K3z-Mk-yTT"/>
                                                 <constraint firstItem="TwQ-ci-M8T" firstAttribute="top" secondItem="9DR-SP-4KY" secondAttribute="top" constant="8" id="c2g-XI-fnt"/>
-                                                <constraint firstItem="TwQ-ci-M8T" firstAttribute="leading" secondItem="9DR-SP-4KY" secondAttribute="leading" constant="16" id="ggz-HZ-wqQ"/>
-                                                <constraint firstAttribute="trailing" secondItem="TwQ-ci-M8T" secondAttribute="trailing" constant="16" id="lIw-i8-n0c"/>
+                                                <constraint firstItem="TwQ-ci-M8T" firstAttribute="leading" secondItem="9DR-SP-4KY" secondAttribute="leading" constant="16" id="ggz-HZ-wqQ">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="TwQ-ci-M8T" secondAttribute="trailing" constant="16" id="lIw-i8-n0c">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
