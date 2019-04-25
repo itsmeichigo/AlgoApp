@@ -42,6 +42,7 @@ class RemindersViewController: UIViewController {
         configureView()
         configureNavigationBar()
         updateColors()
+        
         viewModel.loadReminders()
         
         Themer.shared.currentThemeDriver

@@ -261,7 +261,7 @@
                                                             <rect key="frame" x="317" y="46" width="51" height="31"/>
                                                         </switch>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Easy, Array, Facebook, Easy, Array, Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MV-3c-RPY">
-                                                            <rect key="frame" x="16" y="16" width="299" height="16"/>
+                                                            <rect key="frame" x="16" y="16" width="350" height="16"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -276,7 +276,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="7MV-3c-RPY" firstAttribute="leading" secondItem="aBi-kb-y0r" secondAttribute="leading" constant="16" id="4DV-Eg-LxG"/>
-                                                        <constraint firstAttribute="trailing" secondItem="7MV-3c-RPY" secondAttribute="trailing" constant="67" id="5yb-2J-Ni2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7MV-3c-RPY" secondAttribute="trailing" constant="16" id="5yb-2J-Ni2"/>
                                                         <constraint firstItem="fA1-U6-KJj" firstAttribute="centerY" secondItem="gDD-i1-a0f" secondAttribute="centerY" id="B1w-k2-cj0"/>
                                                         <constraint firstAttribute="bottom" secondItem="Rwg-k7-nqO" secondAttribute="bottom" priority="999" constant="16" id="EhG-fI-RBp"/>
                                                         <constraint firstItem="7MV-3c-RPY" firstAttribute="top" secondItem="aBi-kb-y0r" secondAttribute="top" constant="16" id="G6Y-7s-17Z"/>
