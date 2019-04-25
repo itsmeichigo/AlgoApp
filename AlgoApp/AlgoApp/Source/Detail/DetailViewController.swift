@@ -122,7 +122,7 @@ class DetailViewController: UIViewController {
         otherSolutionsTagView.backgroundColor = .clear
         otherSolutionsTagView.paddingVertical = 6.0
         otherSolutionsTagView.paddingHorizontal = 10.0
-        otherSolutionsTagView.tagFont = UIFont.preferredFont(forTextStyle: .callout)
+        otherSolutionsTagView.tagFont = UIFont.preferredFont(forTextStyle: AppHelper.isIpad ? .body : .callout)
         otherSolutionsTagView.delegate = self
         
         markAsSolvedButton.layer.cornerRadius = 8

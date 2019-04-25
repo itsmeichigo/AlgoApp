@@ -10,10 +10,11 @@ import UIKit
 
 extension String {
     var formattedDescription: NSAttributedString {
+        let preferredTextStyle: UIFont.TextStyle = AppHelper.isIpad ? .body : .callout
         let boldFont = UIFont.systemFont(ofSize: 17, weight: .medium
         )
-        let regularFont = UIFont.preferredFont(forTextStyle: .callout)
-        let fontMetrics = UIFontMetrics(forTextStyle: .callout)
+        let regularFont = UIFont.preferredFont(forTextStyle: preferredTextStyle)
+        let fontMetrics = UIFontMetrics(forTextStyle: preferredTextStyle)
         
         let attributedString = NSMutableAttributedString(string: self, attributes: [
             .foregroundColor: UIColor.titleTextColor(),

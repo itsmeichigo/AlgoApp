@@ -170,6 +170,15 @@ private extension CodeViewController {
         if let content = viewModel.attributedContent,
             content.string.count > 0 {
             codeTextView.attributedText = content
+            
+            if let font = content.attribute(.font, at: 0, effectiveRange: nil) as? UIFont {
+                let size = UIFontDescriptor.preferredFontDescriptor(withTextStyle: AppHelper.isIpad ? .body : .callout).pointSize
+                let newFont = font.withSize(size)
+                let mutableString = NSMutableAttributedString(attributedString: content)
+                mutableString.addAttribute(.font, value: newFont, range: NSMakeRange(0, content.length))
+                
+                codeTextView.attributedText = mutableString
+            }
         } else {
             codeTextView.text = placeholder
         }
