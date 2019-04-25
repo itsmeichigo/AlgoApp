@@ -182,9 +182,10 @@ class NotesViewController: UIViewController {
     
     private func configureCollectionViewLayoutItemSize() {
         let inset: CGFloat = calculateSectionInset()
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        let verticalInset = AppHelper.isIpad ? inset / 2 : 0
+        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: verticalInset, left: inset, bottom: verticalInset, right: inset)
         
-        collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: collectionView.frame.height)
+        collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: collectionView.frame.height - verticalInset * 2)
     }
     
     private func indexOfMajorCell() -> Int {

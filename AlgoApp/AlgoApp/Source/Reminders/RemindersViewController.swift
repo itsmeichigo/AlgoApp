@@ -158,13 +158,15 @@ class RemindersViewController: UIViewController {
     }
     
     private func configureCollectionViewLayoutItemSize() {
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        let buffer: CGFloat = AppHelper.isIpad ? 32 : 0
+        let inset = UIEdgeInsets(top: 8 + buffer, left: 0 + buffer, bottom: 8 + buffer, right: 0 + buffer)
+        collectionViewFlowLayout.sectionInset = inset
         
         let screenWidth = UIScreen.main.bounds.width
         let cellHeight: CGFloat = 141
         if AppHelper.isIpad {
             let spacing = collectionViewFlowLayout.minimumInteritemSpacing
-            collectionViewFlowLayout.itemSize = CGSize(width: (screenWidth - spacing) / 3, height: cellHeight)
+            collectionViewFlowLayout.itemSize = CGSize(width: (screenWidth - inset.left - inset.right - spacing) / 3, height: cellHeight)
         } else {
             collectionViewFlowLayout.itemSize = CGSize(width: screenWidth, height: cellHeight)
         }
