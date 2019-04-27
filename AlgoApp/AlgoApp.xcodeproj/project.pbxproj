@@ -37,7 +37,6 @@
 		DE112E9D223511B5003A5796 /* QuestionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE112E9C223511B5003A5796 /* QuestionFilter.swift */; };
 		DE112EA022351652003A5796 /* ReminderDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE112E9F22351652003A5796 /* ReminderDetailViewModel.swift */; };
 		DE112EA22235169D003A5796 /* RemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE112EA12235169D003A5796 /* RemindersViewModel.swift */; };
-		DE13936E221A491200F70F80 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE13936D221A491200F70F80 /* default.realm */; };
 		DE139D7F22436EC200879F89 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE139D7E22436EC200879F89 /* Language.swift */; };
 		DE13A11622226A7F0091FF96 /* CodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11522226A7F0091FF96 /* CodeViewController.swift */; };
 		DE13A11822226B920091FF96 /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE13A11722226B920091FF96 /* CodeViewModel.swift */; };
@@ -68,6 +67,8 @@
 		DE314394226C2E050063DC71 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE314393226C2E050063DC71 /* Settings.storyboard */; };
 		DE314397226C30D90063DC71 /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE314396226C30D90063DC71 /* Notes.storyboard */; };
 		DE33353E226CCF0300F1D0F0 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353D226CCF0300F1D0F0 /* AppHelper.swift */; };
+		DE33354022740BC500F1D0F0 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353F22740BC500F1D0F0 /* Solution.swift */; };
+		DE33354222743EC000F1D0F0 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE33354122743EC000F1D0F0 /* default.realm */; };
 		DE79F00922511CA50051ECD1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00822511CA50051ECD1 /* AboutViewController.swift */; };
 		DE79F00B225122EC0051ECD1 /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */; };
 		DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */; };
@@ -122,7 +123,6 @@
 		DE112E9C223511B5003A5796 /* QuestionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFilter.swift; sourceTree = "<group>"; };
 		DE112E9F22351652003A5796 /* ReminderDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewModel.swift; sourceTree = "<group>"; };
 		DE112EA12235169D003A5796 /* RemindersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewModel.swift; sourceTree = "<group>"; };
-		DE13936D221A491200F70F80 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE139D7E22436EC200879F89 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		DE13A11522226A7F0091FF96 /* CodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewController.swift; sourceTree = "<group>"; };
 		DE13A11722226B920091FF96 /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
@@ -153,6 +153,8 @@
 		DE314393226C2E050063DC71 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DE314396226C30D90063DC71 /* Notes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notes.storyboard; sourceTree = "<group>"; };
 		DE33353D226CCF0300F1D0F0 /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		DE33353F22740BC500F1D0F0 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
+		DE33354122743EC000F1D0F0 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE79F00822511CA50051ECD1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewController.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
@@ -305,8 +307,8 @@
 		DE0E517C220830C000BFBB0B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DE33354122743EC000F1D0F0 /* default.realm */,
 				DE1A9A1E22429076007E79F6 /* GoogleService-Info.plist */,
-				DE13936D221A491200F70F80 /* default.realm */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -316,6 +318,7 @@
 			children = (
 				DE139D7E22436EC200879F89 /* Language.swift */,
 				DE0E517F220840A400BFBB0B /* Question.swift */,
+				DE33353F22740BC500F1D0F0 /* Solution.swift */,
 				DE0E517E220840A400BFBB0B /* Tag.swift */,
 				DE0E51822208413E00BFBB0B /* Company.swift */,
 				DE0E51842208416100BFBB0B /* QuestionList.swift */,
@@ -513,8 +516,8 @@
 			files = (
 				DE314390226C2CF70063DC71 /* Home.storyboard in Resources */,
 				DE0E515C22070C2A00BFBB0B /* LaunchScreen.storyboard in Resources */,
+				DE33354222743EC000F1D0F0 /* default.realm in Resources */,
 				DE314397226C30D90063DC71 /* Notes.storyboard in Resources */,
-				DE13936E221A491200F70F80 /* default.realm in Resources */,
 				DE1A9A1F22429076007E79F6 /* GoogleService-Info.plist in Resources */,
 				DE314392226C2D120063DC71 /* Reminders.storyboard in Resources */,
 				DE0B03D5225A697B00770AA7 /* highlight.min.js in Resources */,
@@ -753,6 +756,7 @@
 				DE0B03D022599E2400770AA7 /* NotesViewModel.swift in Sources */,
 				DE0E5181220840A400BFBB0B /* Question.swift in Sources */,
 				DE1E284D225CFF7900F6E04E /* String+FormattedDescription.swift in Sources */,
+				DE33354022740BC500F1D0F0 /* Solution.swift in Sources */,
 				DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */,
 				DE24271922476129000A10ED /* PremiumDetailViewController.swift in Sources */,
 				DE139D7F22436EC200879F89 /* Language.swift in Sources */,

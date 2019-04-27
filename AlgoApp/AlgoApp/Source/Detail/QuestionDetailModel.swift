@@ -21,6 +21,7 @@ struct QuestionDetailModel {
     let saved: Bool
     let note: String
     let noteLanguage: Language
+    let githubSolutions: [Language: String]
     
     init(with question: Question) {
         id = question.id
@@ -38,6 +39,34 @@ struct QuestionDetailModel {
             noteLanguage = Language(rawValue: language) ?? .markdown
         } else {
             noteLanguage = .markdown
+        }
+        
+        if let solution = question.solution {
+            var contents: [Language: String] = [:]
+            if let swiftContent = solution.swiftSolution {
+                contents[.swift] = swiftContent
+            }
+            
+            if let pythonContent = solution.pythonSolution {
+                contents[.python] = pythonContent
+            }
+            
+            if let javascriptContent = solution.javascriptSolution {
+                contents[.javascript] = javascriptContent
+            }
+            
+            if let javaContent = solution.javaSolution {
+                contents[.java] = javaContent
+            }
+            
+            if let cppContent = solution.cppSolution {
+                contents[.cPP] = cppContent
+            }
+            
+            githubSolutions = contents
+            
+        } else {
+            githubSolutions = [:]
         }
     }
 }

@@ -12,7 +12,7 @@ import Kanna
 final class SolutionScraper {
     
     func scrapeSolution(at url: URL,
-                        titleSlug: String,
+                        for questionId: Int,
                         searchBlock: @escaping ((Kanna.XPathObject) -> String?),
                         completionBlock: @escaping ((String) -> Void),
                         failureBlock: @escaping (() -> Void)) {

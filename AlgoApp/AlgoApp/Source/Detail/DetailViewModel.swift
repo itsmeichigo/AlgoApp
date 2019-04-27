@@ -61,26 +61,33 @@ final class DetailViewModel {
         self.questionId.accept(questionId)
     }
     
-    func scrapeSolutions() {
-        githubSolutionsRelay.accept([:])
-        scrapingCppSolution.accept(true)
-        scrapingJavaSolution.accept(true)
-        scrapingSwiftSolution.accept(true)
-        scrapingPythonSolution.accept(true)
-        scrapingJavascriptSolution.accept(true)
+    func scrapeSolutions(detail: QuestionDetailModel) {
+        githubSolutions = detail.githubSolutions
         
-        let languages: [Language] = [.swift, .java, .python, .javascript, .cPP]
-        languages.forEach { language in
+        let allLanguages: Set<Language> = [.swift, .java, .python, .javascript, .cPP]
+        let currentLanguages = Set(Array(detail.githubSolutions.keys))
+        
+        let missingLanguages = allLanguages.subtracting(currentLanguages)
+        
+        scrapingCppSolution.accept(!githubSolutions.keys.contains(.cPP))
+        scrapingJavaSolution.accept(!githubSolutions.keys.contains(.java))
+        scrapingSwiftSolution.accept(!githubSolutions.keys.contains(.swift))
+        scrapingPythonSolution.accept(!githubSolutions.keys.contains(.python))
+        scrapingJavascriptSolution.accept(!githubSolutions.keys.contains(.javascript))
+        
+        missingLanguages.forEach { language in
             let relay = scrapingProgressRelay(for: language)
-            guard let titleSlug = detail.value?.titleSlug,
-                let url = language.githubRepoUrl,
+            let titleSlug = detail.titleSlug
+            let questionId = detail.id
+            
+            guard let url = language.githubRepoUrl,
                 let searchBlock = language.githubSearchBlock(with: titleSlug) else {
                     relay?.accept(false)
                     return
             }
             
-            scraper.scrapeSolution(at: url, titleSlug: titleSlug, searchBlock: searchBlock, completionBlock: { [weak self] content in
-                if self?.detail.value?.titleSlug != titleSlug { return }
+            scraper.scrapeSolution(at: url, for: questionId, searchBlock: searchBlock, completionBlock: { [weak self] content in
+                if self?.detail.value?.id != questionId { return }
                 self?.githubSolutions[language] = content
                 relay?.accept(false)
             }, failureBlock: { relay?.accept(false) })

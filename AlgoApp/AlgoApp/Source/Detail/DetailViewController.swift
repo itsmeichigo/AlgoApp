@@ -166,9 +166,9 @@ class DetailViewController: UIViewController {
     private func configureContent() {
         
         viewModel.detail
-            .map { $0?.id }
-            .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] _ in self?.viewModel.scrapeSolutions() })
+            .filterNil()
+            .distinctUntilChanged { $0.id == $1.id }
+            .subscribe(onNext: { [weak self] in self?.viewModel.scrapeSolutions(detail: $0) })
             .disposed(by: disposeBag)
         
         viewModel.detail

@@ -25,6 +25,7 @@ final class Question: Object {
     @objc dynamic var emoji = ""
     
     @objc dynamic var note: Note?
+    @objc dynamic var solution: Solution?
     
     var tags = List<Tag>()
     var companies = List<Company>()
