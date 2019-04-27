@@ -89,6 +89,7 @@ final class DetailViewModel {
             scraper.scrapeSolution(at: url, for: questionId, searchBlock: searchBlock, completionBlock: { [weak self] content in
                 if self?.detail.value?.id != questionId { return }
                 self?.githubSolutions[language] = content
+                self?.saveSolution(for: questionId, content: content, language: language)
                 relay?.accept(false)
             }, failureBlock: { relay?.accept(false) })
         }
@@ -128,7 +129,6 @@ final class DetailViewModel {
                 question.note = note
             }
         }
-        
     }
 }
 
@@ -142,6 +142,47 @@ private extension DetailViewModel {
         case .javascript: return scrapingJavascriptSolution
         case .cPP: return scrapingCppSolution
         default: return nil
+        }
+    }
+    
+    func saveSolution(for questionId: Int, content: String, language: Language) {
+        let realm = try! Realm()
+        if let question = realm.object(ofType: Question.self, forPrimaryKey: questionId) {
+            try! realm.write {
+                if let solution = question.solution {
+                    switch language {
+                    case .cPP:
+                        solution.cppSolution = content
+                    case .java:
+                        solution.javaSolution = content
+                    case .javascript:
+                        solution.javascriptSolution = content
+                    case .python:
+                        solution.pythonSolution = content
+                    case .swift:
+                        solution.swiftSolution = content
+                    default:
+                        break
+                    }
+                } else {
+                    let solution = Solution()
+                    switch language {
+                    case .cPP:
+                        solution.cppSolution = content
+                    case .java:
+                        solution.javaSolution = content
+                    case .javascript:
+                        solution.javascriptSolution = content
+                    case .python:
+                        solution.pythonSolution = content
+                    case .swift:
+                        solution.swiftSolution = content
+                    default:
+                        break
+                    }
+                    question.solution = solution
+                }
+            }
         }
     }
 }
