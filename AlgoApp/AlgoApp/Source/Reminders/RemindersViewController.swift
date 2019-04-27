@@ -236,6 +236,18 @@ class RemindersViewController: UIViewController {
 }
 
 extension RemindersViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? ReminderCell {
+            cell.cardView.backgroundColor = .selectedBackgroundColor()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? ReminderCell {
+            cell.cardView.backgroundColor = .primaryColor()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.reminders.value[indexPath.item]
         if let cell = collectionView.cellForItem(at: indexPath) {

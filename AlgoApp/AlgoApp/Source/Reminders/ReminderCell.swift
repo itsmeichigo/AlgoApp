@@ -14,7 +14,7 @@ import RxSwift
 class ReminderCell: UICollectionViewCell, NibReusable {
 
     @IBOutlet weak var enabledSwitch: UISwitch!
-    @IBOutlet private weak var cardView: UIView!
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var ampmLabel: UILabel!
     @IBOutlet private weak var filterLabel: UILabel!
