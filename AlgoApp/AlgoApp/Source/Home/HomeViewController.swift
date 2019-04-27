@@ -45,6 +45,7 @@ final class HomeViewController: UIViewController {
     private let currentFilter = BehaviorRelay<QuestionFilter?>(value: nil)
     private let disposeBag = DisposeBag()
     private lazy var datasource = self.buildDataSource()
+    private var firstAppear = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,14 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.tintColor = .appOrangeColor()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if AppHelper.isIpad && firstAppear {
+            tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+            firstAppear = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

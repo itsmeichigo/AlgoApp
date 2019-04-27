@@ -68,6 +68,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         if shouldShowNote {
             shouldShowNote = false
             showNotes()
@@ -157,8 +158,8 @@ class DetailViewController: UIViewController {
         
         otherSolutionsLabel.textColor = .subtitleTextColor()
         otherSolutionsTagView.tagLayerColor = .clear
-        otherSolutionsTagView.tagBackgroundColor = UIColor.appPurpleColor().withAlphaComponent(0.1)
-        otherSolutionsTagView.tagTitleColor = .appPurpleColor()
+        otherSolutionsTagView.tagBackgroundColor = .clear
+        otherSolutionsTagView.tagTitleColor = .clear
         
         loadingIndicator.style = Themer.shared.currentTheme == .light ? .gray : .white
     }
@@ -207,17 +208,10 @@ class DetailViewController: UIViewController {
         viewModel.githubSolutionsRelay
             .observeOn(MainScheduler.instance)
             .map { $0.keys.map { $0.rawValue }.joined(separator: ",") }
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.otherSolutionsTagView.tags = $0
-                
-                for (index, tagButton) in self.otherSolutionsTagView.tagArray.enumerated() {
-                    let currentColor = self.tagColors[index % self.tagColors.count]
-                    tagButton.setTitleColor(currentColor, for: .normal)
-                    tagButton.backgroundColor = currentColor.withAlphaComponent(0.1)
-                    tagButton.layer.borderColor = UIColor.clear.cgColor
-                }
+                self.updateSolutionViewColors()
             })
             .disposed(by: disposeBag)
         
@@ -225,6 +219,17 @@ class DetailViewController: UIViewController {
             .map { $0?.note }
             .drive(onNext: { [weak self] in self?.updateNotePanelContent($0) })
             .disposed(by: disposeBag)
+    }
+    
+    private func updateSolutionViewColors() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            for (index, tagButton) in self.otherSolutionsTagView.tagArray.enumerated() {
+                let currentColor = self.tagColors[index % self.tagColors.count]
+                tagButton.setTitleColor(currentColor, for: .normal)
+                tagButton.backgroundColor = currentColor.withAlphaComponent(0.1)
+                tagButton.layer.borderColor = UIColor.clear.cgColor
+            }
+        }
     }
     
     private func configureButtons() {
