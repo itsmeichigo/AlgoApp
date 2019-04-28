@@ -81,7 +81,7 @@ class NotesViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     
-    private func configureView() {
+    private func configureView() {        
         viewModel.notes.asDriver()
             .map { $0.isEmpty }
             .drive(collectionView.rx.isHidden)
