@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let disposeBag = DisposeBag()
     
     /// set orientations you want to be allowed in this property by default
-    var orientationLock = UIInterfaceOrientationMask.portrait
+    var orientationLock = UIInterfaceOrientationMask.allButUpsideDown
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock
@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupRootController()
         
         NotificationHelper.shared.showPendingQuestion()
-        AppConfigs.shared.isPremium = true
         return true
     }
 

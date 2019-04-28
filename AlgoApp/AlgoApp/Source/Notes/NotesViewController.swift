@@ -50,6 +50,13 @@ class NotesViewController: UIViewController {
         super.viewDidLayoutSubviews()
         configureCollectionViewLayoutItemSize()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if let previousTraitCollection = previousTraitCollection,
+            previousTraitCollection.verticalSizeClass != traitCollection.verticalSizeClass {
+            updateCountLabel()
+        }
+    }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
@@ -81,9 +88,7 @@ class NotesViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.notes.asDriver()
-            .do(onNext: { [weak self] in
-                self?.updateCountLabel(total: $0.count)
-            })
+            .do(onNext: { [weak self] _ in self?.updateCountLabel() })
             .map { $0.isEmpty }
             .drive(pageCountLabel.rx.isHidden)
             .disposed(by: disposeBag)
@@ -172,9 +177,9 @@ class NotesViewController: UIViewController {
     
     // MARK: - collection view magic
     private var indexOfCellBeforeDragging = 0
-    private var collectionViewFlowLayout: UICollectionViewFlowLayout {
-        return collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    }
+    private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    }()
     
     private func calculateSectionInset() -> CGFloat {
         return AppHelper.isIpad ? 48 : 16
@@ -185,7 +190,8 @@ class NotesViewController: UIViewController {
         let verticalInset = AppHelper.isIpad ? inset / 2 : 0
         collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: verticalInset, left: inset, bottom: verticalInset, right: inset)
         
-        collectionViewFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - inset * 2, height: collectionView.frame.height - verticalInset * 2)
+        collectionViewFlowLayout.itemSize = CGSize(width: collectionView.frame.width
+            - inset * 2, height: collectionView.frame.height - verticalInset * 2)
     }
     
     private func indexOfMajorCell() -> Int {
@@ -197,8 +203,8 @@ class NotesViewController: UIViewController {
         return safeIndex
     }
     
-    private func updateCountLabel(total: Int) {
-        pageCountLabel.text = "Note \(indexOfMajorCell() + 1) of \(total)"
+    private func updateCountLabel() {
+        pageCountLabel.text = isCompactHeight ? "" : "Note \(indexOfMajorCell() + 1) of \(viewModel.notes.value.count)"
     }
 }
 
@@ -208,7 +214,7 @@ extension NotesViewController: UICollectionViewDelegate, UICollectionViewDelegat
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updateCountLabel(total: collectionView.numberOfItems(inSection: 0))
+        updateCountLabel()
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

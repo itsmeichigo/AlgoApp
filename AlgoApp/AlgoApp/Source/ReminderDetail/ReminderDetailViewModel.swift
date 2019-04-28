@@ -54,6 +54,9 @@ final class ReminderDetailViewModel {
                                                         value: -second,
                                                         to: date,
                                                         options:.matchStrictly)!
+        if updatedDate < Date() {
+            return updatedDate.addingTimeInterval(24*60*60)
+        }
         return updatedDate
     }
 }

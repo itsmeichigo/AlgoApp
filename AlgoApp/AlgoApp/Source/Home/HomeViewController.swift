@@ -61,8 +61,6 @@ final class HomeViewController: UIViewController {
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
-        
-        splitViewController?.preferredDisplayMode = AppHelper.isIpad ? .allVisible : .primaryOverlay
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,10 +70,16 @@ final class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if AppHelper.isIpad && firstAppear {
+        if splitViewController?.isRegularWidth == true && firstAppear {
             tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
             firstAppear = false
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        splitViewController?.preferredDisplayMode = splitViewController?.isRegularWidth == true ? .allVisible : .primaryOverlay
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -193,8 +197,9 @@ final class HomeViewController: UIViewController {
             .filterNil()
             .take(1)
             .subscribe(onNext: { [weak self] question in
-                self?.updateDetailController(with: question.id, shouldShowDetail: AppHelper.isIpad)
-                self?.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+                guard let self = self else { return }
+                self.updateDetailController(with: question.id, shouldShowDetail: self.splitViewController?.isRegularWidth == true)
+                self.tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
             })
             .disposed(by: disposeBag)
         

@@ -226,7 +226,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6UZ-0q-19q">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="yX5-2y-XMy">
                                     <size key="itemSize" width="414" height="141"/>
@@ -348,13 +348,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6UZ-0q-19q" firstAttribute="trailing" secondItem="eZa-Rj-3wr" secondAttribute="trailing" id="0Gr-eU-i3u"/>
+                            <constraint firstItem="6UZ-0q-19q" firstAttribute="bottom" secondItem="eZa-Rj-3wr" secondAttribute="bottom" id="GCh-sq-nzp"/>
                             <constraint firstItem="Goy-Sr-oFH" firstAttribute="centerY" secondItem="3ed-M1-Mps" secondAttribute="centerY" constant="-40" id="Jnx-2o-hVQ"/>
                             <constraint firstItem="Goy-Sr-oFH" firstAttribute="centerX" secondItem="3ed-M1-Mps" secondAttribute="centerX" id="mai-OZ-23E"/>
                             <constraint firstItem="eZa-Rj-3wr" firstAttribute="trailing" secondItem="Goy-Sr-oFH" secondAttribute="trailing" constant="16" id="nFt-RV-mNf"/>
                             <constraint firstItem="6UZ-0q-19q" firstAttribute="top" secondItem="eZa-Rj-3wr" secondAttribute="top" id="rgb-2B-DxY"/>
                             <constraint firstItem="Goy-Sr-oFH" firstAttribute="leading" secondItem="eZa-Rj-3wr" secondAttribute="leading" constant="16" id="ryY-Lg-geR"/>
                             <constraint firstItem="6UZ-0q-19q" firstAttribute="leading" secondItem="eZa-Rj-3wr" secondAttribute="leading" id="trE-9z-7Nz"/>
-                            <constraint firstAttribute="bottom" secondItem="6UZ-0q-19q" secondAttribute="bottom" id="zxX-9m-uLp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eZa-Rj-3wr"/>
                     </view>

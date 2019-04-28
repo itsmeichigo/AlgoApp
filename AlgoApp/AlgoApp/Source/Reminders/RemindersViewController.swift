@@ -33,10 +33,6 @@ class RemindersViewController: UIViewController {
     
     private lazy var addButton = UIButton(type: .system)
     
-    private var collectionViewFlowLayout: UICollectionViewFlowLayout {
-        return collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -65,6 +61,22 @@ class RemindersViewController: UIViewController {
         viewModel.disableExpiredReminders()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        guard viewIfLoaded?.window != nil else { return }
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Themer.shared.currentTheme == .light ? .default : .lightContent
     }
@@ -82,7 +94,6 @@ class RemindersViewController: UIViewController {
     
     private func configureView() {
         
-        configureCollectionViewLayoutItemSize()
         collectionView.delegate = self
         
         openSettingsButton.layer.cornerRadius = openSettingsButton.frame.height / 2
@@ -157,18 +168,18 @@ class RemindersViewController: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
     }
     
-    private func configureCollectionViewLayoutItemSize() {
+    private func configureCollectionViewLayoutItemSize(for width: CGFloat) -> CGSize {
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
         let buffer: CGFloat = AppHelper.isIpad ? 32 : 0
         let inset = UIEdgeInsets(top: 8 + buffer, left: 0 + buffer, bottom: 8 + buffer, right: 0 + buffer)
-        collectionViewFlowLayout.sectionInset = inset
+        layout.sectionInset = inset
         
-        let screenWidth = UIScreen.main.bounds.width
         let cellHeight: CGFloat = 141
-        if AppHelper.isIpad {
-            let spacing = collectionViewFlowLayout.minimumInteritemSpacing
-            collectionViewFlowLayout.itemSize = CGSize(width: (screenWidth - inset.left - inset.right - spacing) / 3, height: cellHeight)
+        if isRegularWidth {
+            let spacing = layout.minimumInteritemSpacing
+            return CGSize(width: (width - inset.left - inset.right - spacing) / 3, height: cellHeight)
         } else {
-            collectionViewFlowLayout.itemSize = CGSize(width: screenWidth, height: cellHeight)
+            return CGSize(width: width, height: cellHeight)
         }
     }
 
@@ -235,7 +246,7 @@ class RemindersViewController: UIViewController {
     }
 }
 
-extension RemindersViewController: UICollectionViewDelegate {
+extension RemindersViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? ReminderCell {
             cell.cardView.backgroundColor = .selectedBackgroundColor()
@@ -253,5 +264,11 @@ extension RemindersViewController: UICollectionViewDelegate {
         if let cell = collectionView.cellForItem(at: indexPath) {
             showDetail(model: item, sourceView: cell, sourceRect: CGRect(x: cell.frame.width / 2, y: cell.frame.height / 2, width: 0, height: 0))
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let margin = view.safeAreaInsets.left + view.safeAreaInsets.right
+        let width = UIScreen.main.bounds.width - margin
+        return configureCollectionViewLayoutItemSize(for: width)
     }
 }

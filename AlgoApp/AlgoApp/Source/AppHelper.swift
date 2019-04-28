@@ -9,6 +9,7 @@
 import UIKit
 
 enum AppHelper {
+    
     static var isIpad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
