@@ -20,6 +20,7 @@ protocol CodeViewControllerDelegate: class {
 class CodeViewController: UIViewController {
     
     var viewModel: CodeViewModel!
+    var isFullscreenCodeEditor = false
     weak var delegate: CodeViewControllerDelegate?
     
     private var codeTextView: UITextView!
@@ -94,7 +95,14 @@ private extension CodeViewController {
             let saveButton = UIBarButtonItem(image: UIImage(named: "done"), style: .plain, target: self, action: #selector(saveContent))
             saveButton.tintColor = .appGreenColor()
             
-            navigationItem.rightBarButtonItems = [saveButton]
+            if !isFullscreenCodeEditor {
+                let enlargeButton = UIBarButtonItem(image: UIImage(named: "maximize"), style: .plain, target: self, action: #selector(enlargeView))
+                enlargeButton.tintColor = .appBlueColor()
+                navigationItem.rightBarButtonItems = [saveButton, enlargeButton]
+                
+            } else {
+                navigationItem.rightBarButtonItems = [saveButton]
+            }
             
             viewModel.language
                 .subscribe(onNext: { [weak self] in
@@ -163,8 +171,9 @@ private extension CodeViewController {
         view.addSubview(codeTextView)
         codeTextView.snp.makeConstraints { maker in
             maker.top.equalTo(pickerView.snp.bottom)
-            maker.leading.trailing.equalToSuperview()
-            maker.bottom.equalToSuperview().offset(0)
+            maker.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
+            maker.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         if let content = viewModel.attributedContent,
@@ -206,6 +215,17 @@ private extension CodeViewController {
         
         let string = codeTextView.attributedText.string
         delegate?.codeControlerShouldSave(content: string, language: viewModel.language.value)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func enlargeView() {
+        let codeController = CodeViewController()
+        codeController.viewModel = CodeViewModel(content: viewModel.content, language: viewModel.language.value, readOnly: false)
+        codeController.title = title
+        codeController.delegate = delegate
+        codeController.isFullscreenCodeEditor = true
+        
+        present(UINavigationController(rootViewController: codeController), animated: true, completion: nil)
     }
     
     @objc func switchLanguage() {
@@ -220,13 +240,13 @@ private extension CodeViewController {
         let keyboardHeight = keyboardRectangle.height
         
         codeTextView.snp.updateConstraints { maker in
-            maker.bottom.equalToSuperview().offset(-keyboardHeight)
+            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-keyboardHeight + view.safeAreaInsets.bottom)
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         codeTextView.snp.updateConstraints { maker in
-            maker.bottom.equalToSuperview().offset(0)
+            maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
