@@ -78,8 +78,10 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        splitViewController?.preferredDisplayMode = splitViewController?.isRegularWidth == true ? .allVisible : .primaryOverlay
-        
+        if splitViewController?.isRegularWidth == true &&
+            splitViewController?.viewControllers.count == 1 {
+            updateDetailController(with: viewModel.questions.value[0].id)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
