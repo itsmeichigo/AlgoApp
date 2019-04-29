@@ -63,7 +63,9 @@ extension ReminderDetail {
                 .joined(separator: ", ")
         }
         
-        return "☝️ Reminded Once"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d"
+        return "☝️ Reminded on \(dateFormatter.string(from: date))"
     }
     
 }

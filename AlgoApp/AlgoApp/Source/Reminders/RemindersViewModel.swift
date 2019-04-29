@@ -31,10 +31,10 @@ final class RemindersViewModel {
         let toggledValue = !reminder.enabled
         let reminderDate = reminder.date
         try! realm.write {
-            reminder.enabled = toggledValue
             if toggledValue && reminderDate < Date() && reminder.repeatDays.isEmpty {
                 reminder.date = reminderDate.addingTimeInterval(24*60*60)
             }
+            reminder.enabled = toggledValue
             NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
         }
     }

@@ -56,6 +56,8 @@ final class ReminderDetailViewModel {
                                                         options:.matchStrictly)!
         if updatedDate < Date() {
             return updatedDate.addingTimeInterval(24*60*60)
+        } else if updatedDate.timeIntervalSinceNow > 24*60*60 {
+            return updatedDate.addingTimeInterval(-24*60*60)
         }
         return updatedDate
     }

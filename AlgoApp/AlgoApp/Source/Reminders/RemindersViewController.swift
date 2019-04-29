@@ -46,13 +46,6 @@ class RemindersViewController: UIViewController {
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
-        
-        AppConfigs.shared.isPremiumDriver
-            .filter { !$0 }
-            .drive(onNext: { [weak self] _ in
-                self?.viewModel.disableAllReminders()
-            })
-            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
