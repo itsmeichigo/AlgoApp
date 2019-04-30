@@ -105,14 +105,14 @@ class DetailViewController: UIViewController {
     
     private func configureNavigationBar() {
         noteButton.setImage(UIImage(named: "notepad"), for: .normal)
-        noteButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
+        noteButton.frame = CGRect(x: 0, y: 0, width: 45, height: 44)
         noteButton.tintColor = .appYellowColor()
         noteButton.addTarget(self, action: #selector(showNotes), for: .touchUpInside)
         
         let noteBarButton = UIBarButtonItem(customView: noteButton)
         
         saveButton.setImage(UIImage(named: "bookmark"), for: .normal)
-        saveButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
+        saveButton.frame = CGRect(x: 0, y: 0, width: 45, height: 44)
         saveButton.tintColor = .appBlueColor()
         let saveBarButton = UIBarButtonItem(customView: saveButton)
         
@@ -307,7 +307,8 @@ class DetailViewController: UIViewController {
         viewController.url = url
         viewController.title = title
         viewController.contentSelector = contentSelector
-        navigationController?.pushViewController(viewController, animated: true)
+        
+        present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
     }
     
     private func setupCodeController(title: String?, content: String?, language: Language, readOnly: Bool = true, fullScreen: Bool = true, delegate: CodeViewControllerDelegate? = nil) -> UINavigationController {

@@ -142,7 +142,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fad-7A-NmM"/>
                     </view>
-                    <navigationItem key="navigationItem" id="2Wa-Vn-nGF"/>
+                    <navigationItem key="navigationItem" id="2Wa-Vn-nGF">
+                        <barButtonItem key="backBarButtonItem" title="   " id="j2G-h0-kWW"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyImageView" destination="Wxf-V9-9nN" id="e3d-Xa-h2e"/>
                         <outlet property="emptyMessageLabel" destination="T5P-SV-BwE" id="STo-QO-zMM"/>

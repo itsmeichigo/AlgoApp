@@ -51,6 +51,10 @@ class WebViewController: UIViewController {
         }
         activityIndicator.startAnimating()
         
+        let dismissButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
+        dismissButton.tintColor = .subtitleTextColor()
+        navigationItem.leftBarButtonItem = dismissButton
+        
         loadPage(url: url, partialContentQuerySelector: contentSelector)
         
         Themer.shared.currentThemeDriver
@@ -90,6 +94,10 @@ class WebViewController: UIViewController {
             "var selectedElement = document.querySelector('\(selector)');" +
         "document.body.innerHTML = selectedElement.innerHTML;"
         return script
+    }
+    
+    @objc private func dismissView() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }
 
