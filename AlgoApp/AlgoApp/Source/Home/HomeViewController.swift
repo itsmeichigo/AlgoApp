@@ -143,7 +143,6 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         tabBarController?.tabBar.barTintColor = .backgroundColor()
-        tabBarController?.tabBar.tintColor = .appOrangeColor()
         
         tableView.reloadData()
         
