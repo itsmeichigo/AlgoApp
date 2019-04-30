@@ -61,6 +61,10 @@ final class HomeViewController: UIViewController {
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
+        
+        if AppHelper.isIpad {
+            splitViewController?.preferredDisplayMode = .allVisible
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
