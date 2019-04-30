@@ -174,7 +174,10 @@ class DetailViewController: UIViewController {
         viewModel.detail
             .filterNil()
             .distinctUntilChanged { $0.id == $1.id }
-            .subscribe(onNext: { [weak self] in self?.viewModel.scrapeSolutions(detail: $0) })
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.scrapeSolutions(detail: $0)
+                self?.scrollView.setContentOffset(.zero, animated: true)
+            })
             .disposed(by: disposeBag)
         
         viewModel.detail
