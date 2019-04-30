@@ -228,7 +228,8 @@ final class HomeViewController: UIViewController {
     }
     
     @objc private func showRandomQuestion() {
-        updateDetailController(with: viewModel.randomQuestionId)
+        guard let id = viewModel.randomQuestionId else { return }
+        updateDetailController(with: id)
     }
     
     @objc private func showFilter() {
