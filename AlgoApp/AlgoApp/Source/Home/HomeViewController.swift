@@ -26,12 +26,31 @@ final class HomeViewController: UIViewController {
    
     private lazy var detailController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
     
+    private lazy var badgeIcon: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.backgroundColor = .appRedColor()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 12)
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = false
+        label.layer.cornerRadius = 10
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
     private lazy var filterButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "filter"), for: .normal)
         button.tintColor = .appOrangeColor()
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         button.addTarget(self, action: #selector(showFilter), for: .touchUpInside)
+        button.addSubview(badgeIcon)
+        badgeIcon.snp.makeConstraints({ maker in
+            maker.height.equalTo(20)
+            maker.top.equalToSuperview().offset(-10)
+            maker.leading.equalToSuperview().offset(10)
+            maker.width.greaterThanOrEqualTo(20)
+        })
         return button
     }()
     
@@ -214,9 +233,10 @@ final class HomeViewController: UIViewController {
         _ = AppConfigs.shared.sortOption
         
         currentFilter.asDriver()
-            .map { $0?.allFilters.isEmpty == false ? "filter-active" : "filter" }
+            .map { $0?.allFilters.count ?? 0 }
             .drive(onNext: { [weak self] in
-                self?.filterButton.setImage(UIImage(named: $0), for: .normal)
+                self?.badgeIcon.text = "\($0)"
+                self?.badgeIcon.isHidden = $0 == 0
             })
             .disposed(by: disposeBag)
         
