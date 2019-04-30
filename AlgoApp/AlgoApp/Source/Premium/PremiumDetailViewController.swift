@@ -91,6 +91,9 @@ class PremiumDetailViewController: UIViewController {
         } else {
             collectionViewTopSpace.constant = 0
         }
+        configureItemSize()
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        pageControl.currentPage = 0
     }
 
     private func configureColors() {
@@ -123,12 +126,15 @@ class PremiumDetailViewController: UIViewController {
         }
     }
     
-    private func configureCollectionView() {
+    private func configureItemSize() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let screenWidth = UIScreen.main.bounds.width
             layout.itemSize = CGSize(width: screenWidth, height: collectionView.frame.height)
         }
-        
+    }
+    
+    private func configureCollectionView() {
+        configureItemSize()
         collectionView.delegate = self
         
         Driver.just(PremiumDetailType.allCases)
