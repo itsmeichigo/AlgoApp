@@ -213,6 +213,13 @@ final class HomeViewController: UIViewController {
         _ = AppConfigs.shared.hidesSolvedProblems
         _ = AppConfigs.shared.sortOption
         
+        currentFilter.asDriver()
+            .map { $0?.allFilters.isEmpty == false ? "filter-active" : "filter" }
+            .drive(onNext: { [weak self] in
+                self?.filterButton.setImage(UIImage(named: $0), for: .normal)
+            })
+            .disposed(by: disposeBag)
+        
         Driver.combineLatest(searchBar.rx.text.asDriver(),
                              currentFilter.asDriver(),
                              AppConfigs.shared.hidesSolvedProblemsDriver,
