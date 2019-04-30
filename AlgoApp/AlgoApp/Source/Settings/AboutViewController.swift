@@ -26,6 +26,10 @@ class AboutViewController: UIViewController {
     
     private func configureNavigationBar() {
         
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = .backgroundColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
+        
         title = "About 🐱💻"
         
         let backButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
