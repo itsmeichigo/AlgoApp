@@ -81,7 +81,7 @@ class NoteCell: UICollectionViewCell, NibReusable {
             contentTextView.attributedText = mutableString
         }
     
-        contentTextView.scrollRangeToVisible(NSRange(location: 0, length: 1))
+        contentTextView.setContentOffset(.zero, animated: false)
         
         languageLabel.text = "\(model.language.rawValue) Snippet"
     }
