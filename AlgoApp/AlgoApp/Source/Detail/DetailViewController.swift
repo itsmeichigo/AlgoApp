@@ -105,19 +105,26 @@ class DetailViewController: UIViewController {
     
     private func configureNavigationBar() {
         noteButton.setImage(UIImage(named: "notepad"), for: .normal)
-        noteButton.frame = CGRect(x: 0, y: 0, width: 45, height: 44)
+        noteButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         noteButton.tintColor = .appYellowColor()
+        noteButton.contentHorizontalAlignment = .right
         noteButton.addTarget(self, action: #selector(showNotes), for: .touchUpInside)
         
         let noteBarButton = UIBarButtonItem(customView: noteButton)
         
         saveButton.setImage(UIImage(named: "bookmark"), for: .normal)
-        saveButton.frame = CGRect(x: 0, y: 0, width: 45, height: 44)
+        saveButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         saveButton.tintColor = .appBlueColor()
+        saveButton.contentHorizontalAlignment = .right
         let saveBarButton = UIBarButtonItem(customView: saveButton)
         
-        let linkBarButton = UIBarButtonItem(image: UIImage(named: "link"), style: .plain, target: self, action: #selector(showLeetCode))
-        linkBarButton.tintColor = .appGreenColor()
+        let linkButton = UIButton(type: .system)
+        linkButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
+        linkButton.setImage(UIImage(named: "link"), for: .normal)
+        linkButton.tintColor = .appGreenColor()
+        linkButton.contentHorizontalAlignment = .right
+        linkButton.addTarget(self, action: #selector(showLeetCode), for: .touchUpInside)
+        let linkBarButton = UIBarButtonItem(customView: linkButton)
         
         navigationItem.rightBarButtonItems = [noteBarButton, saveBarButton, linkBarButton]
         
@@ -373,6 +380,7 @@ extension DetailViewController: FloatingPanelControllerDelegate {
 extension DetailViewController: CodeViewControllerDelegate {
     func codeControllerWillDismiss() {
         notePanel.removePanelFromParent(animated: true)
+        presentedViewController?.dismiss(animated: true, completion: nil)
     }
     
     func codeControlerShouldSave(content: String, language: Language) {
@@ -383,6 +391,7 @@ extension DetailViewController: CodeViewControllerDelegate {
         
         viewModel.updateNote(content, language: language)
         notePanel.removePanelFromParent(animated: true)
+        presentedViewController?.dismiss(animated: true, completion: nil)
     }
     
     func codeControllerShouldExpand() {

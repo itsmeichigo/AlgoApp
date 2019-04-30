@@ -206,8 +206,11 @@ private extension CodeViewController {
     
     @objc func dismissView() {
         codeTextView.resignFirstResponder()
-        delegate?.codeControllerWillDismiss()
-        dismiss(animated: true, completion: nil)
+        if let delegate = delegate {
+            delegate.codeControllerWillDismiss()
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func saveContent() {
@@ -215,7 +218,6 @@ private extension CodeViewController {
         
         let string = codeTextView.attributedText.string
         delegate?.codeControlerShouldSave(content: string, language: viewModel.language.value)
-        dismiss(animated: true, completion: nil)
     }
     
     @objc func enlargeView() {
