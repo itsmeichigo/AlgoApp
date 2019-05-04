@@ -37,8 +37,7 @@ final class CodeViewModel {
         
         self.language.accept(language)
         
-        let path = Bundle.main.path(forResource: "highlight.min", ofType: "js")
-        highlighter = Highlightr(highlightPath: path)
+        highlighter = Highlightr()
         
         let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
         highlighter?.setTheme(to: theme)

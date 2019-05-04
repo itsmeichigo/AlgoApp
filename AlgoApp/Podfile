@@ -4,7 +4,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 def rx
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 3.14.2'
   pod 'RxCocoa'
   pod 'RxSwift'
   pod 'RxRealm'
@@ -24,7 +24,7 @@ end
 
 def ui
   pod 'FloatingPanel'
-  pod 'Highlightr'
+  pod 'Highlightr', :git => 'https://github.com/itsmeichigo/Highlightr.git'
   pod 'SnapKit', '~> 4.0.0'
   pod 'PanModal'
   pod 'Tags'
@@ -40,14 +40,12 @@ def testing
 end
 
 target 'AlgoApp' do
-  inherit! :search_paths
   ui
   rx
   misc
 end
 
 target 'AlgoAppTests' do
-  inherit! :search_paths
   rx
   misc
   testing

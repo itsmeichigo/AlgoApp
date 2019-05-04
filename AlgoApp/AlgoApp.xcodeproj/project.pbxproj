@@ -14,7 +14,6 @@
 		DE0B03CE2258F04400770AA7 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03CD2258F04400770AA7 /* NoteCell.swift */; };
 		DE0B03D022599E2400770AA7 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03CF22599E2400770AA7 /* NotesViewModel.swift */; };
 		DE0B03D222599F5800770AA7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03D122599F5800770AA7 /* Note.swift */; };
-		DE0B03D5225A697B00770AA7 /* highlight.min.js in Resources */ = {isa = PBXBuildFile; fileRef = DE0B03D4225A697A00770AA7 /* highlight.min.js */; };
 		DE0E515222070C2800BFBB0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515122070C2800BFBB0B /* AppDelegate.swift */; };
 		DE0E515422070C2800BFBB0B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0E515322070C2800BFBB0B /* HomeViewController.swift */; };
 		DE0E515922070C2A00BFBB0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE0E515822070C2A00BFBB0B /* Assets.xcassets */; };
@@ -97,7 +96,6 @@
 		DE0B03CD2258F04400770AA7 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		DE0B03CF22599E2400770AA7 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		DE0B03D122599F5800770AA7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		DE0B03D4225A697A00770AA7 /* highlight.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.min.js; sourceTree = "<group>"; };
 		DE0E514E22070C2800BFBB0B /* AlgoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlgoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE0E515122070C2800BFBB0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE0E515322070C2800BFBB0B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -295,7 +293,6 @@
 		DE0E517B220830B200BFBB0B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DE0B03D4225A697A00770AA7 /* highlight.min.js */,
 				DE31438F226C2CF70063DC71 /* Home.storyboard */,
 				DE314391226C2D120063DC71 /* Reminders.storyboard */,
 				DE314396226C30D90063DC71 /* Notes.storyboard */,
@@ -523,7 +520,6 @@
 				DE314397226C30D90063DC71 /* Notes.storyboard in Resources */,
 				DE1A9A1F22429076007E79F6 /* GoogleService-Info.plist in Resources */,
 				DE314392226C2D120063DC71 /* Reminders.storyboard in Resources */,
-				DE0B03D5225A697B00770AA7 /* highlight.min.js in Resources */,
 				DE314394226C2E050063DC71 /* Settings.storyboard in Resources */,
 				DE0E515922070C2A00BFBB0B /* Assets.xcassets in Resources */,
 			);
