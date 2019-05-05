@@ -43,7 +43,7 @@ final class HomeViewController: UIViewController {
         button.setImage(UIImage(named: "filter"), for: .normal)
         button.tintColor = .appOrangeColor()
         button.frame = CGRect(x: 0, y: 0, width: 50, height: 44)
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 10)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 5)
         button.addTarget(self, action: #selector(showFilter), for: .touchUpInside)
         button.addSubview(badgeIcon)
         badgeIcon.snp.makeConstraints({ maker in
