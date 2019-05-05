@@ -107,7 +107,6 @@ class DetailViewController: UIViewController {
         noteButton.setImage(UIImage(named: "notepad"), for: .normal)
         noteButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         noteButton.tintColor = .appYellowColor()
-        noteButton.contentHorizontalAlignment = .right
         noteButton.addTarget(self, action: #selector(showNotes), for: .touchUpInside)
         
         let noteBarButton = UIBarButtonItem(customView: noteButton)
@@ -115,14 +114,12 @@ class DetailViewController: UIViewController {
         saveButton.setImage(UIImage(named: "bookmark"), for: .normal)
         saveButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         saveButton.tintColor = .appBlueColor()
-        saveButton.contentHorizontalAlignment = .right
         let saveBarButton = UIBarButtonItem(customView: saveButton)
         
         let linkButton = UIButton(type: .system)
         linkButton.frame = CGRect(x: 0, y: 0, width: 40, height: 44)
         linkButton.setImage(UIImage(named: "link"), for: .normal)
         linkButton.tintColor = .appGreenColor()
-        linkButton.contentHorizontalAlignment = .right
         linkButton.addTarget(self, action: #selector(showLeetCode), for: .touchUpInside)
         let linkBarButton = UIBarButtonItem(customView: linkButton)
         
