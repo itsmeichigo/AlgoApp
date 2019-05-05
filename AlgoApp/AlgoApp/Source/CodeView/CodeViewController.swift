@@ -166,7 +166,7 @@ private extension CodeViewController {
         codeTextView.isEditable = !viewModel.readOnly
         codeTextView.delegate = self
         codeTextView.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
-        codeTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        codeTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         codeTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(codeTextView)
         codeTextView.snp.makeConstraints { maker in
