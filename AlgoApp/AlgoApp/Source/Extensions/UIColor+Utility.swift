@@ -58,7 +58,7 @@ extension UIColor {
     }
     
     static func appRedColor() -> UIColor {
-        return UIColor(rgb: 0xED6B68)
+        return UIColor(rgb: 0xE23B3B)
     }
     
     static func appPurpleColor() -> UIColor {
