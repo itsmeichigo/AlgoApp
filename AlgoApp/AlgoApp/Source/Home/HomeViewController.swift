@@ -49,7 +49,7 @@ final class HomeViewController: UIViewController {
         badgeIcon.snp.makeConstraints({ maker in
             maker.height.equalTo(20)
             maker.top.equalToSuperview().offset(-10)
-            maker.leading.equalToSuperview().offset(10)
+            maker.leading.equalToSuperview().offset(25)
             maker.width.greaterThanOrEqualTo(20)
         })
         return button

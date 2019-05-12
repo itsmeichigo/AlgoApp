@@ -39,8 +39,14 @@ final class CodeViewModel {
         
         highlighter = Highlightr()
         
-        let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
-        highlighter?.setTheme(to: theme)
+        Themer.shared.currentThemeDriver
+            .map { $0 == .light ? "tomorrow" : "tomorrow-dark" }
+            .drive(onNext: { [weak self] theme in
+                guard let self = self else { return }
+                self.highlighter?.setTheme(to: theme)
+                self.layoutManager.accept(self.setupLayoutManager(for: self.language.value))
+            })
+            .disposed(by: disposeBag)
         
         self.language
             .map { [weak self] in self?.setupLayoutManager(for: $0) }

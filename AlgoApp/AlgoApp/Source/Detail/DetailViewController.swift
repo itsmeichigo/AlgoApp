@@ -62,6 +62,7 @@ class DetailViewController: UIViewController {
         Themer.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
+                self?.updateNotePanelContent(self?.viewModel.detail.value?.note)
             })
             .disposed(by: disposeBag)
     }

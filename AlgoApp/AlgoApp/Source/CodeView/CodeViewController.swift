@@ -39,6 +39,12 @@ class CodeViewController: UIViewController {
         
         configureNavigationBar()
         configureSubviews()
+        
+        Themer.shared.currentThemeDriver
+            .drive(onNext: { [weak self] theme in
+                self?.updateColors()
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,11 +88,6 @@ private extension CodeViewController {
     
     func configureNavigationBar() {
         
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.tintColor = .titleTextColor()
-        navigationController?.navigationBar.barTintColor = .primaryColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
-        
         let closeButton = UIBarButtonItem(image: UIImage(named: "cancel-button"), style: .plain, target: self, action: #selector(dismissView))
         closeButton.tintColor = .subtitleTextColor()
         navigationItem.leftBarButtonItems = [closeButton]
@@ -125,15 +126,13 @@ private extension CodeViewController {
     
     func configureSubviews() {
         
-        view.backgroundColor = .primaryColor()
-        
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pickerView)
         pickerView.snp.makeConstraints { maker in
             maker.top.equalToSuperview().offset(-pickerView.bounds.height)
             maker.leading.trailing.equalToSuperview()
         }
-        pickerView.backgroundColor = .backgroundColor()
+        
         pickerView.dataSource = self
         pickerView.delegate = self
         if let index = viewModel.languageList.firstIndex(where: { $0 == self.viewModel.language.value }) {
@@ -202,6 +201,18 @@ private extension CodeViewController {
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
+    }
+    
+    func updateColors() {
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = .titleTextColor()
+        navigationController?.navigationBar.barTintColor = .primaryColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
+        
+        view.backgroundColor = .primaryColor()
+        
+        pickerView.backgroundColor = .backgroundColor()
+        pickerView.reloadAllComponents()
     }
     
     @objc func dismissView() {
