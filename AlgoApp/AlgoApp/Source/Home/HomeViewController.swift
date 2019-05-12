@@ -62,7 +62,6 @@ final class HomeViewController: UIViewController {
     
     var viewModel: HomeViewModel!
     
-    private let currentFilter = BehaviorRelay<QuestionFilter?>(value: nil)
     private let disposeBag = DisposeBag()
     private lazy var datasource = self.buildDataSource()
     private var firstAppear = true
@@ -95,7 +94,11 @@ final class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if splitViewController?.isRegularWidth == true && firstAppear {
+            updateInitialFilter()
             tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .none)
+            firstAppear = false
+        } else if firstAppear {
+            updateInitialFilter()
             firstAppear = false
         }
     }
@@ -138,8 +141,15 @@ final class HomeViewController: UIViewController {
         }
         
     }
+}
+
+private extension HomeViewController {
+    func updateInitialFilter() {
+        let filter = AppConfigs.shared.currentFilter
+        AppConfigs.shared.currentFilter = filter
+    }
     
-    private func updateColors() {
+    func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
         navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
@@ -156,18 +166,18 @@ final class HomeViewController: UIViewController {
         view.backgroundColor = .backgroundColor()
         
         setNeedsStatusBarAppearanceUpdate()
-    
+        
     }
-
-    private func buildDataSource() -> DataSource {
+    
+    func buildDataSource() -> DataSource {
         return DataSource(configureCell: { (_, tableView, indexPath, model) -> UITableViewCell in
             let cell: HomeTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configureCell(with: model)
-                return cell
+            return cell
         })
     }
     
-    private func configureNavigationBar() {
+    func configureNavigationBar() {
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.placeholder = "Search by title"
@@ -184,7 +194,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
     }
     
-    private func configureView() {
+    func configureView() {
         
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
@@ -232,8 +242,8 @@ final class HomeViewController: UIViewController {
         _ = AppConfigs.shared.hidesSolvedProblems
         _ = AppConfigs.shared.sortOption
         
-        currentFilter.asDriver()
-            .map { $0?.allFilters.count ?? 0 }
+        AppConfigs.shared.currentFilterDriver
+            .map { $0.allFilters.count }
             .drive(onNext: { [weak self] in
                 self?.badgeIcon.text = "\($0)"
                 self?.badgeIcon.isHidden = $0 == 0
@@ -241,7 +251,7 @@ final class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
         
         Driver.combineLatest(searchBar.rx.text.asDriver(),
-                             currentFilter.asDriver(),
+                             AppConfigs.shared.currentFilterDriver,
                              AppConfigs.shared.hidesSolvedProblemsDriver,
                              AppConfigs.shared.sortOptionDriver)
             .drive(onNext: { [unowned self] in
@@ -251,7 +261,6 @@ final class HomeViewController: UIViewController {
                                              sortOption: $3)
             })
             .disposed(by: disposeBag)
-    
     }
     
     @objc private func showRandomQuestion() {
@@ -263,8 +272,8 @@ final class HomeViewController: UIViewController {
         guard let navigationController = storyboard?.instantiateViewController(withIdentifier: "filterNavigationController") as? PannableNavigationController,
             let filterController = navigationController.topViewController as? FilterViewController else { return }
         
-        filterController.initialFilter = currentFilter.value
-        filterController.completionBlock = { [weak self] in self?.currentFilter.accept($0) }
+        filterController.initialFilter = AppConfigs.shared.currentFilter
+        filterController.completionBlock = { AppConfigs.shared.currentFilter = $0 }
         
         presentPanModal(navigationController, sourceView: filterButton, sourceRect: CGRect(x: 25, y: 44, width: 0, height: 0))
         

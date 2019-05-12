@@ -81,7 +81,8 @@ class FilterViewController: UIViewController {
     
     private func loadInitialFilter(_ filter: QuestionFilter) {
         for level in filter.levels {
-            if let button = difficultyTagsView.tagArray.first(where: { $0.title(for: .normal) == level.title }) {
+            let difficulty = Question.DifficultyLevel(rawValue: level) ?? .easy
+            if let button = difficultyTagsView.tagArray.first(where: { $0.title(for: .normal) == difficulty.title }) {
                 tagsTouchAction(difficultyTagsView, tagButton: button)
             }
         }

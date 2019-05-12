@@ -9,16 +9,20 @@
 import Foundation
 import RealmSwift
 
-struct QuestionFilter {
+struct QuestionFilter: Codable {
     let tags: [String]
     let companies: [String]
-    let levels: [Question.DifficultyLevel]
+    let levels: [Int]
     let topLiked: Bool
     let topInterviewed: Bool
     let saved: Bool
     
     var allFilters: [String] {
-        return levels.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : [])
+        return levels.map { Question.DifficultyLevel(rawValue: $0) ?? .easy }.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : [])
+    }
+    
+    static var emptyFilter: QuestionFilter {
+        return QuestionFilter(tags: [], companies: [], levels: [], topLiked: false, topInterviewed: false, saved: false)
     }
 }
 
@@ -39,7 +43,7 @@ final class FilterObject: Object {
         self.init()
         tags.append(objectsIn: filter.tags)
         companies.append(objectsIn: filter.companies)
-        levels.append(objectsIn: filter.levels.map { $0.rawValue })
+        levels.append(objectsIn: filter.levels)
         topLiked = filter.topLiked
         topInterviewed = filter.topInterviewed
     }
@@ -47,7 +51,7 @@ final class FilterObject: Object {
     func toFilterStruct() -> QuestionFilter {
         return QuestionFilter(tags: tags.toArray(),
                               companies: companies.toArray(),
-                              levels: levels.map { Question.DifficultyLevel(rawValue: $0) ?? .easy },
+                              levels: levels.toArray(),
                               topLiked: topLiked,
                               topInterviewed: topInterviewed,
                               saved: false)

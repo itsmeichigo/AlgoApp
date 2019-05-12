@@ -58,6 +58,10 @@ final class AppConfigs {
         return sortOptionRelay.asDriver()
     }
     
+    var currentFilterDriver: Driver<QuestionFilter> {
+        return currentFilterRelay.asDriver()
+    }
+    
     var hidesSolvedProblems: Bool {
         get {
             let hiding = UserDefaults.standard.bool(forKey: hidesSolvedProblemsKey)
@@ -106,6 +110,26 @@ final class AppConfigs {
         }
     }
     
+    var currentFilter: QuestionFilter {
+        get {
+            guard let filterData = UserDefaults.standard.object(forKey: currentFilterKey) as? Data else {
+                return QuestionFilter.emptyFilter
+            }
+            let filter = try? JSONDecoder().decode(QuestionFilter.self, from: filterData)
+            return filter ?? QuestionFilter.emptyFilter
+        }
+        
+        set {
+            do {
+                let encoded = try JSONEncoder().encode(newValue)
+                UserDefaults.standard.set(encoded, forKey: currentFilterKey)
+                currentFilterRelay.accept(newValue)
+            } catch {
+//                print("error: \(error)")
+            }
+        }
+    }
+    
     private let hidesSolvedProblemsKey = "HidesSolvedProblems"
     private let hidesSolvedProblemsRelay = BehaviorRelay<Bool>(value: false)
     
@@ -115,4 +139,6 @@ final class AppConfigs {
     private let sortOptionKey = "SortOptionKey"
     private let sortOptionRelay = BehaviorRelay<SortOption>(value: .oldestFirst)
     
+    private let currentFilterKey = "CurrentFilterKey"
+    private let currentFilterRelay = BehaviorRelay<QuestionFilter>(value: QuestionFilter.emptyFilter)
 }

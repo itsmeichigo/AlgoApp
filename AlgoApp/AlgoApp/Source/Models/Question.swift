@@ -109,7 +109,7 @@ extension Question {
         }
         
         if let levels = filter?.levels, !levels.isEmpty {
-            let levelPredicate = NSPredicate(format: "rawDifficultyLevel IN %@", levels.map { $0.rawValue })
+            let levelPredicate = NSPredicate(format: "rawDifficultyLevel IN %@", levels)
             predicates.append(levelPredicate)
         }
         
