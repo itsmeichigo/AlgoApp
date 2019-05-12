@@ -17,11 +17,14 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
     @IBOutlet weak var tagsLabel: UILabel!
     @IBOutlet weak var markLabel: UILabel!
     @IBOutlet weak var difficultyLabel: UILabel!
+    @IBOutlet weak var solvedLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         cardView.layer.cornerRadius = 8.0
         cardView.dropCardShadow()
+        
+        solvedLabel.layer.cornerRadius = 3.0
         
         selectionStyle = .none
     }
@@ -49,6 +52,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         tagsLabel.text = model.tags.joined(separator: "・")
         markLabel.text = model.remark
         difficultyLabel.text = model.difficulty
+        solvedLabel.isHidden = !model.solved
     }
     
     func updateColors() {
@@ -57,5 +61,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         markLabel.textColor = .subtitleTextColor()
         cardView.backgroundColor = isSelected ? .selectedBackgroundColor() : .primaryColor()
         contentView.backgroundColor = .backgroundColor()
+        solvedLabel.backgroundColor = .secondaryColor()
+        solvedLabel.textColor = .primaryColor()
     }
 }

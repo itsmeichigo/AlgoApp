@@ -26,6 +26,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var descriptionTitleLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var solvedLabel: UILabel!
     @IBOutlet weak var tagsLabel: UILabel!
     
     @IBOutlet private weak var solutionsTitleLabel: UILabel!
@@ -136,7 +137,9 @@ class DetailViewController: UIViewController {
         otherSolutionsTagView.tagFont = UIFont.preferredFont(forTextStyle: AppHelper.isIpad ? .body : .callout)
         otherSolutionsTagView.delegate = self
         
-        markAsSolvedButton.layer.cornerRadius = 8
+        solvedLabel.layer.cornerRadius = 3.0
+        
+        markAsSolvedButton.layer.cornerRadius = 8.0
         markAsSolvedButton.setTitle("🤯 Mark as Solved", for: .normal)
         markAsSolvedButton.setTitle("🤭 Mark as Unsolved", for: .selected)
         markAsSolvedButton.setTitleColor(.white, for: .normal)
@@ -163,6 +166,9 @@ class DetailViewController: UIViewController {
         descriptionTitleLabel.textColor = .titleTextColor()
         tagsLabel.textColor = .subtitleTextColor()
         solutionsTitleLabel.textColor = .titleTextColor()
+        
+        solvedLabel.backgroundColor = .secondaryColor()
+        solvedLabel.textColor = .primaryColor()
         
         officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)
         
@@ -204,6 +210,11 @@ class DetailViewController: UIViewController {
         viewModel.detail
             .map { $0?.content.stringByDecodingHTMLEntities.formattedDescription }
             .bind(to: descriptionTextView.rx.attributedText)
+            .disposed(by: disposeBag)
+        
+        viewModel.detail
+            .map { $0?.solved != true }
+            .bind(to: solvedLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.detail

@@ -16,6 +16,7 @@ struct QuestionCellModel {
     let remark: String
     let difficulty: String
     let rawDifficultyLevel: Int
+    let solved: Bool
     
     init(with question: Question) {
         id = question.id
@@ -25,5 +26,6 @@ struct QuestionCellModel {
         remark = question.remark
         difficulty = question.difficultyLevel.displayText
         rawDifficultyLevel = question.rawDifficultyLevel
+        solved = question.solved
     }
 }
