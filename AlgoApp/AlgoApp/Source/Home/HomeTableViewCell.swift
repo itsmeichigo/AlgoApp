@@ -25,7 +25,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         cardView.layer.cornerRadius = 8.0
         cardView.dropCardShadow()
         
-        solvedLabel.layer.cornerRadius = 3.0
+        solvedLabel.layer.cornerRadius = 2.0
         
         selectionStyle = .none
     }
