@@ -18,6 +18,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
     @IBOutlet weak var markLabel: UILabel!
     @IBOutlet weak var difficultyLabel: UILabel!
     @IBOutlet weak var solvedLabel: UILabel!
+    @IBOutlet weak var bookmarkedImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,6 +54,7 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         markLabel.text = model.remark
         difficultyLabel.text = model.difficulty
         solvedLabel.isHidden = !model.solved
+        bookmarkedImageView.isHidden = !model.saved
     }
     
     func updateColors() {
@@ -63,5 +65,6 @@ final class HomeTableViewCell: UITableViewCell, Reusable {
         contentView.backgroundColor = .backgroundColor()
         solvedLabel.backgroundColor = .secondaryColor()
         solvedLabel.textColor = .primaryColor()
+        bookmarkedImageView.tintColor = .appBlueColor()
     }
 }
