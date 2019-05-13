@@ -18,7 +18,7 @@ struct QuestionFilter: Codable {
     let saved: Bool
     
     var allFilters: [String] {
-        return levels.map { Question.DifficultyLevel(rawValue: $0) ?? .easy }.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : [])
+        return levels.map { Question.DifficultyLevel(rawValue: $0) ?? .easy }.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : []) + (saved ? ["Saved"] : [])
     }
     
     static var emptyFilter: QuestionFilter {
