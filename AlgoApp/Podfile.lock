@@ -50,8 +50,6 @@ PODS:
   - GoogleUtilities/UserDefaults (6.1.0):
     - GoogleUtilities/Logger
   - Highlightr (2.1.0)
-  - IceCream (1.9.2):
-    - RealmSwift
   - iOSSnapshotTestCase (6.0.3):
     - iOSSnapshotTestCase/SwiftSupport (= 6.0.3)
   - iOSSnapshotTestCase/Core (6.0.3)
@@ -113,7 +111,6 @@ DEPENDENCIES:
   - Firebase/Core
   - FloatingPanel
   - Highlightr (from `https://github.com/itsmeichigo/Highlightr.git`)
-  - IceCream
   - Kanna (~> 4.0.0)
   - Nimble
   - Nimble-Snapshots
@@ -146,7 +143,6 @@ SPEC REPOS:
     - FloatingPanel
     - GoogleAppMeasurement
     - GoogleUtilities
-    - IceCream
     - iOSSnapshotTestCase
     - Kanna
     - nanopb
@@ -192,7 +188,6 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 7f028ea162b72c8f326daec74afc95d94f7a47d6
   GoogleUtilities: 84df567c76ca84f67b7bb40e769fdd4acc746a10
   Highlightr: 595f3e100737c8de41113385da8bd0b5b65212c6
-  IceCream: a4dc38bf35f34b02fc8a1f9028267cb220982542
   iOSSnapshotTestCase: 944a73f6d9676302811a86c0cf35f0e6ef5ab2a0
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -217,6 +212,6 @@ SPEC CHECKSUMS:
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   Tags: f513b25d753de97503f1bef5b4ff1fca4a0d5b29
 
-PODFILE CHECKSUM: 3faa3206daf4ac19662fae2eab0436857bbef17b
+PODFILE CHECKSUM: c81b4fa582d372e93cd0402c00b0fcc3348ca127
 
 COCOAPODS: 1.6.1

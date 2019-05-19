@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationHelper.shared.showPendingQuestion()
         return true
     }
+}
 
 private extension AppDelegate {
     func configureRealm() {
