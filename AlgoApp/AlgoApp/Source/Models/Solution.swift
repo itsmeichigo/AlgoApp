@@ -10,9 +10,13 @@ import Foundation
 import RealmSwift
 
 final class Solution: Object {
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var swiftSolution: String?
     @objc dynamic var javascriptSolution: String?
     @objc dynamic var javaSolution: String?
     @objc dynamic var pythonSolution: String?
     @objc dynamic var cppSolution: String?
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }

@@ -39,14 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    private func configureRealm() {
+private extension AppDelegate {
+    func configureRealm() {
         let config = Realm.Configuration(
-            schemaVersion: 5,
+            schemaVersion: 6,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 5) {
-                    // Nothing to do!
-                    // Realm will automatically detect new properties and removed properties
-                    // And will update the schema on disk automatically
+                if (oldSchemaVersion < 6) {
+                    migration.enumerateObjects(ofType: "Solution", { (oldObject, newObject) in
+                        newObject?["id"] = UUID().uuidString
+                    })
                 }
         })
         Realm.Configuration.defaultConfiguration = config
@@ -63,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func setupRootController() {
+    func setupRootController() {
         let tabbarController = UITabBarController(nibName: nil, bundle: nil)
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -85,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let offset: CGFloat = AppHelper.isIpad ? 0 : 6
             controller.tabBarItem.imageInsets = UIEdgeInsets(top: offset, left: 0, bottom: -offset, right: 0)
         }
-
+        
         tabbarController.viewControllers = controllers
     }
 }
