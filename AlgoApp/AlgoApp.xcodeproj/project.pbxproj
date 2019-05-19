@@ -69,6 +69,7 @@
 		DE33353E226CCF0300F1D0F0 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353D226CCF0300F1D0F0 /* AppHelper.swift */; };
 		DE33354022740BC500F1D0F0 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353F22740BC500F1D0F0 /* Solution.swift */; };
 		DE33354222743EC000F1D0F0 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE33354122743EC000F1D0F0 /* default.realm */; };
+		DE5801292291059800A42183 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5801282291059800A42183 /* CloudKit.framework */; };
 		DE79F00922511CA50051ECD1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00822511CA50051ECD1 /* AboutViewController.swift */; };
 		DE79F00B225122EC0051ECD1 /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */; };
 		DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */; };
@@ -155,6 +156,8 @@
 		DE33353D226CCF0300F1D0F0 /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		DE33353F22740BC500F1D0F0 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
 		DE33354122743EC000F1D0F0 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
+		DE5801272291059400A42183 /* AlgoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlgoApp.entitlements; sourceTree = "<group>"; };
+		DE5801282291059800A42183 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DE79F00822511CA50051ECD1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewController.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE5801292291059800A42183 /* CloudKit.framework in Frameworks */,
 				4BCEDB176601904A79793AB9 /* Pods_AlgoApp.framework in Frameworks */,
 				DE1A9A1D22427EAA007E79F6 /* StoreKit.framework in Frameworks */,
 			);
@@ -197,6 +201,7 @@
 		26A64E81E97050C3E263D7D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE5801282291059800A42183 /* CloudKit.framework */,
 				DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */,
 				0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */,
 				0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */,
@@ -237,6 +242,7 @@
 		DE0E515022070C2800BFBB0B /* AlgoApp */ = {
 			isa = PBXGroup;
 			children = (
+				DE5801272291059400A42183 /* AlgoApp.entitlements */,
 				DE0E515D22070C2A00BFBB0B /* Info.plist */,
 				DE0E517C220830C000BFBB0B /* Data */,
 				DE0E517A220830A000BFBB0B /* Source */,
@@ -478,14 +484,25 @@
 				TargetAttributes = {
 					DE0E514D22070C2800BFBB0B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
 					};
 					DE0E516122070C2A00BFBB0B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = DE0E514D22070C2800BFBB0B;
 					};
 				};
@@ -557,6 +574,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -582,6 +600,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -636,6 +655,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/StringExtensionHTML/StringExtensionHTML.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
@@ -661,6 +681,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StringExtensionHTML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
@@ -931,6 +952,7 @@
 			baseConfigurationReference = 6591BD170AE1C7DCDB3DEDB6 /* Pods-AlgoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AlgoApp/AlgoApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2L9U9J29G7;
@@ -943,7 +965,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ichigo.AlgoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -953,6 +975,7 @@
 			baseConfigurationReference = E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AlgoApp/AlgoApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2L9U9J29G7;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -965,7 +988,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ichigo.AlgoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -985,7 +1008,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ichigo.AlgoAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlgoApp.app/AlgoApp";
 			};
@@ -1006,7 +1029,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ichigo.AlgoAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlgoApp.app/AlgoApp";
 			};

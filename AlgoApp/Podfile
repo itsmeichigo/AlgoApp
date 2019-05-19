@@ -4,7 +4,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 def rx
-  pod 'RealmSwift', '~> 3.14.2'
+  pod 'RealmSwift'
   pod 'RxCocoa'
   pod 'RxSwift'
   pod 'RxRealm'
@@ -20,12 +20,13 @@ def misc
   pod 'Firebase/Core'
   pod 'Fabric', '~> 1.9.0'
   pod 'Crashlytics', '~> 3.12.0'
+  pod 'IceCream'
 end
 
 def ui
   pod 'FloatingPanel'
   pod 'Highlightr', :git => 'https://github.com/itsmeichigo/Highlightr.git'
-  pod 'SnapKit', '~> 4.0.0'
+  pod 'SnapKit'
   pod 'PanModal'
   pod 'Tags'
   pod 'SVProgressHUD'
