@@ -36,6 +36,8 @@ final class StoreHelper {
                     AppConfigs.shared.isPremium = true
                 case .failed, .purchasing, .deferred:
                     break // do nothing
+                @unknown default:
+                    break
                 }
             }
         }

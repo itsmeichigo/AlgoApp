@@ -100,6 +100,11 @@ final class DetailViewModel {
         let toggledValue = !question.solved
         try! realmForWrite.write {
             question.solved = toggledValue
+            if toggledValue {
+                QuestionList.solvedList?.questions.append(question)
+            } else if let index = QuestionList.solvedList?.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
+                QuestionList.solvedList?.questions.remove(at: index)
+            }
         }
     }
     
@@ -108,6 +113,11 @@ final class DetailViewModel {
         let toggledValue = !question.saved
         try! realmForWrite.write {
             question.saved = toggledValue
+            if toggledValue {
+                QuestionList.savedList?.questions.append(question)
+            } else if let index = QuestionList.savedList?.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
+                QuestionList.savedList?.questions.remove(at: index)
+            }
         }
     }
     
