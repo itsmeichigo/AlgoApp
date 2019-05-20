@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import IceCream
 
 struct ReminderDetail {
     let id: String
@@ -70,11 +71,12 @@ extension ReminderDetail {
     
 }
 
-final class Reminder: Object {
+final class Reminder: Object, CKRecordRecoverable, CKRecordConvertible {
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var date: Date = Date()
     @objc dynamic var filter: FilterObject? = nil
     @objc dynamic var enabled: Bool = true
+    @objc dynamic var isDeleted: Bool = false
     
     let repeatDays = List<Int>()
     

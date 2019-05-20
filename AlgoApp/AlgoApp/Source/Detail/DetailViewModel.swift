@@ -100,11 +100,16 @@ final class DetailViewModel {
         let toggledValue = !question.solved
         try! realmForWrite.write {
             question.solved = toggledValue
+            guard let solvedList = QuestionList.solvedList else { return }
             if toggledValue {
-                QuestionList.solvedList?.questions.append(question)
-            } else if let index = QuestionList.solvedList?.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
-                QuestionList.solvedList?.questions.remove(at: index)
+                solvedList.questions.append(question)
+            } else if let index = solvedList.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
+                solvedList.questions.remove(at: index)
             }
+            
+            solvedList.questionIds = solvedList.questions
+                .map { "\($0.id)" }
+                .joined(separator: ",")
         }
     }
     
@@ -113,11 +118,16 @@ final class DetailViewModel {
         let toggledValue = !question.saved
         try! realmForWrite.write {
             question.saved = toggledValue
+            guard let savedList = QuestionList.savedList else { return }
             if toggledValue {
-                QuestionList.savedList?.questions.append(question)
-            } else if let index = QuestionList.savedList?.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
-                QuestionList.savedList?.questions.remove(at: index)
+                savedList.questions.append(question)
+            } else if let index = savedList.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
+                savedList.questions.remove(at: index)
             }
+            
+            savedList.questionIds = savedList.questions
+                .map { "\($0.id)" }
+                .joined(separator: ",")
         }
     }
     

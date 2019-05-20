@@ -69,6 +69,7 @@
 		DE33353E226CCF0300F1D0F0 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353D226CCF0300F1D0F0 /* AppHelper.swift */; };
 		DE33354022740BC500F1D0F0 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353F22740BC500F1D0F0 /* Solution.swift */; };
 		DE33354222743EC000F1D0F0 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE33354122743EC000F1D0F0 /* default.realm */; };
+		DE58012B2292E99100A42183 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE58012A2292E99100A42183 /* CloudKit.framework */; };
 		DE79F00922511CA50051ECD1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00822511CA50051ECD1 /* AboutViewController.swift */; };
 		DE79F00B225122EC0051ECD1 /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */; };
 		DEBFEE11224094E0005B1A7A /* UIApplication+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */; };
@@ -156,6 +157,7 @@
 		DE33353F22740BC500F1D0F0 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
 		DE33354122743EC000F1D0F0 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		DE5801272291059400A42183 /* AlgoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlgoApp.entitlements; sourceTree = "<group>"; };
+		DE58012A2292E99100A42183 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DE79F00822511CA50051ECD1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewController.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE58012B2292E99100A42183 /* CloudKit.framework in Frameworks */,
 				4BCEDB176601904A79793AB9 /* Pods_AlgoApp.framework in Frameworks */,
 				DE1A9A1D22427EAA007E79F6 /* StoreKit.framework in Frameworks */,
 			);
@@ -198,6 +201,7 @@
 		26A64E81E97050C3E263D7D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE58012A2292E99100A42183 /* CloudKit.framework */,
 				DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */,
 				0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */,
 				0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */,
@@ -492,7 +496,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};

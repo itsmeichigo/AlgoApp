@@ -11,11 +11,14 @@ import Firebase
 import RealmSwift
 import RxSwift
 import RxCocoa
+import CloudKit
+import IceCream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var syncEngine: SyncEngine?
     
     private let disposeBag = DisposeBag()
     
@@ -32,12 +35,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         configureRealm()
         
+        syncEngine = SyncEngine(objects: [
+            SyncObject<QuestionList>(),
+            SyncObject<Note>(),
+            SyncObject<Reminder>()
+            ])
+        
         StoreHelper.checkPendingTransactions()
         
         setupRootController()
         
+        application.registerForRemoteNotifications()
         NotificationHelper.shared.showPendingQuestion()
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        let dict = userInfo as! [String: NSObject]
+        let notification = CKNotification(fromRemoteNotificationDictionary: dict)
+        
+        if let subscriptionID = notification?.subscriptionID, IceCreamSubscription.allIDs.contains(subscriptionID) {
+            NotificationCenter.default.post(name: Notifications.cloudKitDataDidChangeRemotely.name, object: nil, userInfo: userInfo)
+        }
+        completionHandler(.newData)
+        
     }
 }
 

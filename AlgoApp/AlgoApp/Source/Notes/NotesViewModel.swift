@@ -19,7 +19,7 @@ final class NotesViewModel {
     private lazy var realm = try! Realm()
     
     func loadNotes() {
-        Observable.collection(from: realm.objects(Note.self))
+        Observable.collection(from: realm.objects(Note.self).filter(NSPredicate(format: "isDeleted = false")))
             .map { Array($0)
                     .map { NoteCellModel(with: $0) }
                     .sorted(by: { $0.lastUpdated > $1.lastUpdated })
@@ -32,7 +32,7 @@ final class NotesViewModel {
         guard let model = realm.object(ofType: Note.self, forPrimaryKey: note.id),
             let question = realm.object(ofType: Question.self, forPrimaryKey: note.questionId) else { return }
         try! realm.write {
-            realm.delete(model)
+            model.isDeleted = true
             question.note = nil
         }
     }

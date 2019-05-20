@@ -40,7 +40,7 @@ final class ReminderDetailViewModel {
             let model = realm.object(ofType: Reminder.self, forPrimaryKey: detail.id) else { return }
         NotificationHelper.shared.cancelScheduledNotifications(for: detail, completionHandler: {})
         try! realm.write {
-            realm.delete(model)
+            model.isDeleted = true
         }
     }
     

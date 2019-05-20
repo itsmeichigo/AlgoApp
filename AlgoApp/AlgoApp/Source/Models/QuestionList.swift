@@ -8,14 +8,17 @@
 
 import Foundation
 import RealmSwift
+import IceCream
 
-final class QuestionList: Object {
+final class QuestionList: Object, CKRecordRecoverable, CKRecordConvertible {
     static let savedListId = "saved-list-id"
     static let solvedListId = "solved-list-id"
     
     @objc dynamic var id = ""
     @objc dynamic var name = ""
     @objc dynamic var isCustom = false
+    @objc dynamic var isDeleted = false
+    @objc dynamic var questionIds = ""
     
     var questions = List<Question>()
     

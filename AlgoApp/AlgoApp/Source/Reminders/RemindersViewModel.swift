@@ -19,7 +19,7 @@ final class RemindersViewModel {
     private lazy var realm = try! Realm()
     
     func loadReminders() {
-        Observable.collection(from: realm.objects(Reminder.self))
+        Observable.collection(from: realm.objects(Reminder.self).filter(NSPredicate(format: "isDeleted = false")))
             .map { Array($0).map { ReminderDetail(with: $0) } }
             .bind(to: reminders)
             .disposed(by: disposeBag)
