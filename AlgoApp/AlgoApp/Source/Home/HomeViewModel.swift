@@ -40,28 +40,41 @@ final class HomeViewModel {
     
     private func observeCustomLists() {
         Observable.collection(from: realm.objects(QuestionList.self))
-            .map { [weak self] list -> ([Int], [Int])? in
+            .map { list -> (Set<Int>, Set<Int>)? in
                 guard let solvedList = list.first(where: { $0.id == QuestionList.solvedListId }),
                     let savedList = list.first(where: { $0.id == QuestionList.savedListId }) else { return nil }
                 
-                let solvedIds = solvedList.questionIds.components(separatedBy: ",").filter { !$0.isEmpty }
-                let savedIds = savedList.questionIds.components(separatedBy: ",").filter { !$0.isEmpty }
+                let solvedIds = Set(solvedList.questionIds
+                    .components(separatedBy: ",")
+                    .filter { !$0.isEmpty }
+                    .map { Int($0) ?? -1 }
+                    .filter { $0 != -1 })
                 
-                guard solvedIds.count != solvedList.questions.count &&
-                    savedIds.count != savedList.questions.count else { return nil }
+                let savedIds = Set(savedList.questionIds
+                    .components(separatedBy: ",")
+                    .filter { !$0.isEmpty }
+                    .map { Int($0) ?? -1 }
+                    .filter { $0 != -1 })
                 
-                self?.updateLists(solvedList: solvedList, savedList: savedList)
-                return (solvedIds.map { Int($0) ?? -1 }.filter { $0 != -1 },
-                        savedIds.map { Int($0) ?? -1 }.filter { $0 != -1 })
+                let solvedQuestionIds = Set(solvedList.questions.map { $0.id })
+                let savedQuestionIds = Set(savedList.questions.map { $0.id })
+                
+                let solvedListChanged = !solvedIds.isSubset(of: solvedQuestionIds) || !solvedQuestionIds.isSubset(of: solvedIds)
+                let savedListChanged = !savedIds.isSubset(of: savedQuestionIds) || !savedQuestionIds.isSubset(of: savedIds)
+                
+                guard solvedListChanged || savedListChanged else { return nil }
+                
+                return (solvedIds, savedIds)
             }
             .filterNil()
+            .distinctUntilChanged { $0.0 != $1.0 && $0.1 != $1.1 }
             .withLatestFrom(questions.asObservable()) { (newList, oldList) -> (Set<Int>, Set<Int>, Set<Int>, Set<Int>) in
-                let oldSolvedList = oldList.filter { $0.solved }.map { $0.id }
-                let oldSavedList = oldList.filter { $0.saved }.map { $0.id }
-                return (Set(newList.0),
-                        Set(newList.1),
-                        Set(oldSolvedList),
-                        Set(oldSavedList))
+                let oldSolvedList = Set(oldList.filter { $0.solved }.map { $0.id })
+                let oldSavedList = Set(oldList.filter { $0.saved }.map { $0.id })
+                return (newList.0,
+                        newList.1,
+                        oldSolvedList,
+                        oldSavedList)
             }
             .subscribe(onNext: { input in
                 let (newSolvedList, newSavedList, oldSolvedList, oldSavedList) = input
@@ -74,48 +87,42 @@ final class HomeViewModel {
                     let realmForRead = try Realm()
                     let realmForWrite = try Realm()
                     
-                    try realmForWrite.write {
-                        for index in indicesToUpdate {
-                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: index) {
-                                model.solved = newSolvedList.contains(index)
-                                model.saved = newSavedList.contains(index)
+                    guard !realmForWrite.isInWriteTransaction else { return }
+                    
+                    for index in indicesToUpdate {
+                        if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: index) {
+                            model.solved = newSolvedList.contains(index)
+                            model.saved = newSavedList.contains(index)
+                        }
+                    }
+                    
+                    if let solvedList = QuestionList.solvedList {
+                        solvedList.questions.removeAll()
+                        var solvedQuestionList: [Question] = []
+                        for id in newSolvedList {
+                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
+                                solvedQuestionList.append(model)
                             }
                         }
+                        
+                        solvedList.questions.append(objectsIn: solvedQuestionList)
+                    }
+                    
+                    if let savedList = QuestionList.savedList {
+                        savedList.questions.removeAll()
+                        var savedQuestionList: [Question] = []
+                        for id in newSavedList {
+                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
+                                savedQuestionList.append(model)
+                            }
+                        }
+                        
+                        savedList.questions.append(objectsIn: savedQuestionList)
                     }
                 } catch {
                     print(error.localizedDescription)
                 }
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func updateLists(solvedList: QuestionList, savedList: QuestionList) {
-        let solvedIds = solvedList.questionIds.components(separatedBy: ",").filter { !$0.isEmpty }.map { Int($0) ?? -1 }.filter { $0 != -1 }
-        let savedIds = savedList.questionIds.components(separatedBy: ",").filter { !$0.isEmpty }.map { Int($0) ?? -1 }.filter { $0 != -1 }
-        
-        do {
-            let realmForWrite = try Realm()
-            var savedQuestionList: [Question] = []
-            for id in savedIds {
-                if let model = realm.object(ofType: Question.self, forPrimaryKey: id) {
-                    savedQuestionList.append(model)
-                }
-            }
-            
-            var solvedQuestionList: [Question] = []
-            for id in solvedIds {
-                if let model = realm.object(ofType: Question.self, forPrimaryKey: id) {
-                    solvedQuestionList.append(model)
-                }
-            }
-            
-            try realmForWrite.write {
-                solvedList.questions.append(objectsIn: solvedQuestionList)
-                savedList.questions.append(objectsIn: savedQuestionList)
-            }
-            
-        } catch {
-            print(error.localizedDescription)
-        }
     }
 }

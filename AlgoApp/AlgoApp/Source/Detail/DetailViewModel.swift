@@ -101,15 +101,19 @@ final class DetailViewModel {
         try! realmForWrite.write {
             question.solved = toggledValue
             guard let solvedList = QuestionList.solvedList else { return }
+            let questionList = solvedList.questions
             if toggledValue {
                 solvedList.questions.append(question)
-            } else if let index = solvedList.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
+                solvedList.questionIds = (questionList + [question])
+                    .map { "\($0.id)" }
+                    .joined(separator: ",")
+            } else if let index = solvedList.questions.firstIndex(where: { $0.id == question.id }) {
                 solvedList.questions.remove(at: index)
+                solvedList.questionIds = questionList
+                    .filter { $0.id != question.id }
+                    .map { "\($0.id)" }
+                    .joined(separator: ",")
             }
-            
-            solvedList.questionIds = solvedList.questions
-                .map { "\($0.id)" }
-                .joined(separator: ",")
         }
     }
     
@@ -119,15 +123,23 @@ final class DetailViewModel {
         try! realmForWrite.write {
             question.saved = toggledValue
             guard let savedList = QuestionList.savedList else { return }
-            if toggledValue {
-                savedList.questions.append(question)
-            } else if let index = savedList.questions.index(matching: NSPredicate(format: "id = %i", question.id)) {
-                savedList.questions.remove(at: index)
-            }
+            let questionList = savedList.questions
             
-            savedList.questionIds = savedList.questions
-                .map { "\($0.id)" }
-                .joined(separator: ",")
+            if toggledValue &&
+                (savedList.questions.filter { $0.id == question.id }).isEmpty {
+                savedList.questions.append(question)
+                savedList.questionIds = Set(questionList + [question])
+                    .map { "\($0.id)" }
+                    .joined(separator: ",")
+                
+            } else if !toggledValue,
+                let index = savedList.questions.firstIndex(where: { $0.id == question.id }) {
+                savedList.questions.remove(at: index)
+                savedList.questionIds = Set(questionList)
+                    .filter { $0.id != question.id }
+                    .map { "\($0.id)" }
+                    .joined(separator: ",")
+            }
         }
     }
     
