@@ -89,7 +89,7 @@ final class NotificationHelper: NSObject {
                 for weekday in reminder.repeatDays {
                     dateComponents.weekday = weekday
                     
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     self?.center.add(request, withCompletionHandler: nil)
                 }
