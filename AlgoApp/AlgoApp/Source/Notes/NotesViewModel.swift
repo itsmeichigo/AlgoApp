@@ -20,6 +20,21 @@ final class NotesViewModel {
     
     func loadNotes() {
         Observable.collection(from: realm.objects(Note.self).filter(NSPredicate(format: "isDeleted = false")))
+            .do(onNext: { notes in
+                do {
+                    let realmForRead = try Realm()
+                    let realmForWrite = try Realm()
+                    
+                    try realmForWrite.write {
+                        for note in notes {
+                            if let question = realmForRead.object(ofType: Question.self, forPrimaryKey: note.questionId), question.note == nil {
+                                question.note = note
+                            }
+                        }
+                    }
+                    
+                } catch {}
+            })
             .map { Array($0)
                     .map { NoteCellModel(with: $0) }
                     .sorted(by: { $0.lastUpdated > $1.lastUpdated })

@@ -89,36 +89,39 @@ final class HomeViewModel {
                     
                     guard !realmForWrite.isInWriteTransaction else { return }
                     
-                    for index in indicesToUpdate {
-                        if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: index) {
-                            model.solved = newSolvedList.contains(index)
-                            model.saved = newSavedList.contains(index)
-                        }
-                    }
-                    
-                    if let solvedList = QuestionList.solvedList {
-                        solvedList.questions.removeAll()
-                        var solvedQuestionList: [Question] = []
-                        for id in newSolvedList {
-                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
-                                solvedQuestionList.append(model)
+                    try realmForWrite.write {
+                        for index in indicesToUpdate {
+                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: index) {
+                                model.solved = newSolvedList.contains(index)
+                                model.saved = newSavedList.contains(index)
                             }
                         }
                         
-                        solvedList.questions.append(objectsIn: solvedQuestionList)
-                    }
-                    
-                    if let savedList = QuestionList.savedList {
-                        savedList.questions.removeAll()
-                        var savedQuestionList: [Question] = []
-                        for id in newSavedList {
-                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
-                                savedQuestionList.append(model)
+                        if let solvedList = QuestionList.solvedList {
+                            solvedList.questions.removeAll()
+                            var solvedQuestionList: [Question] = []
+                            for id in newSolvedList {
+                                if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
+                                    solvedQuestionList.append(model)
+                                }
                             }
+                            
+                            solvedList.questions.append(objectsIn: solvedQuestionList)
                         }
                         
-                        savedList.questions.append(objectsIn: savedQuestionList)
+                        if let savedList = QuestionList.savedList {
+                            savedList.questions.removeAll()
+                            var savedQuestionList: [Question] = []
+                            for id in newSavedList {
+                                if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
+                                    savedQuestionList.append(model)
+                                }
+                            }
+                            
+                            savedList.questions.append(objectsIn: savedQuestionList)
+                        }
                     }
+                    
                 } catch {
                     print(error.localizedDescription)
                 }
