@@ -122,6 +122,14 @@ final class NotificationHelper: NSObject {
         Reminder.disableAllReminders()
     }
     
+    func scheduleNotificationIfNeeded(for reminder: ReminderDetail) {
+        center.getPendingNotificationRequests { [weak self] requests in
+            if (requests.filter { ($0.content.userInfo[NotificationHelper.reminderIdKey] as? String) == reminder.id }).isEmpty {
+                self?.updateScheduledNotifications(for: reminder)
+            }
+        }
+    }
+    
     private func showQuestionDetail(for reminderId: String) {
         guard let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
         

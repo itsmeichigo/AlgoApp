@@ -21,6 +21,7 @@ final class RemindersViewModel {
     func loadReminders() {
         Observable.collection(from: realm.objects(Reminder.self).filter(NSPredicate(format: "isDeleted = false")))
             .map { Array($0).map { ReminderDetail(with: $0) } }
+            .do(onNext: { $0.forEach { NotificationHelper.shared.scheduleNotificationIfNeeded(for: $0) } })
             .bind(to: reminders)
             .disposed(by: disposeBag)
     }
