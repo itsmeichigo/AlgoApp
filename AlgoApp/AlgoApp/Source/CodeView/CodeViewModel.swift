@@ -39,7 +39,7 @@ final class CodeViewModel {
         
         highlighter = Highlightr()
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .map { $0 == .light ? "tomorrow" : "tomorrow-dark" }
             .drive(onNext: { [weak self] theme in
                 guard let self = self else { return }

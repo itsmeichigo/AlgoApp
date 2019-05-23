@@ -57,7 +57,7 @@ class WebViewController: UIViewController {
         
         loadPage(url: url, partialContentQuerySelector: contentSelector)
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
             })
@@ -65,12 +65,12 @@ class WebViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Themer.shared.currentTheme == .light ? .default : .lightContent
+        return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
     
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
-        navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
+        navigationController?.navigationBar.barTintColor = AppConfigs.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.titleTextColor()]
     }
     

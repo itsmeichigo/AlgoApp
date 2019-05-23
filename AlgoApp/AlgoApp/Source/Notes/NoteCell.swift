@@ -87,7 +87,7 @@ class NoteCell: UICollectionViewCell, NibReusable {
     }
     
     private func updateColors() {
-        let theme = Themer.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
+        let theme = AppConfigs.shared.currentTheme == .light ? "tomorrow" : "tomorrow-dark"
         let path = Bundle.main.path(forResource: "highlight.min", ofType: "js")
         highlighter = Highlightr(highlightPath: path)
         highlighter?.setTheme(to: theme)

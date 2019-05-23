@@ -60,7 +60,7 @@ class DetailViewController: UIViewController {
         configureButtons()
         configureNotePanel()
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
                 self?.updateNotePanelContent(self?.viewModel.detail.value?.note)
@@ -85,7 +85,7 @@ class DetailViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Themer.shared.currentTheme == .light ? .default : .lightContent
+        return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
     
     private func configureNotePanel() {
@@ -153,7 +153,7 @@ class DetailViewController: UIViewController {
     
     private func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
-        navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
+        navigationController?.navigationBar.barTintColor = AppConfigs.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         view.backgroundColor = .backgroundColor()
         loadingView.backgroundColor = .backgroundColor()
@@ -177,7 +177,7 @@ class DetailViewController: UIViewController {
         otherSolutionsTagView.tagBackgroundColor = .clear
         otherSolutionsTagView.tagTitleColor = .clear
         
-        loadingIndicator.style = Themer.shared.currentTheme == .light ? .gray : .white
+        loadingIndicator.style = AppConfigs.shared.currentTheme == .light ? .gray : .white
     }
 
     private func configureContent() {

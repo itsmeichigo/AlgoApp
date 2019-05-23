@@ -40,7 +40,7 @@ class CodeViewController: UIViewController {
         configureNavigationBar()
         configureSubviews()
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
             })
@@ -80,7 +80,7 @@ class CodeViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Themer.shared.currentTheme == .light ? .default : .lightContent
+        return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
 }
 
@@ -164,7 +164,7 @@ private extension CodeViewController {
         codeTextView.autocorrectionType = .no
         codeTextView.isEditable = !viewModel.readOnly
         codeTextView.delegate = self
-        codeTextView.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
+        codeTextView.keyboardAppearance = AppConfigs.shared.currentTheme == .light ? .light : .dark
         codeTextView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         codeTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(codeTextView)

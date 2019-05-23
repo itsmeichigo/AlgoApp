@@ -48,7 +48,7 @@ class SettingsController: UITableViewController {
         configureView()
         configureNavigationBar()
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.darkModeSwitch.isOn = theme == .dark
                 self?.updateColors()
@@ -65,6 +65,10 @@ class SettingsController: UITableViewController {
             .map { $0.displayText }
             .drive(sortOptionLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        AppConfigs.shared.hidesSolvedProblemsDriver
+            .drive(hidesSolvedSwitch.rx.isOn)
+            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +77,7 @@ class SettingsController: UITableViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Themer.shared.currentTheme == .light ? .default : .lightContent
+        return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
 
     private func configureNavigationBar() {
@@ -84,7 +88,7 @@ class SettingsController: UITableViewController {
         
         tableView.tableFooterView = UIView()
         
-        darkModeSwitch.isOn = Themer.shared.currentTheme == .dark
+        darkModeSwitch.isOn = AppConfigs.shared.currentTheme == .dark
         hidesSolvedSwitch.isOn = AppConfigs.shared.hidesSolvedProblems
         
         cardViews.forEach { view in
@@ -102,7 +106,7 @@ class SettingsController: UITableViewController {
             })
             .map { !$0.1 ? Theme.light : $0.0 ? Theme.dark : Theme.light }
             .drive(onNext: {
-                Themer.shared.currentTheme = $0
+                AppConfigs.shared.currentTheme = $0
             })
             .disposed(by: disposeBag)
         
@@ -144,7 +148,7 @@ class SettingsController: UITableViewController {
         navigationController?.navigationBar.barTintColor = .backgroundColor()
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.titleTextColor()]
         
-        tabBarController?.tabBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
+        tabBarController?.tabBar.barTintColor = AppConfigs.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         hidesSolvedSwitch.onTintColor = .secondaryColor()
         darkModeSwitch.onTintColor = .secondaryColor()

@@ -41,7 +41,7 @@ class RemindersViewController: UIViewController {
         
         viewModel.loadReminders()
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
             })
@@ -71,7 +71,7 @@ class RemindersViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Themer.shared.currentTheme == .light ? .default : .lightContent
+        return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
     
     private func configureNavigationBar() {

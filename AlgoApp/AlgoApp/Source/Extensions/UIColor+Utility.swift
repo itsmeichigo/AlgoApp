@@ -28,14 +28,14 @@ extension UIColor {
 
 extension UIColor {
     static func primaryColor() -> UIColor {
-        switch Themer.shared.currentTheme {
+        switch AppConfigs.shared.currentTheme {
         case .light: return .white
         case .dark: return UIColor(rgb: 0x333333)
         }
     }
     
     static func secondaryColor() -> UIColor {
-        switch Themer.shared.currentTheme {
+        switch AppConfigs.shared.currentTheme {
         case .light: return appOrangeColor()
         case .dark: return appYellowColor()
         }
@@ -66,7 +66,7 @@ extension UIColor {
     }
 
     static func borderColor() -> UIColor {
-        switch Themer.shared.currentTheme {
+        switch AppConfigs.shared.currentTheme {
         case .light: return UIColor(rgb: 0xc3c3c3)
         case .dark: return UIColor(rgb: 0xc3c3c3).withAlphaComponent(0.2)
         }
@@ -77,21 +77,21 @@ extension UIColor {
     }
     
     static func titleTextColor() -> UIColor {
-        switch Themer.shared.currentTheme {
+        switch AppConfigs.shared.currentTheme {
         case .light: return UIColor(rgb: 0x333333)
         case .dark: return .white
         }
     }
     
     static func backgroundColor() -> UIColor {
-        switch Themer.shared.currentTheme {
+        switch AppConfigs.shared.currentTheme {
         case .light: return UIColor(rgb: 0xf4f4f4)
         case .dark: return UIColor(rgb: 0x424242)
         }
     }
     
     static func selectedBackgroundColor() -> UIColor {
-        switch Themer.shared.currentTheme {
+        switch AppConfigs.shared.currentTheme {
         case .light: return UIColor(rgb: 0xe0e0e0)
         case .dark: return UIColor(rgb: 0x242424)
         }

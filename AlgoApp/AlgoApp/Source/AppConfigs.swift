@@ -10,6 +10,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+enum Theme: Int {
+    case light
+    case dark
+}
+
 enum SortOption: Int, CaseIterable {
     case oldestFirst
     case newestFirst
@@ -64,7 +69,7 @@ final class AppConfigs {
     
     var hidesSolvedProblems: Bool {
         get {
-            let hiding = UserDefaults.standard.bool(forKey: hidesSolvedProblemsKey)
+            let hiding = UserDefaults.standard.bool(forKey: AppConfigs.hidesSolvedProblemsKey)
             if hiding != hidesSolvedProblemsRelay.value {
                 hidesSolvedProblemsRelay.accept(hiding)
             }
@@ -72,14 +77,14 @@ final class AppConfigs {
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: hidesSolvedProblemsKey)
+            UserDefaults.standard.set(newValue, forKey: AppConfigs.hidesSolvedProblemsKey)
             hidesSolvedProblemsRelay.accept(newValue)
         }
     }
     
     var isPremium: Bool {
         get {
-            let premium = UserDefaults.standard.bool(forKey: isPremiumKey)
+            let premium = UserDefaults.standard.bool(forKey: AppConfigs.isPremiumKey)
             if premium != isPremiumRelay.value {
                 isPremiumRelay.accept(premium)
             }
@@ -88,14 +93,14 @@ final class AppConfigs {
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: isPremiumKey)
+            UserDefaults.standard.set(newValue, forKey: AppConfigs.isPremiumKey)
             isPremiumRelay.accept(newValue)
         }
     }
     
     var sortOption: SortOption {
         get {
-            let optionValue = UserDefaults.standard.integer(forKey: sortOptionKey)
+            let optionValue = UserDefaults.standard.integer(forKey: AppConfigs.sortOptionKey)
             let option = SortOption(rawValue: optionValue) ?? .oldestFirst
             if option != sortOptionRelay.value {
                 sortOptionRelay.accept(option)
@@ -105,14 +110,14 @@ final class AppConfigs {
         }
         
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: sortOptionKey)
+            UserDefaults.standard.set(newValue.rawValue, forKey: AppConfigs.sortOptionKey)
             sortOptionRelay.accept(newValue)
         }
     }
     
     var currentFilter: QuestionFilter {
         get {
-            guard let filterData = UserDefaults.standard.object(forKey: currentFilterKey) as? Data else {
+            guard let filterData = UserDefaults.standard.object(forKey: AppConfigs.currentFilterKey) as? Data else {
                 return QuestionFilter.emptyFilter
             }
             let filter = try? JSONDecoder().decode(QuestionFilter.self, from: filterData)
@@ -122,7 +127,7 @@ final class AppConfigs {
         set {
             do {
                 let encoded = try JSONEncoder().encode(newValue)
-                UserDefaults.standard.set(encoded, forKey: currentFilterKey)
+                UserDefaults.standard.set(encoded, forKey: AppConfigs.currentFilterKey)
                 currentFilterRelay.accept(newValue)
             } catch {
 //                print("error: \(error)")
@@ -130,15 +135,96 @@ final class AppConfigs {
         }
     }
     
-    private let hidesSolvedProblemsKey = "HidesSolvedProblems"
+    var currentThemeDriver: Driver<Theme> {
+        return currentThemeRelay.asDriver()
+    }
+    
+    var currentTheme: Theme {
+        get {
+            let themeValue = UserDefaults.standard.integer(forKey: AppConfigs.themeKey)
+            let theme = Theme(rawValue: themeValue) ?? .light
+            if theme != currentThemeRelay.value {
+                currentThemeRelay.accept(theme)
+            }
+            return theme
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: AppConfigs.themeKey)
+            currentThemeRelay.accept(newValue)
+        }
+    }
+    
+    static let hidesSolvedProblemsKey = "HidesSolvedProblems"
     private let hidesSolvedProblemsRelay = BehaviorRelay<Bool>(value: false)
     
-    private let isPremiumKey = "IsPremium"
+    static let isPremiumKey = "IsPremium"
     private let isPremiumRelay = BehaviorRelay<Bool>(value: false)
     
-    private let sortOptionKey = "SortOptionKey"
+    static let sortOptionKey = "SortOptionKey"
     private let sortOptionRelay = BehaviorRelay<SortOption>(value: .oldestFirst)
     
-    private let currentFilterKey = "CurrentFilterKey"
+    static let currentFilterKey = "CurrentFilterKey"
     private let currentFilterRelay = BehaviorRelay<QuestionFilter>(value: QuestionFilter.emptyFilter)
+    
+    static let themeKey = "SavedTheme"
+    private let currentThemeRelay = BehaviorRelay<Theme>(value: .light)
+    
+    private let disposeBag = DisposeBag()
+    
+    func registerInitialValues() {
+        var values: [String: Any] = [
+            AppConfigs.hidesSolvedProblemsKey: hidesSolvedProblems,
+            AppConfigs.isPremiumKey: isPremium,
+            AppConfigs.sortOptionKey: sortOption.rawValue,
+            AppConfigs.themeKey: currentTheme.rawValue
+        ]
+        
+        if let filterData = UserDefaults.standard.object(forKey: AppConfigs.currentFilterKey) as? Data {
+            values[AppConfigs.currentFilterKey] = filterData
+        }
+        
+        UserDefaults.standard.register(defaults: values)
+    }
+    
+    func observeUserDefaultsChange() {
+        UserDefaults.standard.rx
+            .observe(Bool.self, AppConfigs.hidesSolvedProblemsKey)
+            .filterNil()
+            .bind(to: hidesSolvedProblemsRelay)
+            .disposed(by: disposeBag)
+        
+        UserDefaults.standard.rx
+            .observe(Bool.self, AppConfigs.isPremiumKey)
+            .filterNil()
+            .bind(to: isPremiumRelay)
+            .disposed(by: disposeBag)
+        
+        UserDefaults.standard.rx
+            .observe(Int.self, AppConfigs.sortOptionKey)
+            .filterNil()
+            .map { SortOption(rawValue: $0) }
+            .filterNil()
+            .bind(to: sortOptionRelay)
+            .disposed(by: disposeBag)
+        
+        UserDefaults.standard.rx
+            .observe(Int.self, AppConfigs.themeKey)
+            .filterNil()
+            .map { Theme(rawValue: $0) }
+            .filterNil()
+            .bind(to: currentThemeRelay)
+            .disposed(by: disposeBag)
+        
+        UserDefaults.standard.rx
+            .observe(Data.self, AppConfigs.currentFilterKey)
+            .filterNil()
+            .map { filterData in
+                let filter = try? JSONDecoder().decode(QuestionFilter.self, from: filterData)
+                return filter ?? QuestionFilter.emptyFilter
+            }
+            .bind(to: currentFilterRelay)
+            .disposed(by: disposeBag)
+    }
 }
+

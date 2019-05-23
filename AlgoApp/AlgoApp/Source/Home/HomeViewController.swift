@@ -75,7 +75,7 @@ final class HomeViewController: UIViewController {
         configureView()
         updateColors()
         
-        Themer.shared.currentThemeDriver
+        AppConfigs.shared.currentThemeDriver
             .drive(onNext: { [weak self] theme in
                 self?.updateColors()
             })
@@ -117,7 +117,7 @@ final class HomeViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Themer.shared.currentTheme == .light ? .default : .lightContent
+        return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
     
     func updateDetailController(with questionId: Int, shouldShowNote: Bool = false, shouldShowDetail: Bool = true) {
@@ -151,14 +151,14 @@ private extension HomeViewController {
     
     func updateColors() {
         navigationController?.navigationBar.tintColor = .titleTextColor()
-        navigationController?.navigationBar.barTintColor = Themer.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
+        navigationController?.navigationBar.barTintColor = AppConfigs.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
         tabBarController?.tabBar.barTintColor = .backgroundColor()
         
         tableView.reloadData()
         
-        searchBar.barStyle = Themer.shared.currentTheme == .light ? .default : .black
-        searchBar.keyboardAppearance = Themer.shared.currentTheme == .light ? .light : .dark
+        searchBar.barStyle = AppConfigs.shared.currentTheme == .light ? .default : .black
+        searchBar.keyboardAppearance = AppConfigs.shared.currentTheme == .light ? .light : .dark
         
         emptyTitleLabel.textColor = .subtitleTextColor()
         emptyMessageLabel.textColor = .subtitleTextColor()

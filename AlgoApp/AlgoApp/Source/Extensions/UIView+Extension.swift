@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
     func dropCardShadow() {
-        let color = Themer.shared.currentTheme == .light ? UIColor(rgb: 0x333333) : UIColor.black
+        let color = AppConfigs.shared.currentTheme == .light ? UIColor(rgb: 0x333333) : UIColor.black
         layer.shadowColor = color.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowOpacity = 0.1

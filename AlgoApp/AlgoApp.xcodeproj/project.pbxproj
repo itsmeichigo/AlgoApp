@@ -45,7 +45,6 @@
 		DE157EA9221D39A90040B4E9 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */; };
 		DE170A02224BDFAB00B0FB56 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
-		DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC32219CAB700BDDFB4 /* Theme.swift */; };
 		DE1A9A1D22427EAA007E79F6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */; };
 		DE1A9A1F22429076007E79F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1A9A1E22429076007E79F6 /* GoogleService-Info.plist */; };
 		DE1AC97022317BA30044D83D /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1AC96F22317BA30044D83D /* RemindersViewController.swift */; };
@@ -133,7 +132,6 @@
 		DE157EA8221D39A90040B4E9 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		DE195DC32219CAB700BDDFB4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DE1A9A1E22429076007E79F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DE1AC96F22317BA30044D83D /* RemindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 				DE0E515122070C2800BFBB0B /* AppDelegate.swift */,
 				DE1D26CF223CE9EA00AA9F68 /* AppConfigs.swift */,
 				DE33353D226CCF0300F1D0F0 /* AppHelper.swift */,
-				DE195DC32219CAB700BDDFB4 /* Theme.swift */,
 				DE1492D72245F42900B7E56C /* StoreHelper.swift */,
 				DE1D26D3223E3C7800AA9F68 /* NotificationHelper.swift */,
 				DE0E517D2208408E00BFBB0B /* Models */,
@@ -584,6 +581,7 @@
 				"${BUILT_PRODUCTS_DIR}/StringExtensionHTML/StringExtensionHTML.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Tags/Tags.framework",
+				"${BUILT_PRODUCTS_DIR}/Zephyr/Zephyr.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -610,6 +608,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StringExtensionHTML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Tags.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zephyr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -662,6 +661,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/StringExtensionHTML/StringExtensionHTML.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Zephyr/Zephyr.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
@@ -688,6 +688,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StringExtensionHTML.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zephyr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
@@ -750,7 +751,6 @@
 				DE1C5DED22757A18001E544F /* UIViewController+Extension.swift in Sources */,
 				DE170A02224BDFAB00B0FB56 /* ConfettiView.swift in Sources */,
 				DE5629532296ECBB001E84E1 /* RealmManager.swift in Sources */,
-				DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */,
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
 				DE79F00922511CA50051ECD1 /* AboutViewController.swift in Sources */,
 				DE24271722466CFD000A10ED /* PremiumAlertViewController.swift in Sources */,

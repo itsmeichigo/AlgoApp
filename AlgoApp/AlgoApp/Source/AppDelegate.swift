@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import CloudKit
 import IceCream
+import Zephyr
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,6 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         configureRealm()
+        
+        AppConfigs.shared.registerInitialValues()
+        AppConfigs.shared.observeUserDefaultsChange()
+        
+        Zephyr.debugEnabled = true
+        Zephyr.addKeysToBeMonitored(keys: AppConfigs.currentFilterKey,
+                                    AppConfigs.hidesSolvedProblemsKey,
+                                    AppConfigs.isPremiumKey,
+                                    AppConfigs.sortOptionKey,
+                                    AppConfigs.themeKey)
+        Zephyr.sync(keys: AppConfigs.currentFilterKey,
+                    AppConfigs.hidesSolvedProblemsKey,
+                    AppConfigs.isPremiumKey,
+                    AppConfigs.sortOptionKey,
+                    AppConfigs.themeKey)
         
         syncEngine = SyncEngine(objects: [
             SyncObject<QuestionList>(),
