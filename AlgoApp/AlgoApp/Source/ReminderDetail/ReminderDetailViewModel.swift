@@ -12,7 +12,7 @@ import RealmSwift
 final class ReminderDetailViewModel {
     let reminder: ReminderDetail?
     
-    private let realm = try! Realm()
+    private let realmManager = RealmManager.shared
     
     init(reminder: ReminderDetail?) {
         self.reminder = reminder
@@ -29,23 +29,21 @@ final class ReminderDetailViewModel {
             reminder.filter = FilterObject(with: filter)
         }
         
-        try! realm.write {
-            realm.add(reminder, update: true)
-            NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
-        }
+        realmManager.create(object: reminder, update: true)
+        NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
     }
     
     func deleteReminder() {
         guard let detail = reminder,
-            let model = realm.object(ofType: Reminder.self, forPrimaryKey: detail.id) else { return }
+            let model = realmManager.object(Reminder.self, id: detail.id) else { return }
         NotificationHelper.shared.cancelScheduledNotifications(for: detail, completionHandler: {})
-        try! realm.write {
+        realmManager.update {
             model.isDeleted = true
         }
     }
     
     func countProblems(with filter: QuestionFilter?, onlyUnsolved: Bool) -> Int {
-        return Question.loadQuestions(filter: filter, onlyUnsolved: onlyUnsolved).count
+        return Question.loadQuestions(with: realmManager, filter: filter, onlyUnsolved: onlyUnsolved).count
     }
     
     private func correctSecondComponent(date: Date, calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)) -> Date {

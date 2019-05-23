@@ -7,27 +7,25 @@
 //
 
 import Foundation
-import RealmSwift
 import RxCocoa
-import RxRealm
 import RxSwift
 
 final class HomeViewModel {
     
     let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
     var randomQuestionId: Int? {
-        return realm.objects(Question.self).randomElement()?.id
+        return realmManager.objects(Question.self).randomElement()?.id
     }
     
     private let disposeBag = DisposeBag()
-    private lazy var realm = try! Realm()
+    private lazy var realmManager = RealmManager.shared
     
     init() {
         observeCustomLists()
     }
     
     func loadQuestions(query: String?, filter: QuestionFilter?, onlyUnsolved: Bool, sortOption: SortOption) {
-        let results = Question.loadQuestions(with: realm, query: query, filter: filter, onlyUnsolved: onlyUnsolved)
+        let results = Question.loadQuestions(with: realmManager, query: query, filter: filter, onlyUnsolved: onlyUnsolved)
         
         Observable.collection(from: results)
             .map { Array($0)
@@ -39,7 +37,7 @@ final class HomeViewModel {
     }
     
     private func observeCustomLists() {
-        Observable.collection(from: realm.objects(QuestionList.self))
+        Observable.collection(from: realmManager.objects(QuestionList.self))
             .map { list -> (Set<Int>, Set<Int>)? in
                 guard let solvedList = list.first(where: { $0.id == QuestionList.solvedListId }),
                     let savedList = list.first(where: { $0.id == QuestionList.savedListId }) else { return nil }
@@ -76,54 +74,45 @@ final class HomeViewModel {
                         oldSolvedList,
                         oldSavedList)
             }
-            .subscribe(onNext: { input in
+            .subscribe(onNext: { [weak self] input in
+                guard let self = self else { return }
                 let (newSolvedList, newSavedList, oldSolvedList, oldSavedList) = input
                 
                 let indicesToUpdate = newSolvedList.union(newSavedList.union(oldSavedList.union(oldSolvedList)))
                 
                 guard !indicesToUpdate.isEmpty else { return }
                 
-                do {
-                    let realmForRead = try Realm()
-                    let realmForWrite = try Realm()
-                    
-                    guard !realmForWrite.isInWriteTransaction else { return }
-                    
-                    try realmForWrite.write {
-                        for index in indicesToUpdate {
-                            if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: index) {
-                                model.solved = newSolvedList.contains(index)
-                                model.saved = newSavedList.contains(index)
-                            }
-                        }
-                        
-                        if let solvedList = QuestionList.solvedList {
-                            solvedList.questions.removeAll()
-                            var solvedQuestionList: [Question] = []
-                            for id in newSolvedList {
-                                if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
-                                    solvedQuestionList.append(model)
-                                }
-                            }
-                            
-                            solvedList.questions.append(objectsIn: solvedQuestionList)
-                        }
-                        
-                        if let savedList = QuestionList.savedList {
-                            savedList.questions.removeAll()
-                            var savedQuestionList: [Question] = []
-                            for id in newSavedList {
-                                if let model = realmForRead.object(ofType: Question.self, forPrimaryKey: id) {
-                                    savedQuestionList.append(model)
-                                }
-                            }
-                            
-                            savedList.questions.append(objectsIn: savedQuestionList)
+                self.realmManager.update {
+                    for index in indicesToUpdate {
+                        if let model = self.realmManager.object(Question.self, id: index) {
+                            model.solved = newSolvedList.contains(index)
+                            model.saved = newSavedList.contains(index)
                         }
                     }
                     
-                } catch {
-                    print(error.localizedDescription)
+                    if let solvedList = QuestionList.solvedList {
+                        solvedList.questions.removeAll()
+                        var solvedQuestionList: [Question] = []
+                        for id in newSolvedList {
+                            if let model = self.realmManager.object( Question.self, id: id) {
+                                solvedQuestionList.append(model)
+                            }
+                        }
+                        
+                        solvedList.questions.append(objectsIn: solvedQuestionList)
+                    }
+                    
+                    if let savedList = QuestionList.savedList {
+                        savedList.questions.removeAll()
+                        var savedQuestionList: [Question] = []
+                        for id in newSavedList {
+                            if let model = self.realmManager.object( Question.self, id: id) {
+                                savedQuestionList.append(model)
+                            }
+                        }
+                        
+                        savedList.questions.append(objectsIn: savedQuestionList)
+                    }
                 }
             })
             .disposed(by: disposeBag)

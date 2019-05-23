@@ -7,10 +7,8 @@
 //
 
 import Foundation
-import RealmSwift
 import RxCocoa
 import RxSwift
-import RxRealm
 
 final class FilterViewModel {
     let allTags = BehaviorRelay<[String]>(value: [])
@@ -25,7 +23,7 @@ final class FilterViewModel {
     private var selectedRemarks: [String] = []
     
     private let disposeBag = DisposeBag()
-    private let realm = try! Realm()
+    private let realmManager = RealmManager.shared
     
     init() {
         loadTags()
@@ -96,14 +94,14 @@ final class FilterViewModel {
     }
     
     private func loadTags() {
-        Observable.collection(from: realm.objects(Tag.self))
+        realmManager.observableObjects(Tag.self)
             .map { $0.map { $0.name } }
             .bind(to: allTags)
             .disposed(by: disposeBag)
     }
     
     private func loadCompanies() {
-        Observable.collection(from: realm.objects(Company.self))
+        realmManager.observableObjects(Company.self)
             .map { $0.map { $0.name } }
             .bind(to: allCompanies)
             .disposed(by: disposeBag)

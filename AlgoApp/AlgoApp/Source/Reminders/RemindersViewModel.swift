@@ -16,10 +16,10 @@ final class RemindersViewModel {
     let reminders = BehaviorRelay<[ReminderDetail]>(value: [])
     
     private let disposeBag = DisposeBag()
-    private lazy var realm = try! Realm()
+    private lazy var realmManager = RealmManager.shared
     
     func loadReminders() {
-        Observable.collection(from: realm.objects(Reminder.self).filter(NSPredicate(format: "isDeleted = false")))
+        realmManager.observableObjects(Reminder.self, filter: NSPredicate(format: "isDeleted = false"))
             .map { Array($0).map { ReminderDetail(with: $0) } }
             .do(onNext: { $0.forEach { NotificationHelper.shared.scheduleNotificationIfNeeded(for: $0) } })
             .bind(to: reminders)
@@ -27,11 +27,11 @@ final class RemindersViewModel {
     }
     
     func toggleReminder(id: String) {
-        let realm = try! Realm()
-        guard let reminder = realm.object(ofType: Reminder.self, forPrimaryKey: id) else { return }
+        guard let reminder = realmManager.object(Reminder.self, id: id) else { return }
         let toggledValue = !reminder.enabled
         let reminderDate = reminder.date
-        try! realm.write {
+        
+        realmManager.update {
             if toggledValue && reminderDate < Date() && reminder.repeatDays.isEmpty {
                 reminder.date = reminderDate.addingTimeInterval(24*60*60)
             }
@@ -41,9 +41,9 @@ final class RemindersViewModel {
     }
     
     func disableAllReminders() {
-        let realm = try! Realm()
-        let reminders = realm.objects(Reminder.self)
-        try! realm.write {
+        let reminders = realmManager.objects(Reminder.self)
+        
+        realmManager.update {
             for reminder in reminders {
                 reminder.enabled = false
                 NotificationHelper.shared.updateScheduledNotifications(for: ReminderDetail(with: reminder))
@@ -52,9 +52,9 @@ final class RemindersViewModel {
     }
     
    func disableExpiredReminders() {
-        let realm = try! Realm()
-        let reminders = realm.objects(Reminder.self)
-        try! realm.write {
+        let reminders = realmManager.objects(Reminder.self)
+    
+        realmManager.update {
             for reminder in reminders where reminder.repeatDays.isEmpty && reminder.date < Date() {
                 reminder.enabled = false
             }

@@ -8,9 +8,7 @@
 
 import Foundation
 import Kanna
-import RealmSwift
 import RxCocoa
-import RxRealm
 import RxSwift
 import RxOptional
 
@@ -20,8 +18,7 @@ final class DetailViewModel {
     let githubSolutionsRelay = BehaviorRelay<[Language: String]>(value: [:])
     let scrapingSolutions = BehaviorRelay<Bool>(value: true)
     
-    private let realmForRead = try! Realm()
-    private let realmForWrite = try! Realm()
+    private let realmManager = RealmManager.shared
     
     private let disposeBag = DisposeBag()
     private let scraper = SolutionScraper()
@@ -42,8 +39,8 @@ final class DetailViewModel {
     init(question id: Int) {
         questionId.accept(id)
         
-        Observable.combineLatest(Observable.collection(from: realmForRead.objects(Question.self)), questionId) { $1 }
-            .map { [weak self] in self?.realmForRead.object(ofType: Question.self, forPrimaryKey: $0) }
+        Observable.combineLatest(realmManager.observableObjects(Question.self), questionId) { $1 }
+            .map { [weak self] in self?.realmManager.object(Question.self, id: $0) }
             .map { question -> QuestionDetailModel? in
                 guard let question = question else { return nil }
                 return QuestionDetailModel(with: question)
@@ -96,9 +93,10 @@ final class DetailViewModel {
     }
     
     func toggleSolved() {
-        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId.value) else { return }
+        guard let question = realmManager.object(Question.self, id: questionId.value) else { return }
         let toggledValue = !question.solved
-        try! realmForWrite.write {
+        
+        realmManager.update {
             question.solved = toggledValue
             guard let solvedList = QuestionList.solvedList else { return }
             let questionList = solvedList.questions
@@ -118,9 +116,10 @@ final class DetailViewModel {
     }
     
     func toggleSaved() {
-        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId.value) else { return }
+        guard let question = realmManager.object(Question.self, id: questionId.value) else { return }
         let toggledValue = !question.saved
-        try! realmForWrite.write {
+        
+        realmManager.update {
             question.saved = toggledValue
             guard let savedList = QuestionList.savedList else { return }
             let questionList = savedList.questions
@@ -144,8 +143,9 @@ final class DetailViewModel {
     }
     
     func updateNote(_ content: String, language: Language) {
-        guard let question = realmForWrite.object(ofType: Question.self, forPrimaryKey: questionId.value) else { return }
-        try! realmForWrite.write {
+        guard let question = realmManager.object(Question.self, id: questionId.value) else { return }
+        
+        realmManager.update {
             if let note = question.note {
                 note.content = content
                 note.language = language.rawValue
@@ -178,9 +178,9 @@ private extension DetailViewModel {
     }
     
     func saveSolution(for questionId: Int, content: String, language: Language) {
-        let realm = try! Realm()
-        if let question = realm.object(ofType: Question.self, forPrimaryKey: questionId) {
-            try! realm.write {
+        
+        if let question = realmManager.object(Question.self, id: questionId) {
+            realmManager.update {
                 if let solution = question.solution {
                     switch language {
                     case .cPP:

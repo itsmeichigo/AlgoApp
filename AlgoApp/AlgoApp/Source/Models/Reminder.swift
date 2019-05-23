@@ -71,7 +71,7 @@ extension ReminderDetail {
     
 }
 
-final class Reminder: Object, CKRecordRecoverable, CKRecordConvertible {
+final class Reminder: Object, IdentifiableObject, CKRecordRecoverable, CKRecordConvertible {
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var date: Date = Date()
     @objc dynamic var filter: FilterObject? = nil
@@ -84,20 +84,18 @@ final class Reminder: Object, CKRecordRecoverable, CKRecordConvertible {
         return "id"
     }
     
-    static func randomQuestionId(for reminderId: String) -> Int? {
-        let realm = try! Realm()
-        guard let reminder = realm.object(ofType: Reminder.self, forPrimaryKey: reminderId) else { return nil }
+    static func randomQuestionId(for reminderId: String, with realmManager: RealmManager = RealmManager.shared) -> Int? {
+        guard let reminder = realmManager.object(Reminder.self, id: reminderId) else { return nil }
         
-        return Question.loadQuestions(with: realm,
+        return Question.loadQuestions(with: realmManager,
                                       filter: ReminderDetail(with: reminder).filter,
                                       onlyUnsolved: AppConfigs.shared.hidesSolvedProblems).randomElement()?.id
     }
     
-    static func disableAllReminders() {
-        let realm = try! Realm()
+    static func disableAllReminders(with realmManager: RealmManager = RealmManager.shared) {
         
-        try! realm.write {
-            for reminder in realm.objects(Reminder.self) {
+        realmManager.update {
+            for reminder in realmManager.objects(Reminder.self) {
                 reminder.enabled = false
             }
         }

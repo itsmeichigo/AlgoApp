@@ -10,7 +10,8 @@ import Foundation
 import RealmSwift
 import IceCream
 
-final class QuestionList: Object, CKRecordRecoverable, CKRecordConvertible {
+final class QuestionList: Object, IdentifiableObject, CKRecordRecoverable, CKRecordConvertible {
+    
     static let savedListId = "saved-list-id"
     static let solvedListId = "solved-list-id"
     
@@ -27,17 +28,15 @@ final class QuestionList: Object, CKRecordRecoverable, CKRecordConvertible {
     }
     
     static var savedList: QuestionList? {
-        let realm = try! Realm()
-        return realm.object(ofType: QuestionList.self, forPrimaryKey: QuestionList.savedListId)
+        return RealmManager.shared.object(QuestionList.self, id: QuestionList.savedListId)
     }
     
     static var solvedList: QuestionList? {
-        let realm = try! Realm()
-        return realm.object(ofType: QuestionList.self, forPrimaryKey: QuestionList.solvedListId)
+        return RealmManager.shared.object(QuestionList.self, id: QuestionList.solvedListId)
     }
     
     static func createCustomListsIfNeeded() {
-        let realm = try! Realm()
+        let realmManager = RealmManager.shared
         
         guard savedList == nil,
             solvedList == nil else { return }
@@ -46,16 +45,14 @@ final class QuestionList: Object, CKRecordRecoverable, CKRecordConvertible {
         newSolvedList.id = QuestionList.solvedListId
         newSolvedList.name = "Solved Questions"
         newSolvedList.isCustom = true
-        newSolvedList.questions.append(objectsIn: realm.objects(Question.self).filter(NSPredicate(format: "solved = true")).toArray())
+        newSolvedList.questions.append(objectsIn: realmManager.objects(Question.self, filter: NSPredicate(format: "solved = true")))
         
         let newSavedList = QuestionList()
         newSavedList.id = QuestionList.savedListId
         newSavedList.name = "Saved Questions"
         newSavedList.isCustom = true
-        newSavedList.questions.append(objectsIn: realm.objects(Question.self).filter(NSPredicate(format: "saved = true")).toArray())
+        newSavedList.questions.append(objectsIn: realmManager.objects(Question.self, filter: NSPredicate(format: "saved = true")).toArray())
         
-        try! realm.write {
-            realm.add([newSolvedList, newSavedList], update: true)
-        }
+        realmManager.create(objects: [newSolvedList, newSavedList], update: true)
     }
 }

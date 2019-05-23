@@ -16,24 +16,20 @@ final class NotesViewModel {
     let notes = BehaviorRelay<[NoteCellModel]>(value: [])
     
     private let disposeBag = DisposeBag()
-    private lazy var realm = try! Realm()
+    private lazy var realmManager = RealmManager.shared
     
     func loadNotes() {
-        Observable.collection(from: realm.objects(Note.self).filter(NSPredicate(format: "isDeleted = false")))
-            .do(onNext: { notes in
-                do {
-                    let realmForRead = try Realm()
-                    let realmForWrite = try Realm()
-                    
-                    try realmForWrite.write {
-                        for note in notes {
-                            if let question = realmForRead.object(ofType: Question.self, forPrimaryKey: note.questionId), question.note == nil {
-                                question.note = note
-                            }
+        realmManager.observableObjects(Note.self, filter: NSPredicate(format: "isDeleted = false"))
+            .do(onNext: { [weak self] notes in
+                guard let self = self else { return }
+                
+                self.realmManager.update {
+                    for note in notes {
+                        if let question = self.realmManager.object(Question.self, id: note.questionId), question.note == nil {
+                            question.note = note
                         }
                     }
-                    
-                } catch {}
+                }
             })
             .map { Array($0)
                     .map { NoteCellModel(with: $0) }
@@ -44,9 +40,10 @@ final class NotesViewModel {
     }
     
     func deleteNote(_ note: NoteCellModel) {
-        guard let model = realm.object(ofType: Note.self, forPrimaryKey: note.id),
-            let question = realm.object(ofType: Question.self, forPrimaryKey: note.questionId) else { return }
-        try! realm.write {
+        guard let model = realmManager.object(Note.self, id: note.id),
+            let question = realmManager.object(Question.self, id: note.questionId) else { return }
+        
+        realmManager.update {
             model.isDeleted = true
             question.note = nil
         }

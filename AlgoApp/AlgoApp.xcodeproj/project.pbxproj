@@ -69,6 +69,7 @@
 		DE33353E226CCF0300F1D0F0 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353D226CCF0300F1D0F0 /* AppHelper.swift */; };
 		DE33354022740BC500F1D0F0 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE33353F22740BC500F1D0F0 /* Solution.swift */; };
 		DE33354222743EC000F1D0F0 /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = DE33354122743EC000F1D0F0 /* default.realm */; };
+		DE5629532296ECBB001E84E1 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5629522296ECBB001E84E1 /* RealmManager.swift */; };
 		DE58012B2292E99100A42183 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE58012A2292E99100A42183 /* CloudKit.framework */; };
 		DE79F00922511CA50051ECD1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00822511CA50051ECD1 /* AboutViewController.swift */; };
 		DE79F00B225122EC0051ECD1 /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */; };
@@ -156,6 +157,7 @@
 		DE33353D226CCF0300F1D0F0 /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		DE33353F22740BC500F1D0F0 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
 		DE33354122743EC000F1D0F0 /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
+		DE5629522296ECBB001E84E1 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DE5801272291059400A42183 /* AlgoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlgoApp.entitlements; sourceTree = "<group>"; };
 		DE58012A2292E99100A42183 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		DE79F00822511CA50051ECD1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */,
 				DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */,
 				DE1E284C225CFF7900F6E04E /* String+FormattedDescription.swift */,
+				DE5629522296ECBB001E84E1 /* RealmManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 			files = (
 				DE1C5DED22757A18001E544F /* UIViewController+Extension.swift in Sources */,
 				DE170A02224BDFAB00B0FB56 /* ConfettiView.swift in Sources */,
+				DE5629532296ECBB001E84E1 /* RealmManager.swift in Sources */,
 				DE195DC42219CAB700BDDFB4 /* Theme.swift in Sources */,
 				DE0E517322082E2700BFBB0B /* HomeTableViewCell.swift in Sources */,
 				DE79F00922511CA50051ECD1 /* AboutViewController.swift in Sources */,

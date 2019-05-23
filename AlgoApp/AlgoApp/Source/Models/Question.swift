@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class Question: Object {
+final class Question: Object, IdentifiableObject {    
     @objc dynamic var id = 0
     @objc dynamic var title = ""
     @objc dynamic var content = ""
@@ -90,9 +90,9 @@ final class Question: Object {
 }
 
 extension Question {
-    static func loadQuestions(with realm: Realm = try! Realm(), query: String? = nil, filter: QuestionFilter? = nil, onlyUnsolved: Bool = false) -> Results<Question> {
+    static func loadQuestions(with realmManager: RealmManager, query: String? = nil, filter: QuestionFilter? = nil, onlyUnsolved: Bool = false) -> Results<Question> {
         var predicates: [NSPredicate] = []
-        var results = realm.objects(Question.self)
+        var results = realmManager.objects(Question.self)
         if let query = query, !query.isEmpty {
             let predicate = NSPredicate(format: "title contains[cd] %@", query)
             predicates.append(predicate)
@@ -136,7 +136,7 @@ extension Question {
         
         if predicates.count > 0 {
             let compound = NSCompoundPredicate(type: .and, subpredicates: predicates)
-            results = realm.objects(Question.self).filter(compound)
+            results = realmManager.objects(Question.self).filter(compound)
         }
         
         return results
