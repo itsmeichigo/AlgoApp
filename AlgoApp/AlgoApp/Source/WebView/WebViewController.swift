@@ -62,6 +62,12 @@ class WebViewController: UIViewController {
                 self?.updateColors()
             })
             .disposed(by: disposeBag)
+        
+        userActivity = NSUserActivity(activityType: "com.ichigo.AlgoApp.browse")
+        userActivity?.webpageURL = url
+        userActivity?.isEligibleForHandoff = true
+        userActivity?.title = title
+        userActivity?.becomeCurrent()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

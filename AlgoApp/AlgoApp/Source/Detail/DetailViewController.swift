@@ -322,7 +322,6 @@ class DetailViewController: UIViewController {
     
     private func showWebpage(url: URL, title: String = "", contentSelector: String?) {
         let viewController = WebViewController()
-        viewController.hidesBottomBarWhenPushed = true
         viewController.url = url
         viewController.title = title
         viewController.contentSelector = contentSelector
@@ -371,10 +370,9 @@ class DetailViewController: UIViewController {
     
     @objc func showLeetCode() {
         guard let path = viewModel.detail.value?.titleSlug,
-            let url = URL(string: "https://leetcode.com/problems/\(path)"),
-            UIApplication.shared.canOpenURL(url) else { return }
+            let url = URL(string: "https://leetcode.com/problems/\(path)") else { return }
         
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        showWebpage(url: url, title: viewModel.detail.value?.title ?? "", contentSelector: nil)
     }
 }
 
