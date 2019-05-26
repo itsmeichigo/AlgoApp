@@ -21,10 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var syncEngine: SyncEngine?
     
-    private let disposeBag = DisposeBag()
-    
     /// set orientations you want to be allowed in this property by default
     var orientationLock = UIInterfaceOrientationMask.allButUpsideDown
+    
+    private let disposeBag = DisposeBag()
+    
+    private let randomQuestionShortcutKey = "com.ichigo.AlgoKitty.randomQuestion"
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return self.orientationLock
@@ -64,6 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         NotificationHelper.shared.showPendingQuestion()
         
+        setupShortcuts(for: application)
+        
         return true
     }
     
@@ -77,6 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         completionHandler(.newData)
         
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(handleShortcutItem(shortcutItem))
     }
 }
 
@@ -130,5 +138,28 @@ private extension AppDelegate {
         }
         
         tabbarController.viewControllers = controllers
+    }
+    
+    func setupShortcuts(for application: UIApplication) {
+        let randomShortcut = UIMutableApplicationShortcutItem(
+            type: randomQuestionShortcutKey,
+            localizedTitle: "Random Challenge",
+            localizedSubtitle: nil,
+            icon: UIApplicationShortcutIcon.init(templateImageName: "shuffle"),
+            userInfo: nil
+        )
+        
+        application.shortcutItems = [randomShortcut]
+    }
+    
+    func handleShortcutItem(_ item: UIApplicationShortcutItem) -> Bool {
+        switch item.type {
+        case randomQuestionShortcutKey:
+            guard let id = RealmManager.shared.objects(Question.self).randomElement()?.id else { return false }
+            AppHelper.showQuestionDetail(for: id)
+            return true
+        default:
+            return false
+        }        
     }
 }

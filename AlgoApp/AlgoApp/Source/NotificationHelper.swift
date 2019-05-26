@@ -99,7 +99,10 @@ final class NotificationHelper: NSObject {
     
     func showPendingQuestion() {
         guard let id = pendingReminderId else { return }
-        showQuestionDetail(for: id)
+        guard let questionId = Reminder.randomQuestionId(for: id) else { return }
+        AppHelper.showQuestionDetail(for: questionId) { [weak self] in
+            self?.pendingReminderId = id
+        }
     }
     
     func cancelScheduledNotifications(for reminder: ReminderDetail, completionHandler: @escaping (() -> Void)) {
@@ -129,36 +132,6 @@ final class NotificationHelper: NSObject {
             }
         }
     }
-    
-    private func showQuestionDetail(for reminderId: String) {
-        guard let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
-        
-        guard let window = UIApplication.shared.keyWindow,
-            let tabbarController = window.rootViewController as? UITabBarController,
-            let splitViewController = tabbarController.viewControllers?.first as? UISplitViewController else {
-                
-                self.pendingReminderId = reminderId
-                return
-        }
-        
-        if let presentedController = splitViewController.presentedViewController {
-            presentedController.dismiss(animated: false, completion: nil)
-        }
-        
-        guard let navigationController = splitViewController.viewControllers.first as? UINavigationController else { return }
-        
-        if let homeViewController = navigationController.topViewController as? HomeViewController {
-            homeViewController.updateDetailController(with: questionId)
-        } else if let detailNavigationController = navigationController.topViewController as? UINavigationController {
-            detailNavigationController.popToRootViewController(animated: false)
-            
-            if let detailController = detailNavigationController.topViewController as? DetailViewController {
-                detailController.viewModel.updateDetails(with: questionId)
-            }
-         }
-        
-        tabbarController.selectedIndex = 0
-    }
 }
 
 extension NotificationHelper: UNUserNotificationCenterDelegate {
@@ -168,7 +141,10 @@ extension NotificationHelper: UNUserNotificationCenterDelegate {
         
         if let reminderId = response.notification.request.content.userInfo[NotificationHelper.reminderIdKey] as? String {
             
-            showQuestionDetail(for: reminderId)
+            guard let questionId = Reminder.randomQuestionId(for: reminderId) else { return }
+            AppHelper.showQuestionDetail(for: questionId) { [weak self] in
+                self?.pendingReminderId = reminderId
+            }
         }
     }
     
