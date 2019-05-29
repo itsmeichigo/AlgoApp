@@ -108,7 +108,6 @@ private extension AppDelegate {
         
         do {
             try FileManager.default.copyItem(atPath: bundleReamPath!, toPath: defaultRealmPath.path)
-            QuestionList.createCustomListsIfNeeded()
         } catch let error as NSError {
             print("error occurred, here are the details:\n \(error)")
         }

@@ -27,25 +27,12 @@ final class QuestionList: Object, IdentifiableObject, CKRecordRecoverable, CKRec
         return "id"
     }
     
-    static var savedList: QuestionList? {
-        return RealmManager.shared.object(QuestionList.self, id: QuestionList.savedListId)
-    }
-    
-    static var solvedList: QuestionList? {
-        return RealmManager.shared.object(QuestionList.self, id: QuestionList.solvedListId)
-    }
-    
-    static func createCustomListsIfNeeded() {
+    static var savedList: QuestionList {
         let realmManager = RealmManager.shared
-        
-        guard savedList == nil,
-            solvedList == nil else { return }
-        
-        let newSolvedList = QuestionList()
-        newSolvedList.id = QuestionList.solvedListId
-        newSolvedList.name = "Solved Questions"
-        newSolvedList.isCustom = true
-        newSolvedList.questions.append(objectsIn: realmManager.objects(Question.self, filter: NSPredicate(format: "solved = true")))
+        let object = realmManager.object(QuestionList.self, id: QuestionList.savedListId)
+        if let object = object {
+            return object
+        }
         
         let newSavedList = QuestionList()
         newSavedList.id = QuestionList.savedListId
@@ -53,6 +40,24 @@ final class QuestionList: Object, IdentifiableObject, CKRecordRecoverable, CKRec
         newSavedList.isCustom = true
         newSavedList.questions.append(objectsIn: realmManager.objects(Question.self, filter: NSPredicate(format: "saved = true")).toArray())
         
-        realmManager.create(objects: [newSolvedList, newSavedList], update: true)
+        realmManager.create(objects: [newSavedList], update: true)
+        return newSavedList
+    }
+    
+    static var solvedList: QuestionList {
+        let realmManager = RealmManager.shared
+        let object = realmManager.object(QuestionList.self, id: QuestionList.solvedListId)
+        if let object = object {
+            return object
+        }
+        
+        let newSolvedList = QuestionList()
+        newSolvedList.id = QuestionList.solvedListId
+        newSolvedList.name = "Solved Questions"
+        newSolvedList.isCustom = true
+        newSolvedList.questions.append(objectsIn: realmManager.objects(Question.self, filter: NSPredicate(format: "solved = true")))
+        
+        realmManager.create(objects: [newSolvedList], update: true)
+        return newSolvedList
     }
 }

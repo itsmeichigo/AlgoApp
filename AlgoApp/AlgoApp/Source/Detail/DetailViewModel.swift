@@ -98,7 +98,7 @@ final class DetailViewModel {
         
         realmManager.update {
             question.solved = toggledValue
-            guard let solvedList = QuestionList.solvedList else { return }
+            let solvedList = QuestionList.solvedList
             let questionList = solvedList.questions
             if toggledValue {
                 solvedList.questions.append(question)
@@ -121,7 +121,7 @@ final class DetailViewModel {
         
         realmManager.update {
             question.saved = toggledValue
-            guard let savedList = QuestionList.savedList else { return }
+            let savedList = QuestionList.savedList
             let questionList = savedList.questions
             
             if toggledValue &&

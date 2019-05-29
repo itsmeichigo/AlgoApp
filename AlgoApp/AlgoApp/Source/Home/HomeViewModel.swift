@@ -90,29 +90,28 @@ final class HomeViewModel {
                         }
                     }
                     
-                    if let solvedList = QuestionList.solvedList {
-                        solvedList.questions.removeAll()
-                        var solvedQuestionList: [Question] = []
-                        for id in newSolvedList {
-                            if let model = self.realmManager.object( Question.self, id: id) {
-                                solvedQuestionList.append(model)
-                            }
+                    let solvedList = QuestionList.solvedList
+                    solvedList.questions.removeAll()
+                    var solvedQuestionList: [Question] = []
+                    for id in newSolvedList {
+                        if let model = self.realmManager.object( Question.self, id: id) {
+                            solvedQuestionList.append(model)
                         }
-                        
-                        solvedList.questions.append(objectsIn: solvedQuestionList)
                     }
                     
-                    if let savedList = QuestionList.savedList {
-                        savedList.questions.removeAll()
-                        var savedQuestionList: [Question] = []
-                        for id in newSavedList {
-                            if let model = self.realmManager.object( Question.self, id: id) {
-                                savedQuestionList.append(model)
-                            }
+                    solvedList.questions.append(objectsIn: solvedQuestionList)
+                    
+                    let savedList = QuestionList.savedList
+                    savedList.questions.removeAll()
+                    var savedQuestionList: [Question] = []
+                    for id in newSavedList {
+                        if let model = self.realmManager.object( Question.self, id: id) {
+                            savedQuestionList.append(model)
                         }
-                        
-                        savedList.questions.append(objectsIn: savedQuestionList)
                     }
+                    
+                    savedList.questions.append(objectsIn: savedQuestionList)
+                    
                 }
             })
             .disposed(by: disposeBag)
