@@ -37,38 +37,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         configureRealm()
-        
-        AppConfigs.shared.registerInitialValues()
-        AppConfigs.shared.observeUserDefaultsChange()
-        
-        Zephyr.debugEnabled = true
-        Zephyr.addKeysToBeMonitored(keys: AppConfigs.currentFilterKey,
-                                    AppConfigs.hidesSolvedProblemsKey,
-                                    AppConfigs.isPremiumKey,
-                                    AppConfigs.sortOptionKey,
-                                    AppConfigs.themeKey)
-        Zephyr.sync(keys: AppConfigs.currentFilterKey,
-                    AppConfigs.hidesSolvedProblemsKey,
-                    AppConfigs.isPremiumKey,
-                    AppConfigs.sortOptionKey,
-                    AppConfigs.themeKey)
-        
         syncEngine = SyncEngine(objects: [
             SyncObject<QuestionList>(),
             SyncObject<Note>(),
             SyncObject<Reminder>()
             ])
         
+        AppConfigs.shared.observeUserDefaultsChange()
+        AppConfigs.shared.registerInitialValues()
+        
+        application.registerForRemoteNotifications()
         StoreHelper.checkPendingTransactions()
         
         setupRootController()
         
-        application.registerForRemoteNotifications()
         NotificationHelper.shared.showPendingQuestion()
-        
         setupShortcuts(for: application)
         
         return true
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Zephyr.debugEnabled = true
+        Zephyr.sync(keys: AppConfigs.currentFilterKey,
+                    AppConfigs.hidesSolvedProblemsKey,
+                    AppConfigs.isPremiumKey,
+                    AppConfigs.sortOptionKey,
+                    AppConfigs.themeKey)
+        Zephyr.addKeysToBeMonitored(keys: AppConfigs.currentFilterKey,
+                                    AppConfigs.hidesSolvedProblemsKey,
+                                    AppConfigs.isPremiumKey,
+                                    AppConfigs.sortOptionKey,
+                                    AppConfigs.themeKey)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
