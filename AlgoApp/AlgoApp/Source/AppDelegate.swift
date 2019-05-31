@@ -58,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Zephyr.debugEnabled = true
         Zephyr.sync(keys: AppConfigs.currentFilterKey,
                     AppConfigs.hidesSolvedProblemsKey,
                     AppConfigs.isPremiumKey,
