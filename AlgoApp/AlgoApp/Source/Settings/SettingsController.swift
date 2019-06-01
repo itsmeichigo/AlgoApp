@@ -10,6 +10,7 @@ import PanModal
 import UIKit
 import RxCocoa
 import RxSwift
+import CloudKit
 
 class SettingsController: UITableViewController {
     
@@ -43,6 +44,12 @@ class SettingsController: UITableViewController {
     }
     
     private let disposeBag = DisposeBag()
+    private let iCloudEnabled = PublishRelay<Bool>()
+    
+    private let viewWillAppearSignal = PublishRelay<Void>()
+    private let didBecomeActiveSignal = UIApplication.shared
+            .rx.applicationDidBecomeActive
+            .startWith(.active)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +84,7 @@ class SettingsController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.tintColor = .appPurpleColor()
+        viewWillAppearSignal.accept(())
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -113,9 +121,19 @@ class SettingsController: UITableViewController {
             })
             .disposed(by: disposeBag)
         
+        Observable.combineLatest(viewWillAppearSignal, didBecomeActiveSignal)
+            .flatMapLatest { [weak self] _ in self?.checkiCloudStatus() ?? .just(false) }
+            .observeOn(MainScheduler.instance)
+            .do(onNext: { [weak self] in
+                self?.iCloudStatusLabel.text = $0 == true ? "On" : "Off"
+            })
+            .bind(to: iCloudEnabled)
+            .disposed(by: disposeBag)
+        
         iCloudButton.rx.tap
+            .withLatestFrom(iCloudEnabled)
             .subscribe(onNext: { [weak self] in
-                self?.showiCloudDetail(isEnabled: true)
+                self?.showiCloudDetail(isEnabled: $0)
             })
             .disposed(by: disposeBag)
         
@@ -206,6 +224,20 @@ class SettingsController: UITableViewController {
         presentPanModal(controller, sourceView: darkModeSwitch, sourceRect: CGRect(x: darkModeSwitch.frame.width / 2, y: darkModeSwitch.frame.height, width: 0, height: 0))
         
         controller.popoverPresentationController?.backgroundColor = .backgroundColor()
+    }
+    
+    private func checkiCloudStatus() -> Observable<Bool> {
+        return Observable<Bool>.create { observer in
+            CKContainer.default().accountStatus { (status, error) in
+                if (status == .available) {
+                    observer.onNext(true)
+                } else {
+                    observer.onNext(false)
+                }
+            }
+            
+            return Disposables.create {}
+        }
     }
     
     private func showiCloudDetail(isEnabled: Bool) {
