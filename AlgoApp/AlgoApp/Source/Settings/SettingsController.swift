@@ -21,8 +21,10 @@ class SettingsController: UITableViewController {
     @IBOutlet var cardViews: [UIView]!
     @IBOutlet var separatorViews: [UIView]!
     
+    @IBOutlet weak var iCloudStatusLabel: UILabel!
     @IBOutlet weak var sortOptionLabel: UILabel!
     
+    @IBOutlet weak var iCloudButton: UIButton!
     @IBOutlet weak var sortProblemsButton: UIButton!
     @IBOutlet weak var goPremiumButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
@@ -35,7 +37,8 @@ class SettingsController: UITableViewController {
             goPremiumButton,
             aboutButton,
             reviewButton,
-            contactButton
+            contactButton,
+            iCloudButton
         ]
     }
     
@@ -110,6 +113,12 @@ class SettingsController: UITableViewController {
             })
             .disposed(by: disposeBag)
         
+        iCloudButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.showiCloudDetail(isEnabled: true)
+            })
+            .disposed(by: disposeBag)
+        
         hidesSolvedSwitch.rx.isOn
             .subscribe(onNext: {
                 AppConfigs.shared.hidesSolvedProblems = $0
@@ -122,8 +131,7 @@ class SettingsController: UITableViewController {
         
         contactButton.rx.tap.asDriver()
             .drive(onNext: {
-                let path = "https://twitter.com/itsmeichigo"
-                guard let url = URL(string: path),
+                guard let url = URL(string: AppHelper.twitterPath),
                     UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             })
@@ -131,8 +139,7 @@ class SettingsController: UITableViewController {
         
         reviewButton.rx.tap.asDriver()
             .drive(onNext: {
-                let path = "itms-apps://itunes.apple.com/app/id1457038505"
-                guard let url = URL(string: path),
+                guard let url = URL(string: AppHelper.appStorePath),
                     UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             })
@@ -190,13 +197,22 @@ class SettingsController: UITableViewController {
     }
 
     private func showPremiumAlert() {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "FeatureDetailViewController") as? FeatureDetailViewController else { return }
         
         controller.mode = .darkMode
         controller.dismissHandler = { [weak self] in
             self?.showPremiumDetail()
         }
         presentPanModal(controller, sourceView: darkModeSwitch, sourceRect: CGRect(x: darkModeSwitch.frame.width / 2, y: darkModeSwitch.frame.height, width: 0, height: 0))
+        
+        controller.popoverPresentationController?.backgroundColor = .backgroundColor()
+    }
+    
+    private func showiCloudDetail(isEnabled: Bool) {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "FeatureDetailViewController") as? FeatureDetailViewController else { return }
+        
+        controller.mode = .iCloud(isEnabled: isEnabled)
+        presentPanModal(controller, sourceView: darkModeSwitch, sourceRect: CGRect(x: iCloudButton.frame.width / 2, y: iCloudButton.frame.height / 2, width: 0, height: 0))
         
         controller.popoverPresentationController?.backgroundColor = .backgroundColor()
     }
@@ -214,7 +230,8 @@ extension SettingsController {
         case 0: return AppHelper.isIpad ? 126 : 84
         case 1: return AppHelper.isIpad ? 156 : 136
         case 2: return AppConfigs.shared.isPremium ? 0 : (AppHelper.isIpad ? 86 : 76)
-        case 3: return AppHelper.isIpad ? 234 : 204
+        case 3: return AppHelper.isIpad ? 126 : 84
+        case 4: return AppHelper.isIpad ? 234 : 204
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }

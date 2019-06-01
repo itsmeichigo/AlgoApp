@@ -10,6 +10,9 @@ import UIKit
 
 enum AppHelper {
     
+    static let twitterPath = "https://twitter.com/itsmeichigo"
+    static let appStorePath = "itms-apps://itunes.apple.com/app/id1457038505"
+    
     static var isIpad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }

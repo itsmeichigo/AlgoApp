@@ -249,8 +249,68 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="76" id="gLm-yW-fE5">
+                                        <rect key="frame" x="0.0" y="296" width="414" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gLm-yW-fE5" id="mVW-tv-lde">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhx-hQ-NnB">
+                                                    <rect key="frame" x="16" y="8" width="382" height="60"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-Lb-MP7">
+                                                            <rect key="frame" x="16" y="0.0" width="350" height="60"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <state key="normal" title="☁️ iCloud Syncing"/>
+                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                            </variation>
+                                                        </button>
+                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="9Li-dB-lw8">
+                                                            <rect key="frame" x="357" y="22.5" width="9" height="15"/>
+                                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcj-3R-SGT">
+                                                            <rect key="frame" x="327.5" y="20.5" width="21.5" height="19.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                            </variation>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="vcj-3R-SGT" firstAttribute="centerY" secondItem="mhx-hQ-NnB" secondAttribute="centerY" id="0Cx-FL-aD7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="9Li-dB-lw8" secondAttribute="trailing" constant="16" id="M5n-6H-4IA"/>
+                                                        <constraint firstItem="RM9-Lb-MP7" firstAttribute="leading" secondItem="mhx-hQ-NnB" secondAttribute="leading" constant="16" id="Ut7-zM-9ia"/>
+                                                        <constraint firstItem="9Li-dB-lw8" firstAttribute="leading" secondItem="vcj-3R-SGT" secondAttribute="trailing" constant="8" id="f6F-VP-wLz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="RM9-Lb-MP7" secondAttribute="bottom" id="fwh-Nz-y9o"/>
+                                                        <constraint firstItem="9Li-dB-lw8" firstAttribute="centerY" secondItem="mhx-hQ-NnB" secondAttribute="centerY" id="yJJ-6Z-0T6"/>
+                                                        <constraint firstItem="RM9-Lb-MP7" firstAttribute="top" secondItem="mhx-hQ-NnB" secondAttribute="top" id="zJp-ic-sko"/>
+                                                        <constraint firstAttribute="trailing" secondItem="RM9-Lb-MP7" secondAttribute="trailing" constant="16" id="zZs-31-X1f"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="mhx-hQ-NnB" secondAttribute="trailing" constant="16" id="Evu-uJ-4aM">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="mhx-hQ-NnB" secondAttribute="bottom" priority="900" constant="8" id="bl6-ph-kMe"/>
+                                                <constraint firstItem="mhx-hQ-NnB" firstAttribute="top" secondItem="mVW-tv-lde" secondAttribute="top" constant="8" id="rzc-OM-hV5"/>
+                                                <constraint firstItem="mhx-hQ-NnB" firstAttribute="leading" secondItem="mVW-tv-lde" secondAttribute="leading" constant="16" id="vgC-LN-hKR">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                </constraint>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="204" id="ug6-ii-lcK">
-                                        <rect key="frame" x="0.0" y="296" width="414" height="204"/>
+                                        <rect key="frame" x="0.0" y="372" width="414" height="204"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ug6-ii-lcK" id="9DR-SP-4KY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="204"/>
@@ -399,6 +459,8 @@
                         <outlet property="darkModeSwitch" destination="5vM-oV-vAG" id="CdG-d3-Fl1"/>
                         <outlet property="goPremiumButton" destination="i2Z-d8-lZp" id="Cwz-T9-Tld"/>
                         <outlet property="hidesSolvedSwitch" destination="Mos-dc-Khp" id="5Dm-p6-rcl"/>
+                        <outlet property="iCloudButton" destination="RM9-Lb-MP7" id="ps0-g7-Wz2"/>
+                        <outlet property="iCloudStatusLabel" destination="vcj-3R-SGT" id="79g-jI-KT8"/>
                         <outlet property="reviewButton" destination="plu-4n-EgE" id="jf4-An-HzU"/>
                         <outlet property="sortOptionLabel" destination="aVP-K3-FFk" id="7or-Rt-NHy"/>
                         <outlet property="sortProblemsButton" destination="xaI-fu-pzM" id="be0-jW-SXP"/>
@@ -413,6 +475,8 @@
                         <outletCollection property="cardViews" destination="Qcy-Sk-nfp" collectionClass="NSMutableArray" id="vVd-qh-w0Y"/>
                         <outletCollection property="arrowImageViews" destination="9C8-Pu-zv1" collectionClass="NSMutableArray" id="cXb-lG-qIC"/>
                         <outletCollection property="arrowImageViews" destination="8UQ-qZ-ley" collectionClass="NSMutableArray" id="FYj-Pb-xzP"/>
+                        <outletCollection property="cardViews" destination="mhx-hQ-NnB" collectionClass="NSMutableArray" id="3yA-eu-6wQ"/>
+                        <outletCollection property="arrowImageViews" destination="9Li-dB-lw8" collectionClass="NSMutableArray" id="W1A-jL-ctn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acB-eJ-jWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -430,7 +494,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HUG-X4-CEh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">A wise (wo)man once said: "One LeetCode problem a day keeps unemployment away". If you are like me - wanting to practice coding problems for job interviews; or just simply like solving puzzles in form of coding - this app is your buddy. 🤓  All the problems in this app belong to LeetCode - a very popular platform for job interview preparations. Only free problems are included in the app, so if you look for beyond these, please head to the source site for more challenges.  The solutions in this app were collected from GitHub repos listed below. I cannot guarantee the performance of them but here are my kudos 🙏 to all the contributors of the repos:  ・Swift Solutions: https://github.com/soapyigu/LeetCode-Swift ・Java Solutions: https://github.com/fishercoder1534/Leetcode ・Python Solutions: https://github.com/Garvit244/Leetcode ・JavaScript Solutions: https://github.com/hanzichi/leetcode ・C++ Solutions: https://github.com/haoel/leetcode  The notes and code snippets you save in this app are saved locally and can be sync through iCloud - so if you wish to save your progress / notes / reminders between your devices, don't forget to login to iCloud.  Last but not least, the icons and logos in this apps were created using vectors from FlatIcon website. I wish I could make them all with my bare hands, but my talents are limited. 😬  Thanks for reading the potentially lengthiest About page ever! Please also buy AlgoKitty Premium to help me buy breakfast 🥓🍳🥯, as you may know, that's the most important meal of the day and I don't want to skip it.</mutableString>
+                                <mutableString key="text">A wise (wo)man once said: "One LeetCode problem a day keeps unemployment away". If you are like me - wanting to practice coding problems for job interviews; or just simply like solving puzzles in form of coding - this app is your buddy. 🤓  All the problems in this app belong to LeetCode - a very popular platform for job interview preparations. Only free problems are included in the app, so if you look for beyond these, please head to the source site for more challenges.  The solutions in this app were collected from GitHub repos listed below. I cannot guarantee the performance of them but here are my kudos 🙏 to all the contributors of the repos:  ・Swift Solutions: https://github.com/soapyigu/LeetCode-Swift ・Java Solutions: https://github.com/fishercoder1534/Leetcode ・Python Solutions: https://github.com/Garvit244/Leetcode ・JavaScript Solutions: https://github.com/hanzichi/leetcode ・C++ Solutions: https://github.com/haoel/leetcode  The notes and code snippets you save in this app are saved locally and can be sync through iCloud - so if you wish to save your progress / notes / reminders between your devices, don't forget to login to iCloud and enable iCloud Drive.  Last but not least, the icons and logos in this apps were created using vectors from FlatIcon website. I wish I could make them all with my bare hands, but my talents are limited. 😬  Thanks for reading the potentially lengthiest About page ever! Please also buy AlgoKitty Premium to help me buy breakfast 🥓🍳🥯, as you may know, that's the most important meal of the day and I don't want to skip it.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -494,10 +558,10 @@
             </objects>
             <point key="canvasLocation" x="2922" y="1187"/>
         </scene>
-        <!--Premium Alert View Controller-->
+        <!--Feature Detail View Controller-->
         <scene sceneID="VX8-tY-k49">
             <objects>
-                <viewController storyboardIdentifier="PremiumAlertViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yvb-rj-bNP" customClass="PremiumAlertViewController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeatureDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yvb-rj-bNP" customClass="FeatureDetailViewController" customModule="AlgoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HvN-Tw-U8F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

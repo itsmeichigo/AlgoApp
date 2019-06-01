@@ -340,7 +340,7 @@ class DetailViewController: UIViewController {
     
     private func showPremiumPopup() {
         guard presentedViewController == nil,
-            let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+            let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "FeatureDetailViewController") as? FeatureDetailViewController else { return }
         
         controller.mode = .code
         controller.dismissHandler = { [weak self] in self?.presentPremiumDetail() }

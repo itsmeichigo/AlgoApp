@@ -27,7 +27,7 @@ class RemindersViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = RemindersViewModel()
     
-    private var premiumViewController: PremiumAlertViewController?
+    private var premiumViewController: FeatureDetailViewController?
     
     private lazy var datasource: Datasource = buildDatasource()
     
@@ -224,7 +224,7 @@ class RemindersViewController: UIViewController {
     }
     
     private func showPremiumAlert() {
-        guard let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "PremiumAlertViewController") as? PremiumAlertViewController else { return }
+        guard let controller = AppHelper.settingsStoryboard.instantiateViewController(withIdentifier: "FeatureDetailViewController") as? FeatureDetailViewController else { return }
         
         controller.mode = .alarm
         controller.dismissHandler = { [weak self] in
