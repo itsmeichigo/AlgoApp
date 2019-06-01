@@ -279,7 +279,7 @@ class DetailViewController: UIViewController {
             .withLatestFrom(viewModel.detail)
             .filterNil()
             .subscribe(onNext: { [unowned self] in
-                guard let url = URL(string: "https://leetcode.com/articles/\($0.articleSlug)#solution") else { return }
+                guard let url = URL(string: "\(AppConstants.leetcodePath)/articles/\($0.articleSlug)#solution") else { return }
                 self.showWebpage(url: url, title: "Official Explanation", contentSelector: ".article-base")
             })
             .disposed(by: disposeBag)
@@ -370,7 +370,7 @@ class DetailViewController: UIViewController {
     
     @objc func showLeetCode() {
         guard let path = viewModel.detail.value?.titleSlug,
-            let url = URL(string: "https://leetcode.com/problems/\(path)") else { return }
+            let url = URL(string: "\(AppConstants.leetcodePath)/problems/\(path)") else { return }
         
         showWebpage(url: url, title: viewModel.detail.value?.title ?? "", contentSelector: nil)
     }

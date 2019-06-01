@@ -51,11 +51,11 @@ class AboutViewController: UIViewController {
         
         string.enumerateSubstrings(in: string.startIndex..<string.endIndex, options: .byWords) { (substring, range, _, _) in
             if substring == "LeetCode", string[range.upperBound].isWhitespace {
-                attributedString.addAttribute(.link, value: "https://leetcode.com/", range: NSRange(range, in: string))
+                attributedString.addAttribute(.link, value: AppConstants.leetcodePath, range: NSRange(range, in: string))
             }
             
             if substring == "FlatIcon" {
-                attributedString.addAttribute(.link, value: "https://www.flaticon.com/", range: NSRange(range, in: string))
+                attributedString.addAttribute(.link, value: AppConstants.flatIconPath, range: NSRange(range, in: string))
             }
         }
         

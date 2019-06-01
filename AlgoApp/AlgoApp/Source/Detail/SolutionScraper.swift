@@ -32,10 +32,10 @@ final class SolutionScraper {
                 
                 let result = searchBlock(tds)
                 if let path = result?.replacingOccurrences(of: " ", with: "%20") {
-                    if path.contains("https://github.com"), let url = URL(string: path) {
+                    if path.contains(AppConstants.githubPath), let url = URL(string: path) {
                         found = true
                         self.scrapeContent(url: url, completionBlock: completionBlock, failureBlock: failureBlock)
-                    } else if let url = URL(string: "https://github.com" + path) {
+                    } else if let url = URL(string: AppConstants.githubPath + path) {
                         found = true
                         self.scrapeContent(url: url, completionBlock: completionBlock, failureBlock: failureBlock)
                     }

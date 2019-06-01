@@ -131,7 +131,7 @@ class SettingsController: UITableViewController {
         
         contactButton.rx.tap.asDriver()
             .drive(onNext: {
-                guard let url = URL(string: AppHelper.twitterPath),
+                guard let url = URL(string: AppConstants.twitterPath),
                     UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             })
@@ -139,7 +139,7 @@ class SettingsController: UITableViewController {
         
         reviewButton.rx.tap.asDriver()
             .drive(onNext: {
-                guard let url = URL(string: AppHelper.appStorePath),
+                guard let url = URL(string: AppConstants.appStorePath),
                     UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             })

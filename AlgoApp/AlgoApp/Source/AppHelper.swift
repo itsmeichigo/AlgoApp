@@ -8,10 +8,15 @@
 
 import UIKit
 
-enum AppHelper {
-    
+enum AppConstants {
     static let twitterPath = "https://twitter.com/itsmeichigo"
     static let appStorePath = "itms-apps://itunes.apple.com/app/id1457038505"
+    static let leetcodePath = "https://leetcode.com"
+    static let flatIconPath = "https://www.flaticon.com"
+    static let githubPath = "https://github.com"
+}
+
+enum AppHelper {
     
     static var isIpad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
