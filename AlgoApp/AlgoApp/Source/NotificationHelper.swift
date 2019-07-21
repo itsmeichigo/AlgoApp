@@ -28,7 +28,9 @@ final class NotificationHelper: NSObject {
         "What time is it? Puzzle time!",
         "You asked to be reminded - you got it!",
         "Yet another reminder to practice coding",
-        "Ready? Puzzle time!"
+        "Ready? Puzzle time!",
+        "Time to hack another algo problem!",
+        "Knock knock, where's our hacker at?"
     ]
     
     private let reminderBodies: [String] = [
@@ -36,7 +38,9 @@ final class NotificationHelper: NSObject {
         "Keep your coding skills sharp with at least one challenge a day 🤓",
         "You're doing better everyday 🥳 Here's another coding challenge for you.",
         "You're guaranteed to learn something new 🤯 by trying this coding problem.",
-        "Be a ninja and take on this one challenge picked especially for you 😏"
+        "Be a ninja and take on this one challenge picked especially for you 😏",
+        "All ninjas need to practice their skills everyday, you know you do too 🤓",
+        "Algo problems are fun if you practice them everyday ✨"
     ]
     
     override init() {
@@ -89,6 +93,10 @@ final class NotificationHelper: NSObject {
                 for weekday in reminder.repeatDays {
                     dateComponents.weekday = weekday
                     
+                    // different titles and bodies for different days
+                    content.title = self?.reminderTitles.randomElement() ?? ""
+                    content.body = self?.reminderBodies.randomElement() ?? ""
+                    
                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                     self?.center.add(request, withCompletionHandler: nil)
@@ -120,11 +128,6 @@ final class NotificationHelper: NSObject {
         }
     }
     
-    func cancelAllScheduledNotifications() {
-        center.removeAllPendingNotificationRequests()
-        Reminder.disableAllReminders()
-    }
-    
     func scheduleNotificationIfNeeded(for reminder: ReminderDetail) {
         if reminder.enabled == false || (reminder.repeatDays.isEmpty && reminder.date < Date()) {
             return
@@ -134,6 +137,7 @@ final class NotificationHelper: NSObject {
                 self?.updateScheduledNotifications(for: reminder)
             }
         }
+
     }
 }
 
