@@ -47,11 +47,13 @@ final class ReminderDetailViewModel {
     }
     
     private func correctSecondComponent(date: Date, calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)) -> Date {
-        let second = calendar.component(.second, from: date)
-        let updatedDate = (calendar as NSCalendar).date(byAdding: NSCalendar.Unit.second,
-                                                        value: -second,
-                                                        to: date,
-                                                        options:.matchStrictly)!
+        
+        let calendar = Calendar.current
+        let minute = calendar.component(.minute, from: date)
+        let hour = calendar.component(.hour, from: date)
+        
+        let updatedDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: Date())!
+        
         if updatedDate < Date() {
             return updatedDate.addingTimeInterval(24*60*60)
         } else if updatedDate.timeIntervalSinceNow > 24*60*60 {
