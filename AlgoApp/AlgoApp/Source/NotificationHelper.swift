@@ -126,6 +126,9 @@ final class NotificationHelper: NSObject {
     }
     
     func scheduleNotificationIfNeeded(for reminder: ReminderDetail) {
+        if reminder.enabled == false || (reminder.repeatDays.isEmpty && reminder.date < Date()) {
+            return
+        }
         center.getPendingNotificationRequests { [weak self] requests in
             if (requests.filter { ($0.content.userInfo[NotificationHelper.reminderIdKey] as? String) == reminder.id }).isEmpty {
                 self?.updateScheduledNotifications(for: reminder)
