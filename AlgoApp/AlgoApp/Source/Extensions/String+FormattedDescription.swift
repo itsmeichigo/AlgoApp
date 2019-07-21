@@ -11,8 +11,7 @@ import UIKit
 extension String {
     var formattedDescription: NSAttributedString {
         let preferredTextStyle: UIFont.TextStyle = AppHelper.isIpad ? .body : .callout
-        let boldFont = UIFont.systemFont(ofSize: 17, weight: .medium
-        )
+        let boldFont = UIFont.systemFont(ofSize: 17, weight: .medium)
         let regularFont = UIFont.preferredFont(forTextStyle: preferredTextStyle)
         let fontMetrics = UIFontMetrics(forTextStyle: preferredTextStyle)
         

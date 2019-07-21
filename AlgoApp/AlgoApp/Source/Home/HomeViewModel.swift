@@ -14,7 +14,7 @@ final class HomeViewModel {
     
     let questions = BehaviorRelay<[QuestionCellModel]>(value: [])
     var randomQuestionId: Int? {
-        return realmManager.objects(Question.self).randomElement()?.id
+        return Question.randomQuestionId()
     }
     
     private let disposeBag = DisposeBag()

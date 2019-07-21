@@ -153,7 +153,7 @@ private extension AppDelegate {
     func handleShortcutItem(_ item: UIApplicationShortcutItem) -> Bool {
         switch item.type {
         case randomQuestionShortcutKey:
-            guard let id = RealmManager.shared.objects(Question.self).randomElement()?.id else { return false }
+            guard let id = Question.randomQuestionId() else { return false }
             AppHelper.showQuestionDetail(for: id)
             return true
         default:

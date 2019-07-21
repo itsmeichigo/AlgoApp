@@ -90,6 +90,14 @@ final class Question: Object, IdentifiableObject {
 }
 
 extension Question {
+    
+    static func randomQuestionId(with realmManager: RealmManager = RealmManager.shared) -> Int? {
+        
+        return Question.loadQuestions(with: realmManager,
+                                      filter: AppConfigs.shared.currentFilter,
+                                      onlyUnsolved: true).randomElement()?.id
+    }
+    
     static func loadQuestions(with realmManager: RealmManager, query: String? = nil, filter: QuestionFilter? = nil, onlyUnsolved: Bool = false) -> Results<Question> {
         var predicates: [NSPredicate] = []
         var results = realmManager.objects(Question.self)

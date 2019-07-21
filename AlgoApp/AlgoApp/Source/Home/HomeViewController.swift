@@ -264,7 +264,13 @@ private extension HomeViewController {
     }
     
     @objc private func showRandomQuestion() {
-        guard let id = viewModel.randomQuestionId else { return }
+        guard let id = viewModel.randomQuestionId else {
+            let alertController = UIAlertController(title: "Oops", message: "No problem found with your current filter", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
         updateDetailController(with: id)
     }
     
