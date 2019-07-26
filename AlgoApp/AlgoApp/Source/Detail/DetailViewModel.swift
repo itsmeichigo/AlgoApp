@@ -84,10 +84,15 @@ final class DetailViewModel {
             }
             
             scraper.scrapeSolution(at: url, for: questionId, searchBlock: searchBlock, completionBlock: { [weak self] content in
+                
                 if self?.detail.value?.id != questionId { return }
-                self?.githubSolutions[language] = content
-                self?.saveSolution(for: questionId, content: content, language: language)
-                relay?.accept(false)
+                
+                DispatchQueue.main.async {
+                    self?.githubSolutions[language] = content
+                    self?.saveSolution(for: questionId, content: content, language: language)
+                    relay?.accept(false)
+                }
+                
             }, failureBlock: { relay?.accept(false) })
         }
     }
