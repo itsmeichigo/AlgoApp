@@ -15,14 +15,15 @@ struct QuestionFilter: Codable {
     let levels: [Int]
     let topLiked: Bool
     let topInterviewed: Bool
-    let saved: Bool
+    let saved: Bool?
+    let solved: Bool?
     
     var allFilters: [String] {
-        return levels.map { Question.DifficultyLevel(rawValue: $0) ?? .easy }.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : []) + (saved ? ["Saved"] : [])
+        return levels.map { Question.DifficultyLevel(rawValue: $0) ?? .easy }.map { $0.title } + tags + companies + (topLiked ? ["Top Liked 👍"] : []) + (topInterviewed ? ["Top Interviewed 👩‍💻"] : []) + (saved == true ? ["Saved"] : saved == false ? ["Unsaved"] : []) + (solved == true ? ["Solved"] : solved == false ? ["Unsolved"] : [])
     }
     
     static var emptyFilter: QuestionFilter {
-        return QuestionFilter(tags: [], companies: [], levels: [], topLiked: false, topInterviewed: false, saved: false)
+        return QuestionFilter(tags: [], companies: [], levels: [], topLiked: false, topInterviewed: false, saved: nil, solved: nil)
     }
 }
 
@@ -54,6 +55,7 @@ final class FilterObject: Object {
                               levels: levels.toArray(),
                               topLiked: topLiked,
                               topInterviewed: topInterviewed,
-                              saved: false)
+                              saved: nil,
+                              solved: nil)
     }
 }

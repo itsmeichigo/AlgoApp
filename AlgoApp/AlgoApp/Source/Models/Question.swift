@@ -135,11 +135,17 @@ extension Question {
         if filter?.saved == true {
             let savedPredicate = NSPredicate(format: "saved = true")
             predicates.append(savedPredicate)
+        } else if filter?.saved == false {
+            let savedPredicate = NSPredicate(format: "saved = false")
+            predicates.append(savedPredicate)
         }
         
-        if onlyUnsolved {
+        if onlyUnsolved || filter?.solved == false {
             let unsolvedPredicate = NSPredicate(format: "solved = false")
             predicates.append(unsolvedPredicate)
+        } else if filter?.solved == true {
+            let solvedPredicate = NSPredicate(format: "solved = true")
+            predicates.append(solvedPredicate)
         }
         
         if predicates.count > 0 {

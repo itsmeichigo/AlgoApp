@@ -16,6 +16,9 @@ final class FilterViewModel {
     let currentFilterRelay = BehaviorRelay<QuestionFilter?>(value: nil)
     
     let savedTag = "Saved"
+    let notSavedTag = "Not saved"
+    let solvedTag = "Solved"
+    let unsolvedTag = "Unsolved"
     
     private var selectedCategories: [String] = []
     private var selectedCompanies: [String] = []
@@ -84,9 +87,10 @@ final class FilterViewModel {
         
         let topLiked = selectedRemarks.contains(Question.Remarks.topLiked.title)
         let topInterviewed = selectedRemarks.contains(Question.Remarks.topInterviewed.title)
-        let saved = selectedRemarks.contains(savedTag)
+        let saved: Bool? = selectedRemarks.contains(savedTag) ? true : selectedRemarks.contains(notSavedTag) ? false : nil
+        let solved: Bool? = selectedRemarks.contains(solvedTag) ? true : selectedRemarks.contains(unsolvedTag) ? false : nil
         
-        return QuestionFilter(tags: selectedCategories, companies: selectedCompanies, levels: levels.map { $0.rawValue }, topLiked: topLiked, topInterviewed: topInterviewed, saved: saved)
+        return QuestionFilter(tags: selectedCategories, companies: selectedCompanies, levels: levels.map { $0.rawValue }, topLiked: topLiked, topInterviewed: topInterviewed, saved: saved, solved: solved)
     }
     
     private func updateCurrentFilter() {

@@ -28,7 +28,7 @@ class FilterViewController: UIViewController {
     private var viewModel: FilterViewModel!
     private let disposeBag = DisposeBag()
     
-    var hidesSavedTag = false
+    var reminderMode = false
     var initialFilter: QuestionFilter?
     var completionBlock: ((QuestionFilter) -> Void)?
     
@@ -46,7 +46,7 @@ class FilterViewController: UIViewController {
         
         difficultyTagsView.tags = Question.DifficultyLevel.allCases.map { $0.title }.joined(separator: ",")
         
-        let remarkTags = Question.Remarks.allCases.map { $0.title } + (hidesSavedTag ? [] : [viewModel.savedTag])
+        let remarkTags = Question.Remarks.allCases.map { $0.title } + (reminderMode ? [] : [viewModel.savedTag, viewModel.notSavedTag, viewModel.solvedTag, viewModel.unsolvedTag])
         otherTagsView.tags = remarkTags.joined(separator: ",")
         
         viewModel.allTags.asDriver()
@@ -107,7 +107,15 @@ class FilterViewController: UIViewController {
             tagsTouchAction(otherTagsView, tagButton: button)
         }
         
-        if filter.saved, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.savedTag }) {
+        if filter.saved == true, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.savedTag }) {
+            tagsTouchAction(otherTagsView, tagButton: button)
+        } else if filter.saved == false, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.notSavedTag }) {
+            tagsTouchAction(otherTagsView, tagButton: button)
+        }
+        
+        if filter.solved == true, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.solvedTag }) {
+            tagsTouchAction(otherTagsView, tagButton: button)
+        } else if filter.solved == false, let button = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.unsolvedTag }) {
             tagsTouchAction(otherTagsView, tagButton: button)
         }
     }
@@ -141,6 +149,9 @@ extension FilterViewController: TagsDelegate {
             tagButton.backgroundColor = .secondaryColor()
             tagButton.setTitleColor(.primaryColor(), for: .normal)
             tagButton.layer.borderColor = UIColor.clear.cgColor
+            
+            toggleButtons(for: tagButton, in: tagsView)
+            
         } else {
             tagButton.backgroundColor = .clear
             tagButton.setTitleColor(.titleTextColor(), for: .normal)
@@ -156,6 +167,26 @@ extension FilterViewController: TagsDelegate {
             viewModel.updateCompany(title)
         } else if tagsView == otherTagsView {
             viewModel.updateRemark(title)
+        }
+    }
+    
+    private func toggleButtons(for tagButton: TagButton, in tagsView: TagsView) {
+        if tagButton.title(for: .normal) == viewModel.savedTag,
+            let notSavedButton = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.notSavedTag }),
+            notSavedButton.layer.borderColor == UIColor.clear.cgColor {
+            tagsTouchAction(tagsView, tagButton: notSavedButton)
+        } else if tagButton.title(for: .normal) == viewModel.notSavedTag,
+            let savedButton = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.savedTag }),
+            savedButton.layer.borderColor == UIColor.clear.cgColor {
+            tagsTouchAction(tagsView, tagButton: savedButton)
+        } else if tagButton.title(for: .normal) == viewModel.solvedTag,
+            let unsolvedButton = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.unsolvedTag }),
+            unsolvedButton.layer.borderColor == UIColor.clear.cgColor {
+            tagsTouchAction(tagsView, tagButton: unsolvedButton)
+        } else if tagButton.title(for: .normal) == viewModel.unsolvedTag,
+            let solvedButton = otherTagsView.tagArray.first(where: { $0.title(for: .normal) == viewModel.solvedTag }),
+            solvedButton.layer.borderColor == UIColor.clear.cgColor {
+            tagsTouchAction(tagsView, tagButton: solvedButton)
         }
     }
 }
