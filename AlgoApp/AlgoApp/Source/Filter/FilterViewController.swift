@@ -69,6 +69,10 @@ class FilterViewController: UIViewController {
             tagView?.tagFont = UIFont.preferredFont(forTextStyle: .callout)
         }
         
+        if reminderMode {
+            viewModel.updateRemark(viewModel.unsolvedTag)
+        }
+        
         updateColors()
     }
     
