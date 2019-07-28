@@ -94,11 +94,10 @@ extension Question {
     static func randomQuestionId(with realmManager: RealmManager = RealmManager.shared) -> Int? {
         
         return Question.loadQuestions(with: realmManager,
-                                      filter: AppConfigs.shared.currentFilter,
-                                      onlyUnsolved: true).randomElement()?.id
+                                      filter: AppConfigs.shared.currentFilter).randomElement()?.id
     }
     
-    static func loadQuestions(with realmManager: RealmManager, query: String? = nil, filter: QuestionFilter? = nil, onlyUnsolved: Bool = false) -> Results<Question> {
+    static func loadQuestions(with realmManager: RealmManager, query: String? = nil, filter: QuestionFilter? = nil) -> Results<Question> {
         var predicates: [NSPredicate] = []
         var results = realmManager.objects(Question.self)
         if let query = query, !query.isEmpty {
@@ -140,7 +139,7 @@ extension Question {
             predicates.append(savedPredicate)
         }
         
-        if onlyUnsolved || filter?.solved == false {
+        if filter?.solved == false {
             let unsolvedPredicate = NSPredicate(format: "solved = false")
             predicates.append(unsolvedPredicate)
         } else if filter?.solved == true {

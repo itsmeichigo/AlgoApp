@@ -239,7 +239,6 @@ private extension HomeViewController {
             .disposed(by: disposeBag)
         
         // hack: trigger getters to update drivers
-        _ = AppConfigs.shared.hidesSolvedProblems
         _ = AppConfigs.shared.sortOption
         
         AppConfigs.shared.currentFilterDriver
@@ -252,13 +251,11 @@ private extension HomeViewController {
         
         Driver.combineLatest(searchBar.rx.text.asDriver(),
                              AppConfigs.shared.currentFilterDriver,
-                             AppConfigs.shared.hidesSolvedProblemsDriver,
                              AppConfigs.shared.sortOptionDriver)
             .drive(onNext: { [unowned self] in
                 self.viewModel.loadQuestions(query: $0,
                                              filter: $1,
-                                             onlyUnsolved: $2,
-                                             sortOption: $3)
+                                             sortOption: $2)
             })
             .disposed(by: disposeBag)
     }

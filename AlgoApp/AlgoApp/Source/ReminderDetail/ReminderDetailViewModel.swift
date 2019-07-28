@@ -42,8 +42,8 @@ final class ReminderDetailViewModel {
         }
     }
     
-    func countProblems(with filter: QuestionFilter?, onlyUnsolved: Bool) -> Int {
-        return Question.loadQuestions(with: realmManager, filter: filter, onlyUnsolved: onlyUnsolved).count
+    func countProblems(with filter: QuestionFilter?) -> Int {
+        return Question.loadQuestions(with: realmManager, filter: filter).count
     }
     
     private func correctSecondComponent(date: Date, calendar: Calendar = Calendar(identifier: Calendar.Identifier.gregorian)) -> Date {

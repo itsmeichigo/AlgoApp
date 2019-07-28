@@ -24,8 +24,8 @@ final class HomeViewModel {
         observeCustomLists()
     }
     
-    func loadQuestions(query: String?, filter: QuestionFilter?, onlyUnsolved: Bool, sortOption: SortOption) {
-        let results = Question.loadQuestions(with: realmManager, query: query, filter: filter, onlyUnsolved: onlyUnsolved)
+    func loadQuestions(query: String?, filter: QuestionFilter?, sortOption: SortOption) {
+        let results = Question.loadQuestions(with: realmManager, query: query, filter: filter)
         
         Observable.collection(from: results)
             .map { Array($0)

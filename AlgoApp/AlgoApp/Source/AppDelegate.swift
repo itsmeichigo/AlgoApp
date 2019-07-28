@@ -59,12 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Zephyr.sync(keys: AppConfigs.currentFilterKey,
-                    AppConfigs.hidesSolvedProblemsKey,
                     AppConfigs.isPremiumKey,
                     AppConfigs.sortOptionKey,
                     AppConfigs.themeKey)
         Zephyr.addKeysToBeMonitored(keys: AppConfigs.currentFilterKey,
-                                    AppConfigs.hidesSolvedProblemsKey,
                                     AppConfigs.isPremiumKey,
                                     AppConfigs.sortOptionKey,
                                     AppConfigs.themeKey)

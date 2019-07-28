@@ -88,8 +88,7 @@ final class Reminder: Object, IdentifiableObject, CKRecordRecoverable, CKRecordC
         guard let reminder = realmManager.object(Reminder.self, id: reminderId) else { return nil }
         
         return Question.loadQuestions(with: realmManager,
-                                      filter: ReminderDetail(with: reminder).filter,
-                                      onlyUnsolved: AppConfigs.shared.hidesSolvedProblems).randomElement()?.id
+                                      filter: ReminderDetail(with: reminder).filter).randomElement()?.id
     }
     
     static func disableAllReminders(with realmManager: RealmManager = RealmManager.shared) {

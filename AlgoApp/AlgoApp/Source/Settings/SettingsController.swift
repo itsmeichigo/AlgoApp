@@ -14,7 +14,6 @@ import CloudKit
 
 class SettingsController: UITableViewController {
     
-    @IBOutlet weak var hidesSolvedSwitch: UISwitch!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
     @IBOutlet var arrowImageViews: [UIImageView]!
@@ -75,10 +74,6 @@ class SettingsController: UITableViewController {
             .map { $0.displayText }
             .drive(sortOptionLabel.rx.text)
             .disposed(by: disposeBag)
-        
-        AppConfigs.shared.hidesSolvedProblemsDriver
-            .drive(hidesSolvedSwitch.rx.isOn)
-            .disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +95,6 @@ class SettingsController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         darkModeSwitch.isOn = AppConfigs.shared.currentTheme == .dark
-        hidesSolvedSwitch.isOn = AppConfigs.shared.hidesSolvedProblems
         
         cardViews.forEach { view in
             view.layer.cornerRadius = 8.0
@@ -137,12 +131,6 @@ class SettingsController: UITableViewController {
             })
             .disposed(by: disposeBag)
         
-        hidesSolvedSwitch.rx.isOn
-            .subscribe(onNext: {
-                AppConfigs.shared.hidesSolvedProblems = $0
-            })
-            .disposed(by: disposeBag)
-        
         goPremiumButton.rx.tap.asDriver()
             .drive(onNext: { [unowned self] in self.showPremiumDetail() })
             .disposed(by: disposeBag)
@@ -175,7 +163,6 @@ class SettingsController: UITableViewController {
         
         tabBarController?.tabBar.barTintColor = AppConfigs.shared.currentTheme == .light ? .backgroundColor() : .primaryColor()
         
-        hidesSolvedSwitch.onTintColor = .secondaryColor()
         darkModeSwitch.onTintColor = .secondaryColor()
         
         sortOptionLabel.textColor = .subtitleTextColor()
@@ -262,8 +249,7 @@ extension SettingsController {
         case 0: return AppHelper.isIpad ? 126 : 84
         case 1: return AppHelper.isIpad ? 156 : 136
         case 2: return AppConfigs.shared.isPremium ? 0 : (AppHelper.isIpad ? 86 : 76)
-        case 3: return AppHelper.isIpad ? 86 : 76
-        case 4: return AppHelper.isIpad ? 234 : 204
+        case 3: return AppHelper.isIpad ? 234 : 204
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
