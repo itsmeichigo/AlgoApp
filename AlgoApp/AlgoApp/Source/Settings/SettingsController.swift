@@ -244,7 +244,7 @@ class SettingsController: UITableViewController {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "FeatureDetailViewController") as? FeatureDetailViewController else { return }
         
         controller.mode = .iCloud(isEnabled: isEnabled)
-        presentPanModal(controller, sourceView: darkModeSwitch, sourceRect: CGRect(x: iCloudButton.frame.width / 2, y: iCloudButton.frame.height / 2, width: 0, height: 0))
+        presentPanModal(controller, sourceView: iCloudButton, sourceRect: CGRect(x: iCloudButton.frame.width, y: iCloudButton.frame.height / 2, width: 0, height: 0))
         
         controller.popoverPresentationController?.backgroundColor = .backgroundColor()
     }
@@ -262,7 +262,7 @@ extension SettingsController {
         case 0: return AppHelper.isIpad ? 126 : 84
         case 1: return AppHelper.isIpad ? 156 : 136
         case 2: return AppConfigs.shared.isPremium ? 0 : (AppHelper.isIpad ? 86 : 76)
-        case 3: return AppHelper.isIpad ? 126 : 84
+        case 3: return AppHelper.isIpad ? 86 : 76
         case 4: return AppHelper.isIpad ? 234 : 204
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
