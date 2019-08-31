@@ -84,6 +84,11 @@ class DetailViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        AppConfigs.shared.lastOpenedQuestionId = 0
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return AppConfigs.shared.currentTheme == .light ? .default : .lightContent
     }
@@ -242,6 +247,13 @@ class DetailViewController: UIViewController {
         viewModel.detail.asDriver()
             .map { $0?.note }
             .drive(onNext: { [weak self] in self?.updateNotePanelContent($0) })
+            .disposed(by: disposeBag)
+        
+         UIApplication.shared.rx.applicationWillTerminate
+            .withLatestFrom(viewModel.detail)
+            .filterNil()
+            .map { $0.id }
+            .subscribe(onNext: { AppConfigs.shared.lastOpenedQuestionId = $0 })
             .disposed(by: disposeBag)
     }
     

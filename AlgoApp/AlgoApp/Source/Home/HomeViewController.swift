@@ -23,6 +23,14 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var emptyMessageLabel: UILabel!
     
     @IBOutlet private weak var tableView: UITableView!
+    
+    @IBOutlet weak var notificationView: UIView!
+    @IBOutlet weak var notificationButton: UIButton!
+    @IBOutlet weak var notificationEmojiLabel: UILabel!
+    @IBOutlet weak var notificationSubtitleLabel: UILabel!
+    @IBOutlet weak var notificationTitleLabel: UILabel!
+    @IBOutlet weak var notificationDismissButton: UIButton!
+    @IBOutlet weak var notificationViewBottomSpace: NSLayoutConstraint!
    
     private lazy var detailController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
     
@@ -101,6 +109,8 @@ final class HomeViewController: UIViewController {
             updateInitialFilter()
             firstAppear = false
         }
+        
+        showLastOpenedQuestion()
     }
     
     override func viewDidLayoutSubviews() {
@@ -144,6 +154,19 @@ final class HomeViewController: UIViewController {
 }
 
 private extension HomeViewController {
+    func showLastOpenedQuestion() {
+        let id = AppConfigs.shared.lastOpenedQuestionId
+        guard let question = viewModel.getLastQuestion(id: id) else { return }
+        
+        notificationEmojiLabel.text = question.emoji
+        notificationTitleLabel.text = question.title
+        
+        notificationViewBottomSpace.constant = 16
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
     func updateInitialFilter() {
         let filter = AppConfigs.shared.currentFilter
         AppConfigs.shared.currentFilter = filter
@@ -162,7 +185,7 @@ private extension HomeViewController {
         
         emptyTitleLabel.textColor = .subtitleTextColor()
         emptyMessageLabel.textColor = .subtitleTextColor()
-        
+                
         view.backgroundColor = .backgroundColor()
         
         setNeedsStatusBarAppearanceUpdate()
@@ -195,6 +218,32 @@ private extension HomeViewController {
     }
     
     func configureView() {
+        
+        notificationView.layer.cornerRadius = 8
+        notificationView.dropCardShadow()
+        notificationDismissButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.notificationViewBottomSpace.constant = -150
+                UIView.animate(withDuration: 0.3, animations: {
+                    self?.view.layoutIfNeeded()
+                }, completion: { _ in
+                    AppConfigs.shared.lastOpenedQuestionId = 0
+                })
+            })
+            .disposed(by: disposeBag)
+        
+        notificationButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.updateDetailController(with: AppConfigs.shared.lastOpenedQuestionId)
+                self?.notificationDismissButton.sendActions(for: .touchUpInside)
+            })
+            .disposed(by: disposeBag)
+        
+        UIApplication.shared.rx.applicationWillTerminate
+            .subscribe(onNext: { _ in
+                AppConfigs.shared.lastOpenedQuestionId = 0
+            })
+            .disposed(by: disposeBag)
         
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none

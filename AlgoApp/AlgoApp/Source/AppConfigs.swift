@@ -134,6 +134,16 @@ final class AppConfigs {
         }
     }
     
+    var lastOpenedQuestionId: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: AppConfigs.lastOpenedKey)
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: AppConfigs.lastOpenedKey)
+        }
+    }
+    
     static let isPremiumKey = "IsPremium"
     private let isPremiumRelay = BehaviorRelay<Bool>(value: false)
     
@@ -145,6 +155,8 @@ final class AppConfigs {
     
     static let themeKey = "SavedTheme"
     private let currentThemeRelay = BehaviorRelay<Theme>(value: .light)
+    
+    static let lastOpenedKey = "LastOpenedQuestion"
     
     private let disposeBag = DisposeBag()
     

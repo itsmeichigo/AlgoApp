@@ -36,6 +36,13 @@ final class HomeViewModel {
             .disposed(by: disposeBag)
     }
     
+    func getLastQuestion(id: Int) -> QuestionCellModel? {
+        if let model = realmManager.object(Question.self, id: id) {
+            return QuestionCellModel(with: model)
+        }
+        return nil
+    }
+    
     private func observeCustomLists() {
         Observable.collection(from: realmManager.objects(QuestionList.self))
             .map { list -> (Set<Int>, Set<Int>)? in
