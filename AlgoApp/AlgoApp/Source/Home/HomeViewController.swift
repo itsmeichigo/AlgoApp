@@ -26,7 +26,6 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var notificationButton: UIButton!
-    @IBOutlet weak var notificationEmojiLabel: UILabel!
     @IBOutlet weak var notificationSubtitleLabel: UILabel!
     @IBOutlet weak var notificationTitleLabel: UILabel!
     @IBOutlet weak var notificationDismissButton: UIButton!
@@ -158,8 +157,7 @@ private extension HomeViewController {
         let id = AppConfigs.shared.lastOpenedQuestionId
         guard let question = viewModel.getLastQuestion(id: id) else { return }
         
-        notificationEmojiLabel.text = question.emoji
-        notificationTitleLabel.text = question.title
+        notificationTitleLabel.text = [question.emoji ?? "", question.title].joined(separator: "  ")
         
         notificationViewBottomSpace.constant = 16
         UIView.animate(withDuration: 0.3, animations: {
