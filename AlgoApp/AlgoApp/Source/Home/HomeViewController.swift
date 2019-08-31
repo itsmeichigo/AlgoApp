@@ -24,12 +24,12 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
+    @IBOutlet weak var notificationContainerView: UIView!
     @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var notificationButton: UIButton!
     @IBOutlet weak var notificationSubtitleLabel: UILabel!
     @IBOutlet weak var notificationTitleLabel: UILabel!
     @IBOutlet weak var notificationDismissButton: UIButton!
-    @IBOutlet weak var notificationViewBottomSpace: NSLayoutConstraint!
    
     private lazy var detailController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
     
@@ -159,10 +159,9 @@ private extension HomeViewController {
         
         notificationTitleLabel.text = [question.emoji ?? "", question.title].joined(separator: "  ")
         
-        notificationViewBottomSpace.constant = 16
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.layoutIfNeeded()
-        })
+        UIView.animate(withDuration: 0.3) {
+            self.notificationContainerView.isHidden = false
+        }
     }
     
     func updateInitialFilter() {
@@ -221,9 +220,8 @@ private extension HomeViewController {
         notificationView.dropCardShadow()
         notificationDismissButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.notificationViewBottomSpace.constant = -150
                 UIView.animate(withDuration: 0.3, animations: {
-                    self?.view.layoutIfNeeded()
+                    self?.notificationContainerView.isHidden = true
                 }, completion: { _ in
                     AppConfigs.shared.lastOpenedQuestionId = 0
                 })
