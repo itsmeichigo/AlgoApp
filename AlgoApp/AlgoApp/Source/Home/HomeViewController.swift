@@ -155,7 +155,12 @@ final class HomeViewController: UIViewController {
 private extension HomeViewController {
     func showLastOpenedQuestion() {
         let id = AppConfigs.shared.lastOpenedQuestionId
-        guard let question = viewModel.getLastQuestion(id: id) else { return }
+        guard let question = viewModel.getLastQuestion(id: id) else {
+            UIView.animate(withDuration: 0.3) {
+                self.notificationContainerView.isHidden = true
+            }
+            return
+        }
         
         notificationTitleLabel.text = [question.emoji ?? "", question.title].joined(separator: "  ")
         
@@ -223,7 +228,7 @@ private extension HomeViewController {
                 UIView.animate(withDuration: 0.3, animations: {
                     self?.notificationContainerView.isHidden = true
                 }, completion: { _ in
-                    AppConfigs.shared.lastOpenedQuestionId = 0
+                    AppConfigs.shared.lastOpenedQuestionId = -1
                 })
             })
             .disposed(by: disposeBag)
@@ -237,7 +242,7 @@ private extension HomeViewController {
         
         UIApplication.shared.rx.applicationWillTerminate
             .subscribe(onNext: { _ in
-                AppConfigs.shared.lastOpenedQuestionId = 0
+                AppConfigs.shared.lastOpenedQuestionId = -1
             })
             .disposed(by: disposeBag)
         

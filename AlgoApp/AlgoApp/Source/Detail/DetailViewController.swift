@@ -86,7 +86,7 @@ class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        AppConfigs.shared.lastOpenedQuestionId = 0
+        AppConfigs.shared.lastOpenedQuestionId = -1
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
