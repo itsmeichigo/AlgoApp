@@ -269,7 +269,7 @@
         <!--Split View Controller-->
         <scene sceneID="ROu-D5-FsB">
             <objects>
-                <splitViewController id="W3G-xl-d96" sceneMemberID="viewController">
+                <splitViewController presentsWithGesture="NO" id="W3G-xl-d96" sceneMemberID="viewController">
                     <connections>
                         <segue destination="tCw-LM-bwg" kind="relationship" relationship="masterViewController" id="WE5-UV-F5x"/>
                     </connections>
