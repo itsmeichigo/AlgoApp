@@ -99,12 +99,12 @@ private extension AppDelegate {
         Realm.Configuration.defaultConfiguration = config
         
         let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
-        let bundleReamPath = Bundle.main.path(forResource: "default", ofType:"realm")
+        let bundleRealmPath = Bundle.main.path(forResource: "default", ofType:"realm")
         
         guard !FileManager.default.fileExists(atPath: defaultRealmPath.path) else { return }
         
         do {
-            try FileManager.default.copyItem(atPath: bundleReamPath!, toPath: defaultRealmPath.path)
+            try FileManager.default.copyItem(atPath: bundleRealmPath!, toPath: defaultRealmPath.path)
         } catch let error as NSError {
             print("error occurred, here are the details:\n \(error)")
         }
@@ -121,6 +121,10 @@ private extension AppDelegate {
             let remindersController = AppHelper.remindersStoryboard.instantiateInitialViewController(),
             let notesController = AppHelper.notesStoryboard.instantiateInitialViewController(),
             let settingsController = AppHelper.settingsStoryboard.instantiateInitialViewController() else { return }
+        
+        if AppHelper.isIpad {
+            (homeController as? UISplitViewController)?.preferredDisplayMode = .allVisible
+        }
         
         let images: [UIImage?] = [UIImage(named: "cat"), UIImage(named: "reminder"), UIImage(named: "notes"), UIImage(named: "settings")]
         let names = ["Challenges", "Reminders", "Notes", "Settings"]
