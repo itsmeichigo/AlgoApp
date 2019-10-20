@@ -114,7 +114,9 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if splitViewController?.isRegularWidth == true &&
+        
+        // set detail controller on iphone when first rotated
+        if !AppHelper.isIpad && splitViewController?.isRegularWidth == true &&
             splitViewController?.viewControllers.count == 1 {
             updateDetailController(with: viewModel.questions.value[0].id)
         }
