@@ -1,7 +1,7 @@
 # AlgoApp
 An app to help you slay coding problems every freaking day
 
-![AlgoKitty](https://ph-files.imgix.net/db710be8-e7d4-4027-88a5-23e3a072bb53?auto=format&auto=compress&codec=mozjpeg&cs=strip)
+![AlgoKitty](https://github.com/itsmeichigo/AlgoApp/blob/master/10.png)
 
 ## Main Features
 
