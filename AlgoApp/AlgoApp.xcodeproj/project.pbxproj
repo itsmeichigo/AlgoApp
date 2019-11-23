@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,7 +45,6 @@
 		DE170A02224BDFAB00B0FB56 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */; };
 		DE195DC22219485F00BDDFB4 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE195DC12219485F00BDDFB4 /* WebViewController.swift */; };
 		DE1A9A1D22427EAA007E79F6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */; };
-		DE1A9A1F22429076007E79F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE1A9A1E22429076007E79F6 /* GoogleService-Info.plist */; };
 		DE1AC97022317BA30044D83D /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1AC96F22317BA30044D83D /* RemindersViewController.swift */; };
 		DE1BA9AD222BA918009C30B0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AC222BA918009C30B0 /* SettingsController.swift */; };
 		DE1BA9B0222C0D44009C30B0 /* UITabBarController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */; };
@@ -133,7 +132,6 @@
 		DE170A01224BDFAB00B0FB56 /* ConfettiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		DE195DC12219485F00BDDFB4 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		DE1A9A1E22429076007E79F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DE1AC96F22317BA30044D83D /* RemindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
 		DE1BA9AC222BA918009C30B0 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		DE1BA9AE222C0D44009C30B0 /* UITabBarController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extension.swift"; sourceTree = "<group>"; };
@@ -312,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				DE33354122743EC000F1D0F0 /* default.realm */,
-				DE1A9A1E22429076007E79F6 /* GoogleService-Info.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -535,7 +532,6 @@
 				DE314390226C2CF70063DC71 /* Home.storyboard in Resources */,
 				DE33354222743EC000F1D0F0 /* default.realm in Resources */,
 				DE314397226C30D90063DC71 /* Notes.storyboard in Resources */,
-				DE1A9A1F22429076007E79F6 /* GoogleService-Info.plist in Resources */,
 				DE314392226C2D120063DC71 /* Reminders.storyboard in Resources */,
 				DE314394226C2E050063DC71 /* Settings.storyboard in Resources */,
 				DE0E515922070C2A00BFBB0B /* Assets.xcassets in Resources */,
