@@ -12,9 +12,4 @@ An app to help you slay coding problems every freaking day 🐱💻
 - Filter / tag / search by company / save to fave list
 - Notes keeping
 - Change app themes
-
-## Extras
-
-- iMessage app to send problems / share notes / streak
-- widget for streaks
-
+- iCloud syncing for progress and preferences
