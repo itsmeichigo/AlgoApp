@@ -1,7 +1,8 @@
-# AlgoApp
-An app to help you slay coding problems every freaking day
+# AlgoApp 
+An app to help you slay coding problems every freaking day 🐱💻
 
-![AlgoKitty](https://github.com/itsmeichigo/AlgoApp/blob/master/10.png)
+[![AlgoKitty](https://github.com/itsmeichigo/AlgoApp/blob/master/10.png)]((https://www.producthunt.com/posts/algokitty))
+
 
 ## Main Features
 
