@@ -246,7 +246,14 @@ extension SettingsController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch indexPath.row {
-        case 0: return AppHelper.isIpad ? 126 : 84
+        case 0:
+            // hide theme switch in iOS 13
+            if #available(iOS 13.0, *) {
+                return 0
+            } else {
+               return AppHelper.isIpad ? 126 : 84
+            }
+
         case 1: return AppHelper.isIpad ? 156 : 136
         case 2: return AppConfigs.shared.isPremium ? 0 : (AppHelper.isIpad ? 86 : 76)
         case 3: return AppHelper.isIpad ? 234 : 204

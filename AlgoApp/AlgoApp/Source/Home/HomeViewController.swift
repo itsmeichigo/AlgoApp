@@ -310,6 +310,23 @@ private extension HomeViewController {
                                              sortOption: $2)
             })
             .disposed(by: disposeBag)
+        
+        UIApplication.shared.rx.applicationDidBecomeActive
+            .startWith(.active)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                if #available(iOS 13.0, *) {
+                    switch self.traitCollection.userInterfaceStyle {
+                    case .light, .unspecified:
+                        AppConfigs.shared.currentTheme = .light
+                    case .dark:
+                        AppConfigs.shared.currentTheme = .dark
+                    @unknown default:
+                        AppConfigs.shared.currentTheme = .light
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc private func showRandomQuestion() {
