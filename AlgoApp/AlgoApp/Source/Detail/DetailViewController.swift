@@ -180,11 +180,7 @@ class DetailViewController: UIViewController {
         solvedLabel.textColor = .primaryColor()
         
         officialSolutionButton.setTitleColor(.appOrangeColor(), for: .normal)
-        
         otherSolutionsLabel.textColor = .subtitleTextColor()
-        otherSolutionsTagView.tagLayerColor = .clear
-        otherSolutionsTagView.tagBackgroundColor = .clear
-        otherSolutionsTagView.tagTitleColor = .clear
         
         loadingIndicator.style = AppConfigs.shared.currentTheme == .light ? .gray : .white
     }
