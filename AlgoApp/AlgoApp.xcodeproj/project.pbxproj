@@ -438,7 +438,6 @@
 				DE0E514B22070C2800BFBB0B /* Frameworks */,
 				DE0E514C22070C2800BFBB0B /* Resources */,
 				02CB798C52235E92E9E29044 /* [CP] Embed Pods Frameworks */,
-				DE1A9A2022429375007E79F6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -603,23 +602,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		DE1A9A2022429375007E79F6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		F9FA04633E6B74E0C1301CB6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

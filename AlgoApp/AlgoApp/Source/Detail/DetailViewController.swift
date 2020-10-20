@@ -97,9 +97,13 @@ class DetailViewController: UIViewController {
         notePanel.delegate = self
         notePanel.isRemovalInteractionEnabled = true
         
-        notePanel.surfaceView.cornerRadius = 16.0
-        notePanel.surfaceView.shadowHidden = false
+        let appearance = SurfaceAppearance()
+        let shadow = SurfaceAppearance.Shadow()
+        shadow.hidden = true
+        appearance.cornerRadius = 16.0
+        appearance.shadows = [shadow]
         notePanel.surfaceView.grabberHandle.isHidden = true
+        notePanel.surfaceView.appearance = appearance
     }
     
     private func updateNotePanelContent(_ content: String?) {
@@ -392,7 +396,7 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: FloatingPanelControllerDelegate {
     func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
-        if notePanel.position != .full {
+        if notePanel.state != .full {
             view.endEditing(true)
         }
     }

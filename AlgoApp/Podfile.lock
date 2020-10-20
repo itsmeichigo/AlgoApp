@@ -1,83 +1,61 @@
 PODS:
-  - Crashlytics (3.12.0):
-    - Fabric (~> 1.9.0)
   - Differentiator (4.0.1)
-  - Fabric (1.9.0)
-  - FloatingPanel (1.7.0)
+  - FloatingPanel (2.0.0)
   - Highlightr (2.1.0)
-  - IceCream (1.12.1):
+  - IceCream (1.13.2):
     - RealmSwift
-  - iOSSnapshotTestCase (6.2.0):
-    - iOSSnapshotTestCase/SwiftSupport (= 6.2.0)
-  - iOSSnapshotTestCase/Core (6.2.0)
-  - iOSSnapshotTestCase/SwiftSupport (6.2.0):
-    - iOSSnapshotTestCase/Core
   - Kanna (4.0.3)
-  - Nimble (8.0.4)
-  - Nimble-Snapshots (8.0.0):
-    - Nimble-Snapshots/Core (= 8.0.0)
-  - Nimble-Snapshots/Core (8.0.0):
-    - iOSSnapshotTestCase (~> 6.0)
-    - Nimble (~> 8.0)
-  - PanModal (1.2.4)
-  - Quick (2.2.0)
-  - Realm (3.19.1):
-    - Realm/Headers (= 3.19.1)
-  - Realm/Headers (3.19.1)
-  - RealmSwift (3.19.1):
-    - Realm (= 3.19.1)
-  - Reusable (4.1.0):
-    - Reusable/Storyboard (= 4.1.0)
-    - Reusable/View (= 4.1.0)
-  - Reusable/Storyboard (4.1.0)
-  - Reusable/View (4.1.0)
-  - RxBlocking (5.0.0):
-    - RxSwift (~> 5)
-  - RxCocoa (5.0.0):
+  - Nimble (9.0.0)
+  - PanModal (1.2.7)
+  - Quick (3.0.0)
+  - Realm (5.5.0):
+    - Realm/Headers (= 5.5.0)
+  - Realm/Headers (5.5.0)
+  - RealmSwift (5.5.0):
+    - Realm (= 5.5.0)
+  - Reusable (4.1.1):
+    - Reusable/Storyboard (= 4.1.1)
+    - Reusable/View (= 4.1.1)
+  - Reusable/Storyboard (4.1.1)
+  - Reusable/View (4.1.1)
+  - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxOptional (4.0.0):
+  - RxOptional (4.1.0):
     - RxCocoa (~> 5)
     - RxSwift (~> 5)
-  - RxRealm (1.0.0):
-    - RealmSwift (~> 3.14)
+  - RxRealm (3.1.0):
+    - RealmSwift (~> 5.2)
     - RxSwift (~> 5.0)
-  - RxRelay (5.0.0):
+  - RxRelay (5.1.1):
     - RxSwift (~> 5)
-  - RxSwift (5.0.0)
-  - RxTest (5.0.0):
-    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
   - SnapKit (5.0.1)
   - StringExtensionHTML (1.0.2)
   - SVProgressHUD (2.2.5)
-  - SwiftyStoreKit (0.15.0)
-  - Tags (0.3.0)
-  - Zephyr (3.5.0)
+  - SwiftyStoreKit (0.16.1)
+  - Tags (0.3.1)
+  - Zephyr (3.6.0)
 
 DEPENDENCIES:
-  - Crashlytics (~> 3.12.0)
-  - Fabric (~> 1.9.0)
   - FloatingPanel
   - Highlightr (from `https://github.com/itsmeichigo/Highlightr.git`)
   - IceCream
   - Kanna (~> 4.0.0)
   - Nimble
-  - Nimble-Snapshots
   - PanModal
   - Quick
   - RealmSwift
   - Reusable
-  - RxBlocking
   - RxCocoa
   - RxDataSources
   - RxOptional
   - RxRealm
   - RxSwift
-  - RxTest
   - SnapKit
   - StringExtensionHTML
   - SVProgressHUD
@@ -86,29 +64,23 @@ DEPENDENCIES:
   - Zephyr
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Crashlytics
+  https://github.com/CocoaPods/Specs.git:
     - Differentiator
-    - Fabric
     - FloatingPanel
     - IceCream
-    - iOSSnapshotTestCase
     - Kanna
     - Nimble
-    - Nimble-Snapshots
     - PanModal
     - Quick
     - Realm
     - RealmSwift
     - Reusable
-    - RxBlocking
     - RxCocoa
     - RxDataSources
     - RxOptional
     - RxRealm
     - RxRelay
     - RxSwift
-    - RxTest
     - SnapKit
     - StringExtensionHTML
     - SVProgressHUD
@@ -126,36 +98,30 @@ CHECKOUT OPTIONS:
     :git: https://github.com/itsmeichigo/Highlightr.git
 
 SPEC CHECKSUMS:
-  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
-  FloatingPanel: f686602da8eff56375e577f19be37348a95f4e24
+  FloatingPanel: b0d4f9b2312b21741a18b659ddfa206b60d3b97a
   Highlightr: 683f05d5223cade533a78528a35c9f06e4caddf8
-  IceCream: b1b9c2d696d18f424039c118fce07bb8e08a15b3
-  iOSSnapshotTestCase: 9ab44cb5aa62b84d31847f40680112e15ec579a6
+  IceCream: 9335dfa136e260ff4ba1b969a49061f5661441d3
   Kanna: 0ebbdd0e7e3308f0aafbd569e79c8cadc5eb877c
-  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
-  Nimble-Snapshots: 8ec63f41ce6c7229a17be9a64edbc123b181f75b
-  PanModal: 275f6d4d07565ddf4ed16d7be5d9cd275682d80d
-  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
-  Realm: fb377747e694c7deb62d402400454134fe321bee
-  RealmSwift: 1302b0ab60f3105a2b214a735eeb0938607cf16b
-  Reusable: 82be188f29d96dc5eff0db7b2393bcc08d2cdd5b
-  RxBlocking: c67185d26498ea3cbe3e121917c3c16739e43123
-  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
+  Realm: fb399d76f44042e5cdfc630f33828fdb4d077345
+  RealmSwift: 3b7e62356207ef16d34de4e55d475163bd2062bb
+  Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxOptional: 9904e2219d59260c3c171273d475b2126de187e8
-  RxRealm: 1e81dcfca1fb50c3e9b3e1f8102bc875c5156a2e
-  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
-  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
-  RxTest: 4349afe98f564e0a9bc19063368904622d17d49a
+  RxOptional: b1fcd60856807a564c0215c2184b8d33e7826dc2
+  RxRealm: 50e5fe5c1f22518205afbb313fbc5580d73bc586
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   StringExtensionHTML: 856dcc0c705012ae2f9c29c7413b015b82133e52
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
-  Tags: a01fe615710345309c141b0101492402907c067b
-  Zephyr: d4cbf727c30a5fc4fa1828f17a09f735948309fb
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
+  Tags: 77420a200531fb338563b07279858edb51d080c5
+  Zephyr: da639b1d1bb46a6f2034a862175dd91971968482
 
-PODFILE CHECKSUM: 08882fe2933ff2b4bb98861bb1ad3ae8b349998d
+PODFILE CHECKSUM: d7d02bc50c1417d3d67ba86aacb35f0a10888610
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.9.3

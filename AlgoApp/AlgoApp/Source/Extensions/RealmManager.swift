@@ -71,15 +71,15 @@ final class RealmManager {
     }
     
     func create(object: Object, update: Bool = false) {
-        tryOrLogError { $0.add(object, update: update) }
+        tryOrLogError { $0.add(object, update: update ? .modified : .error) }
     }
     
     func create(objects: [Object], update: Bool = false) {
-        tryOrLogError { $0.add(objects, update: update) }
+        tryOrLogError { $0.add(objects, update: update ? .modified : .error) }
     }
     
     func create<T: Object>(_ type: T.Type, value: Any, update: Bool = false) {
-        tryOrLogError { $0.create(type, value: value, update: update) }
+        tryOrLogError { $0.create(type, value: value, update: update ? .modified : .error) }
     }
     
     func delete<T: RealmSwift.Object>(object: T) {
