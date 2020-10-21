@@ -1,6 +1,0 @@
-framework module Tags {
-  umbrella header "Tags-umbrella.h"
-
-  export *
-  module * { export * }
-}

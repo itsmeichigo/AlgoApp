@@ -1,6 +1,0 @@
-framework module Pods_AlgoAppTests {
-  umbrella header "Pods-AlgoAppTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
