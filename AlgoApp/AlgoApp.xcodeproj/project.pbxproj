@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BCEDB176601904A79793AB9 /* Pods_AlgoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */; };
-		8466EA9403B1C5EF1EAEFC28 /* Pods_AlgoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */; };
+		276DAEB285FF71BC347390EF /* Pods_AlgoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E6DCAD3B9166CFF0DCCEDE /* Pods_AlgoApp.framework */; };
+		A11D99751AE990D7E13E5AB9 /* Pods_AlgoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D787FA6064A8391A6A709A8 /* Pods_AlgoAppTests.framework */; };
 		DE090AD2224C6352002AA465 /* SVProgressHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */; };
 		DE0B03C52258C00A00770AA7 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03C42258C00A00770AA7 /* NotesViewController.swift */; };
 		DE0B03CE2258F04400770AA7 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B03CD2258F04400770AA7 /* NoteCell.swift */; };
@@ -86,11 +86,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgoAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		040821A4F46688C4B6B3059C /* Pods-AlgoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6591BD170AE1C7DCDB3DEDB6 /* Pods-AlgoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.debug.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.debug.xcconfig"; sourceTree = "<group>"; };
-		7B2540EDFF9B32ED935A3A23 /* Pods-AlgoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.release.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		3368C98989D391C3BC5ECFD7 /* Pods-AlgoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.debug.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5A9AFC62AE20EF134546795D /* Pods-AlgoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5D1265D2208B2DF37901B85A /* Pods-AlgoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoAppTests.release.xcconfig"; path = "Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		6D787FA6064A8391A6A709A8 /* Pods_AlgoAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgoAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A67E541BC742ACC211D13E15 /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
 		DE090AD1224C6352002AA465 /* SVProgressHUD+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVProgressHUD+Extension.swift"; sourceTree = "<group>"; };
 		DE0B03C42258C00A00770AA7 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		DE0B03CD2258F04400770AA7 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		DE79F00A225122EC0051ECD1 /* SortOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewController.swift; sourceTree = "<group>"; };
 		DEBFEE10224094E0005B1A7A /* UIApplication+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+RxSwift.swift"; sourceTree = "<group>"; };
 		DEBFEE1222409539005B1A7A /* RxApplicationDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxApplicationDelegateProxy.swift; sourceTree = "<group>"; };
-		E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlgoApp.release.xcconfig"; path = "Target Support Files/Pods-AlgoApp/Pods-AlgoApp.release.xcconfig"; sourceTree = "<group>"; };
+		F5E6DCAD3B9166CFF0DCCEDE /* Pods_AlgoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,8 +169,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE58012B2292E99100A42183 /* CloudKit.framework in Frameworks */,
-				4BCEDB176601904A79793AB9 /* Pods_AlgoApp.framework in Frameworks */,
 				DE1A9A1D22427EAA007E79F6 /* StoreKit.framework in Frameworks */,
+				276DAEB285FF71BC347390EF /* Pods_AlgoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8466EA9403B1C5EF1EAEFC28 /* Pods_AlgoAppTests.framework in Frameworks */,
+				A11D99751AE990D7E13E5AB9 /* Pods_AlgoAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,10 +188,10 @@
 		1F3DBEDD1FA67FD5401AE9BD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6591BD170AE1C7DCDB3DEDB6 /* Pods-AlgoApp.debug.xcconfig */,
-				E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */,
-				040821A4F46688C4B6B3059C /* Pods-AlgoAppTests.debug.xcconfig */,
-				7B2540EDFF9B32ED935A3A23 /* Pods-AlgoAppTests.release.xcconfig */,
+				3368C98989D391C3BC5ECFD7 /* Pods-AlgoApp.debug.xcconfig */,
+				A67E541BC742ACC211D13E15 /* Pods-AlgoApp.release.xcconfig */,
+				5A9AFC62AE20EF134546795D /* Pods-AlgoAppTests.debug.xcconfig */,
+				5D1265D2208B2DF37901B85A /* Pods-AlgoAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -201,8 +201,8 @@
 			children = (
 				DE58012A2292E99100A42183 /* CloudKit.framework */,
 				DE1A9A1C22427EA9007E79F6 /* StoreKit.framework */,
-				0210A813D28E7D205B2AD77E /* Pods_AlgoApp.framework */,
-				0235DB8B4CAB1A449C726E36 /* Pods_AlgoAppTests.framework */,
+				F5E6DCAD3B9166CFF0DCCEDE /* Pods_AlgoApp.framework */,
+				6D787FA6064A8391A6A709A8 /* Pods_AlgoAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -433,11 +433,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE0E516B22070C2A00BFBB0B /* Build configuration list for PBXNativeTarget "AlgoApp" */;
 			buildPhases = (
-				F9FA04633E6B74E0C1301CB6 /* [CP] Check Pods Manifest.lock */,
+				0F38CB5142E1E56FDFC4E9FA /* [CP] Check Pods Manifest.lock */,
 				DE0E514A22070C2800BFBB0B /* Sources */,
 				DE0E514B22070C2800BFBB0B /* Frameworks */,
 				DE0E514C22070C2800BFBB0B /* Resources */,
-				02CB798C52235E92E9E29044 /* [CP] Embed Pods Frameworks */,
+				2E4135384D193B1797801B75 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,11 +452,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE0E516E22070C2A00BFBB0B /* Build configuration list for PBXNativeTarget "AlgoAppTests" */;
 			buildPhases = (
-				05C5B2A30625B451727F3054 /* [CP] Check Pods Manifest.lock */,
+				3D16649E12A8445854DA314B /* [CP] Check Pods Manifest.lock */,
 				DE0E515E22070C2A00BFBB0B /* Sources */,
 				DE0E515F22070C2A00BFBB0B /* Frameworks */,
 				DE0E516022070C2A00BFBB0B /* Resources */,
-				10D61FCA5276208172040CE5 /* [CP] Embed Pods Frameworks */,
+				06BC4C9A4977BA61BE7D7D99 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -547,46 +547,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02CB798C52235E92E9E29044 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		05C5B2A30625B451727F3054 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AlgoAppTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		10D61FCA5276208172040CE5 /* [CP] Embed Pods Frameworks */ = {
+		06BC4C9A4977BA61BE7D7D99 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -603,7 +564,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlgoAppTests/Pods-AlgoAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F9FA04633E6B74E0C1301CB6 /* [CP] Check Pods Manifest.lock */ = {
+		0F38CB5142E1E56FDFC4E9FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -619,6 +580,45 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-AlgoApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2E4135384D193B1797801B75 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlgoApp/Pods-AlgoApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D16649E12A8445854DA314B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AlgoAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -837,7 +837,7 @@
 		};
 		DE0E516C22070C2A00BFBB0B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6591BD170AE1C7DCDB3DEDB6 /* Pods-AlgoApp.debug.xcconfig */;
+			baseConfigurationReference = 3368C98989D391C3BC5ECFD7 /* Pods-AlgoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlgoApp/AlgoApp.entitlements;
@@ -860,7 +860,7 @@
 		};
 		DE0E516D22070C2A00BFBB0B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0D5C7C0E780C2860EE7E3CD /* Pods-AlgoApp.release.xcconfig */;
+			baseConfigurationReference = A67E541BC742ACC211D13E15 /* Pods-AlgoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlgoApp/AlgoApp.entitlements;
@@ -883,7 +883,7 @@
 		};
 		DE0E516F22070C2A00BFBB0B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 040821A4F46688C4B6B3059C /* Pods-AlgoAppTests.debug.xcconfig */;
+			baseConfigurationReference = 5A9AFC62AE20EF134546795D /* Pods-AlgoAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -904,7 +904,7 @@
 		};
 		DE0E517022070C2A00BFBB0B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B2540EDFF9B32ED935A3A23 /* Pods-AlgoAppTests.release.xcconfig */;
+			baseConfigurationReference = 5D1265D2208B2DF37901B85A /* Pods-AlgoAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

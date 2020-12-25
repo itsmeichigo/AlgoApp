@@ -18,10 +18,10 @@ final class DetailViewModel {
     let githubSolutionsRelay = BehaviorRelay<[Language: String]>(value: [:])
     let scrapingSolutions = BehaviorRelay<Bool>(value: true)
     
-    private let realmManager = RealmManager.shared
+    private let realmManager: RealmManager
+    private let scraper: SolutionScraper
     
     private let disposeBag = DisposeBag()
-    private let scraper = SolutionScraper()
     private var questionId = BehaviorRelay<Int>(value: 0)
     
     private let scrapingSwiftSolution = BehaviorRelay<Bool>(value: true)
@@ -36,7 +36,12 @@ final class DetailViewModel {
         }
     }
     
-    init(question id: Int) {
+    init(question id: Int,
+         realmManager: RealmManager = .shared,
+         scraper: SolutionScraper = .init()) {
+        self.realmManager = realmManager
+        self.scraper = scraper
+        
         questionId.accept(id)
         
         Observable.combineLatest(realmManager.observableObjects(Question.self), questionId) { $1 }
@@ -151,20 +156,12 @@ final class DetailViewModel {
         guard let question = realmManager.object(Question.self, id: questionId.value) else { return }
         
         realmManager.update {
-            if let note = question.note {
-                note.content = content
-                note.language = language.rawValue
-                note.questionId = question.id
-                note.questionTitle = question.title
-                question.note = note
-            } else {
-                let note = Note()
-                note.content = content
-                note.language = language.rawValue
-                note.questionId = question.id
-                note.questionTitle = question.title
-                question.note = note
-            }
+            let note = question.note ?? Note()
+            note.content = content
+            note.language = language.rawValue
+            note.questionId = question.id
+            note.questionTitle = question.title
+            question.note = note
         }
     }
 }
@@ -184,41 +181,26 @@ private extension DetailViewModel {
     
     func saveSolution(for questionId: Int, content: String, language: Language) {
         
-        if let question = realmManager.object(Question.self, id: questionId) {
-            realmManager.update {
-                if let solution = question.solution {
-                    switch language {
-                    case .cPP:
-                        solution.cppSolution = content
-                    case .java:
-                        solution.javaSolution = content
-                    case .javascript:
-                        solution.javascriptSolution = content
-                    case .python:
-                        solution.pythonSolution = content
-                    case .swift:
-                        solution.swiftSolution = content
-                    default:
-                        break
-                    }
-                } else {
-                    let solution = Solution()
-                    switch language {
-                    case .cPP:
-                        solution.cppSolution = content
-                    case .java:
-                        solution.javaSolution = content
-                    case .javascript:
-                        solution.javascriptSolution = content
-                    case .python:
-                        solution.pythonSolution = content
-                    case .swift:
-                        solution.swiftSolution = content
-                    default:
-                        break
-                    }
-                    question.solution = solution
-                }
+        guard let question = realmManager.object(Question.self, id: questionId) else { return }
+        realmManager.update {
+            let solution = question.solution ?? Solution()
+            switch language {
+            case .cPP:
+                solution.cppSolution = content
+            case .java:
+                solution.javaSolution = content
+            case .javascript:
+                solution.javascriptSolution = content
+            case .python:
+                solution.pythonSolution = content
+            case .swift:
+                solution.swiftSolution = content
+            default:
+                break
+            }
+            
+            if question.solution == nil {
+                question.solution = solution
             }
         }
     }
