@@ -1,7 +1,11 @@
 # AlgoApp 
 An app to help you slay coding problems every freaking day 🐱💻
 
-[![AlgoKitty](https://github.com/itsmeichigo/AlgoApp/blob/master/10.png)](https://www.producthunt.com/posts/algokitty)
+[👉 Visit ProductHunt Page](https://www.producthunt.com/posts/algokitty)
+
+![ProductHunt](https://github.com/itsmeichigo/AlgoApp/blob/master/10.png)
+
+<img width=300 src="https://github.com/itsmeichigo/AlgoApp/raw/master/screenshots/1.png" alt="screenshot 1" /><img width=300 src="https://github.com/itsmeichigo/AlgoApp/raw/master/screenshots/2.png" alt="screenshot 2" /><img width=300 src="https://github.com/itsmeichigo/AlgoApp/raw/master/screenshots/3.png" alt="screenshot 3" /><img width=300 src="https://github.com/itsmeichigo/AlgoApp/raw/master/screenshots/4.png" alt="screenshot 4" /><img width=300 src="https://github.com/itsmeichigo/AlgoApp/raw/master/screenshots/5.png" alt="screenshot 5" />
 
 
 ## Main Features
